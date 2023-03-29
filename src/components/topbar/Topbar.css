@@ -1,0 +1,41 @@
+.topbar-container{
+    width: 100%;
+    background-color: white;
+    height:6rem;
+    display: flex;
+    align-items: center;
+}
+.topbar-container .profile-area{
+    position: absolute;
+    right: 2rem;
+}
+
+.topbar-container .profile-area .profile{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.topbar-container .profile-area .profile-photo{
+    display: block;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+#menu-btn{
+    display: none;
+}
+img{
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    #menu-btn{
+        display: inline-block;
+        cursor: pointer;
+        margin-left: 1.5rem;
+        background: white;
+    }
+}

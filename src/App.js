@@ -1,24 +1,24 @@
 import logo from './logo.svg';
 import './App.css';
+import { Topbar } from './components/topbar/Topbar';
+import { Sidebar } from './components/sidebar/Sidebar';
+import { Route,BrowserRouter,Switch} from 'react-router-dom';
+import { Dashboard } from './pages/dashboard/Dashboard';
+import { Ceomessage } from './pages/ceomessage/Ceomessage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <BrowserRouter>
+    <div className="main-container">
+      <Sidebar/>
+      <div className='container'>
+        <Topbar/>
+          <Route exact path="/"><Dashboard/></Route>
+          <Route exact path="/ceomessage"><Ceomessage/></Route>
+      </div>
+      
     </div>
+    </BrowserRouter>
   );
 }
 
