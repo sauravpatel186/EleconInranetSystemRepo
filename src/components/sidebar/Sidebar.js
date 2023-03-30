@@ -35,7 +35,7 @@ return (
     <div className='sidebar-container' style={{display : `${style}`}}>
         <div className='top-sidebar'>
             <div className='logo-top-sidebar'>
-            <NavLink  to="/" > <img src='Elecon_engineering_logo.png'></img></NavLink>
+            <Link  to="/" > <img src='Elecon_engineering_logo.png'></img></Link>
             </div>
             <div className='close-top-sidebar' onClick={handleClick}>
                 <span><CloseIcon/></span>    
@@ -43,7 +43,7 @@ return (
         </div>
         <div className='nav-sidebar'>
             <div className='nav-link'>
-                <NavLink className="nav-text" exact activeClassName='active-nav-text' to="/" >
+                <NavLink className="nav-text" to="/" >
                     <span><Grid/></span>
                     <Typography 
                         className='nav-font' 
@@ -53,7 +53,7 @@ return (
                 </NavLink>
             </div>
             <div className='nav-link'>
-                <Link className="nav-text" exact activeClassName='active-nav-text' to="/ceomessage">
+                <Link className="nav-text" to="/ceomessage">
                     <span><Person/></span>
                     <Typography 
                         className='nav-font' 
@@ -62,7 +62,7 @@ return (
                     </Typography></Link>
             </div>
             <div className='nav-link'>
-                <NavLink className="nav-text" exact activeClassName='active-nav-text' to="/policies">
+                <NavLink className="nav-text"  to="/policies">
                     <span><ArticleIcon/></span>
                     <Typography 
                         className='nav-font' 
@@ -72,7 +72,7 @@ return (
                 </NavLink>
             </div>
             <div className='nav-link'>
-                <NavLink className="nav-text" exact to="/thoughtoftheday" activeClassName='active-nav-text'>
+                <NavLink className="nav-text" exact to="/thoughtoftheday">
                     <span><TipsAndUpdatesIcon/></span>
                     <Typography 
                         className='nav-font' 
@@ -82,7 +82,7 @@ return (
                 </NavLink>
             </div>
             <div className='nav-link'>
-                <NavLink className="nav-text" exact to="/noticeboard" activeClassName='active-nav-text'>
+                <NavLink className="nav-text" exact to="/noticeboard" >
                     <span><NoteIcon/></span>
                     <Typography 
                         className='nav-font' 
@@ -92,7 +92,7 @@ return (
                 </NavLink>
             </div>
             <div className='nav-link'>
-                <NavLink className="nav-text" exact to="/managementdesk" activeClassName='active-nav-text'>
+                <NavLink className="nav-text" exact to="/managementdesk" >
                     <span><Diversity3Icon/></span>
                     <Typography 
                         className='nav-font' 
@@ -102,7 +102,7 @@ return (
                 </NavLink>
             </div>
             <div className='nav-link'>
-                <NavLink className="nav-text" exact to="/opinionpoll" activeClassName='active-nav-text'>
+                <NavLink className="nav-text" exact to="/opinionpoll" >
                     <span><PollIcon/></span>
                     <Typography 
                         className='nav-font' 
@@ -112,7 +112,7 @@ return (
                 </NavLink>
             </div>
             <div className='nav-link'>
-                <NavLink className="nav-text" exact to="/upcomingevent" activeClassName='active-nav-text'>
+                <NavLink className="nav-text" exact to="/upcomingevent" >
                     <span><EventIcon/></span>
                     <Typography 
                         className='nav-font' 
@@ -122,7 +122,7 @@ return (
                 </NavLink>
             </div>
             <div className='nav-link'>
-                <NavLink className="nav-text" exact to="/newjoinee" activeClassName='active-nav-text'>
+                <NavLink className="nav-text" exact to="/newjoinee" >
                     <span><BadgeIcon/></span>
                     <Typography 
                         className='nav-font' 
@@ -132,7 +132,7 @@ return (
                 </NavLink>
             </div>
             <div className='nav-link'>
-                <NavLink className="nav-text" exact to="/employeemaster" activeClassName='active-nav-text'>
+                <NavLink className="nav-text" exact to="/employeemaster" >
                     <span><Person/></span>
                     <Typography 
                         className='nav-font' 

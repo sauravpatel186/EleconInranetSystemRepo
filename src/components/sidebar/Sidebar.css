@@ -44,10 +44,7 @@
     font-size: 1.6rem;
     transition: all 300ms ease;
 } 
-.nav-sidebar .active-nav-text{
-    color:#527ed4;
-    background: #ced2db;
-}
+
 .nav-sidebar .active-nav-text::before{
     content: "";
     width: 6px;

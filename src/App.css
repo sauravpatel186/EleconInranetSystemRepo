@@ -43,3 +43,13 @@ html
   position: relative;
   flex-direction: column;
 }
+.active{
+  color:#527ed4;
+  background: #ced2db;
+}
+.active::before{
+  content: "";
+  width: 6px;
+  height: 100%;
+  background-color:#527ed4 ;
+}
