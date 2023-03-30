@@ -5,6 +5,8 @@ import { Sidebar } from './components/sidebar/Sidebar';
 import { Route,BrowserRouter,Switch} from 'react-router-dom';
 import { Dashboard } from './pages/dashboard/Dashboard';
 import { Ceomessage } from './pages/ceomessage/Ceomessage';
+import  Upcomingevent  from './pages/upcomingevent/Upcomingevent';
+import Createupcomingevent from './pages/upcomingevent/Createupcomingevent';
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         <Topbar/>
           <Route exact path="/"><Dashboard/></Route>
           <Route exact path="/ceomessage"><Ceomessage/></Route>
+          <Route exact path="/upcomingevent"><Upcomingevent/></Route>
+          <Route exact path="/createupcomingevent"><Createupcomingevent/></Route>
       </div>
       
     </div>
