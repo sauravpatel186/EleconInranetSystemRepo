@@ -1,18 +1,15 @@
 import React from "react";
 import {
-  Routes,
-  Route,
-  BrowserRouter,
-  Switch,
-  useNavigate,
-  NavLink,
+  Link,NavLink,
+  useRouteMatch
 } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 const Upcomingevent = () => {
+   let { path, url } = useRouteMatch();
   return (
-    <>
-      <Typography variant="h4" gutterBottom>
+    <div className="upcomingevent-container">
+      <Typography variant="h5" gutterBottom>
         Upcoming Event
       </Typography>
       <NavLink to="/createupcomingevent"> 
@@ -20,7 +17,7 @@ const Upcomingevent = () => {
           Create Upcoming Event
         </Button>
       </NavLink>
-    </>
+    </div>
   );
 };
 

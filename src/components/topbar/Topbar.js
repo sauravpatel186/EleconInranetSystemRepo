@@ -1,30 +1,28 @@
-import React, { useState } from 'react'
+import React, { createContext, useState ,useEffect} from 'react'
 import "./Topbar.css"
+import { useDispatch, useSelector } from 'react-redux'
 
 import {ExpandMore,
         Menu as MenuIcon} from "@mui/icons-material"
 import { Menu , MenuItem} from '@mui/material'
-import { Sidebar } from '../sidebar/Sidebar'
-import { useDispatch, useSelector } from 'react-redux'
-import {displayReducer,  displayActions } from '../../state/reducers/displayReducer'
 export const Topbar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  // const [navEl,setNavEl] = useState(false);
-  // const openNav= Boolean(navEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const display = useSelector(state => state.showIcon);
-  console.log(display);
-  const dispatch = useDispatch();
-   const handleNavigation = (event) =>{
-     displayActions.toogleCounter(false);
-   }
- 
+  const sideMenu = document.getElementsByClassName("sidebar-container");
+
+  const openSidebar = () => {
+    
+    sideMenu[0].style.display = "block";
+  
+}
+  const visible = createContext();
   return (
     <div className='topbar-container'>
         <div className='profile-area'>
@@ -47,7 +45,7 @@ export const Topbar = () => {
         <MenuItem onClick={handleClose}>Logout</MenuItem>
       </Menu>
         </div>
-        <button id='menu-btn' onClick={()=>dispatch(displayActions.toogleCounter(false))}>
+      <button id='menu-btn' name='hambutton' onClick={openSidebar}>
           <span><MenuIcon/></span>
         </button>
       </div>

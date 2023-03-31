@@ -15,51 +15,42 @@ import {Close as CloseIcon,
         } from '@mui/icons-material'
 import { Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import displayReducer, { displayActions } from '../../state/reducers/displayReducer';
-import store from '../../state/store';
+
 export const Sidebar = () => {
-    const display = useSelector(state => state.showIcon);
-    const dispatch = useDispatch();
-    var style = "block";
-    if(!display)
-    {
-        style = "none";
-    }
-    const handleClick=()=>{
-        console.log("button clicked");
-        store.dispatch({showIcon : false })
-    }
-    const activeLink = "display : flex , color:#527ed4 ,background : #, margin-left: 2rem, gap: 1rem , align-items: center,position: relative , height: 3.7rem , transition: all 300ms ease";
-    const normalLink = "display-flex  color-#c0d0ef margin-left - 2rem, gap: 1rem , align-items: center,position: relative , height: 3.7rem , transition: all 300ms ease";
+
+const sideMenu = document.getElementsByClassName("sidebar-container");
+const sidebarClose = ()=>{
+    sideMenu[0].style.display = "none";
+}
 return (
-    <div className='sidebar-container' style={{display : `${style}`}}>
+    <div className='sidebar-container'>
         <div className='top-sidebar'>
             <div className='logo-top-sidebar'>
             <Link  to="/" > <img src='Elecon_engineering_logo.png'></img></Link>
             </div>
-            <div className='close-top-sidebar' onClick={handleClick}>
+            <div className='close-top-sidebar' onClick= {sidebarClose}>
                 <span><CloseIcon/></span>    
             </div>
         </div>
         <div className='nav-sidebar'>
             <div className='nav-link'>
-                <NavLink className="nav-text" to="/" >
+                <NavLink className="nav-text" to="/" exact>
                     <span><Grid/></span>
-                    <Typography 
+                    <label 
                         className='nav-font' 
                         variant='subtitle1'>
                         Dashboard
-                    </Typography>
+                    </label>
                 </NavLink>
             </div>
             <div className='nav-link'>
-                <Link className="nav-text" to="/ceomessage">
+                <NavLink className="nav-text" to="/ceomessage" exact>
                     <span><Person/></span>
                     <Typography 
                         className='nav-font' 
                         variant='subtitle1'>
                         CEO Message
-                    </Typography></Link>
+                    </Typography></NavLink>
             </div>
             <div className='nav-link'>
                 <NavLink className="nav-text"  to="/policies">
