@@ -1,3 +1,11 @@
 .upcomingevent-container{
     margin : 5rem 0;
 }
+table {
+    width: 100%;
+    border: 1px solid blue;
+    }
+    th, td {
+    text-align: left;
+    padding: 8px;
+    }

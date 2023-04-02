@@ -36,6 +36,9 @@ const [eventdata,seteventdata]=useState([]);
      //}
      getLocalItem();
       }, [])
+      const DivStyle={
+        overflowX: 'auto',
+      }
   return (
     
     <div className="upcomingevent-container">
@@ -50,18 +53,24 @@ const [eventdata,seteventdata]=useState([]);
       </NavLink>
       <div className="table">
       <table>
+      <div style={DivStyle}>
         <tr>
-          <th>Title</th>
-          <th>Department</th>
+          <th>Event Title</th>
+          <th>Organizer</th>
           <th>Venue</th>
+          <th>Department</th>
+          <th>Start Date</th>
+          <th>End Date</th>   
         </tr>
-        
         {eventdata.map((e)=>{
        return (
-        <tr key={e.id}>
+      <tr key={e.id}>
        <td>{e.title}</td>
-       <td>{e.department}</td>
+       <td>{e.organizer}</td>
        <td>{e.venue}</td>
+       <td>{e.department}</td>
+       <td>{e.startdate}</td>
+       <td>{e.enddate}</td>
 
        </tr>
      );})}
@@ -89,7 +98,7 @@ const [eventdata,seteventdata]=useState([]);
           <td>{eventdata[e].department}</td>)} */}
           {/* <td>{eventdata[0].title}</td>
           <td>{eventdata[0].department}</td> */}
-          
+      </div>   
       </table>
     </div>
     </div>
