@@ -19,7 +19,8 @@ export const Topbar = () => {
 
   const openSidebar = () => {
     
-    sideMenu[0].style.display = "block";
+    sideMenu[0].style.display = "flex";
+    sideMenu[0].style.flexDirection = "column";
   
 }
   const visible = createContext();

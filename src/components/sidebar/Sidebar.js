@@ -11,17 +11,22 @@ import {Close as CloseIcon,
         TipsAndUpdates as TipsAndUpdatesIcon,
         Article as ArticleIcon,
         Person,
-        GridView as Grid
+        GridView as Grid,
+        EmojiEvents,
+        VideoCall
         } from '@mui/icons-material'
 import { Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
+
 
 export const Sidebar = () => {
 
 const sideMenu = document.getElementsByClassName("sidebar-container");
 const sidebarClose = ()=>{
     sideMenu[0].style.display = "none";
+    sideMenu[0].classList.add("sidebar-container-2");
 }
+const [overflow,setOverflow]=useState("hidden");
 return (
     <div className='sidebar-container'>
         <div className='top-sidebar'>
@@ -36,9 +41,7 @@ return (
             <div className='nav-link'>
                 <NavLink className="nav-text" to="/" exact>
                     <span><Grid/></span>
-                    <label 
-                        className='nav-font' 
-                        variant='subtitle1'>
+                    <label className='nav-font'>
                         Dashboard
                     </label>
                 </NavLink>
@@ -46,93 +49,109 @@ return (
             <div className='nav-link'>
                 <NavLink className="nav-text" to="/ceomessage" exact>
                     <span><Person/></span>
-                    <Typography 
-                        className='nav-font' 
-                        variant='subtitle1'>
+                    <label className='nav-font'>
                         CEO Message
-                    </Typography></NavLink>
+                    </label></NavLink>
             </div>
             <div className='nav-link'>
                 <NavLink className="nav-text"  to="/policies">
                     <span><ArticleIcon/></span>
-                    <Typography 
-                        className='nav-font' 
-                        variant='subtitle1'>
+                    <label className='nav-font'>
                         Policies
-                    </Typography>
+                    </label>
                 </NavLink>
             </div>
             <div className='nav-link'>
                 <NavLink className="nav-text" exact to="/thoughtoftheday">
                     <span><TipsAndUpdatesIcon/></span>
-                    <Typography 
+                    <label
                         className='nav-font' 
-                        variant='subtitle1'>
+                        >
                         Thought of the day
-                    </Typography>
+                    </label>
                 </NavLink>
             </div>
             <div className='nav-link'>
                 <NavLink className="nav-text" exact to="/noticeboard" >
                     <span><NoteIcon/></span>
-                    <Typography 
-                        className='nav-font' 
-                        variant='subtitle1'>
+                    <label 
+                        className='nav-font' >
                         Noticeboard
-                    </Typography>
+                    </label>
                 </NavLink>
             </div>
             <div className='nav-link'>
                 <NavLink className="nav-text" exact to="/managementdesk" >
                     <span><Diversity3Icon/></span>
-                    <Typography 
-                        className='nav-font' 
-                        variant='subtitle1'>
+                    <label 
+                        className='nav-font'>
                         Management Desk
-                    </Typography>
+                    </label>
                 </NavLink>
             </div>
             <div className='nav-link'>
                 <NavLink className="nav-text" exact to="/opinionpoll" >
                     <span><PollIcon/></span>
-                    <Typography 
-                        className='nav-font' 
-                        variant='subtitle1'>
+                    <label 
+                        className='nav-font'>
                         Opinion Poll
-                    </Typography>
+                    </label>
                 </NavLink>
             </div>
             <div className='nav-link'>
                 <NavLink className="nav-text" exact to="/upcomingevent" >
                     <span><EventIcon/></span>
-                    <Typography 
-                        className='nav-font' 
-                        variant='subtitle1'>
+                    <label
+                        className='nav-font'>
                         Upcoming Event
-                    </Typography>
+                    </label>
                 </NavLink>
             </div>
             <div className='nav-link'>
                 <NavLink className="nav-text" exact to="/newjoinee" >
                     <span><BadgeIcon/></span>
-                    <Typography 
-                        className='nav-font' 
-                        variant='subtitle1'>
+                    <label
+                        className='nav-font' >
                         New Joinee
-                    </Typography>
+                    </label>
                 </NavLink>
             </div>
             <div className='nav-link'>
                 <NavLink className="nav-text" exact to="/employeemaster" >
                     <span><Person/></span>
-                    <Typography 
-                        className='nav-font' 
-                        variant='subtitle1'>
+                    <label 
+                        className='nav-font'>
                         Employee Master
-                        </Typography>
+                        </label>
                 </NavLink>
             </div>
-            
+            <div className='nav-link'>
+                <NavLink className="nav-text" exact to="/achievement" >
+                    <span><EmojiEvents/></span>
+                    <label 
+                        className='nav-font'>
+                        Achievement
+                        </label>
+                </NavLink>
+            </div>
+            <div className='nav-link'>
+                <NavLink className="nav-text" exact to="/videostreaming" >
+                    <span><VideoCall/></span>
+                    <label 
+                        className='nav-font'>
+                        Video Streaming
+                        </label>
+                </NavLink>
+            </div>
+            <div className='nav-link'>
+                <NavLink className="nav-text" exact to="/videostreaming" >
+                    <span><VideoCall/></span>
+                    <label 
+                        className='nav-font'>
+                        Video Streaming
+                        </label>
+                </NavLink>
+            </div>
         </div>
     </div>
 )

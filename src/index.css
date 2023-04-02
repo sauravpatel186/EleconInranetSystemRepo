@@ -2,6 +2,8 @@ body {
   margin: 0;
   font-family:'Plus Jakarta Sans', sans-serif;
   background-color: rgba(240, 244, 247,0.5);
+  overflow-x: auto;
+  overflow-y: auto;
 }
 
 :root{
@@ -70,4 +72,24 @@ body {
     --cui-link-hover-color: #297acc;
     --cui-code-color: #d63384;
     --cui-highlight-bg: #fff3cd;
+}
+::-webkit-scrollbar {
+  width: 0.3rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--cui-border-color-translucent); 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cui-body-color); 
 }

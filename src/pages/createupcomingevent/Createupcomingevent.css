@@ -9,7 +9,6 @@
 .page-header{
     font-size: calc(1.325rem + 0.9vw)!important;
     font-weight: 600!important;
-    margin-bottom: 1.5rem;
     color: var(--cui-body-color);
     font-family:'Plus Jakarta Sans';
 }
@@ -20,6 +19,7 @@
     background: #fff;
     border-radius: 0.5rem;
     box-shadow : rgba(50,50,93,.02) 0 2px 5px -1px, rgba(0,0,0,.05) 0 1px 3px -1px;
+    margin-top: 1.5rem;
 }
 .createupcomingevent-header{
     margin-left: 3rem;
