@@ -31,7 +31,7 @@ return (
     <div className='sidebar-container'>
         <div className='top-sidebar'>
             <div className='logo-top-sidebar'>
-            <Link  to="/" > <img src='Elecon_engineering_logo.png'></img></Link>
+            <Link  to="/" > <img src='/Elecon_engineering_logo.png'></img></Link>
             </div>
             <div className='close-top-sidebar' onClick= {sidebarClose}>
                 <span><CloseIcon/></span>    

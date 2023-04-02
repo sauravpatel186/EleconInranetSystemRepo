@@ -29,7 +29,7 @@ export const Topbar = () => {
         <div className='profile-area'>
           <div className='profile'>
             <div className='profile-photo'>
-              <img src="profile-1.jpg" onClick={handleClick}/>
+              <img src="/profile-1.jpg" onClick={handleClick}/>
             </div>
           </div>
           <Menu

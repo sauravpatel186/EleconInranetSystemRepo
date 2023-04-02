@@ -11,13 +11,6 @@ import Createupcomingevent from './pages/createupcomingevent/Createupcomingevent
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 function App() {
-  const sideMenu = document.getElementsByClassName("sidebar-container");
-  useEffect(() => {
-    if(window.innerWidth > 768+"px")
-    {
-      sideMenu[0].style.display = "flex";    
-    }
-  }, [])
   
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -31,7 +24,7 @@ function App() {
                 <Route exact path="/"><Dashboard/></Route>
                 <Route exact path="/ceomessage"><Ceomessage/></Route>
                 <Route exact path="/upcomingevent"><Upcomingevent/></Route>
-                <Route exact path="/createupcomingevent"><Createupcomingevent/></Route>
+                <Route index path="/upcomingevent/createupcomingevent"><Createupcomingevent/></Route>
               </Switch>
             
           </div>
