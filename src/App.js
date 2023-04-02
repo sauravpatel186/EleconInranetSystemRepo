@@ -10,6 +10,8 @@ import Upcomingevent from "./pages/upcomingevent/Upcomingevent";
 import Createupcomingevent from './pages/createupcomingevent/Createupcomingevent';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { Achievement } from './pages/achievement/Achievement';
+import { CreateAchievement } from './pages/achievement/createachievement/CreateAchievement';
 function App() {
   
   return (
@@ -25,6 +27,9 @@ function App() {
                 <Route exact path="/ceomessage"><Ceomessage/></Route>
                 <Route exact path="/upcomingevent"><Upcomingevent/></Route>
                 <Route index path="/upcomingevent/createupcomingevent"><Createupcomingevent/></Route>
+                <Route exact path="/achievement"><Achievement/></Route>
+                <Route index path="/achievement/createachievement"><CreateAchievement
+                /></Route>
               </Switch>
             
           </div>

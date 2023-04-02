@@ -1,6 +1,6 @@
 //import React from "react";
 import * as React from "react";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
@@ -8,7 +8,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import "./Createupcomingevent.css";
-import { Divider } from "@mui/material";
+import { Breadcrumbs, Divider } from "@mui/material";
 import dayjs from "dayjs";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -18,10 +18,11 @@ import { DateField } from "@mui/x-date-pickers/DateField";
 import Button from "@mui/material/Button";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { Link } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 const showToastMessage = () => {
   toast.success('Success Notification !', {
-      position: toast.POSITION.TOP_RIGHT
+    position: toast.POSITION.TOP_RIGHT
   });
 };
 
@@ -43,52 +44,52 @@ const Createupcomingevent = () => {
       setEvent(JSON.parse(data));
     }
   }, []);
-
+  const navigate = useHistory();
   let value
   const addHandler = () => {
     let newEvent = {
       id: Math.random(),
       title: newTitle,
       eventorganizer: newEventOrganizer,
-      department:newDepartment,
+      department: newDepartment,
       venue: newVenue,
-      startdate:startdate,
-      enddate:enddate,
-      RSVP:RSVP,
-      time:Math.floor(Date.now() / 1000),
+      startdate: startdate,
+      enddate: enddate,
+      RSVP: RSVP,
+      time: Math.floor(Date.now() / 1000),
       description: newDescription,
       isCompleted: false,
       isDeleted: false,
     };
-    if(newEvent.title===""){
+    if (newEvent.title === "") {
       alert("Title cannot be empty! Please enter a title!!!")
       return false;
     }
-    if(newEvent.description===""){
+    if (newEvent.description === "") {
       alert("Description cannot be empty! Please enter a description!!!")
       return false;
     }
-    if(newEvent.eventorganizer===""){
+    if (newEvent.eventorganizer === "") {
       alert("Event Organizer cannot be empty! Please enter a event organizer!!!")
       return false;
     }
-    if(newEvent.startdate===""){
+    if (newEvent.startdate === "") {
       alert("Start Date cannot be empty! Please enter a date!!!")
       return false;
     }
-    if(newEvent.RSVP===""){
+    if (newEvent.RSVP === "") {
       alert("RSVP field cannot be empty! Please enter RSVP!!!")
       return false;
     }
-    if(newEvent.enddate===""){
+    if (newEvent.enddate === "") {
       alert("End Date cannot be empty! Please enter a date!!!")
       return false;
     }
-    if(newEvent.venue===""){
+    if (newEvent.venue === "") {
       alert("Venue cannot be empty! Please enter a venue!!!")
       return false;
     }
-    if(newEvent.department===""){
+    if (newEvent.department === "") {
       alert("Department field cannot be empty! Please enter a department!!!")
       return false;
     }
@@ -97,6 +98,7 @@ const Createupcomingevent = () => {
 
     localStorage.setItem("data", JSON.stringify(Event));
     showToastMessage();
+    navigate.push("/upcomingevent");
   };
 
   const handleDepartmentChange = (event) => {
@@ -112,6 +114,24 @@ const Createupcomingevent = () => {
         <header className="page-header">
           <label>Upcoming Event</label>
         </header>
+        <div className='page-breadscrumb'>
+              <Breadcrumbs aria-label="breadcrumb">
+                <Link underline="hover" color="inherit" href="/">
+                  Home
+                </Link>
+                <Link
+                  underline="hover" color="inherit" href="/upcomingevent">
+                  Upcoming Event
+                </Link>
+                <Link
+                  underline="hover"
+                  color="text.primary"
+                  href="/upcomingevent/createupcomingevent"
+                  aria-current="page">
+                  Createupcoming Event
+                </Link>
+              </Breadcrumbs>
+            </div>
         <div className="createupcomingevent-container">
           <div className="createupcomingevent-header">
             <Typography className="header-font" variant="body" gutterBottom>
@@ -195,21 +215,21 @@ const Createupcomingevent = () => {
                     onChange={(newValue) => setstartdate(newValue)}
                   />
                 </DemoContainer>
-              {/* </LocalizationProvider> */}
+                {/* </LocalizationProvider> */}
               </div>
               <div className="createeventforminput">
                 {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
-                  <DemoContainer required components={["DatePicker", "DatePicker"]}>
-                    <DatePicker
-                      label="End Date"
-                      value={enddate}
-                      required
-                      format="DD-MM-YYYY"
-                      sx={{ width: 100 + "%" }}
-                      onChange={(newValue) => setenddate(newValue)}
-                      disablePast
-                    />
-                  </DemoContainer>
+                <DemoContainer required components={["DatePicker", "DatePicker"]}>
+                  <DatePicker
+                    label="End Date"
+                    value={enddate}
+                    required
+                    format="DD-MM-YYYY"
+                    sx={{ width: 100 + "%" }}
+                    onChange={(newValue) => setenddate(newValue)}
+                    disablePast
+                  />
+                </DemoContainer>
                 {/* </LocalizationProvider> */}
               </div>
               <div className="createeventforminput">
@@ -220,7 +240,7 @@ const Createupcomingevent = () => {
                 variant="outlined"
                 sx={{ width: 100 + "%" }}
               /> */}
-                <FormControl sx={{ width: 100 + "%" , marginTop:"1vh" }}>
+                <FormControl sx={{ width: 100 + "%", marginTop: "1vh" }}>
                   <InputLabel id="demo-simple-select-autowidth-label" required>
                     RSVP
                   </InputLabel>
