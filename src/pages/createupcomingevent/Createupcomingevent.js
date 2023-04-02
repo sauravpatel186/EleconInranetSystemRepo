@@ -3,32 +3,6 @@ import * as React from "react";
 import { useEffect,useState } from "react";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-<<<<<<< HEAD
-import "./Createupcomingevent.css"
-import { Divider,Link,Breadcrumbs } from "@mui/material";
-const Createupcomingevent = () => {
-  return (
-<div className='page-information-container'>
-    <header className="page-header"><label>Upcoming Event</label></header>
-    <div className='page-breadscrumb'>
-      <Breadcrumbs aria-label="breadcrumb">
-        <Link underline="hover" color="inherit" href="/">
-          Home
-        </Link>
-        <Link underline="hover" color="inherit" href="/upcomingevent">
-          Upcoming Event
-        </Link>
-        <Link
-          underline="hover"
-          color="text.primary"
-          href="/createupcomingevent"
-          aria-current="page">
-          Createupcoming Event
-        </Link>
-      </Breadcrumbs>
-      </div>
-    <div className="createupcomingevent-container">
-=======
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -44,7 +18,6 @@ import { DateField } from "@mui/x-date-pickers/DateField";
 import Button from "@mui/material/Button";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
->>>>>>> be4644f2f5681ecd831d7aca023774604ff1a536
 
 const showToastMessage = () => {
   toast.success('Success Notification !', {
@@ -61,8 +34,8 @@ const Createupcomingevent = () => {
   const [newVenue, setnewVenue] = useState("");
   const [newDepartment, setnewDepartment] = React.useState("");
   const [RSVP, setRSVP] = React.useState("");
-  const [startdate, setstartdate] = React.useState(dayjs(""));
-  const [enddate, setenddate] = React.useState("");
+  const [startdate, setstartdate] = React.useState(null);
+  const [enddate, setenddate] = React.useState(null);
 
   useEffect(() => {
     let data = localStorage.getItem("data");
@@ -211,29 +184,33 @@ const Createupcomingevent = () => {
             </div>
             <div className="formrow">
               <div className="createeventforminput">
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
                 <DemoContainer components={["DatePicker", "DatePicker"]}>
                   <DatePicker
                     label="Start Date"
                     value={startdate}
                     sx={{ width: 100 + "%" }}
+                    disablePast
+                    format="DD-MM-YYYY"
                     onChange={(newValue) => setstartdate(newValue)}
                   />
                 </DemoContainer>
-              </LocalizationProvider>
+              {/* </LocalizationProvider> */}
               </div>
               <div className="createeventforminput">
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
                   <DemoContainer required components={["DatePicker", "DatePicker"]}>
                     <DatePicker
                       label="End Date"
                       value={enddate}
                       required
+                      format="DD-MM-YYYY"
                       sx={{ width: 100 + "%" }}
                       onChange={(newValue) => setenddate(newValue)}
+                      disablePast
                     />
                   </DemoContainer>
-                </LocalizationProvider>
+                {/* </LocalizationProvider> */}
               </div>
               <div className="createeventforminput">
                 {/* <TextField

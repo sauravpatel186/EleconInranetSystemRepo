@@ -8,6 +8,8 @@ import { Dashboard } from './pages/dashboard/Dashboard';
 import { Ceomessage } from './pages/ceomessage/Ceomessage';
 import Upcomingevent from "./pages/upcomingevent/Upcomingevent";
 import Createupcomingevent from './pages/createupcomingevent/Createupcomingevent';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 function App() {
   const sideMenu = document.getElementsByClassName("sidebar-container");
   useEffect(() => {
@@ -18,6 +20,7 @@ function App() {
   }, [])
   
   return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
     <div className="main-container">
       <Sidebar/>
       <div className='container'>
@@ -34,7 +37,7 @@ function App() {
           </div>
       </div>
     </div>
-
+    </LocalizationProvider>
   );
 }
 
