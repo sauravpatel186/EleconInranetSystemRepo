@@ -11,6 +11,7 @@ import Createupcomingevent from './pages/createupcomingevent/Createupcomingevent
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Achievement } from './pages/achievement/Achievement';
+import Opinionpoll from './pages/opinionpoll/Opinionpoll';
 import { CreateAchievement } from './pages/achievement/createachievement/CreateAchievement';
 function App() {
   
@@ -25,6 +26,7 @@ function App() {
               <Switch>
                 <Route exact path="/"><Dashboard/></Route>
                 <Route exact path="/ceomessage"><Ceomessage/></Route>
+                <Route exact path="/opinionpoll"><Opinionpoll/></Route>
                 <Route exact path="/upcomingevent"><Upcomingevent/></Route>
                 <Route index path="/upcomingevent/createupcomingevent"><Createupcomingevent/></Route>
                 <Route exact path="/achievement"><Achievement/></Route>
