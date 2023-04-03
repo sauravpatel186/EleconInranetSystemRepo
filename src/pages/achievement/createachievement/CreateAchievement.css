@@ -12,16 +12,16 @@
     color: var(--cui-body-color);
     font-family:'Plus Jakarta Sans';
 }
-.createupcomingevent-container{
+.createachievement-container{
     display: flex;
     width: 100%;
     flex-direction: column;
     background: #fff;
     border-radius: 0.5rem;
-    box-shadow : #32325d05 0 2px 5px -1px, rgba(0,0,0,.05) 0 1px 3px -1px;
+    box-shadow : rgba(50,50,93,.02) 0 2px 5px -1px, rgba(0,0,0,.05) 0 1px 3px -1px;
     margin-top: 1.5rem;
 }
-.createupcomingevent-header{
+.createachievement-header{
     margin-left: 3rem;
     margin-top: 1rem;
 }
@@ -33,7 +33,7 @@
 .form-line{
     margin-top : 1rem;
 }
-.createeventform{
+.createachievementform{
     margin-top: 2rem;
     display: flex;
     justify-content: space-between;
@@ -50,13 +50,14 @@
     display: flex;
     flex-direction: row;
     position: relative;
+    gap:1rem
 }
-.createeventforminput{
+.createachievementforminput{
     width: 100%;
-     padding-right: 1rem;
+    
 }
 @media screen and (max-width: 768px)  {
-    .createeventform{
+    .createachievementform{
         gap :0;
     }
  
@@ -67,7 +68,7 @@
         flex-direction: column;
        
     }
-    .createeventforminput{
+    .createachievementforminput{
         margin-top: 1.5rem;
     }
 }
