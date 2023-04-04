@@ -7,7 +7,7 @@ import {
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Createupcomingevent from "../createupcomingevent/Createupcomingevent";
-import "./Upcomingevent.css";
+import "./upcomingevent.css";
 import { Checkbox } from "@mui/material";
 import { Edit } from "@mui/icons-material";
 import { Delete } from "@mui/icons-material";
