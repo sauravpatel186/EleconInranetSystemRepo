@@ -116,11 +116,11 @@ const Createupcomingevent = () => {
         </header>
         <div className='page-breadscrumb'>
               <Breadcrumbs aria-label="breadcrumb">
-                <Link underline="hover" color="inherit" href="/">
+                <Link underline="hover" color="inherit" href="/" exact to="/">
                   Home
                 </Link>
                 <Link
-                  underline="hover" color="inherit" href="/upcomingevent">
+                  underline="hover" color="inherit" href="/upcomingevent" exact to="/upcomingevent">
                   Upcoming Event
                 </Link>
                 <Link
