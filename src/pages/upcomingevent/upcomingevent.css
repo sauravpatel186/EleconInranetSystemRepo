@@ -6,6 +6,16 @@
     display: flex;
     flex-direction: column;
 }
+<<<<<<< HEAD
+table {
+    width: 100%;
+    border: 1px solid blue;
+    }
+    th, td {
+    text-align: left;
+    padding: 8px;
+    }
+=======
 .page-header{
     font-size: calc(1.325rem + 0.9vw)!important;
     font-weight: 600!important;
@@ -66,3 +76,4 @@ table tbody tr:nth-of-type(even){
     }
 
 }
+>>>>>>> facc0a91c0d877edaba438984961dcb2db3f7f23
