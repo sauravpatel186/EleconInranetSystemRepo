@@ -10,7 +10,7 @@ import "./CreateAchievement.css";
 import { toast } from "react-toastify"
 import { Divider, Input } from "@mui/material";
 import dayjs from "dayjs";
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import achievementServices from "../../../services/achievementServices";
 import * as Yup from "yup";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -18,7 +18,6 @@ import Button from "@mui/material/Button";
 import 'react-toastify/dist/ReactToastify.css';
 import { ValidationErrorMessage } from "../../../components/ValidationErrorMessage/ValidationErrorMessage"
 import { Formik } from "formik";
-import { LocalizationProvider } from "@mui/x-date-pickers";
 import { useHistory } from "react-router-dom";
 import { Achievement } from "../Achievement";
 export const CreateAchievement = () => {
@@ -56,6 +55,16 @@ export const CreateAchievement = () => {
             setFieldValue("achievementImage", "");
         }
     };
+    const submitData = async(data)=>{
+        try{
+            await achievementServices.addAchievement(data);
+            navigate.push("/achievement");
+        }
+        catch(error)
+        {
+            console.error(error);
+        }
+    }
     return (
         <div className="page-information-container">
             <header className="page-header">
@@ -89,8 +98,8 @@ export const CreateAchievement = () => {
                             achievementTitle: data.achievementTitle,
                             employeeIdandName: data.employeeIdandName,
                             achievementArea: data.achievementArea,
-                            achievementStartDate: data.achievementStartDate,
-                            achievementEndDate: data.achievementEndDate,
+                            achievementStartDate: JSON.stringify(dayjs(data.achievementStartDate)),
+                            achievementEndDate: JSON.stringify(dayjs(data.achievementEndDate)),
                             achievementDescription: data.achievementDescription,
                             achievementImage: data.achievementImage,
                             time: Math.floor(Date.now() / 1000),
@@ -100,6 +109,8 @@ export const CreateAchievement = () => {
                         setNewAchievement([...newachievement]);
                         const store = localStorage.setItem("achievement",JSON.stringify(newachievement));
                         toast("Stored Successfully");
+                        // console.log(JSON.stringify(achievement));
+                        // submitData(achievement);
                         navigate.push("/achievement");
                     }}
                 >

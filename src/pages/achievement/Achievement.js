@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { Delete, ModeEdit } from '@mui/icons-material';
 import { Link as LinkRoute } from "react-router-dom";
+import achievementServices from '../../services/achievementServices';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "white",
@@ -99,7 +100,7 @@ export const Achievement = () => {
        
 
             <TableContainer>
-              <Table stickyHeader aria-label='sticky table' sx={{ maxHeight: 440 }}>
+              <Table stickyHeader aria-label='sticky table' sx={{ maxHeight: 440 }} size='small'>
                 <TableHead>
                   <TableRow>
                     <StyledTableCell><Checkbox size='small' name='achievementSelect' sx={{ color: "white" }}></Checkbox></StyledTableCell>
