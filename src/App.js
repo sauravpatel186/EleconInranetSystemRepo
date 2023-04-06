@@ -32,6 +32,7 @@ function App() {
                 <Route exact path="/achievement"><Achievement/></Route>
                 <Route index path="/achievement/createachievement"><CreateAchievement
                 /></Route>
+                <Route index path=".achievement/updateachievement/:id"></Route>
               </Switch>
             
           </div>
