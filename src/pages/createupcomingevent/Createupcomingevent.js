@@ -128,7 +128,7 @@ const Createupcomingevent = () => {
                   color="text.primary"
                   href="/upcomingevent/createupcomingevent"
                   aria-current="page">
-                  Createupcoming Event
+                  Create Upcoming Event
                 </Link>
               </Breadcrumbs>
             </div>
@@ -266,7 +266,7 @@ const Createupcomingevent = () => {
                   id="outlined-multiline-static"
                   label="Description"
                   multiline
-                  rows={4}
+                  rows={6}
                   defaultValue=""
                   variant="outlined"
                   onChange={(data) => setnewDescription(data.target.value)}
