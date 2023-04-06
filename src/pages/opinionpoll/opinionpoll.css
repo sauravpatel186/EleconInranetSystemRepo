@@ -32,7 +32,7 @@
     margin:2rem;
     display: flex;
 }
-table thead tr{
+/* table thead tr{
     background-color: #009879;
     color: white;
     font-weight: bold;
@@ -65,4 +65,4 @@ table tbody tr:nth-of-type(even){
         font-size: 12px;
     }
 
-}
+} */
