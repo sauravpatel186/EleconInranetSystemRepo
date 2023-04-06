@@ -92,6 +92,7 @@ const Upcomingevent = (props) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   }
+  console.log(eventdata)
   return (
     <div className="page-information-container">
       <div className="page-header"><label>

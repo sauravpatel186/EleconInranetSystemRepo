@@ -319,6 +319,12 @@ const Createupcomingevent = () => {
             setFieldValue("eventImage", "");
         }
     };
+    useEffect(() => {
+        let data = localStorage.getItem("event");
+        if (data) {
+          setNewEvent(JSON.parse(data));
+        }
+      }, []);
     return (
         <div className="page-information-container">
             <header className="page-header">
@@ -363,7 +369,7 @@ const Createupcomingevent = () => {
                         }
                         newevent.push(event);
                         setNewEvent([...newevent]);
-                        const store = localStorage.setItem("event",JSON.stringify(newevent));
+                        localStorage.setItem("event",JSON.stringify(newevent));
                         toast("Stored Successfully");
                         navigate.push("/upcomingevent");
                     }}
