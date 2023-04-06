@@ -12,6 +12,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Achievement } from './pages/achievement/Achievement';
 import { CreateAchievement } from './pages/achievement/createachievement/CreateAchievement';
+import Createopinionpoll from './pages/createopinionpoll/Createopinionpoll';
+import Opinionpoll from './pages/opinionpoll/Opinionpoll';
 function App() {
   
   return (
