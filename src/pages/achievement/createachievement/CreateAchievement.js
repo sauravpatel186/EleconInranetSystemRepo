@@ -21,6 +21,7 @@ import { Formik } from "formik";
 import { useHistory } from "react-router-dom";
 import { Achievement } from "../Achievement";
 export const CreateAchievement = () => {
+    
     const navigate = useHistory();
     const [newachievement,setNewAchievement]=useState([]);
     const ValidationSchema = Yup.object().shape({
@@ -55,7 +56,12 @@ export const CreateAchievement = () => {
             setFieldValue("achievementImage", "");
         }
     };
-    
+    useEffect(() => {
+        let data = localStorage.getItem("achievement");
+        if (data) {
+          setNewAchievement(JSON.parse(data));
+        }
+      }, []);
     return (
         <div className="page-information-container">
             <header className="page-header">
@@ -98,7 +104,7 @@ export const CreateAchievement = () => {
                         }
                         newachievement.push(achievement);
                         setNewAchievement([...newachievement]);
-                        const store = localStorage.setItem("achievement",JSON.stringify(newachievement));
+                        localStorage.setItem("achievement",JSON.stringify(newachievement));
                         toast("Stored Successfully");
                         // console.log(JSON.stringify(achievement));
                         // submitData(achievement);
