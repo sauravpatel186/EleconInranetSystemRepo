@@ -3,7 +3,6 @@
     margin-top: 2rem;
     margin-left: 2rem;
     margin-right: 2rem;
-    display: flex;
     flex-direction: column;
 }
 .page-header{
@@ -27,7 +26,7 @@
     gap: 1rem;
     margin:2rem 2rem 0rem 2rem
 }
-.table-container{
+/* .table-container{
     
     margin:2rem;
     display: flex;
@@ -65,4 +64,4 @@ table tbody tr:nth-of-type(even){
         font-size: 12px;
     }
 
-}
+} */

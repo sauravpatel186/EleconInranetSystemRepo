@@ -3,7 +3,6 @@
     top: 0;
     z-index: 3;
     height: 100vh;
-    top: 4rem;
     box-shadow: (50,50,93,.02) 0 2px 5px -1px, rgba(0,0,0,.05) 0 1px 3px -1px;
     position: sticky;
     position: -webkit-sticky;
@@ -16,7 +15,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    top:4rem;
+
 }
 .top-sidebar .logo-top-sidebar{
     display: flex;
@@ -38,9 +37,13 @@
     width: 16rem;
     padding-right: 1rem;
     position: -webkit-sticky;
-    overflow-y: scroll;
+    
     position: sticky;
     align-self: flex-start;
+    padding-bottom: 2rem;
+}
+.nav-sidebar:hover{
+    overflow-y: scroll;
 }
 .nav-sidebar .nav-text{
     display: flex;
@@ -73,7 +76,7 @@
     color:#527ed4;
 }
 .nav-link .active-nav-text span{
-    color: #527ed4;
+    background: rgba(0, 127, 255, 0.12);
     margin-left: calc(0rem - 2px);
 }
 .nav-link:hover{
@@ -114,6 +117,6 @@
 }
 @media screen and (min-width : 768px) {
     .sidebar-container-2{
-        display: block!important;
+        display: flex!important;
     }
 }

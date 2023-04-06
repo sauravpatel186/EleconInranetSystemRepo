@@ -27,6 +27,7 @@
 
 #menu-btn{
     display: none;
+
 }
 img{
     width: 100%;
@@ -38,5 +39,13 @@ img{
         cursor: pointer;
         margin-left: 1.5rem;
         background: white;
+        color: rgba(0, 127, 255, 1);
+        border-radius: 0.3rem;
+        padding: 0.2rem;
+        border:0.1rem solid var(--cui-gray-300);
+        box-shadow:(50,50,93,.02) 0 2px 5px -1px, rgba(0,0,0,.05) 0 1px 3px -1px;
+    }
+    #menu-btn:hover{
+        background-color: var(--cui-gray-100);
     }
 }

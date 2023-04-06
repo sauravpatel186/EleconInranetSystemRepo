@@ -12,6 +12,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Achievement } from './pages/achievement/Achievement';
 import { CreateAchievement } from './pages/achievement/createachievement/CreateAchievement';
+import { UpdateAchievement } from './pages/achievement/updateachievement/UpdateAchievement';
 function App() {
   
   return (
@@ -28,8 +29,8 @@ function App() {
                 <Route exact path="/upcomingevent"><Upcomingevent/></Route>
                 <Route index path="/upcomingevent/createupcomingevent"><Createupcomingevent/></Route>
                 <Route exact path="/achievement"><Achievement/></Route>
-                <Route index path="/achievement/createachievement"><CreateAchievement
-                /></Route>
+                <Route index path="/achievement/createachievement"><CreateAchievement/></Route>
+                <Route index path="/achievement/updateachievement/:id"><UpdateAchievement/></Route>
               </Switch>
             
           </div>
