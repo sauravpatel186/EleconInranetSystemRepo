@@ -10,7 +10,7 @@ import "./CreateAchievement.css";
 import { toast } from "react-toastify"
 import { Divider, Input } from "@mui/material";
 import dayjs from "dayjs";
-import achievementServices from "../../../services/achievementServices";
+
 import * as Yup from "yup";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -55,16 +55,7 @@ export const CreateAchievement = () => {
             setFieldValue("achievementImage", "");
         }
     };
-    const submitData = async(data)=>{
-        try{
-            await achievementServices.addAchievement(data);
-            navigate.push("/achievement");
-        }
-        catch(error)
-        {
-            console.error(error);
-        }
-    }
+    
     return (
         <div className="page-information-container">
             <header className="page-header">
