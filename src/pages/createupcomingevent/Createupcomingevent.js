@@ -117,11 +117,11 @@ const Createupcomingevent = () => {
         </header>
         <div className='page-breadscrumb'>
               <Breadcrumbs aria-label="breadcrumb">
-                <Link underline="hover" color="inherit" href="/" onClick={()=>{navigate.push("/")}}>
+                <Link underline="hover" color="inherit" href="/" exact to="/" onClick={()=>{navigate.push("/")}}>
                   Home
                 </Link>
                 <Link
-                  underline="hover" color="inherit" onClick={()=>{navigate.push("/upcomingevent")}}>
+                  underline="hover" color="inherit" href="/upcomingevent">
                   Upcoming Event
                 </Link>
                 <Link
