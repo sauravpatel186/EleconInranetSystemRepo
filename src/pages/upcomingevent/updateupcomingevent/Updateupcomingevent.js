@@ -56,9 +56,9 @@ export const Updateupcomingevent = () => {
       eventOrganizerName: e[0]["eventOrganizerName"],
       eventRSVP: e[0]["eventRSVP"],
       eventDescription: e[0]["eventDescription"],
-      eventEndDate: e[0]["eventEndDate"].slice(0, 10),
+      eventEndDate: e[0]["eventEndDate"],
       eventImage: e[0]["eventImage"],
-      eventStartDate: e[0]["eventStartDate"].slice(0, 10),
+      eventStartDate: e[0]["eventStartDate"],
     }));
     console.log(eventData);
     console.log(JSON.parse(localStorage.getItem("event")));
@@ -260,7 +260,7 @@ export const Updateupcomingevent = () => {
                       components={["DatePicker", "DatePicker"]}>
                       <DatePicker
                         label="Start Date"
-                        value={dayjs(values.eventStartDate)}
+                        value={dayjs(parseISO(values.eventStartDate))}
                         format="DD-MM-YYYY"
                         sx={{ width: 100 + "%" }}
                         onChange={(newValue) =>
@@ -278,7 +278,7 @@ export const Updateupcomingevent = () => {
                     <DemoContainer required components={["DatePicker"]}>
                       <DatePicker
                         label="End Date"
-                        value={dayjs(values.eventEndDate)}
+                        value={dayjs(parseISO(values.eventEndDate))}
                         format="DD-MM-YYYY"
                         sx={{ width: 100 + "%" }}
                         onChange={(newValue) =>
