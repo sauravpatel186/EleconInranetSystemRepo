@@ -7,14 +7,16 @@ import { Route,BrowserRouter,Switch,Router} from 'react-router-dom';
 import { Dashboard } from './pages/dashboard/Dashboard';
 import { Ceomessage } from './pages/ceomessage/Ceomessage';
 import Upcomingevent from "./pages/upcomingevent/Upcomingevent";
-import Createupcomingevent from './pages/createupcomingevent/Createupcomingevent';
+import Createupcomingevent from './pages/upcomingevent/createupcomingevent/Createupcomingevent';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Achievement } from './pages/achievement/Achievement';
 import { CreateAchievement } from './pages/achievement/createachievement/CreateAchievement';
-import Createopinionpoll from './pages/createopinionpoll/Createopinionpoll';
+import Createopinionpoll from './pages/opinionpoll/createopinionpoll/Createopinionpoll';
 import Opinionpoll from './pages/opinionpoll/Opinionpoll';
 import { UpdateAchievement } from './pages/achievement/updateachievement/UpdateAchievement';
+import { Updateupcomingevent } from './pages/upcomingevent/updateupcomingevent/Updateupcomingevent';
+import { Updateopinionpoll } from './pages/opinionpoll/updateopinionpoll/Updateopinionpoll';
 
 function App() {
   
@@ -34,9 +36,10 @@ function App() {
                 <Route index path="/upcomingevent/createupcomingevent"><Createupcomingevent/></Route>
                 <Route exact path="/opinionpoll/createopinionpoll"><Createopinionpoll/></Route>
                 <Route exact path="/achievement"><Achievement/></Route>
-                <Route index path="/achievement/createachievement"><CreateAchievement
-                /></Route>
+                <Route index path="/achievement/createachievement"><CreateAchievement/></Route>
                 <Route index path="/achievement/updateachievement/:id"><UpdateAchievement/></Route>
+                <Route index path="/upcomingevent/updateupcomingevent/:id"><Updateupcomingevent/></Route>
+                <Route index path="/opinionpoll/updateopinionpoll/:id"><Updateopinionpoll/></Route>
               </Switch>
             
           </div>

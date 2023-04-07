@@ -1,15 +1,27 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { NavLink, useHistory, useRouteMatch, Route } from "react-router-dom";
+import { styled } from "@mui/material/styles";
 import {
-   NavLink,useHistory,
-  useRouteMatch, Route
-} from "react-router-dom";
-import { styled } from '@mui/material/styles';
-import { Typography, Button, Breadcrumbs, Link, Checkbox, Paper, tableCellClasses, TableContainer, Table, TableHead, TableBody, TableCell, TableRow, TablePagination } from '@mui/material'
-import Createupcomingevent from "../createupcomingevent/Createupcomingevent";
+  Typography,
+  Button,
+  Breadcrumbs,
+  Link,
+  Checkbox,
+  Paper,
+  tableCellClasses,
+  TableContainer,
+  Table,
+  TableHead,
+  TableBody,
+  TableCell,
+  TableRow,
+  TablePagination,
+} from "@mui/material";
+import Createupcomingevent from "./createupcomingevent/Createupcomingevent";
 import "./upcomingevent.css";
 import { Edit } from "@mui/icons-material";
-import { Delete,ModeEdit } from "@mui/icons-material";
+import { Delete, ModeEdit } from "@mui/icons-material";
 import { Link as LinkRoute } from "react-router-dom";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -17,7 +29,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     color: "black",
     fontSize: 14,
     fontWeight: 600,
-    fontFamily: "'Plus Jakarta Sans'"
+    fontFamily: "'Plus Jakarta Sans'",
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -27,11 +39,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(even)': {
+  "&:nth-of-type(even)": {
     backgroundColor: theme.palette.action.hover,
   },
   // hide last border
-  '&:last-child td, &:last-child th': {
+  "&:last-child td, &:last-child th": {
     border: 0,
   },
 }));
@@ -69,20 +81,18 @@ const Upcomingevent = (props) => {
     let data = JSON.parse(localStorage.getItem("event"));
     if (data) {
       seteventdata(JSON.parse(localStorage.getItem("event")));
-    }
-    else {
+    } else {
       return [];
     }
-  }
+  };
 
   useEffect(() => {
     try {
       getLocalItem();
-    }
-    catch (error) {
+    } catch (error) {
       console.error(error);
     }
-  }, [])
+  }, []);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -91,91 +101,117 @@ const Upcomingevent = (props) => {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
-  }
-  console.log(eventdata)
+  };
+  console.log(eventdata);
   return (
     <div className="page-information-container">
-      <div className="page-header"><label>
-        Upcoming Event
-      </label>
+      <div className="page-header">
+        <label>Upcoming Event</label>
       </div>
       <div className='page-breadscrumb'>
+            <br/>
               <Breadcrumbs aria-label="breadcrumb">
-                <NavLink underline="hover" color="inherit" href="/" exact to="/">
+                <Link underline="hover" color="inherit" href="/" exact to="/">
                   Home
-                </NavLink>
-                <NavLink
+                </Link>
+                <Link
                   underline="hover" color="inherit" href="/upcomingevent" exact to="/upcomingevent">
                   Upcoming Event
-                </NavLink>
+                </Link>
               </Breadcrumbs>
+              <br/>
             </div>
       <div className="upcomingevent-container">
         <div className="upcomingevent-container-button">
-          <Route exact path="/upcomingevent/createupcomingevent"><Createupcomingevent /></Route>
+          <Route exact path="/upcomingevent/createupcomingevent">
+            <Createupcomingevent />
+          </Route>
           <NavLink to="/upcomingevent/createupcomingevent">
-            <Button variant="contained" color="success">
+            <Button variant="contained" color="success" size="small">
               Create Upcoming Event
             </Button>
           </NavLink>
-          <Route exact path="/upcomingevent/createupcomingevent"><Createupcomingevent /></Route>
+          <Route exact path="/upcomingevent/createupcomingevent">
+            <Createupcomingevent />
+          </Route>
           <NavLink to="/upcomingevent/createupcomingevent">
-            <Button variant="contained" color="error">
+            <Button variant="contained" color="error" size="small">
               Disable Selected
             </Button>
           </NavLink>
         </div>
         <div className="table-container">
-        <TableContainer>
-              <Table stickyHeader aria-label='sticky table' sx={{ maxHeight: 440 }}>
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell><Checkbox size='small' name='achievementSelect' sx={{ color: "white" }}></Checkbox></StyledTableCell>
-                    <StyledTableCell>Event Title</StyledTableCell>
-                    <StyledTableCell>Organizer Name</StyledTableCell>
-                    <StyledTableCell>Department</StyledTableCell>
-                    <StyledTableCell>Venue</StyledTableCell>
-                    <StyledTableCell>Description</StyledTableCell>
-                    <StyledTableCell>Image</StyledTableCell>
-                    <StyledTableCell>Start Date</StyledTableCell>
-                    <StyledTableCell>End Date</StyledTableCell>
-                    <StyledTableCell>RSVP</StyledTableCell>
-                    <StyledTableCell>Actions</StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {eventdata.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((e) => {
-                      return (
-                        <StyledTableRow hover role="checkbox" tabIndex={-1} key={e.id}>
-                          <StyledTableCell><Checkbox size='small' /></StyledTableCell>
-                          <StyledTableCell>{e.eventTitle}</StyledTableCell>
-                          <StyledTableCell>{e.eventOrganizerName}</StyledTableCell>
-                          <StyledTableCell>{e.eventDepartment}</StyledTableCell>
-                          <StyledTableCell>{e.eventVenue}</StyledTableCell>
-                          <StyledTableCell>{e.eventDescription}</StyledTableCell>
-                          <StyledTableCell><img src={e.eventImage} /></StyledTableCell>
-                          <StyledTableCell>{e.eventStartDate}</StyledTableCell>
-                          <StyledTableCell>{e.eventEndDate}</StyledTableCell>
-                          <StyledTableCell>{e.eventRSVP}</StyledTableCell>
-                          <StyledTableCell>
+          <TableContainer>
+            <Table
+              stickyHeader
+              aria-label="sticky table"
+              sx={{ maxHeight: 440 }}>
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>
+                    <Checkbox
+                      size="small"
+                      name="achievementSelect"
+                      sx={{ color: "black" }}></Checkbox>
+                  </StyledTableCell>
+                  <StyledTableCell>Event Title</StyledTableCell>
+                  <StyledTableCell>Organizer Name</StyledTableCell>
+                  <StyledTableCell>Department</StyledTableCell>
+                  <StyledTableCell>Venue</StyledTableCell>
+                  <StyledTableCell>Description</StyledTableCell>
+                  <StyledTableCell>Image</StyledTableCell>
+                  <StyledTableCell>Start Date</StyledTableCell>
+                  <StyledTableCell>End Date</StyledTableCell>
+                  <StyledTableCell>RSVP</StyledTableCell>
+                  <StyledTableCell>Actions</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {eventdata
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((e) => {
+                    return (
+                      <StyledTableRow
+                        hover
+                        role="checkbox"
+                        tabIndex={-1}
+                        key={e.id}>
+                        <StyledTableCell>
+                          <Checkbox size="small" />
+                        </StyledTableCell>
+                        <StyledTableCell>{e.eventTitle}</StyledTableCell>
+                        <StyledTableCell>
+                          {e.eventOrganizerName}
+                        </StyledTableCell>
+                        <StyledTableCell>{e.eventDepartment}</StyledTableCell>
+                        <StyledTableCell>{e.eventVenue}</StyledTableCell>
+                        <StyledTableCell>{e.eventDescription}</StyledTableCell>
+                        <StyledTableCell>
+                          <img src={e.eventImage} />
+                        </StyledTableCell>
+                        <StyledTableCell>{e.eventStartDate}</StyledTableCell>
+                        <StyledTableCell>{e.eventEndDate}</StyledTableCell>
+                        <StyledTableCell>{e.eventRSVP}</StyledTableCell>
+                        <StyledTableCell>
+                          <LinkRoute
+                            to={{
+                              pathname:
+                                "/upcomingevent/updateupcomingevent/:id",
+                              state: { idParam: e.id },
+                            }}>
+                            <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />
+                          </LinkRoute>
 
-
-                            <LinkRoute to={{
-                              pathname: "/achievement/updateachievement/:id",
-                              state: { idParam: e.id }
-                            }} ><ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} /></LinkRoute>
-
-                            <Delete sx={{ color: "red" }} />
-                          </StyledTableCell>
-                        </StyledTableRow>
-                      )
-                    })}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </div>
-          <div>
+                          <Delete sx={{ color: "red" }} />
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
+        <div>
           <TablePagination
             rowsPerPageOptions={[5]}
             component="div"

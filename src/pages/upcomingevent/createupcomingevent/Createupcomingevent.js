@@ -8,7 +8,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import "./Createupcomingevent.css";
-import { ValidationErrorMessage } from "../../components/ValidationErrorMessage/ValidationErrorMessage"
+import { ValidationErrorMessage } from "../../../../src/components/ValidationErrorMessage/ValidationErrorMessage"
 import { Breadcrumbs, Divider, Input } from "@mui/material";
 import dayjs from "dayjs";
 import * as Yup from "yup";
@@ -330,8 +330,27 @@ const Createupcomingevent = () => {
             <header className="page-header">
                 <label>Upcoming Event</label>
             </header>
-            <div className="createevent-container">
-                <div className="createevent-header">
+            <div className='page-breadscrumb'>
+            <br/>
+              <Breadcrumbs aria-label="breadcrumb">
+                <Link underline="hover" color="inherit" href="/" exact to="/">
+                  Home
+                </Link>
+                <Link
+                  underline="hover" color="inherit" href="/upcomingevent" exact to="/upcomingevent">
+                  Upcoming Event
+                </Link>
+                <Link
+                  underline="hover"
+                  color="text.primary"
+                  href="/upcomingevent/createupcomingevent"
+                  aria-current="page">
+                  Create Upcoming Event
+                </Link>
+              </Breadcrumbs>
+            </div>
+            <div className="createupcomingevent-container">
+                <div className="createupcomingevent-header">
                     <Typography className="header-font" variant="body" gutterBottom>
                         Create a new event
                     </Typography>
@@ -441,7 +460,7 @@ const Createupcomingevent = () => {
                                         <DemoContainer required components={["DatePicker", "DatePicker"]}>
                                             <DatePicker
                                                 label="Start Date"
-                                                value={values.eventStartDate}
+                                                value={dayjs(values.eventStartDate)}
                                                 required
                                                 format="DD-MM-YYYY"
                                                 sx={{ width: 100 + "%" }}
@@ -456,7 +475,7 @@ const Createupcomingevent = () => {
                                         <DemoContainer required components={["DatePicker"]}>
                                             <DatePicker
                                                 label="End Date"
-                                                value={values.eventEndDate}
+                                                value={dayjs(values.eventEndDate)}
                                                 required
                                                 format="DD-MM-YYYY"
                                                 sx={{ width: 100 + "%" }}

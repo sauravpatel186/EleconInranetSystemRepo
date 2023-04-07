@@ -1,15 +1,88 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link, NavLink, useRouteMatch, Route } from "react-router-dom";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import { NavLink, useHistory, useRouteMatch, Route } from "react-router-dom";
+import { styled } from "@mui/material/styles";
 import "./opinionpoll.css";
-import { Checkbox } from "@mui/material";
+import Createopinionpoll from "./createopinionpoll/Createopinionpoll";
+import {
+  Typography,
+  Button,
+  Breadcrumbs,
+  Link,
+  Checkbox,
+  Paper,
+  tableCellClasses,
+  TableContainer,
+  Table,
+  TableHead,
+  TableBody,
+  TableCell,
+  TableRow,
+  TablePagination,
+} from "@mui/material";
 import { Edit } from "@mui/icons-material";
-import { Delete } from "@mui/icons-material";
-import { Breadcrumbs, Divider } from "@mui/material";
-import Createopinionpoll from "../createopinionpoll/Createopinionpoll";
+import { Delete, ModeEdit } from "@mui/icons-material";
+import { Link as LinkRoute } from "react-router-dom";
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: "white",
+    color: "black",
+    fontSize: 14,
+    fontWeight: 600,
+    fontFamily: "'Plus Jakarta Sans'",
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+    fontFamily: "Plus Jakarta Sans",
+    fontWeight: 500,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(even)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
+
 const Opinionpoll = () => {
+
+  const navigate = useHistory();
+  let { path, url } = useRouteMatch();
+  const [opiniondata, setopiniondata] = useState([]);
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  const getLocalItem = () => {
+    let data = JSON.parse(localStorage.getItem("opinionpoll"));
+    if (data) {
+      setopiniondata(JSON.parse(localStorage.getItem("opinionpoll")));
+    } else {
+      return [];
+    }
+  };
+
+  useEffect(() => {
+    try {
+      getLocalItem();
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+  console.log(opiniondata);
+
   return (
     <div>
       <div className="page-information-container">
@@ -47,7 +120,7 @@ const Opinionpoll = () => {
             </NavLink>
           </div>
           <div className="table-container">
-            <table>
+            {/* <table>
               <thead>
                 <tr>
                   <th>
@@ -61,7 +134,7 @@ const Opinionpoll = () => {
                   <th>Delete</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody> */}
                 {/* {eventdata.map((e) => {
               return (
                 <tr key={e.id}>
@@ -76,7 +149,7 @@ const Opinionpoll = () => {
                 </tr>
               );
             })} */}
-                <td>
+                {/* <td>
                   <Checkbox size="small" />
                 </td>
                 <td>Demo</td>
@@ -90,8 +163,77 @@ const Opinionpoll = () => {
                   <Delete />
                 </td>
               </tbody>
-            </table>
+            </table> */}
+            <TableContainer>
+            <Table
+              stickyHeader
+              aria-label="sticky table"
+              sx={{ maxHeight: 440 }}>
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>
+                    <Checkbox
+                      size="small"
+                      name="opinionpollSelect"
+                      sx={{ color: "black" }}></Checkbox>
+                  </StyledTableCell>
+                  <StyledTableCell>Opinion Poll Title</StyledTableCell>
+                  <StyledTableCell>Opinion Poll Type</StyledTableCell>
+                  <StyledTableCell>Description</StyledTableCell>
+                  <StyledTableCell>Start Date</StyledTableCell>
+                  <StyledTableCell>End Date</StyledTableCell>
+                  <StyledTableCell>Actions</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {opiniondata
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((e) => {
+                    return (
+                      <StyledTableRow
+                        hover
+                        role="checkbox"
+                        tabIndex={-1}
+                        key={e.id}>
+                        <StyledTableCell>
+                          <Checkbox size="small" />
+                        </StyledTableCell>
+                        <StyledTableCell>{e.opinionTitle}</StyledTableCell>
+                        <StyledTableCell>
+                          {e.opinionType}
+                        </StyledTableCell>
+                        <StyledTableCell>{e.opinionDescription}</StyledTableCell>
+                        <StyledTableCell>{e.opinionStartDate}</StyledTableCell>
+                        <StyledTableCell>{e.opinionEndDate}</StyledTableCell>
+                        <StyledTableCell>
+                          <LinkRoute
+                            to={{
+                              pathname:
+                                "/opinionpoll/updateopinionpoll/:id",
+                              state: { idParam: e.id },
+                            }}>
+                            <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />
+                          </LinkRoute>
+
+                          <Delete sx={{ color: "red" }} />
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
           </div>
+          <div>
+          <TablePagination
+            rowsPerPageOptions={[5]}
+            component="div"
+            count={opiniondata.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          /></div>
         </div>
       </div>
     </div>
