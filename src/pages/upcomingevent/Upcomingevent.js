@@ -102,6 +102,12 @@ const Upcomingevent = (props) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  function convert(str) {
+    var date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [day,mnth,date.getFullYear()].join("-");
+  }
   console.log(eventdata);
   return (
     <div className="page-information-container">
@@ -189,8 +195,8 @@ const Upcomingevent = (props) => {
                         <StyledTableCell>
                           <img src={e.eventImage} />
                         </StyledTableCell>
-                        <StyledTableCell>{e.eventStartDate}</StyledTableCell>
-                        <StyledTableCell>{e.eventEndDate}</StyledTableCell>
+                        <StyledTableCell>{convert(e.eventStartDate)}</StyledTableCell>
+                        <StyledTableCell>{convert(e.eventEndDate)}</StyledTableCell>
                         <StyledTableCell>{e.eventRSVP}</StyledTableCell>
                         <StyledTableCell>
                           <LinkRoute
