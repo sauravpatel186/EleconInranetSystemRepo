@@ -23,59 +23,41 @@ import { Formik } from "formik";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { useHistory } from "react-router-dom";
 export const UpdateAchievement = () => {
+    const [newachievement, setNewAchievement] = useState([]);
     const { type } = useParams();
     const idParamVal = useLocation().state.idParam;
     const [achievementData, setAchievementData] = useState({
         achievementType: "",
-        achievementTitle:"",
-        employeeIdandName:"",
-        achievementArea:"",
-        achievementStartDate:"",
+        achievementTitle: "",
+        employeeIdandName: "",
+        achievementArea: "",
+        achievementStartDate: "",
         achievementEndDate: "",
-        achievementDescription:"",
-        achievementImage:""
-});
-    const initialValue = {
-        achievementType: "",
-        achievementTitle:"",
-        employeeIdandName:"",
-        achievementArea:"",
-        achievementStartDate:"",
-        achievementEndDate: "",
-        achievementDescription:"",
-        achievementImage:""
-    }
-    const updateState = (e) =>{
-        setAchievementData(existingValue=>({
+        achievementDescription: "",
+        achievementImage: ""
+    });
+    const updateState = (e) => {
+        setAchievementData(existingValue => ({
             ...existingValue,
-            achievementType:e[0]["achievementType"],
-            achievementTitle:e[0]["achievementTitle"],
-            employeeIdandName:e[0]["employeeIdandName"],
-            achievementArea:e[0]["achievementArea"],
-            achievementDescription:e[0]["achievementDescription"],
-            achievementEndDate:(e[0]["achievementEndDate"]).slice(0,10),
-            achievementImage:e[0]["achievementImage"],
-            achievementStartDate:(e[0]["achievementStartDate"]).slice(0,10)
+            achievementType: e[0]["achievementType"],
+            achievementTitle: e[0]["achievementTitle"],
+            employeeIdandName: e[0]["employeeIdandName"],
+            achievementArea: e[0]["achievementArea"],
+            achievementDescription: e[0]["achievementDescription"],
+            achievementEndDate: e[0]["achievementEndDate"],
+            achievementImage: e[0]["achievementImage"],
+            achievementStartDate: e[0]["achievementStartDate"]
         })
         )
         console.log(achievementData);
+        console.log(parseISO("2023-04-06T18:30:00.000Z"));
     }
     const getAchievementData = (id) => {
         let data = JSON.parse(localStorage.getItem("achievement"));
         if (data) {
             let adata = data.filter(achievements => achievements.id === id);
-            updateState(adata)
-            
-            
-            // console.log(achievementData);
-            // initialValue.achievementType = achievementData[0]["achievementType"];
-            // initialValue.achievementTitle = achievementData[0]["achievementTile"];
-            // initialValue.employeeIdandName = achievementData[0]["employeeIdandName"];
-            // initialValue.achievementArea = achievementData[0]["achievementArea"];
-            // initialValue.achievementStartDate = achievementData[0]["achievementStatDate"];
-            // initialValue.achievementEndDate = achievementData[0]["achievementEndDate"];
-            // initialValue.achievementDescription = achievementData[0]["achievementDescritpion"];
-            // initialValue.achievementImage = achievementData[0]["achievementImage"];
+            updateState(adata);
+            setNewAchievement(data);
         } else {
             return [];
         }
@@ -90,7 +72,6 @@ export const UpdateAchievement = () => {
         }
     }, [])
     const navigate = useHistory();
-    const [newachievement, setNewAchievement] = useState([]);
     const ValidationSchema = Yup.object().shape({
         achievementType: Yup.string().required("Please select an option"),
         achievementTitle: Yup.string().required("Achievement Title is required"),
@@ -123,7 +104,17 @@ export const UpdateAchievement = () => {
             setFieldValue("achievementImage", "");
         }
     };
-
+    //Handles The Event when data is changed
+    const UpdateData = (id, updatedData) => {
+        const datawithId = newachievement.find(e => e.id == id); // finds the element with id 
+        if (datawithId["id"] === updatedData.id) {
+            // /console.log(newachievement);
+            setNewAchievement(result => [...result,updatedData]);
+             console.log(newachievement);
+        }
+        // setToDos([...toDos]) //updating the current state
+        // localStorage.setItem("data", JSON.stringify(toDos)) //updating local storage with state
+    }
     return (
         <div className="page-information-container">
             <header className="page-header">
@@ -144,19 +135,19 @@ export const UpdateAchievement = () => {
                     enableReinitialize
                     onSubmit={data => {
                         let achievement = {
-                            id: Math.random(),
+                            id: idParamVal,
                             achievementType: data.achievementType,
                             achievementTitle: data.achievementTitle,
                             employeeIdandName: data.employeeIdandName,
                             achievementArea: data.achievementArea,
-                            achievementStartDate: data.achievementStartDate,
-                            achievementEndDate: data.achievementEndDate,
+                            achievementStartDate: JSON.stringify(data.achievementStartDate),
+                            achievementEndDate: JSON.stringify(data.achievementEndDate),
                             achievementDescription: data.achievementDescription,
                             achievementImage: data.achievementImage,
                             time: Math.floor(Date.now() / 1000),
                             isDeleted: false,
                         }
-                        
+                        UpdateData(idParamVal, achievement);
                     }}
                 >
                     {({ values, handleChange, handleBlur, errors, handleSubmit, touched, setFieldValue, setFieldError }) => (
@@ -242,13 +233,13 @@ export const UpdateAchievement = () => {
                                         <DemoContainer required components={["DatePicker", "DatePicker"]}>
                                             <DatePicker
                                                 label="Start Date"
-                                                value={dayjs(values.achievementStartDate)}
+                                                value={dayjs(parseISO(values.achievementStartDate))}
                                                 required
                                                 format="DD-MM-YYYY"
-                                                defaultValue={dayjs(values.achievementStartDate)}
+                                                defaultValue={dayjs(parseISO(values.achievementStartDate))}
                                                 sx={{ width: 100 + "%" }}
                                                 onChange={(newValue) => setFieldValue("achievementStartDate", newValue)}
-                                                disablePast
+                                                
                                             />
                                         </DemoContainer>
                                         <ValidationErrorMessage message={errors.achievementStartDate} touched={touched.achievementStartDate} />
@@ -258,13 +249,13 @@ export const UpdateAchievement = () => {
                                         <DemoContainer required components={["DatePicker"]}>
                                             <DatePicker
                                                 label="End Date"
-                                                value={dayjs(values.achievementEndDate)}
+                                                value={dayjs(parseISO(values.achievementEndDate))}
                                                 required
                                                 format="DD-MM-YYYY"
                                                 sx={{ width: 100 + "%" }}
                                                 defaultValue={dayjs(values.achievementEndDate)}
                                                 onChange={(newValue) => setFieldValue("achievementEndDate", newValue)}
-                                                disablePast
+                                        
                                             />
                                         </DemoContainer>
                                         <ValidationErrorMessage message={errors.achievementEndDate} touched={touched.achievementEndDate} />

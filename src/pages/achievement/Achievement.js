@@ -10,11 +10,11 @@ import { Link as LinkRoute } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "white",
-    color: "black",
+    backgroundColor: "#527ED4",
+    color: "white",
     fontSize: 14,
     fontWeight: 600,
-    fontFamily: "'Plus Jakarta Sans'"
+    fontFamily: "Plus Jakarta Sans"
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -67,6 +67,10 @@ export const Achievement = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   }
+  
+  const handleDelete = (e)=>{
+    console.log(e);
+  }
   return (
     <div className="page-information-container">
       <div className="page-header"><label>
@@ -88,22 +92,20 @@ export const Achievement = () => {
       <div className="achievement-container">
         <div className="achievement-container-button">
           <NavLink to="/achievement/createachievement">
-            <Button variant="contained" color="success">
-              Create New Achievement
+            <Button variant="contained" color="success" size='small' className='btn-create'>
+              <Typography variant='caption' className='btn-success-font'>Create New Achievement</Typography>
             </Button>
           </NavLink>
-          <Button variant="contained" color="error">
-            Disable Selected
+          <Button variant="contained" color="error" size='small' className='btn-delete'>
+          <Typography variant='caption' className='btn-delete-font'>Disable Selected</Typography>
           </Button>
         </div>
         <div className="achievementtable-container">
-       
-
-            <TableContainer>
+            <TableContainer sx={{boxShadow:"box-shadow:  3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)"}}>
               <Table stickyHeader aria-label='sticky table' sx={{ maxHeight: 440 }} size='small'>
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell><Checkbox size='small' name='achievementSelect' sx={{ color: "white" }}></Checkbox></StyledTableCell>
+                    <StyledTableCell><Checkbox size='small' name='achievementSelect' sx={{ color: "black" }}></Checkbox></StyledTableCell>
                     <StyledTableCell>Achievement Title</StyledTableCell>
                     <StyledTableCell>Achievement Type</StyledTableCell>
                     <StyledTableCell>Employee Id and Name</StyledTableCell>
@@ -136,8 +138,8 @@ export const Achievement = () => {
                               pathname: "/achievement/updateachievement/:id",
                               state: { idParam: e.id }
                             }} ><ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} /></LinkRoute>
-
-                            <Delete sx={{ color: "red" }} />
+                              
+                          <div key={e.id} onClick={handleDelete(e.id)}><Delete sx={{ color: "red" }}/></div>
                           </StyledTableCell>
                         </StyledTableRow>
                       )
