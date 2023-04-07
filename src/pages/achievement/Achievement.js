@@ -67,9 +67,15 @@ export const Achievement = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   }
-  
+
   const handleDelete = (e)=>{
     console.log(e);
+  }
+  function convert(str) {
+    var date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [day,mnth,date.getFullYear()].join("-");
   }
   return (
     <div className="page-information-container">
@@ -129,8 +135,8 @@ export const Achievement = () => {
                           <StyledTableCell>{e.achievementArea}</StyledTableCell>
                           <StyledTableCell>{e.achievementDescription}</StyledTableCell>
                           <StyledTableCell><img src={e.achievementImage} /></StyledTableCell>
-                          <StyledTableCell>{e.achievementStartDate}</StyledTableCell>
-                          <StyledTableCell>{e.achievementEndDate}</StyledTableCell>
+                          <StyledTableCell>{convert(e.achievementStartDate)}</StyledTableCell>
+                          <StyledTableCell>{convert(e.achievementEndDate)}</StyledTableCell>
                           <StyledTableCell>
 
 
