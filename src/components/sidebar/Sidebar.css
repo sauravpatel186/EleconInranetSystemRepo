@@ -43,7 +43,7 @@
     padding-bottom: 2rem;
 }
 .nav-sidebar:hover{
-    overflow-y: scroll;
+    overflow-y: scroll!important;
 }
 .nav-sidebar .nav-text{
     display: flex;
