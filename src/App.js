@@ -17,7 +17,11 @@ import Opinionpoll from './pages/opinionpoll/Opinionpoll';
 import { UpdateAchievement } from './pages/achievement/updateachievement/UpdateAchievement';
 import { Updateupcomingevent } from './pages/upcomingevent/updateupcomingevent/Updateupcomingevent';
 import { Updateopinionpoll } from './pages/opinionpoll/updateopinionpoll/Updateopinionpoll';
-import {Thoughtoftheday} from './pages/thoughtoftheday/Thoughtoftheday';
+import  Policies  from './pages/policies/Policies';
+import  CreatePolicies  from './pages/policies/createpolicies/CreatePolicies';
+import { UpdatePolicies } from './pages/policies/updatepolicies/UpdatePolicies';
+import CreateCeomessage from './pages/ceomessage/createceomessage/CreateCeomessage';
+import UpdateCeomessage from './pages/ceomessage/updateceomessage/UpdateCeomessage';import {Thoughtoftheday} from './pages/thoughtoftheday/Thoughtoftheday';
 import {Createthought} from './pages/thoughtoftheday/createthought/Createthought';
 import {Updatethought} from './pages/thoughtoftheday/updatethought/Updatethought';
 
@@ -43,9 +47,6 @@ function App() {
                 <Route index path="/achievement/updateachievement/:id"><UpdateAchievement/></Route>
                 <Route index path="/upcomingevent/updateupcomingevent/:id"><Updateupcomingevent/></Route>
                 <Route index path="/opinionpoll/updateopinionpoll/:id"><Updateopinionpoll/></Route>
-                <Route exact path="/thoughtoftheday"><Thoughtoftheday/></Route>
-                <Route index path="/thoughtoftheday/createthought"><Createthought/></Route>
-                <Route index path="/thoughtoftheday/updatethought/:id"><Updatethought/></Route>
               </Switch>
             
           </div>

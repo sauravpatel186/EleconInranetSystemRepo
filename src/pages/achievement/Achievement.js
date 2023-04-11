@@ -43,7 +43,9 @@ export const Achievement = () => {
   const getLocalItem = () => {
     let data = JSON.parse(localStorage.getItem("achievement"));
     if (data) {
-      setAchievementdata(JSON.parse(localStorage.getItem("achievement")));
+
+      setAchievementdata(data);
+      console.log(achievementdata)
     }
     else {
       return [];
@@ -68,14 +70,22 @@ export const Achievement = () => {
     setPage(0);
   }
 
-  const handleDelete = (e)=>{
+  const handleDelete = (e) => {
     console.log(e);
+    const achievements = achievementdata.find(a => a.id !== e.id);
+    achievements.isDeleted = true;
+    setAchievementdata(result => ({
+      ...result,
+      isDeleted: true
+    }));
+    console.log(achievementdata)
+    localStorage.setItem("achievement",JSON.stringify(achievementdata))
   }
   function convert(str) {
     var date = new Date(str),
       mnth = ("0" + (date.getMonth() + 1)).slice(-2),
       day = ("0" + date.getDate()).slice(-2);
-    return [day,mnth,date.getFullYear()].join("-");
+    return [day, mnth, date.getFullYear()].join("/");
   }
   return (
     <div className="page-information-container">
@@ -103,56 +113,64 @@ export const Achievement = () => {
             </Button>
           </NavLink>
           <Button variant="contained" color="error" size='small' className='btn-delete'>
-          <Typography variant='caption' className='btn-delete-font'>Disable Selected</Typography>
+            <Typography variant='caption' className='btn-delete-font'>Disable Selected</Typography>
           </Button>
         </div>
         <div className="achievementtable-container">
-            <TableContainer sx={{boxShadow:"box-shadow:  3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)"}}>
-              <Table stickyHeader aria-label='sticky table' sx={{ maxHeight: 440 }} size='small'>
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell><Checkbox size='small' name='achievementSelect' sx={{ color: "black" }}></Checkbox></StyledTableCell>
-                    <StyledTableCell>Achievement Title</StyledTableCell>
-                    <StyledTableCell>Achievement Type</StyledTableCell>
-                    <StyledTableCell>Employee Id and Name</StyledTableCell>
-                    <StyledTableCell>Achievement Area</StyledTableCell>
-                    <StyledTableCell>Achievement Description</StyledTableCell>
-                    <StyledTableCell>Image</StyledTableCell>
-                    <StyledTableCell>Start Date</StyledTableCell>
-                    <StyledTableCell>End Date</StyledTableCell>
-                    <StyledTableCell>Actions</StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {achievementdata.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((e) => {
-                      return (
-                        <StyledTableRow hover role="checkbox" tabIndex={-1} key={e.id}>
-                          <StyledTableCell><Checkbox size='small' /></StyledTableCell>
-                          <StyledTableCell>{e.achievementTitle}</StyledTableCell>
-                          <StyledTableCell>{e.achievementType}</StyledTableCell>
-                          <StyledTableCell>{e.employeeIdandName}</StyledTableCell>
-                          <StyledTableCell>{e.achievementArea}</StyledTableCell>
-                          <StyledTableCell>{e.achievementDescription}</StyledTableCell>
-                          <StyledTableCell><img src={e.achievementImage} /></StyledTableCell>
-                          <StyledTableCell>{convert(e.achievementStartDate)}</StyledTableCell>
-                          <StyledTableCell>{convert(e.achievementEndDate)}</StyledTableCell>
-                          <StyledTableCell>
+          <TableContainer sx={{ boxShadow: "box-shadow:  3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)" }}>
+            <Table stickyHeader aria-label='sticky table' sx={{ maxHeight: 440 }} size='small'>
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell><Checkbox size='small' name='achievementSelect' sx={{ color: "black" }}></Checkbox></StyledTableCell>
+                  <StyledTableCell>Achievement Title</StyledTableCell>
+                  <StyledTableCell>Achievement Type</StyledTableCell>
+                  <StyledTableCell>Employee Id and Name</StyledTableCell>
+                  <StyledTableCell>Achievement Area</StyledTableCell>
+                  <StyledTableCell>Achievement Description</StyledTableCell>
+                  <StyledTableCell>Image</StyledTableCell>
+                  <StyledTableCell>Start Date</StyledTableCell>
+                  <StyledTableCell>End Date</StyledTableCell>
+                  <StyledTableCell>Actions</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              
+              { achievementdata.length > 0 &&
+                        (
+                          <TableBody>
+                            {achievementdata.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                              .map((e) => {
+                                console.log(achievementdata.length);
+                              e.isDeleted == false && 
+                                (
+                                  <StyledTableRow hover role="checkbox" tabIndex={-1} key={e.id}>
+                                    <StyledTableCell><Checkbox size='small' /></StyledTableCell>
+                                    <StyledTableCell>{e.achievementTitle}</StyledTableCell>
+                                    <StyledTableCell>{e.achievementType}</StyledTableCell>
+                                    <StyledTableCell>{e.employeeIdandName}</StyledTableCell>
+                                    <StyledTableCell>{e.achievementArea}</StyledTableCell>
+                                    <StyledTableCell>{e.achievementDescription}</StyledTableCell>
+                                    <StyledTableCell><img className="achievement-image" src={e.achievementImage} width="40rem" height="40rem" /></StyledTableCell>
+                                    <StyledTableCell>{convert(e.achievementStartDate)}</StyledTableCell>
+                                    <StyledTableCell>{convert(e.achievementEndDate)}</StyledTableCell>
+                                    <StyledTableCell>
+                                      <LinkRoute to={{
+                                        pathname: "/achievement/updateachievement/:id",
+                                        state: { idParam: e.id }
+                                      }} ><ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} /></LinkRoute>
+                                      <Button size='small' id={e.id} key={e.id} onClick={(event) => handleDelete(e.id)} sx={{ verticalAlign: "bottom", minWidth: "auto" }}><Delete sx={{ color: "red" }} /></Button>
+                                    </StyledTableCell>
+                                  </StyledTableRow>
 
-
-                            <LinkRoute to={{
-                              pathname: "/achievement/updateachievement/:id",
-                              state: { idParam: e.id }
-                            }} ><ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} /></LinkRoute>
+                                )
                               
-                          <div key={e.id} onClick={handleDelete(e.id)}><Delete sx={{ color: "red" }}/></div>
-                          </StyledTableCell>
-                        </StyledTableRow>
-                      )
-                    })}
-                </TableBody>
-              </Table>
-            </TableContainer>
+                              }
+                              )}
+                          </TableBody>)
+      
+          }
+              
+            </Table>
+          </TableContainer>
           <TablePagination
             rowsPerPageOptions={[5]}
             component="div"
@@ -202,5 +220,5 @@ export const Achievement = () => {
       </div>
     </div>
 
-  )
+  );
 }
