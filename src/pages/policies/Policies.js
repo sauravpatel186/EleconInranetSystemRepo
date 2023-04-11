@@ -1,7 +1,7 @@
 import React from 'react'
 import { styled } from '@mui/material/styles';
 import { Typography, Button, Breadcrumbs, Link, Checkbox, Paper, tableCellClasses, TableContainer, Table, TableHead, TableBody, TableCell, TableRow, TablePagination } from '@mui/material'
-import "../ceomessage/Ceomessage.css"
+import "../policies/Policies.css"
 import { NavLink, useHistory, useRouteMatch } from 'react-router-dom'
 import { useState } from 'react'
 import { useEffect } from 'react'
@@ -33,17 +33,17 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export const Ceomessage = () => {
+export const Policies = () => {
   const navigate = useHistory();
   let { path, url } = useRouteMatch();
-  const [ceomessagedata, setCeomessagedata] = useState([]);
+  const [policiesdata, setPoliciesdata] = useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const getLocalItem = () => {
-    let data = JSON.parse(localStorage.getItem("ceomessage"));
+    let data = JSON.parse(localStorage.getItem("policies"));
     if (data) {
-      setCeomessagedata(JSON.parse(localStorage.getItem("ceomessage")));
+      setPoliciesdata(JSON.parse(localStorage.getItem("policies")));
     }
     else {
       return [];
@@ -80,7 +80,7 @@ export const Ceomessage = () => {
   return (
     <div className="page-information-container">
       <div className="page-header"><label>
-        Ceomessage
+        Policies
       </label>
         <div className='page-breadscrumb'>
           <Breadcrumbs aria-label="breadcrumb">
@@ -88,60 +88,60 @@ export const Ceomessage = () => {
               Home
             </Link>
             <Link
-              underline="hover" area-current="page" style={{ color: "black" }} onClick={() => { navigate.push("/ceomessage") }}>
-              Ceomessage
+              underline="hover" area-current="page" style={{ color: "black" }} onClick={() => { navigate.push("/policies") }}>
+              Policies
             </Link>
 
           </Breadcrumbs>
         </div>
       </div>
-      <div className="ceomessage-container">
-        <div className="ceomessage-container-button">
-          <NavLink to="/ceomessage/createceomessage">
+      <div className="policies-container">
+        <div className="policies-container-button">
+          <NavLink to="/policies/createpolicies">
             <Button variant="contained" color="success" size='small' className='btn-create'>
-              <Typography variant='caption' className='btn-success-font'>Create New Ceomessage</Typography>
+              <Typography variant='caption' className='btn-success-font'>Create New Policies</Typography>
             </Button>
           </NavLink>
           <Button variant="contained" color="error" size='small' className='btn-delete'>
           <Typography variant='caption' className='btn-delete-font'>Disable Selected</Typography>
           </Button>
         </div>
-        <div className="ceomessagetable-container">
+        <div className="policiestable-container">
             <TableContainer sx={{boxShadow:"box-shadow:  3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)"}}>
               <Table stickyHeader aria-label='sticky table' sx={{ maxHeight: 440 }} size='small'>
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell><Checkbox size='small' name='ceomessageSelect' sx={{ color: "black" }}></Checkbox></StyledTableCell>
-                    <StyledTableCell>ceomessage Title</StyledTableCell>
-                    {/* <StyledTableCell>ceomessage Type</StyledTableCell> */}
-                    {/* <StyledTableCell>Employee Id and Name</StyledTableCell> */}
-                    {/* <StyledTableCell>ceomessage Area</StyledTableCell> */}
-                    <StyledTableCell>ceomessage Description</StyledTableCell>
+                    <StyledTableCell><Checkbox size='small' name='policiesSelect' sx={{ color: "black" }}></Checkbox></StyledTableCell>
+                    <StyledTableCell>Policies Title</StyledTableCell>
+                    {/* <StyledTableCell>Policies Type</StyledTableCell>
+                    <StyledTableCell>Employee Id and Name</StyledTableCell> */}
+                    <StyledTableCell>Policy/Manual</StyledTableCell>
+                    <StyledTableCell>Policies Description</StyledTableCell>
                     <StyledTableCell>Image</StyledTableCell>
-                    <StyledTableCell>Start Date</StyledTableCell>
-                    <StyledTableCell>End Date</StyledTableCell>
+                    <StyledTableCell>Creation Date</StyledTableCell>
+                    <StyledTableCell>Revised Date</StyledTableCell>
                     <StyledTableCell>Actions</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {ceomessagedata.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  {policiesdata.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((e) => {
                       return (
                         <StyledTableRow hover role="checkbox" tabIndex={-1} key={e.id}>
                           <StyledTableCell><Checkbox size='small' /></StyledTableCell>
-                          <StyledTableCell>{e.ceomessageTitle}</StyledTableCell>
-                          {/* <StyledTableCell>{e.ceomessageType}</StyledTableCell>  */}
-                          {/* <StyledTableCell>{e.employeeIdandName}</StyledTableCell> */}
-                          {/* <StyledTableCell>{e.ceomessageArea}</StyledTableCell> */}
-                          <StyledTableCell>{e.ceomessageDescription}</StyledTableCell>
-                          <StyledTableCell><img src={e.ceomessageImage} /></StyledTableCell>
-                          <StyledTableCell>{convert(e.ceomessageStartDate)}</StyledTableCell>
-                          <StyledTableCell>{convert(e.ceomessageEndDate)}</StyledTableCell>
+                          <StyledTableCell>{e.policiesTitle}</StyledTableCell>
+                          {/* <StyledTableCell>{e.policiesType}</StyledTableCell>
+                          <StyledTableCell>{e.employeeIdandName}</StyledTableCell> */}
+                          <StyledTableCell>{e.policiesArea}</StyledTableCell>
+                          <StyledTableCell>{e.policiesDescription}</StyledTableCell>
+                          <StyledTableCell><img src={e.policiesImage} /></StyledTableCell>
+                          <StyledTableCell>{convert(e.policiesStartDate)}</StyledTableCell>
+                          <StyledTableCell>{convert(e.policiesEndDate)}</StyledTableCell>
                           <StyledTableCell>
 
 
                             <LinkRoute to={{
-                              pathname: "/ceomessage/updateceomessage/:id",
+                              pathname: "/policies/updatepolicies/:id",
                               state: { idParam: e.id }
                             }} ><ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} /></LinkRoute>
                               
@@ -156,7 +156,7 @@ export const Ceomessage = () => {
           <TablePagination
             rowsPerPageOptions={[5]}
             component="div"
-            count={ceomessagedata.length}
+            count={policiesdata.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -179,7 +179,7 @@ export const Ceomessage = () => {
               </tr>
             </thead>
             <tbody>
-              {achievementdata.map((e) => {
+              {policiesdata.map((e) => {
                 return (
                   <tr key={e.id}>
                     <td><Checkbox size="small" /></td>
@@ -197,10 +197,11 @@ export const Ceomessage = () => {
                 );
               })}
             </tbody>
-          </table> */}
+          </table>  */}
         </div>
       </div>
     </div>
 
   )
 }
+export default Policies

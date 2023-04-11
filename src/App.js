@@ -17,7 +17,11 @@ import Opinionpoll from './pages/opinionpoll/Opinionpoll';
 import { UpdateAchievement } from './pages/achievement/updateachievement/UpdateAchievement';
 import { Updateupcomingevent } from './pages/upcomingevent/updateupcomingevent/Updateupcomingevent';
 import { Updateopinionpoll } from './pages/opinionpoll/updateopinionpoll/Updateopinionpoll';
-
+import  Policies  from './pages/policies/Policies';
+import  CreatePolicies  from './pages/policies/createpolicies/CreatePolicies';
+import { UpdatePolicies } from './pages/policies/updatepolicies/UpdatePolicies';
+import CreateCeomessage from './pages/ceomessage/createceomessage/CreateCeomessage';
+import UpdateCeomessage from './pages/ceomessage/updateceomessage/UpdateCeomessage';
 function App() {
   
   return (
@@ -40,6 +44,11 @@ function App() {
                 <Route index path="/achievement/updateachievement/:id"><UpdateAchievement/></Route>
                 <Route index path="/upcomingevent/updateupcomingevent/:id"><Updateupcomingevent/></Route>
                 <Route index path="/opinionpoll/updateopinionpoll/:id"><Updateopinionpoll/></Route>
+                <Route exact path="/policies"><Policies/></Route>
+                <Route index path="/policies/createpolicies"><CreatePolicies/></Route>
+                <Route index path="/policies/updatepolicies/:id"><UpdatePolicies/></Route>
+                <Route index path="/ceomessage/createceomessage"><CreateCeomessage/></Route>
+                <Route index path="/ceomessage/updateceomessage/:id"><UpdateCeomessage/></Route>
               </Switch>
             
           </div>
