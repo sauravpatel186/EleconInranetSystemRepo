@@ -25,6 +25,9 @@ import UpdateCeomessage from './pages/ceomessage/updateceomessage/UpdateCeomessa
 import {Thoughtoftheday} from './pages/thoughtoftheday/Thoughtoftheday';
 import {Createthought} from './pages/thoughtoftheday/createthought/Createthought';
 import {Updatethought} from './pages/thoughtoftheday/updatethought/Updatethought';
+import {Noticeboard} from './pages/noticeboard/Noticeboard';
+import {Createnotice} from './pages/noticeboard/createnotice/Createnotice';
+import {Updatenotice} from './pages/noticeboard/updatenotice/Updatenotice';
 
 function App() {
   
@@ -56,6 +59,10 @@ function App() {
                 <Route exact path="/policies"><Policies/></Route>
                 <Route index path="/policies/createpolicies"><CreatePolicies/></Route>
                 <Route index path="/policies/updatepolicies/:id"><UpdatePolicies/></Route>
+                <Route exact path="/noticeboard"><Noticeboard/></Route>
+                <Route index path="/noticeboard/createnotice"><Createnotice/></Route>
+                <Route index path="/noticeboard/updatenotice/:id"><Updatenotice/></Route>
+
               </Switch>
             
           </div>
