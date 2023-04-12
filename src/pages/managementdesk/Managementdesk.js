@@ -50,14 +50,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const Managementdesk = (props) => {
     
-    const [eventdata, seteventdata] = useState([]);
+    const [mddata, setmddata] = useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const getLocalItem = () => {
-    let data = JSON.parse(localStorage.getItem("event"));
+    let data = JSON.parse(localStorage.getItem("md"));
     if (data) {
-      seteventdata(JSON.parse(localStorage.getItem("event")));
+      setmddata(JSON.parse(localStorage.getItem("md")));
     } else {
       return [];
     }
@@ -71,12 +71,12 @@ const Managementdesk = (props) => {
     }
   }, []);
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (md, newPage) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
+  const handleChangeRowsPerPage = (md) => {
+    setRowsPerPage(+md.target.value);
     setPage(0);
   };
   function convert(str) {
@@ -85,7 +85,7 @@ const Managementdesk = (props) => {
        day = ("0" + date.getDate()).slice(-2);
     return [day,mnth,date.getFullYear()].join("-");
   }
-  console.log(eventdata);
+  console.log(mddata);
   return (
     <div className="page-information-container">
         <div className="page-header">
@@ -145,7 +145,7 @@ const Managementdesk = (props) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {eventdata
+                {mddata
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((e) => {
                     return (
@@ -157,15 +157,15 @@ const Managementdesk = (props) => {
                         <StyledTableCell>
                           <Checkbox size="small" />
                         </StyledTableCell>
-                        <StyledTableCell>{e.eventTitle}</StyledTableCell>
-                        <StyledTableCell>{e.eventDescription}</StyledTableCell>
-                        <StyledTableCell>{convert(e.eventStartDate)}</StyledTableCell>
-                        <StyledTableCell>{convert(e.eventEndDate)}</StyledTableCell>
+                        <StyledTableCell>{e.mdTitle}</StyledTableCell>
+                        <StyledTableCell>{e.mdDescription}</StyledTableCell>
+                        <StyledTableCell>{convert(e.mdStartDate)}</StyledTableCell>
+                        <StyledTableCell>{convert(e.mdEndDate)}</StyledTableCell>
                         <StyledTableCell>
                           <LinkRoute
                             to={{
                               pathname:
-                                "/managementdesk/createmanagementdesk:id",
+                                "/managementdesk/updatemanagementdesk:id",
                               state: { idParam: e.id },
                             }}>
                             <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />
@@ -182,7 +182,7 @@ const Managementdesk = (props) => {
           <TablePagination
             rowsPerPageOptions={[5]}
             component="div"
-            count={eventdata.length}
+            count={mddata.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

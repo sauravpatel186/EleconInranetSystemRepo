@@ -24,18 +24,18 @@ import { Link, useRouteMatch,useHistory} from "react-router-dom";
 
 const Createmanagementdesk = () => {
     const navigate = useHistory();
-      const [newevent,setNewEvent]=useState([]);
+      const [newmd,setNewMd]=useState([]);
       const ValidationSchema = Yup.object().shape({
-          eventTitle: Yup.string().required("Event Title is required."),
-          eventStartDate: Yup.string().required("Start Date is required"),
-          eventEndDate: Yup.string().required("End Date is required"),
-          eventDescription: Yup.string().required("Event Description is required"),
+          mdTitle: Yup.string().required("md Title is required."),
+          mdStartDate: Yup.string().required("Start Date is required"),
+          mdEndDate: Yup.string().required("End Date is required"),
+          mdDescription: Yup.string().required("md Description is required"),
           
       })
       useEffect(() => {
-          let data = localStorage.getItem("event");
+          let data = localStorage.getItem("md");
           if (data) {
-            setNewEvent(JSON.parse(data));
+            setNewMd(JSON.parse(data));
           }
         }, []);
       return (
@@ -74,25 +74,25 @@ const Createmanagementdesk = () => {
                   <Formik
                       initialValues={{
                           
-                          eventTitle: "",
-                          eventStartDate: null,
-                          eventEndDate: null,
-                          eventDescription: "",
+                          mdTitle: "",
+                          mdStartDate: null,
+                          mdEndDate: null,
+                          mdDescription: "",
                       }}
                       validationSchema={ValidationSchema}
                       onSubmit={data => {
-                          let event = {
+                          let md = {
                               id: Math.random(),
-                              eventTitle: data.eventTitle,
-                              eventStartDate: data.eventStartDate,
-                              eventEndDate: data.eventEndDate,
-                              eventDescription: data.eventDescription,
+                              mdTitle: data.mdTitle,
+                              mdStartDate: data.mdStartDate,
+                              mdEndDate: data.mdEndDate,
+                              mdDescription: data.mdDescription,
                               time: Math.floor(Date.now() / 1000),
                               isDeleted: false,
                           }
-                          newevent.push(event);
-                          setNewEvent([...newevent]);
-                          localStorage.setItem("event",JSON.stringify(newevent));
+                          newmd.push(md);
+                          setNewMd([...newmd]);
+                          localStorage.setItem("md",JSON.stringify(newmd));
                           toast("Stored Successfully");
                           navigate.push("/managementdesk");
                       }}
@@ -104,44 +104,44 @@ const Createmanagementdesk = () => {
                                       <div className="createeventforminput">
                                           <TextField
                                               label="Event Title"
-                                              name="eventTitle"
-                                              type="eventTitle"
+                                              name="mdTitle"
+                                              type="mdTitle"
                                               onChange={handleChange}
                                               onBlur={handleBlur}
                                               variant="outlined"
                                               sx={{ width: 100 + "%" }}
                                           />
-                                          <ValidationErrorMessage message={errors.eventTitle} touched={touched.eventTitle} />
+                                          <ValidationErrorMessage message={errors.mdTitle} touched={touched.mdTitle} />
   
                                       </div>
                                       <div className="createeventforminput">
                                           <DemoContainer required components={["DatePicker", "DatePicker"]}>
                                               <DatePicker
                                                   label="Start Date"
-                                                  value={dayjs(values.eventStartDate)}
+                                                  value={dayjs(values.mdStartDate)}
                                                   required
                                                   format="DD-MM-YYYY"
                                                   sx={{ width: 100 + "%" }}
-                                                  onChange={(newValue) => setFieldValue("eventStartDate", newValue)}
+                                                  onChange={(newValue) => setFieldValue("mdStartDate", newValue)}
                                                   disablePast
                                               />
                                           </DemoContainer>
-                                          <ValidationErrorMessage message={errors.eventStartDate} touched={touched.eventStartDate} />
+                                          <ValidationErrorMessage message={errors.mdStartDate} touched={touched.mdStartDate} />
   
                                       </div>
                                       <div className="createeventforminput">
                                           <DemoContainer required components={["DatePicker"]}>
                                               <DatePicker
                                                   label="End Date"
-                                                  value={dayjs(values.eventEndDate)}
+                                                  value={dayjs(values.mdEndDate)}
                                                   required
                                                   format="DD-MM-YYYY"
                                                   sx={{ width: 100 + "%" }}
-                                                  onChange={(newValue) => setFieldValue("eventEndDate", newValue)}
+                                                  onChange={(newValue) => setFieldValue("mdEndDate", newValue)}
                                                   disablePast
                                               />
                                           </DemoContainer>
-                                          <ValidationErrorMessage message={errors.eventEndDate} touched={touched.eventEndDate} />
+                                          <ValidationErrorMessage message={errors.mdEndDate} touched={touched.mdEndDate} />
   
                                       </div>
                                   </div>
@@ -152,14 +152,14 @@ const Createmanagementdesk = () => {
                                               label="Event Description"
                                               multiline
                                               rows={4}
-                                              name="eventDescription"
-                                              type="eventDescription"
+                                              name="mdDescription"
+                                              type="mdDescription"
                                               variant="outlined"
                                               onChange={handleChange}
                                               onBlur={handleBlur}
                                               sx={{ width: 100 + "%" }}
                                           />
-                                          <ValidationErrorMessage message={errors.eventDescription} touched={touched.eventDescription} />
+                                          <ValidationErrorMessage message={errors.mdDescription} touched={touched.mdDescription} />
                                       </div>
                                   </div>
                                   <div className="formrow">

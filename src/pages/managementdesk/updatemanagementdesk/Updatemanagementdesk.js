@@ -24,26 +24,27 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { useHistory } from "react-router-dom";
 export const Updatemanagementdesk = () => {
   const { type } = useParams();
+  const [newmd, setNewMd] = useState([]);
   const idParamVal = useLocation().state.idParam;
-  const [eventData, seteventData] = useState({
-    eventTitle: "",
-    eventStartDate: "",
-    eventEndDate: "",
-    eventDescription: "",
+  const [mdData, setmdData] = useState({
+    mdTitle: "",
+    mdStartDate: "",
+    mdEndDate: "",
+    mdDescription: "",
   });
   const updateState = (e) => {
-    seteventData((existingValue) => ({
+    setmdData((existingValue) => ({
       ...existingValue,
-      eventTitle: e[0]["eventTitle"],
-      eventDescription: e[0]["eventDescription"],
-      eventEndDate: e[0]["eventEndDate"],
-      eventStartDate: e[0]["eventStartDate"],
+      mdTitle: e[0]["mdTitle"],
+      mdDescription: e[0]["mdDescription"],
+      mdEndDate: e[0]["mdEndDate"],
+      mdStartDate: e[0]["mdStartDate"],
     }));
-    console.log(eventData);
-    console.log(JSON.parse(localStorage.getItem("event")));
+    console.log(mdData);
+    console.log(JSON.parse(localStorage.getItem("md")));
   };
-  const geteventData = (id) => {
-    let data = JSON.parse(localStorage.getItem("event"));
+  const getmdData = (id) => {
+    let data = JSON.parse(localStorage.getItem("md"));
     if (data) {
       let edata = data.filter((events) => events.id === id);
       updateState(edata);
@@ -53,18 +54,17 @@ export const Updatemanagementdesk = () => {
     };
     useEffect(() => {
         try {
-          geteventData(idParamVal);
+          getmdData(idParamVal);
         } catch (error) {
           console.log(error);
         }
       }, []);
     const navigate = useHistory();
-    const [newevent, setnewevent] = useState([]);
     const ValidationSchema = Yup.object().shape({
-      eventTitle: Yup.string().required("Event Title is required."),
-      eventStartDate: Yup.string().required("Start Date is required"),
-      eventEndDate: Yup.string().required("End Date is required"),
-      eventDescription: Yup.string().required("Event Description is required"),
+      mdTitle: Yup.string().required("md Title is required."),
+      mdStartDate: Yup.string().required("Start Date is required"),
+      mdEndDate: Yup.string().required("End Date is required"),
+      mdDescription: Yup.string().required("md Description is required"),
     });
     return (
         <div className="page-information-container">
@@ -81,16 +81,16 @@ export const Updatemanagementdesk = () => {
               <Divider sx={{ borderBottomWidth: 2 }} />
             </div>
             <Formik
-              initialValues={eventData}
+              initialValues={mdData}
               validationSchema={ValidationSchema}
               enableReinitialize
               onSubmit={(data) => {
-                let event = {
+                let md = {
                   id: Math.random(),
-                  eventTitle: data.eventTitle,
-                  eventStartDate: data.eventStartDate,
-                  eventEndDate: data.eventEndDate,
-                  eventDescription: data.eventDescription,
+                  mdTitle: data.mdTitle,
+                  mdStartDate: data.mdStartDate,
+                  mdEndDate: data.mdEndDate,
+                  mdDescription: data.mdDescription,
                   time: Math.floor(Date.now() / 1000),
                   isDeleted: false,
                 };
@@ -111,17 +111,17 @@ export const Updatemanagementdesk = () => {
                       <div className="createeventforminput">
                         <TextField
                           label="Event Title"
-                          name="eventTitle"
-                          type="eventTitle"
+                          name="mdTitle"
+                          type="mdTitle"
                           onChange={handleChange}
                           onBlur={handleBlur}
                           variant="outlined"
-                          value={values.eventTitle}
+                          value={values.mdTitle}
                           sx={{ width: 100 + "%" }}
                         />
                         <ValidationErrorMessage
-                          message={errors.eventTitle}
-                          touched={touched.eventTitle}
+                          message={errors.mdTitle}
+                          touched={touched.mdTitle}
                         />
                       </div>
                       <div className="createeventforminput">
@@ -130,36 +130,36 @@ export const Updatemanagementdesk = () => {
                           components={["DatePicker", "DatePicker"]}>
                           <DatePicker
                             label="Start Date"
-                            value={dayjs(parseISO(values.eventStartDate))}
+                            value={dayjs(parseISO(values.mdStartDate))}
                             format="DD-MM-YYYY"
                             sx={{ width: 100 + "%" }}
                             onChange={(newValue) =>
-                              setFieldValue("eventStartDate", newValue)
+                              setFieldValue("mdStartDate", newValue)
                             }
                             // disablePast
                           />
                         </DemoContainer>
                         <ValidationErrorMessage
-                          message={errors.eventStartDate}
-                          touched={touched.eventStartDate}
+                          message={errors.mdStartDate}
+                          touched={touched.mdStartDate}
                         />
                       </div>
                       <div className="createeventforminput">
                         <DemoContainer required components={["DatePicker"]}>
                           <DatePicker
                             label="End Date"
-                            value={dayjs(parseISO(values.eventEndDate))}
+                            value={dayjs(parseISO(values.mdEndDate))}
                             format="DD-MM-YYYY"
                             sx={{ width: 100 + "%" }}
                             onChange={(newValue) =>
-                              setFieldValue("eventEndDate", newValue)
+                              setFieldValue("mdEndDate", newValue)
                             }
                             //disablePast
                           />
                         </DemoContainer>
                         <ValidationErrorMessage
-                          message={errors.eventEndDate}
-                          touched={touched.eventEndDate}
+                          message={errors.mdEndDate}
+                          touched={touched.mdEndDate}
                         />
                       </div>
                       
@@ -170,18 +170,18 @@ export const Updatemanagementdesk = () => {
                           id="outlined-multiline-static"
                           label="Event Description"
                           multiline
-                          value={values.eventDescription}
+                          value={values.mdDescription}
                           rows={4}
-                          name="eventDescription"
-                          type="eventDescription"
+                          name="mdDescription"
+                          type="mdDescription"
                           variant="outlined"
                           onChange={handleChange}
                           onBlur={handleBlur}
                           sx={{ width: 100 + "%" }}
                         />
                         <ValidationErrorMessage
-                          message={errors.eventDescription}
-                          touched={touched.eventDescription}
+                          message={errors.mdDescription}
+                          touched={touched.mdDescription}
                         />
                       </div>
                     </div>
