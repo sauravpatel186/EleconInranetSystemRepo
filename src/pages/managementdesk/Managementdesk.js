@@ -179,7 +179,6 @@ const Managementdesk = (props) => {
               </TableBody>
             </Table>
           </TableContainer>
-          <div>
           <TablePagination
             rowsPerPageOptions={[5]}
             component="div"
@@ -189,7 +188,6 @@ const Managementdesk = (props) => {
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
-          </div>
         </div>
      
     </div>
