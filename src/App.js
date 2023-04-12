@@ -45,19 +45,16 @@ function App() {
                 <Route index path="/achievement/updateachievement/:id"><UpdateAchievement/></Route>
                 <Route index path="/upcomingevent/updateupcomingevent/:id"><Updateupcomingevent/></Route>
                 <Route index path="/opinionpoll/updateopinionpoll/:id"><Updateopinionpoll/></Route>
-<<<<<<< HEAD
-                <Route exact path="/managementdesk"><Managementdesk/></Route>
-                <Route index path="/managementdesk/createmanagementdesk"><Createmanagementdesk/></Route>
-                <Route index path="/managementdesk/updatemanagementdesk/:id"><Updatemanagementdesk/></Route>
-
-=======
                 <Route exact path="/thoughtoftheday"><Thoughtoftheday/></Route>
                 <Route index path="/thoughtoftheday/createthought"><Createthought/></Route>
                 <Route index path="/thoughtoftheday/updatethought/:id"><Updatethought/></Route>
                 <Route exact path="/policies"><Policies/></Route>
                 <Route index path="/policies/createpolicies"><CreatePolicies/></Route>
                 <Route index path="/policies/updatepolicies/:id"><UpdatePolicies/></Route>
->>>>>>> be4fc9a1ee0c03b0b0223f5bb2a76f0b7e5d2cb9
+                <Route exact path="/managementdesk"><Managementdesk/></Route>
+                <Route index path="/managementdesk/createmanagementdesk"><Createmanagementdesk/></Route>
+                <Route index path="/managementdesk/updatemanagementdesk/:id"><Updatemanagementdesk/></Route>
+
               </Switch>
             
           </div>
