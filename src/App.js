@@ -27,6 +27,12 @@ import CreateAnnouncement from './pages/announcement/createannouncement/CreateAn
 import Announcements from './pages/announcement/Announcements'
 import { Updateannouncement } from './pages/announcement/updateannouncement/Updateannouncement';
 
+//import { Announcements} from './pages/announcement/Announcements';
+//import { CreateAnnouncement } from './pages/announcement/createannouncement/CreateAnnouncement'
+import CreateAnnouncement from './pages/announcement/createannouncement/CreateAnnouncement'
+import Announcements from './pages/announcement/Announcements'
+import { Updateannouncement } from './pages/announcement/updateannouncement/Updateannouncement';
+
 import Managementdesk from "./pages/managementdesk/Managementdesk";
 import Createmanagementdesk from './pages/managementdesk/createmanagementdesk/Createmanagementdesk';
 import { Updatemanagementdesk } from './pages/managementdesk/updatemanagementdesk/Updatemanagementdesk';
@@ -103,8 +109,8 @@ function App() {
                 <Route exact path="/admindashboard/announcement/createannouncement"><CreateAnnouncement/></Route>
                 <Route exact path="/admindashboard/announcement/updateannouncement/:id"><Updateannouncement/></Route>
 
-            </Switch>
-            </LocalizationProvider>
+              </Switch>
+            
           </div>
         </div>
       </div> 
