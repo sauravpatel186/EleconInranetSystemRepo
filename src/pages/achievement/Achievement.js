@@ -39,9 +39,9 @@ export const Achievement = () => {
   const [achievementdata, setAchievementdata] = useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
-  const getLocalItem = () => {
-    let data = JSON.parse(localStorage.getItem("achievement"));
+  
+  const getLocalItem = async() => {
+    let data =await JSON.parse(localStorage.getItem("achievement"));
     if (data) {
 
       setAchievementdata(data);
@@ -72,13 +72,14 @@ export const Achievement = () => {
 
   const handleDelete = (e) => {
     console.log(e);
-    const achievements = achievementdata.find(a => a.id !== e.id);
-    achievements.isDeleted = true;
-    setAchievementdata(result => ({
-      ...result,
-      isDeleted: true
-    }));
+    const index = achievementdata.indexOf(achievementdata.find(a => a.id == e));
+    console.log(index)
+    achievementdata[index].isDeleted = true
+    // achievements.isDeleted = true;
+    // let objs = achievementdata
+    setAchievementdata(achievementdata);
     console.log(achievementdata)
+    navigate.push("/admindashboard/achievement")
     localStorage.setItem("achievement",JSON.stringify(achievementdata))
   }
   function convert(str) {
@@ -94,11 +95,11 @@ export const Achievement = () => {
       </label>
         <div className='page-breadscrumb'>
           <Breadcrumbs aria-label="breadcrumb">
-            <Link underline="hover" color="inherit" href="/" onClick={() => { navigate.push("/") }}>
+            <Link underline="hover" color="inherit" href="/" onClick={() => { navigate.push("/admindashboard") }}>
               Home
             </Link>
             <Link
-              underline="hover" area-current="page" style={{ color: "black" }} onClick={() => { navigate.push("/achievement") }}>
+              underline="hover" area-current="page" style={{ color: "black" }} onClick={() => { navigate.push("/admindashboard/achievement") }}>
               Achievement
             </Link>
 
@@ -107,7 +108,7 @@ export const Achievement = () => {
       </div>
       <div className="achievement-container">
         <div className="achievement-container-button">
-          <NavLink to="/achievement/createachievement">
+          <NavLink to="/admindashboard/achievement/createachievement">
             <Button variant="contained" color="success" size='small' className='btn-create'>
               <Typography variant='caption' className='btn-success-font'>Create New Achievement</Typography>
             </Button>
@@ -135,13 +136,12 @@ export const Achievement = () => {
               </TableHead>
               
               { achievementdata.length > 0 &&
-                        (
+                        
                           <TableBody>
                             {achievementdata.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                               .map((e) => {
                                 console.log(achievementdata.length);
-                              e.isDeleted == false && 
-                                (
+                              if(e.isDeleted == false) return (
                                   <StyledTableRow hover role="checkbox" tabIndex={-1} key={e.id}>
                                     <StyledTableCell><Checkbox size='small' /></StyledTableCell>
                                     <StyledTableCell>{e.achievementTitle}</StyledTableCell>
@@ -154,7 +154,7 @@ export const Achievement = () => {
                                     <StyledTableCell>{convert(e.achievementEndDate)}</StyledTableCell>
                                     <StyledTableCell>
                                       <LinkRoute to={{
-                                        pathname: "/achievement/updateachievement/:id",
+                                        pathname: "/admindashboard/achievement/updateachievement/:id",
                                         state: { idParam: e.id }
                                       }} ><ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} /></LinkRoute>
                                       <Button size='small' id={e.id} key={e.id} onClick={(event) => handleDelete(e.id)} sx={{ verticalAlign: "bottom", minWidth: "auto" }}><Delete sx={{ color: "red" }} /></Button>
@@ -165,13 +165,13 @@ export const Achievement = () => {
                               
                               }
                               )}
-                          </TableBody>)
+                          </TableBody>
       
           }
               
             </Table>
           </TableContainer>
-          <TablePagination
+          {achievementdata.length > 0 && <TablePagination
             rowsPerPageOptions={[5]}
             component="div"
             count={achievementdata.length}
@@ -179,7 +179,7 @@ export const Achievement = () => {
             page={page}
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
-          />
+          />}
           {/* <table>
             <thead>
               <tr>

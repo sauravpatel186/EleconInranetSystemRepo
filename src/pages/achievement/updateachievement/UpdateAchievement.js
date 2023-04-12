@@ -24,6 +24,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { useHistory } from "react-router-dom";
 export const UpdateAchievement = () => {
     const [newachievement, setNewAchievement] = useState([]);
+    const [allachievement, setAllAchievement] = useState([]);
     const { type } = useParams();
     const idParamVal = useLocation().state.idParam;
     const [achievementData, setAchievementData] = useState({
@@ -49,11 +50,10 @@ export const UpdateAchievement = () => {
             achievementStartDate: e[0]["achievementStartDate"]
         })
         )
-        console.log(achievementData);
-        console.log(parseISO("2023-04-06T18:30:00.000Z"));
     }
     const getAchievementData = (id) => {
         let data = JSON.parse(localStorage.getItem("achievement"));
+        // setAllAchievement(data);
         if (data) {
             let adata = data.filter(achievements => achievements.id === id);
             updateState(adata);
@@ -108,12 +108,14 @@ export const UpdateAchievement = () => {
     const UpdateData = (id, updatedData) => {
         const datawithId = newachievement.find(e => e.id == id); // finds the element with id 
         if (datawithId["id"] === updatedData.id) {
-            // /console.log(newachievement);
-            setNewAchievement(result => [...result,updatedData]);
-             console.log(newachievement);
+            // let temp = JSON.parse(localStorage.getItem("achievement"));
+            let tempdata = newachievement.indexOf(newachievement.find(achievements => achievements.id == id));
+            newachievement[tempdata] = updatedData
+            setAllAchievement([...newachievement])
+            console.log(allachievement);
+            localStorage.setItem("achievement", JSON.stringify(allachievement));
+            navigate.push("/admindashboard/achievement");
         }
-        // setToDos([...toDos]) //updating the current state
-        // localStorage.setItem("data", JSON.stringify(toDos)) //updating local storage with state
     }
     return (
         <div className="page-information-container">
@@ -140,8 +142,8 @@ export const UpdateAchievement = () => {
                             achievementTitle: data.achievementTitle,
                             employeeIdandName: data.employeeIdandName,
                             achievementArea: data.achievementArea,
-                            achievementStartDate: JSON.stringify(data.achievementStartDate),
-                            achievementEndDate: JSON.stringify(data.achievementEndDate),
+                            achievementStartDate: data.achievementStartDate,
+                            achievementEndDate: data.achievementEndDate,
                             achievementDescription: data.achievementDescription,
                             achievementImage: data.achievementImage,
                             time: Math.floor(Date.now() / 1000),
@@ -233,13 +235,13 @@ export const UpdateAchievement = () => {
                                         <DemoContainer required components={["DatePicker", "DatePicker"]}>
                                             <DatePicker
                                                 label="Start Date"
-                                                value={dayjs(parseISO(values.achievementStartDate))}
+                                                value={dayjs(values.achievementStartDate)}
                                                 required
                                                 format="DD-MM-YYYY"
-                                                defaultValue={dayjs(parseISO(values.achievementStartDate))}
+                                                // defaultValue={dayjs(parseISO(values.achievementStartDate))}
                                                 sx={{ width: 100 + "%" }}
                                                 onChange={(newValue) => setFieldValue("achievementStartDate", newValue)}
-                                                
+
                                             />
                                         </DemoContainer>
                                         <ValidationErrorMessage message={errors.achievementStartDate} touched={touched.achievementStartDate} />
@@ -249,13 +251,13 @@ export const UpdateAchievement = () => {
                                         <DemoContainer required components={["DatePicker"]}>
                                             <DatePicker
                                                 label="End Date"
-                                                value={dayjs(parseISO(values.achievementEndDate))}
+                                                value={dayjs(values.achievementEndDate)}
                                                 required
                                                 format="DD-MM-YYYY"
                                                 sx={{ width: 100 + "%" }}
-                                                defaultValue={dayjs(values.achievementEndDate)}
+                                                // defaultValue={dayjs(values.achievementEndDate)}
                                                 onChange={(newValue) => setFieldValue("achievementEndDate", newValue)}
-                                        
+
                                             />
                                         </DemoContainer>
                                         <ValidationErrorMessage message={errors.achievementEndDate} touched={touched.achievementEndDate} />
