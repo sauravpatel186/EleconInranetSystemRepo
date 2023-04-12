@@ -17,6 +17,12 @@ import Opinionpoll from './pages/opinionpoll/Opinionpoll';
 import { UpdateAchievement } from './pages/achievement/updateachievement/UpdateAchievement';
 import { Updateupcomingevent } from './pages/upcomingevent/updateupcomingevent/Updateupcomingevent';
 import { Updateopinionpoll } from './pages/opinionpoll/updateopinionpoll/Updateopinionpoll';
+//import { Announcements} from './pages/announcement/Announcements';
+//import { CreateAnnouncement } from './pages/announcement/createannouncement/CreateAnnouncement'
+import CreateAnnouncement from './pages/announcement/createannouncement/CreateAnnouncement'
+import Announcements from './pages/announcement/Announcements'
+import { Updateannouncement } from './pages/announcement/updateannouncement/Updateannouncement';
+
 
 function App() {
   
@@ -40,6 +46,9 @@ function App() {
                 <Route index path="/achievement/updateachievement/:id"><UpdateAchievement/></Route>
                 <Route index path="/upcomingevent/updateupcomingevent/:id"><Updateupcomingevent/></Route>
                 <Route index path="/opinionpoll/updateopinionpoll/:id"><Updateopinionpoll/></Route>
+                <Route exact path="/announcement"><Announcements/></Route>
+                <Route exact path="/announcement/createannouncement"><CreateAnnouncement/></Route>
+                <Route exact path="/announcement/updateannouncement/:id"><Updateannouncement/></Route>
               </Switch>
             
           </div>
