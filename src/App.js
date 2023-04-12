@@ -23,12 +23,7 @@ import { Admin } from './pages/Admin/Admin';
 import { useState } from 'react';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import Thoughtoftheday from './pages/thoughtoftheday/Thoughtoftheday';
-import CreateAnnouncement from './pages/announcement/createannouncement/CreateAnnouncement'
-import Announcements from './pages/announcement/Announcements'
-import { Updateannouncement } from './pages/announcement/updateannouncement/Updateannouncement';
 
-//import { Announcements} from './pages/announcement/Announcements';
-//import { CreateAnnouncement } from './pages/announcement/createannouncement/CreateAnnouncement'
 import CreateAnnouncement from './pages/announcement/createannouncement/CreateAnnouncement'
 import Announcements from './pages/announcement/Announcements'
 import { Updateannouncement } from './pages/announcement/updateannouncement/Updateannouncement';
@@ -110,7 +105,7 @@ function App() {
                 <Route exact path="/admindashboard/announcement/updateannouncement/:id"><Updateannouncement/></Route>
 
               </Switch>
-            
+            </LocalizationProvider>
           </div>
         </div>
       </div> 
