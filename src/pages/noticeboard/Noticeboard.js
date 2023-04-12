@@ -107,7 +107,7 @@ export const Noticeboard = () => {
       </div>
       <div className="noticeboard-container">
         <div className="noticeboard-container-button">
-          <NavLink to="/noticeboard/createnotice">
+          <NavLink to="/admindashboard/noticeboard/createnotice">
             <Button variant="contained" color="success" size='small' className='btn-create'>
               <Typography variant='caption' className='btn-success-font'>Create New Notice</Typography>
             </Button>
@@ -147,7 +147,7 @@ export const Noticeboard = () => {
                                     <StyledTableCell>{convert(e.noticeEndDate)}</StyledTableCell>
                                     <StyledTableCell>
                                       <LinkRoute to={{
-                                        pathname: "/noticeboard/updatenotice/:id",
+                                        pathname: "/admindashboard/noticeboard/updatenotice/:id",
                                         state: { idParam: e.id }
                                       }} ><ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} /></LinkRoute>
                                       <Button size='small' id={e.id} key={e.id} onClick={(event) => handleDelete(e.id)} sx={{ verticalAlign: "bottom", minWidth: "auto" }}><Delete sx={{ color: "red" }} /></Button>

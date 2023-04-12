@@ -13,12 +13,12 @@ import {Close as CloseIcon,
         Person,
         GridView as Grid,
         EmojiEvents,
-        VideoCall
+        VideoCall,
+        Announcement
         } from '@mui/icons-material'
 import { Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-
-
+import { useRouteMatch } from 'react-router-dom/cjs/react-router-dom.min';
 export const Sidebar = () => {
 
 const sideMenu = document.getElementsByClassName("sidebar-container");
@@ -26,6 +26,8 @@ const sidebarClose = ()=>{
     sideMenu[0].style.display = "none";
     sideMenu[0].classList.add("sidebar-container-2");
 }
+let {url,path}=useDispatch();
+console.log(path);
 const [overflow,setOverflow]=useState("hidden");
 return (
     <div className='sidebar-container'>
@@ -39,7 +41,7 @@ return (
         </div>
         <div className='nav-sidebar'>
             <div className='nav-link'>
-                <NavLink className="nav-text" to="/" exact>
+                <NavLink className="nav-text" to="/admindashboard" exact>
                     <span><Grid/></span>
                     <label className='nav-font'>
                         Dashboard
@@ -47,14 +49,14 @@ return (
                 </NavLink>
             </div>
             <div className='nav-link'>
-                <NavLink className="nav-text" to="/ceomessage" exact>
+                <NavLink className="nav-text" to="/admindashboard/ceomessage" exact>
                     <span><Person/></span>
                     <label className='nav-font'>
                         CEO Message
                     </label></NavLink>
             </div>
             <div className='nav-link'>
-                <NavLink className="nav-text"  to="/policies">
+                <NavLink className="nav-text"  to="/admindashboard/policies">
                     <span><ArticleIcon/></span>
                     <label className='nav-font'>
                         Policies
@@ -62,7 +64,7 @@ return (
                 </NavLink>
             </div>
             <div className='nav-link'>
-                <NavLink className="nav-text" exact to="/thoughtoftheday">
+                <NavLink className="nav-text" exact to="/admindashboard/thoughtoftheday">
                     <span><TipsAndUpdatesIcon/></span>
                     <label
                         className='nav-font' 
@@ -72,7 +74,7 @@ return (
                 </NavLink>
             </div>
             <div className='nav-link'>
-                <NavLink className="nav-text" exact to="/noticeboard" >
+                <NavLink className="nav-text" exact to="/admindashboard/noticeboard" >
                     <span><NoteIcon/></span>
                     <label 
                         className='nav-font' >
@@ -81,7 +83,7 @@ return (
                 </NavLink>
             </div>
             <div className='nav-link'>
-                <NavLink className="nav-text" exact to="/managementdesk" >
+                <NavLink className="nav-text" exact to="/admindashboard/managementdesk" >
                     <span><Diversity3Icon/></span>
                     <label 
                         className='nav-font'>
@@ -90,7 +92,7 @@ return (
                 </NavLink>
             </div>
             <div className='nav-link'>
-                <NavLink className="nav-text" exact to="/opinionpoll" >
+                <NavLink className="nav-text" exact to="/admindashboard/opinionpoll" >
                     <span><PollIcon/></span>
                     <label 
                         className='nav-font'>
@@ -99,7 +101,7 @@ return (
                 </NavLink>
             </div>
             <div className='nav-link'>
-                <NavLink className="nav-text" exact to="/upcomingevent" >
+                <NavLink className="nav-text" exact to="/admindashboard/upcomingevent" >
                     <span><EventIcon/></span>
                     <label
                         className='nav-font'>
@@ -108,7 +110,7 @@ return (
                 </NavLink>
             </div>
             <div className='nav-link'>
-                <NavLink className="nav-text" exact to="/newjoinee" >
+                <NavLink className="nav-text" exact to="/admindashboard/newjoinee" >
                     <span><BadgeIcon/></span>
                     <label
                         className='nav-font' >
@@ -117,7 +119,7 @@ return (
                 </NavLink>
             </div>
             <div className='nav-link'>
-                <NavLink className="nav-text" exact to="/employeemaster" >
+                <NavLink className="nav-text" exact to="/admindashboard/employeemaster" >
                     <span><Person/></span>
                     <label 
                         className='nav-font'>
@@ -126,7 +128,7 @@ return (
                 </NavLink>
             </div>
             <div className='nav-link'>
-                <NavLink className="nav-text" exact to="/achievement" >
+                <NavLink className="nav-text" exact to="/admindashboard/achievement" >
                     <span><EmojiEvents/></span>
                     <label 
                         className='nav-font'>
@@ -135,11 +137,11 @@ return (
                 </NavLink>
             </div>
             <div className='nav-link'>
-                <NavLink className="nav-text" exact to="/videostreaming" >
-                    <span><VideoCall/></span>
+                <NavLink className="nav-text" exact to="/announcement" >
+                    <span><Announcement/></span>
                     <label 
                         className='nav-font'>
-                        Video Streaming
+                        Announcement
                         </label>
                 </NavLink>
             </div>
@@ -152,6 +154,7 @@ return (
                         </label>
                 </NavLink>
             </div>
+            
           
         </div>
     </div>

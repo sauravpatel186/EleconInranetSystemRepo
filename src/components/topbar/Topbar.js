@@ -5,7 +5,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import {ExpandMore,
         Menu as MenuIcon} from "@mui/icons-material"
 import { Menu , MenuItem} from '@mui/material'
-export const Topbar = () => {
+
+
+
+export const Topbar = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -42,7 +45,10 @@ export const Topbar = () => {
         }}
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={()=>{
+          handleClose()
+          props.close()
+          }}>Back To Intranet</MenuItem>
         <MenuItem onClick={handleClose}>Logout</MenuItem>
       </Menu>
         </div>

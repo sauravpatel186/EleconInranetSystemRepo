@@ -25,8 +25,8 @@ import { Delete, ModeEdit } from "@mui/icons-material";
 import { Link as LinkRoute } from "react-router-dom";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "white",
-    color: "black",
+    backgroundColor: "#527ED4",
+    color: "white",
     fontSize: 14,
     fontWeight: 600,
     fontFamily: "'Plus Jakarta Sans'",
@@ -157,8 +157,8 @@ const Upcomingevent = (props) => {
                   <StyledTableCell>
                     <Checkbox
                       size="small"
-                      name="achievementSelect"
-                      sx={{ color: "black" }}></Checkbox>
+                      name="upcomingeventSelect"
+                      sx={{ color:"white" }}></Checkbox>
                   </StyledTableCell>
                   <StyledTableCell>Event Title</StyledTableCell>
                   <StyledTableCell>Organizer Name</StyledTableCell>
@@ -193,7 +193,7 @@ const Upcomingevent = (props) => {
                         <StyledTableCell>{e.eventVenue}</StyledTableCell>
                         <StyledTableCell>{e.eventDescription}</StyledTableCell>
                         <StyledTableCell>
-                          <img src={e.eventImage} />
+                          <img src={e.eventImage} height="50rem" width="50rem" style={{border: '1px solid black'}} />
                         </StyledTableCell>
                         <StyledTableCell>{convert(e.eventStartDate)}</StyledTableCell>
                         <StyledTableCell>{convert(e.eventEndDate)}</StyledTableCell>
