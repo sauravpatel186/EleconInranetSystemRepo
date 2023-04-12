@@ -49,34 +49,27 @@ function App() {
   }
 
   return (
-
-    <>
-      {!isIntranetDashboardOpen &&<Switch>
-        <Route exact path="/"><IntranetDashboard open={AdminHandler}/></Route>
-        <Redirect to="/"></Redirect>
-      </Switch> }
-       { isIntranetDashboardOpen && <div className="main-container">
-        <Sidebar />
-        <div className='container'>
-          <Topbar close={AdminCloseHandler}/>
-          <div className='page-container'>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <Switch>
-              <Route exact path="/admindashboard"><Dashboard /></Route>
-              <Route exact path="/admindashboard/ceomessage"><Ceomessage /></Route>
-              <Route exact path="/admindashboard/opinionpoll"><Opinionpoll /></Route>
-              <Route exact path="/admindashboard/upcomingevent"><Upcomingevent /></Route>
-              <Route index path="/admindashboard/upcomingevent/createupcomingevent"><Createupcomingevent /></Route>
-              <Route exact path="/admindashboard/opinionpoll/createopinionpoll"><Createopinionpoll /></Route>
-              <Route exact path="/admindashboard/achievement"><Achievement /></Route>
-              <Route index path="/admindashboard/achievement/createachievement"><CreateAchievement /></Route>
-              <Route index path="/admindashboard/achievement/updateachievement/:id"><UpdateAchievement /></Route>
-              <Route index path="/admindashboard/upcomingevent/updateupcomingevent/:id"><Updateupcomingevent /></Route>
-              <Route index path="/admindashboard/opinionpoll/updateopinionpoll/:id"><Updateopinionpoll /></Route>
-              
-
-            </Switch>
-            </LocalizationProvider>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <div className="main-container">
+      <Sidebar/>
+      <div className='container'>
+        <Topbar/>
+        <div className='page-container'>
+          
+              <Switch>
+                <Route exact path="/"><Dashboard/></Route>
+                <Route exact path="/ceomessage"><Ceomessage/></Route>
+                <Route exact path="/opinionpoll"><Opinionpoll/></Route>
+                <Route exact path="/upcomingevent"><Upcomingevent/></Route>
+                <Route index path="/upcomingevent/createupcomingevent"><Createupcomingevent/></Route>
+                <Route exact path="/opinionpoll/createopinionpoll"><Createopinionpoll/></Route>
+                <Route exact path="/achievement"><Achievement/></Route>
+                <Route index path="/achievement/createachievement"><CreateAchievement/></Route>
+                <Route index path="/achievement/updateachievement/:id"><UpdateAchievement/></Route>
+                <Route index path="/upcomingevent/updateupcomingevent/:id"><Updateupcomingevent/></Route>
+                <Route index path="/opinionpoll/updateopinionpoll/:id"><Updateopinionpoll/></Route>
+              </Switch>
+            
           </div>
         </div>
       </div> 
