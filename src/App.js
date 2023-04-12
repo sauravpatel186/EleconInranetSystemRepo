@@ -20,6 +20,14 @@ import { Updateopinionpoll } from './pages/opinionpoll/updateopinionpoll/Updateo
 import Managementdesk from "./pages/managementdesk/Managementdesk";
 import Createmanagementdesk from './pages/managementdesk/createmanagementdesk/Createmanagementdesk';
 import { Updatemanagementdesk } from './pages/managementdesk/updatemanagementdesk/Updatemanagementdesk';
+import CreateCeomessage from './pages/ceomessage/createceomessage/CreateCeomessage';
+import UpdateCeomessage from './pages/ceomessage/updateceomessage/UpdateCeomessage';
+import Thoughtoftheday from './pages/thoughtoftheday/Thoughtoftheday';
+import Createthought from './pages/thoughtoftheday/createthought/Createthought';
+import Updatethought from './pages/thoughtoftheday/updatethought/Updatethought';
+import Policies from './pages/policies/Policies';
+import CreatePolicies from './pages/policies/createpolicies/CreatePolicies';
+import UpdatePolicies from './pages/policies/updatepolicies/UpdatePolicies';
 
 function App() {
   
