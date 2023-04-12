@@ -13,7 +13,8 @@ import {Close as CloseIcon,
         Person,
         GridView as Grid,
         EmojiEvents,
-        VideoCall
+        VideoCall,
+        Announcement
         } from '@mui/icons-material'
 import { Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
@@ -135,11 +136,11 @@ return (
                 </NavLink>
             </div>
             <div className='nav-link'>
-                <NavLink className="nav-text" exact to="/videostreaming" >
-                    <span><VideoCall/></span>
+                <NavLink className="nav-text" exact to="/announcement" >
+                    <span><Announcement/></span>
                     <label 
                         className='nav-font'>
-                        Video Streaming
+                        Announcement
                         </label>
                 </NavLink>
             </div>
