@@ -17,6 +17,9 @@ import Opinionpoll from './pages/opinionpoll/Opinionpoll';
 import { UpdateAchievement } from './pages/achievement/updateachievement/UpdateAchievement';
 import { Updateupcomingevent } from './pages/upcomingevent/updateupcomingevent/Updateupcomingevent';
 import { Updateopinionpoll } from './pages/opinionpoll/updateopinionpoll/Updateopinionpoll';
+import Managementdesk from "./pages/managementdesk/Managementdesk";
+import Createmanagementdesk from './pages/managementdesk/createmanagementdesk/Createmanagementdesk';
+import { Updatemanagementdesk } from './pages/managementdesk/updatemanagementdesk/Updatemanagementdesk';
 
 function App() {
   
@@ -40,6 +43,10 @@ function App() {
                 <Route index path="/achievement/updateachievement/:id"><UpdateAchievement/></Route>
                 <Route index path="/upcomingevent/updateupcomingevent/:id"><Updateupcomingevent/></Route>
                 <Route index path="/opinionpoll/updateopinionpoll/:id"><Updateopinionpoll/></Route>
+                <Route exact path="/managementdesk"><Managementdesk/></Route>
+                <Route index path="/managementdesk/createmanagementdesk"><Createmanagementdesk/></Route>
+                <Route index path="/managementdesk/updatemanagementdesk/:id"><Updatemanagementdesk/></Route>
+
               </Switch>
             
           </div>
