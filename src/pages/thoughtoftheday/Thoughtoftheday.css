@@ -11,7 +11,7 @@
     color: var(--cui-body-color);
     font-family:'Plus Jakarta Sans';
 }
-.ceomessage-container{
+.thoughtoftheday-container{
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -20,13 +20,13 @@
     box-shadow : #32325d05 0 2px 5px -1px, rgba(0,0,0,.05) 0 1px 3px -1px;
     margin-top: 1.5rem;
 }
-.ceomessage-container-button{
+.thoughtoftheday-container-button{
     display: flex;
     flex-direction: row;
     gap: 1rem;
     margin:2rem 2rem 0rem 2rem
 }
-.ceomessagetable-container{
+.thoughttable-container{
     margin:2rem;
     display: block;
     } 
@@ -84,3 +84,4 @@ table tbody tr:nth-of-type(even){
     }
 
 } */
+

@@ -23,6 +23,17 @@ import CreateAnnouncement from './pages/announcement/createannouncement/CreateAn
 import Announcements from './pages/announcement/Announcements'
 import { Updateannouncement } from './pages/announcement/updateannouncement/Updateannouncement';
 
+import Managementdesk from "./pages/managementdesk/Managementdesk";
+import Createmanagementdesk from './pages/managementdesk/createmanagementdesk/Createmanagementdesk';
+import { Updatemanagementdesk } from './pages/managementdesk/updatemanagementdesk/Updatemanagementdesk';
+import CreateCeomessage from './pages/ceomessage/createceomessage/CreateCeomessage';
+import UpdateCeomessage from './pages/ceomessage/updateceomessage/UpdateCeomessage';
+import Thoughtoftheday from './pages/thoughtoftheday/Thoughtoftheday';
+import Createthought from './pages/thoughtoftheday/createthought/Createthought';
+import Updatethought from './pages/thoughtoftheday/updatethought/Updatethought';
+import Policies from './pages/policies/Policies';
+import CreatePolicies from './pages/policies/createpolicies/CreatePolicies';
+import UpdatePolicies from './pages/policies/updatepolicies/UpdatePolicies';
 
 function App() {
   
@@ -37,6 +48,8 @@ function App() {
               <Switch>
                 <Route exact path="/"><Dashboard/></Route>
                 <Route exact path="/ceomessage"><Ceomessage/></Route>
+                <Route index path="/ceomessage/createceomessage"><CreateCeomessage/></Route>
+                <Route index path="/ceomessage/updateceomessage/:id"><UpdateCeomessage/></Route>
                 <Route exact path="/opinionpoll"><Opinionpoll/></Route>
                 <Route exact path="/upcomingevent"><Upcomingevent/></Route>
                 <Route index path="/upcomingevent/createupcomingevent"><Createupcomingevent/></Route>
@@ -46,6 +59,16 @@ function App() {
                 <Route index path="/achievement/updateachievement/:id"><UpdateAchievement/></Route>
                 <Route index path="/upcomingevent/updateupcomingevent/:id"><Updateupcomingevent/></Route>
                 <Route index path="/opinionpoll/updateopinionpoll/:id"><Updateopinionpoll/></Route>
+                <Route exact path="/thoughtoftheday"><Thoughtoftheday/></Route>
+                <Route index path="/thoughtoftheday/createthought"><Createthought/></Route>
+                <Route index path="/thoughtoftheday/updatethought/:id"><Updatethought/></Route>
+                <Route exact path="/policies"><Policies/></Route>
+                <Route index path="/policies/createpolicies"><CreatePolicies/></Route>
+                <Route index path="/policies/updatepolicies/:id"><UpdatePolicies/></Route>
+                <Route exact path="/managementdesk"><Managementdesk/></Route>
+                <Route index path="/managementdesk/createmanagementdesk"><Createmanagementdesk/></Route>
+                <Route index path="/managementdesk/updatemanagementdesk/:id"><Updatemanagementdesk/></Route>
+
                 <Route exact path="/announcement"><Announcements/></Route>
                 <Route exact path="/announcement/createannouncement"><CreateAnnouncement/></Route>
                 <Route exact path="/announcement/updateannouncement/:id"><Updateannouncement/></Route>
