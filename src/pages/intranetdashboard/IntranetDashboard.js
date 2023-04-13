@@ -7,6 +7,7 @@ import tree from "../../assets/images/icons8-resort-64.png"
 import cricket from "../../assets/images/cricket-image.png"
 import tennis from "../../assets/images/tennis-img.png"
 import { Link, NavLink } from "react-router-dom"
+import { Achievementcard } from "../../components/cards/achievementcard"
 export const IntranetDashboard = (props) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -150,7 +151,9 @@ export const IntranetDashboard = (props) => {
                     <div className='gallery-container'>
                         <div className='gallery-text'><Typography variant='body1'>Gallery</Typography></div>
                         <div className='gallery-box'>
-                            <img src="/infrastructure-img1.jpg"></img>
+                            <Achievementcard />
+                            {
+                                /* <img src="/infrastructure-img1.jpg"></img> */}
                         </div>
                     </div>
                     <div className='event-container'>
@@ -283,7 +286,9 @@ export const IntranetDashboard = (props) => {
                         <div className='trophy-text'>
                             <Typography variant='body1'>Achievement</Typography>
                         </div>
-                        <div className='trophy-box'></div>
+                        <div className='trophy-box'>
+
+                        </div>
                     </div>
                 </div>
                 <div className='container-content-row-8'>
@@ -300,19 +305,63 @@ export const IntranetDashboard = (props) => {
                             <div className='hr-container'>
                                 <div className='hr-text'>
                                     <Typography variant='h4'>HRMS</Typography>
-                                    <Typography className='adrenaline' sx={{marginLeft:3+"rem"}} variant='h6'>Adrenaline</Typography>
+                                    <Typography className='adrenaline' sx={{ marginLeft: 3 + "rem" }} variant='body1'>Adrenaline</Typography>
                                 </div>
                             </div>
                             <div className='hrzone-container'>
                                 <div className='hrzone-text'>
-                                <Typography variant='h4'>HRMS</Typography>
-                                    <Typography className='adrenaline' sx={{marginLeft:3+"rem"}} variant='h6'>Adrenaline</Typography>
-                                
+                                    <Typography variant='h4'>HR</Typography>
+                                    <Typography variant='h4'>Zone</Typography>
                                 </div>
                             </div>
                         </div>
                         <div className='admin-all-container'>
+                            <div className='admin-container'>
+                                <div className='admin-text'>
+                                    <Typography variant='h4'>ADMIN</Typography>
+                                    <Typography className='adrenaline' sx={{ marginLeft: 3 + "rem" }} variant='h6'>System</Typography>
+                                </div>
+                            </div>
+                            <div className='all-container'>
+                                <div className='all-text'>
+                                    <Typography variant='h6'>All</Typography>
+                                    <Typography variant='h4'>SYSTEM</Typography>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='container-content-row-9'>
+                    <div className='container-content-sub-row-9'>
+                        <div className='tpm-none-container'>
+                            <div className='tpm-container'>
+                                <div className='tpm-text'>
+                                    <Typography variant='h4'>TPM</Typography>
+                                    <Typography className='adrenaline' variant='h6'>Total Productive System</Typography>
+                                </div>
+                            </div>
+                            <div className='none-container'>
+                                <div className='none-text'>
+                                    <Typography variant='h4'>Non Moving</Typography>
+                                    <Typography variant='h6'>Items</Typography>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='oracle-container'>
                             
+                                <div className='oracle-text'>
+                                    <Typography variant='h4'>ORACLE</Typography>
+                                    <Typography className='adrenaline' variant='h6'>Business Intelligence</Typography>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div className='videos-container'>
+                        <div className='videos-text'>
+                            <Typography variant='body1'>Videos</Typography>
+                        </div>
+                        <div className='videos-box'>
+                            <img src="/infrastructure-img1.jpg"></img>
                         </div>
                     </div>
                 </div>

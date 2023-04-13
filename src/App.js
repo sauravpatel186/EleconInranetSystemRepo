@@ -39,6 +39,8 @@ import Updatethought from './pages/thoughtoftheday/updatethought/Updatethought';
 import Policies from './pages/policies/Policies';
 import CreatePolicies from './pages/policies/createpolicies/CreatePolicies';
 import UpdatePolicies from './pages/policies/updatepolicies/UpdatePolicies';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom';
+
 function App() {
   const USER_TYPES = {
     PUBILIC: "Public User",
@@ -46,7 +48,7 @@ function App() {
     ADMIN_USER: "Admin User"
   }
   const [isIntranetDashboardOpen,setisIntranetDashboardOpen]=useState(false);
-
+  const history = useHistory();
   useEffect(()=>{
     let adminDashboardChecker = localStorage.getItem("isAdminDashboard")
     if(adminDashboardChecker === "true"){
@@ -64,13 +66,15 @@ function App() {
     setisIntranetDashboardOpen(false)
     localStorage.setItem("isAdminDashboard", "false")
   }
-
+  
   return (
 
     <>
       {!isIntranetDashboardOpen &&<Switch>
         <Route exact path="/"><IntranetDashboard open={AdminHandler}/></Route>
+        {console.log(history.goBack())}
         <Redirect to="/"></Redirect>
+        
       </Switch> }
        { isIntranetDashboardOpen && <div className="main-container">
         <Sidebar />
