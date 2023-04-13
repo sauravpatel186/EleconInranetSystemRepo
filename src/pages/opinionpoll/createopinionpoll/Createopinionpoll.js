@@ -189,7 +189,7 @@ const Createopinionpoll = () => {
                       components={["DatePicker", "DatePicker"]}>
                       <DatePicker
                         label="Start Date"
-                        value={dayjs(values.opinionStartDate)}
+                        value={(values.opinionStartDate)}
                         required
                         format="DD-MM-YYYY"
                         sx={{ width: 100 + "%" }}

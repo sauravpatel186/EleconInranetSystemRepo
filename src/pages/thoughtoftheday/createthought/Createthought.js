@@ -19,7 +19,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ValidationErrorMessage } from "../../../components/ValidationErrorMessage/ValidationErrorMessage"
 import { Formik } from "formik";
 import { useHistory } from "react-router-dom";
-import { Thoughtoftheday } from "../Thoughtoftheday";
+
 export const Createthought = () => {
     
     const navigate = useHistory();

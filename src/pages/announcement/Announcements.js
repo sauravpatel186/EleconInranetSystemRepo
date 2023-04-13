@@ -2,8 +2,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { NavLink, useHistory, useRouteMatch, Route } from "react-router-dom";
 import { styled } from "@mui/material/styles";
-import "./opinionpoll.css";
-import Createopinionpoll from "./createopinionpoll/Createopinionpoll";
 import {
   Typography,
   Button,
@@ -20,7 +18,9 @@ import {
   TableRow,
   TablePagination,
 } from "@mui/material";
-import { Edit } from "@mui/icons-material";
+import CreateAnnouncement from "./createannouncement/CreateAnnouncement";
+import "./Announcement.css";
+import { Announcement, Edit } from "@mui/icons-material";
 import { Delete, ModeEdit } from "@mui/icons-material";
 import { Link as LinkRoute } from "react-router-dom";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -47,19 +47,40 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
+const Announcements = () => {
+  // const { path, url } = useRouteMatch();
+  // const [eventdata, seteventdata] = useState([]);
+  // const getLocalItem = () => {
+  //   let data = JSON.parse(localStorage.getItem("data"));
+  //   console.log(data[0]["id"]);
 
-const Opinionpoll = () => {
+  //   console.log(url);
+  //   if (data) {
+  //     seteventdata(JSON.parse(localStorage.getItem("data")));
+  //   }
+  //   else {
+  //     return [];
+  //   }
+  // }
 
+  // useEffect(() => {
+  //   try {
+  //     getLocalItem();
+  //   }
+  //   catch (error) {
+  //     console.error(error);
+  //   }
+  // }, [])
   const navigate = useHistory();
   let { path, url } = useRouteMatch();
-  const [opiniondata, setopiniondata] = useState([]);
+  const [announcementdata, setannouncementdata] = useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const getLocalItem = () => {
-    let data = JSON.parse(localStorage.getItem("opinionpoll"));
+    let data = JSON.parse(localStorage.getItem("announcement"));
     if (data) {
-      setopiniondata(JSON.parse(localStorage.getItem("opinionpoll")));
+      setannouncementdata(JSON.parse(localStorage.getItem("announcement")));
     } else {
       return [];
     }
@@ -81,96 +102,52 @@ const Opinionpoll = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  console.log(opiniondata);
   function convert(str) {
     var date = new Date(str),
       mnth = ("0" + (date.getMonth() + 1)).slice(-2),
       day = ("0" + date.getDate()).slice(-2);
     return [day,mnth,date.getFullYear()].join("-");
   }
-
+  console.log(announcementdata);
   return (
-    <div>
-      <div className="page-information-container">
-        <div className="page-header">
-          <label>Opinionpoll</label>
-        </div>
-        <div className='page-breadscrumb'>
+    <div className="page-information-container">
+      <div className="page-header">
+        <label>Announcement</label>
+      </div>
+      <div className='page-breadscrumb'>
+            <br/>
               <Breadcrumbs aria-label="breadcrumb">
                 <Link underline="hover" color="inherit" href="/" exact to="/">
                   Home
                 </Link>
                 <Link
-                  underline="hover" color="inherit" href="/opinionpoll" exact to="/opinionpoll">
-                  Opinion Poll
+                  underline="hover" color="inherit" href="/announcement" exact to="/announcement">
+                  Announcement
                 </Link>
               </Breadcrumbs>
+              <br/>
             </div>
-        <div className="upcomingevent-container">
-          <div className="upcomingevent-container-button">
-            <Route exact path="/upcomingevent/createupcomingevent">
-              <Createopinionpoll />
-            </Route>
-            <NavLink to="/opinionpoll/createopinionpoll">
-              <Button variant="contained" color="success">
-                Create Opinionpoll
-              </Button>
-            </NavLink>
-            <Route exact path="/opinionpoll/createopinionpoll">
-              <Createopinionpoll />
-            </Route>
-            <NavLink to="/opinionpoll/createopinionpoll">
-              <Button variant="contained" color="error">
-                Disable Selected
-              </Button>
-            </NavLink>
-          </div>
-          <div className="table-container">
-            {/* <table>
-              <thead>
-                <tr>
-                  <th>
-                    <Checkbox size="small" />
-                  </th>
-                  <th>Opinion Title</th>
-                  <th>Description</th>
-                  <th>Start Date</th>
-                  <th>End Date</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
-                </tr>
-              </thead>
-              <tbody> */}
-                {/* {eventdata.map((e) => {
-              return (
-                <tr key={e.id}>
-                  <td><Checkbox size="small"/></td>
-                  <td>{e.title}</td>
-                  <td>{e.eventorganizer}</td>
-                  <td>{e.description}</td>
-                  <td>{e.department}</td>
-                  <td>{e.venue}</td>
-                  <td><Edit/></td>
-                  <td><Delete/></td>
-                </tr>
-              );
-            })} 
-                 <td>
-                  <Checkbox size="small" />
-                </td>
-                <td>Demo</td>
-                <td>Demo</td>
-                <td>Demo</td>
-                <td>Demo</td>
-                <td>
-                  <Edit />
-                </td>
-                <td>
-                  <Delete />
-                </td>
-              </tbody>
-            </table> */}
-            <TableContainer>
+      <div className="upcomingevent-container">
+        <div className="upcomingevent-container-button">
+          <Route exact path="/announcement/createannouncement">
+            <CreateAnnouncement />
+          </Route>
+          <NavLink to="/announcement/createannouncement">
+            <Button variant="contained" color="success" size="small">
+              Create Announcement
+            </Button>
+          </NavLink>
+          <Route exact path="/announcement/createannouncement">
+            <CreateAnnouncement />
+          </Route>
+          <NavLink to="/announcement/createannouncement">
+            <Button variant="contained" color="error" size="small">
+              Disable Selected
+            </Button>
+          </NavLink>
+        </div>
+        <div className="table-container">
+          <TableContainer>
             <Table
               stickyHeader
               aria-label="sticky table"
@@ -180,11 +157,11 @@ const Opinionpoll = () => {
                   <StyledTableCell>
                     <Checkbox
                       size="small"
-                      name="opinionpollSelect"
-                      sx={{ color: "white" }}></Checkbox>
+                      name="upcomingeventSelect"
+                      sx={{ color:"white" }}></Checkbox>
                   </StyledTableCell>
-                  <StyledTableCell>Opinion Poll Title</StyledTableCell>
-                  <StyledTableCell>Opinion Poll Type</StyledTableCell>
+                  <StyledTableCell>Event Title</StyledTableCell>
+                  <StyledTableCell>Department</StyledTableCell>
                   <StyledTableCell>Description</StyledTableCell>
                   <StyledTableCell>Start Date</StyledTableCell>
                   <StyledTableCell>End Date</StyledTableCell>
@@ -192,7 +169,7 @@ const Opinionpoll = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {opiniondata
+                {announcementdata
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((e) => {
                     return (
@@ -204,18 +181,16 @@ const Opinionpoll = () => {
                         <StyledTableCell>
                           <Checkbox size="small" />
                         </StyledTableCell>
-                        <StyledTableCell>{e.opinionTitle}</StyledTableCell>
-                        <StyledTableCell>
-                          {e.opinionType}
-                        </StyledTableCell>
-                        <StyledTableCell>{e.opinionDescription}</StyledTableCell>
-                        <StyledTableCell>{convert(e.opinionStartDate)}</StyledTableCell>
-                        <StyledTableCell>{convert(e.opinionEndDate)}</StyledTableCell>
+                        <StyledTableCell>{e.announcementTitle}</StyledTableCell>
+                        <StyledTableCell>{e.announcementDepartment}</StyledTableCell>
+                        <StyledTableCell>{e.announcementDescription}</StyledTableCell>
+                        <StyledTableCell>{convert(e.announcementStartDate)}</StyledTableCell>
+                        <StyledTableCell>{convert(e.announcementEndDate)}</StyledTableCell>
                         <StyledTableCell>
                           <LinkRoute
                             to={{
                               pathname:
-                                "/opinionpoll/updateopinionpoll/:id",
+                                "/announcement/updateannouncement/:id",
                               state: { idParam: e.id },
                             }}>
                             <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />
@@ -229,21 +204,21 @@ const Opinionpoll = () => {
               </TableBody>
             </Table>
           </TableContainer>
-          </div>
-          <div>
+        </div>
+        <div>
           <TablePagination
             rowsPerPageOptions={[5]}
             component="div"
-            count={opiniondata.length}
+            count={announcementdata.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
-          /></div>
+          />
         </div>
       </div>
     </div>
   );
 };
 
-export default Opinionpoll;
+export default Announcements;
