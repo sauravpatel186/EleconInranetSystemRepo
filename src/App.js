@@ -19,7 +19,7 @@ import { Updateupcomingevent } from './pages/upcomingevent/updateupcomingevent/U
 import { Updateopinionpoll } from './pages/opinionpoll/updateopinionpoll/Updateopinionpoll';
 import Managementdesk from "./pages/managementdesk/Managementdesk";
 import Createmanagementdesk from './pages/managementdesk/createmanagementdesk/Createmanagementdesk';
-import { Updatemanagementdesk } from './pages/managementdesk/updatemanagementdesk/Updatemanagementdesk';
+import Updatemanagementdesk from './pages/managementdesk/updatemanagementdesk/Updatemanagementdesk';
 import CreateCeomessage from './pages/ceomessage/createceomessage/CreateCeomessage';
 import UpdateCeomessage from './pages/ceomessage/updateceomessage/UpdateCeomessage';
 import Thoughtoftheday from './pages/thoughtoftheday/Thoughtoftheday';
