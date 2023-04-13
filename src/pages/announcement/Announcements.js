@@ -117,11 +117,11 @@ const Announcements = () => {
       <div className='page-breadscrumb'>
             <br/>
               <Breadcrumbs aria-label="breadcrumb">
-                <Link underline="hover" color="inherit" href="/" exact to="/">
+                <Link underline="hover" color="inherit" href="/admindashboard" exact to="/admindashboard/">
                   Home
                 </Link>
                 <Link
-                  underline="hover" color="inherit" href="/announcement" exact to="/announcement">
+                  underline="hover" color="inherit" href="/admindashboard/announcement" exact to="/admindashboard/announcement">
                   Announcement
                 </Link>
               </Breadcrumbs>
@@ -129,18 +129,18 @@ const Announcements = () => {
             </div>
       <div className="upcomingevent-container">
         <div className="upcomingevent-container-button">
-          <Route exact path="/announcement/createannouncement">
+          <Route exact path="/admindashboard/announcement/createannouncement">
             <CreateAnnouncement />
           </Route>
-          <NavLink to="/announcement/createannouncement">
+          <NavLink to="/admindashboard/announcement/createannouncement">
             <Button variant="contained" color="success" size="small">
               Create Announcement
             </Button>
           </NavLink>
-          <Route exact path="/announcement/createannouncement">
+          <Route exact path="/admindashboard/announcement/createannouncement">
             <CreateAnnouncement />
           </Route>
-          <NavLink to="/announcement/createannouncement">
+          <NavLink to="/admindashboard/announcement/createannouncement">
             <Button variant="contained" color="error" size="small">
               Disable Selected
             </Button>
@@ -190,7 +190,7 @@ const Announcements = () => {
                           <LinkRoute
                             to={{
                               pathname:
-                                "/announcement/updateannouncement/:id",
+                                "/admindashboard/announcement/updateannouncement/:id",
                               state: { idParam: e.id },
                             }}>
                             <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />

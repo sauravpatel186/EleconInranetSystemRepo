@@ -88,7 +88,7 @@ export const Ceomessage = () => {
               Home
             </Link>
             <Link
-              underline="hover" area-current="page" style={{ color: "black" }} onClick={() => { navigate.push("/ceomessage") }}>
+              underline="hover" area-current="page" style={{ color: "black" }} onClick={() => { navigate.push("/admindashboard/ceomessage") }}>
               Ceomessage
             </Link>
 
@@ -97,7 +97,7 @@ export const Ceomessage = () => {
       </div>
       <div className="ceomessage-container">
         <div className="ceomessage-container-button">
-          <NavLink to="/ceomessage/createceomessage">
+          <NavLink to="/admindashboard/ceomessage/createceomessage">
             <Button variant="contained" color="success" size='small' className='btn-create'>
               <Typography variant='caption' className='btn-success-font'>Create New Ceomessage</Typography>
             </Button>
@@ -141,7 +141,7 @@ export const Ceomessage = () => {
 
 
                             <LinkRoute to={{
-                              pathname: "/ceomessage/updateceomessage/:id",
+                              pathname: "/admindashboard/ceomessage/updateceomessage/:id",
                               state: { idParam: e.id }
                             }} ><ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} /></LinkRoute>
                               

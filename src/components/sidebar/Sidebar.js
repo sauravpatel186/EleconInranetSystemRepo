@@ -137,7 +137,7 @@ return (
                 </NavLink>
             </div>
             <div className='nav-link'>
-                <NavLink className="nav-text" exact to="/announcement" >
+                <NavLink className="nav-text" exact to="/admindashboard/announcement" >
                     <span><Announcement/></span>
                     <label 
                         className='nav-font'>

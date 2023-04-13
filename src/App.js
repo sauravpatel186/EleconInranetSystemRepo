@@ -99,10 +99,11 @@ function App() {
                 <Route exact path="/admindashboard/managementdesk"><Managementdesk/></Route>
                 <Route index path="/admindashboard/managementdesk/createmanagementdesk"><Createmanagementdesk/></Route>
                 <Route index path="/admindashboard/managementdesk/updatemanagementdesk/:id"><Updatemanagementdesk/></Route>
-
+                <Route exact path="/admindashboard/ceomessage/createceomessage"><CreateCeomessage/></Route>
                 <Route exact path="/admindashboard/announcement"><Announcements/></Route>
                 <Route exact path="/admindashboard/announcement/createannouncement"><CreateAnnouncement/></Route>
                 <Route exact path="/admindashboard/announcement/updateannouncement/:id"><Updateannouncement/></Route>
+                <Route exact path="/admindashboard/ceomessage/updateceomessage/:id"><UpdateCeomessage/></Route>
 
               </Switch>
             </LocalizationProvider>

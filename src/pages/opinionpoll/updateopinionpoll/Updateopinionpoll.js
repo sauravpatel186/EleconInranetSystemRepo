@@ -134,7 +134,7 @@ export const Updateopinionpoll = () => {
           enableReinitialize
           onSubmit={(data) => {
             let event = {
-              id: Math.random(),
+              id: idParamVal,
               opinionType: data.opinionType,
               opinionTitle: data.opinionTitle,
               opinionStartDate: data.opinionStartDate,

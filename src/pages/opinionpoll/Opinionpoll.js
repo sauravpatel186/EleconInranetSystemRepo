@@ -108,18 +108,18 @@ const Opinionpoll = () => {
             </div>
         <div className="upcomingevent-container">
           <div className="upcomingevent-container-button">
-            <Route exact path="/upcomingevent/createupcomingevent">
+            <Route exact path="/admindashboard/upcomingevent/createupcomingevent">
               <Createopinionpoll />
             </Route>
-            <NavLink to="/opinionpoll/createopinionpoll">
+            <NavLink to="/admindashboard/opinionpoll/createopinionpoll">
               <Button variant="contained" color="success">
                 Create Opinionpoll
               </Button>
             </NavLink>
-            <Route exact path="/opinionpoll/createopinionpoll">
+            <Route exact path="/admindashboard/opinionpoll/createopinionpoll">
               <Createopinionpoll />
             </Route>
-            <NavLink to="/opinionpoll/createopinionpoll">
+            <NavLink to="/admindashboard/opinionpoll/createopinionpoll">
               <Button variant="contained" color="error">
                 Disable Selected
               </Button>
@@ -215,7 +215,7 @@ const Opinionpoll = () => {
                           <LinkRoute
                             to={{
                               pathname:
-                                "/opinionpoll/updateopinionpoll/:id",
+                                "/admindashboard/opinionpoll/updateopinionpoll/:id",
                               state: { idParam: e.id },
                             }}>
                             <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />

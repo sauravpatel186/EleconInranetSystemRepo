@@ -117,11 +117,11 @@ const Upcomingevent = (props) => {
       <div className='page-breadscrumb'>
             <br/>
               <Breadcrumbs aria-label="breadcrumb">
-                <Link underline="hover" color="inherit" href="/" exact to="/">
+                <Link underline="hover" color="inherit" href="/admindashboard" exact to="/admindashboard">
                   Home
                 </Link>
                 <Link
-                  underline="hover" color="inherit" href="/upcomingevent" exact to="/upcomingevent">
+                  underline="hover" color="inherit" href="/admindashboard/upcomingevent" exact to="/admindashboard/upcomingevent">
                   Upcoming Event
                 </Link>
               </Breadcrumbs>
@@ -129,18 +129,18 @@ const Upcomingevent = (props) => {
             </div>
       <div className="upcomingevent-container">
         <div className="upcomingevent-container-button">
-          <Route exact path="/upcomingevent/createupcomingevent">
+          <Route exact path="/admindashboard/upcomingevent/createupcomingevent">
             <Createupcomingevent />
           </Route>
-          <NavLink to="/upcomingevent/createupcomingevent">
+          <NavLink to="/admindashboard/upcomingevent/createupcomingevent">
             <Button variant="contained" color="success" size="small">
               Create Upcoming Event
             </Button>
           </NavLink>
-          <Route exact path="/upcomingevent/createupcomingevent">
+          <Route exact path="/admindashboard/upcomingevent/createupcomingevent">
             <Createupcomingevent />
           </Route>
-          <NavLink to="/upcomingevent/createupcomingevent">
+          <NavLink to="/admindashboard/upcomingevent/createupcomingevent">
             <Button variant="contained" color="error" size="small">
               Disable Selected
             </Button>
@@ -202,7 +202,7 @@ const Upcomingevent = (props) => {
                           <LinkRoute
                             to={{
                               pathname:
-                                "/upcomingevent/updateupcomingevent/:id",
+                                "/admindashboard/upcomingevent/updateupcomingevent/:id",
                               state: { idParam: e.id },
                             }}>
                             <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />

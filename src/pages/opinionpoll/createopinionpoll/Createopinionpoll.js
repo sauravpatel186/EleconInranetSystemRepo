@@ -71,21 +71,21 @@ const Createopinionpoll = () => {
       <div className="page-breadscrumb">
         <br />
         <Breadcrumbs aria-label="breadcrumb">
-          <Link underline="hover" color="inherit" href="/" exact to="/">
+          <Link underline="hover" color="inherit" href="/admindashboard" exact to="/admindashboard">
             Home
           </Link>
           <Link
             underline="hover"
             color="inherit"
-            href="/opinionpoll"
+            href="/admindashboard/opinionpoll"
             exact
-            to="/opinionpoll">
+            to="/admindashboard/opinionpoll">
             Opinion Poll
           </Link>
           <Link
             underline="hover"
             color="text.primary"
-            href="/opinionpoll/createopinionpoll"
+            href="/admindashboard/opinionpoll/createopinionpoll"
             aria-current="page">
             Create Opinion Poll
           </Link>
