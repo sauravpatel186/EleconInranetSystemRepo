@@ -165,7 +165,7 @@ const Managementdesk = (props) => {
                           <LinkRoute
                             to={{
                               pathname:
-                                "/managementdesk/updatemanagementdesk:id",
+                                "/managementdesk/updatemanagementdesk/:id",
                               state: { idParam: e.id },
                             }}>
                             <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />

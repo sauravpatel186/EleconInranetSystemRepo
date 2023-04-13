@@ -199,4 +199,5 @@ export const Updatemanagementdesk = () => {
           </div>
         </div>
       );
-                            }
+}
+export default Updatemanagementdesk 

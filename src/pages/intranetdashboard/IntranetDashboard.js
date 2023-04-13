@@ -127,6 +127,7 @@ export const IntranetDashboard = (props) => {
                         MenuListProps={{
                             'aria-labelledby': 'basic-button',
                         }}
+                        style={{zIndex:3000}}
                     >
                         <MenuItem onClick={handleClose}>Profile</MenuItem>
                         <MenuItem onClick={handleClose}><Link to="/admindashboard" onClick={() => props.open(true)}>Admin Dashboard</Link></MenuItem>

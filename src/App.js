@@ -30,7 +30,7 @@ import { Updateannouncement } from './pages/announcement/updateannouncement/Upda
 
 import Managementdesk from "./pages/managementdesk/Managementdesk";
 import Createmanagementdesk from './pages/managementdesk/createmanagementdesk/Createmanagementdesk';
-import { Updatemanagementdesk } from './pages/managementdesk/updatemanagementdesk/Updatemanagementdesk';
+import Updatemanagementdesk from './pages/managementdesk/updatemanagementdesk/Updatemanagementdesk';
 import CreateCeomessage from './pages/ceomessage/createceomessage/CreateCeomessage';
 import UpdateCeomessage from './pages/ceomessage/updateceomessage/UpdateCeomessage';
 
@@ -41,6 +41,9 @@ import CreatePolicies from './pages/policies/createpolicies/CreatePolicies';
 import UpdatePolicies from './pages/policies/updatepolicies/UpdatePolicies';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 
+import Noticeboard from './pages/noticeboard/Noticeboard';
+import Createnotice from './pages/noticeboard/createnotice/Createnotice';
+import Updatenotice from './pages/noticeboard/updatenotice/Updatenotice';
 function App() {
   const USER_TYPES = {
     PUBILIC: "Public User",
@@ -72,9 +75,7 @@ function App() {
     <>
       {!isIntranetDashboardOpen &&<Switch>
         <Route exact path="/"><IntranetDashboard open={AdminHandler}/></Route>
-        {console.log(history.goBack())}
         <Redirect to="/"></Redirect>
-        
       </Switch> }
        { isIntranetDashboardOpen && <div className="main-container">
         <Sidebar />
@@ -107,6 +108,10 @@ function App() {
                 <Route exact path="/admindashboard/announcement"><Announcements/></Route>
                 <Route exact path="/admindashboard/announcement/createannouncement"><CreateAnnouncement/></Route>
                 <Route exact path="/admindashboard/announcement/updateannouncement/:id"><Updateannouncement/></Route>
+                <Route exact path="/admindashboard/noticeboard"><Noticeboard/></Route>
+                <Route index path="/admindashboard/noticeboard/createnotice"><Createnotice/></Route>
+                <Route index path="/admindashboard/noticeboard/updatenotice/:id"><Updatenotice/></Route>
+                
 
               </Switch>
             </LocalizationProvider>
