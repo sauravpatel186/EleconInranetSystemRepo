@@ -43,9 +43,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     backgroundColor: theme.palette.action.hover,
   },
   // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
+  // "&:last-child td, &:last-child th": {
+  //   border: 0,
+  // },
 }));
 
 const Opinionpoll = () => {
@@ -89,6 +89,19 @@ const Opinionpoll = () => {
     return [day,mnth,date.getFullYear()].join("-");
   }
 
+  const handleDelete = (e) => {
+    console.log(e);
+    const index = opiniondata.indexOf(opiniondata.find(a => a.id == e));
+    console.log(index)
+    opiniondata[index].isDeleted = true
+    // achievements.isDeleted = true;
+    // let objs = achievementdata
+    setopiniondata(opiniondata);
+    console.log(opiniondata)
+    navigate.push("/admindashboard/opinionpoll")
+    localStorage.setItem("opinionpoll",JSON.stringify(opiniondata))
+  }
+
   return (
     <div>
       <div className="page-information-container">
@@ -97,13 +110,13 @@ const Opinionpoll = () => {
         </div>
         <div className='page-breadscrumb'>
               <Breadcrumbs aria-label="breadcrumb">
-                <Link underline="hover" color="inherit" href="/" exact to="/">
+                <NavLink underline="hover" color="inherit" href="/admindashboard" exact to="/admindashboard">
                   Home
-                </Link>
-                <Link
-                  underline="hover" color="inherit" href="/opinionpoll" exact to="/opinionpoll">
+                </NavLink>
+                <NavLink
+                  underline="hover" color="inherit" href="/admindashboard/opinionpoll" exact to="/admindashboard/opinionpoll">
                   Opinion Poll
-                </Link>
+                </NavLink>
               </Breadcrumbs>
             </div>
         <div className="upcomingevent-container">
@@ -191,10 +204,12 @@ const Opinionpoll = () => {
                   <StyledTableCell>Actions</StyledTableCell>
                 </TableRow>
               </TableHead>
+              { opiniondata.length > 0 &&
               <TableBody>
                 {opiniondata
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((e) => {
+                    if(e.isDeleted == false) 
                     return (
                       <StyledTableRow
                         hover
@@ -221,12 +236,13 @@ const Opinionpoll = () => {
                             <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />
                           </LinkRoute>
 
-                          <Delete sx={{ color: "red" }} />
+                          <Button size='small' id={e.id} key={e.id} onClick={(event) => handleDelete(e.id)} sx={{ verticalAlign: "bottom", minWidth: "auto" }}><Delete sx={{ color: "red" }} /></Button>
                         </StyledTableCell>
                       </StyledTableRow>
                     );
                   })}
               </TableBody>
+}
             </Table>
           </TableContainer>
           </div>

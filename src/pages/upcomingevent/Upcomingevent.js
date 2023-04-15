@@ -43,9 +43,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     backgroundColor: theme.palette.action.hover,
   },
   // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
+  // "&:last-child td, &:last-child th": {
+  //   border: 0,
+  // },
 }));
 const Upcomingevent = (props) => {
   // const { path, url } = useRouteMatch();
@@ -108,6 +108,18 @@ const Upcomingevent = (props) => {
       day = ("0" + date.getDate()).slice(-2);
     return [day,mnth,date.getFullYear()].join("-");
   }
+  const handleDelete = (e) => {
+    console.log(e);
+    const index = eventdata.indexOf(eventdata.find(a => a.id == e));
+    console.log(index)
+    eventdata[index].isDeleted = true
+    // achievements.isDeleted = true;
+    // let objs = achievementdata
+    seteventdata(eventdata);
+    console.log(eventdata)
+    navigate.push("/admindashboard/upcomingevent")
+    localStorage.setItem("event",JSON.stringify(eventdata))
+  }
   console.log(eventdata);
   return (
     <div className="page-information-container">
@@ -117,13 +129,13 @@ const Upcomingevent = (props) => {
       <div className='page-breadscrumb'>
             <br/>
               <Breadcrumbs aria-label="breadcrumb">
-                <Link underline="hover" color="inherit" href="/admindashboard" exact to="/admindashboard">
+                <NavLink underline="hover" color="inherit" href="/admindashboard" exact to="/admindashboard">
                   Home
-                </Link>
-                <Link
+                </NavLink>
+                <NavLink
                   underline="hover" color="inherit" href="/admindashboard/upcomingevent" exact to="/admindashboard/upcomingevent">
                   Upcoming Event
-                </Link>
+                </NavLink>
               </Breadcrumbs>
               <br/>
             </div>
@@ -172,10 +184,12 @@ const Upcomingevent = (props) => {
                   <StyledTableCell>Actions</StyledTableCell>
                 </TableRow>
               </TableHead>
+              { eventdata.length > 0 &&
               <TableBody>
                 {eventdata
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((e) => {
+                    if(e.isDeleted == false)
                     return (
                       <StyledTableRow
                         hover
@@ -193,7 +207,7 @@ const Upcomingevent = (props) => {
                         <StyledTableCell>{e.eventVenue}</StyledTableCell>
                         <StyledTableCell>{e.eventDescription}</StyledTableCell>
                         <StyledTableCell>
-                          <img src={e.eventImage} height="50rem" width="50rem" style={{border: '1px solid black'}} />
+                          <img src={e.eventImage} height="50rem" width="50rem" style={{}} />
                         </StyledTableCell>
                         <StyledTableCell>{convert(e.eventStartDate)}</StyledTableCell>
                         <StyledTableCell>{convert(e.eventEndDate)}</StyledTableCell>
@@ -208,12 +222,12 @@ const Upcomingevent = (props) => {
                             <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />
                           </LinkRoute>
 
-                          <Delete sx={{ color: "red" }} />
+                          <Button size='small' id={e.id} key={e.id} onClick={(event) => handleDelete(e.id)} sx={{ verticalAlign: "bottom", minWidth: "auto" }}><Delete sx={{ color: "red" }} /></Button>
                         </StyledTableCell>
                       </StyledTableRow>
                     );
                   })}
-              </TableBody>
+              </TableBody>}
             </Table>
           </TableContainer>
         </div>

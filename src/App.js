@@ -39,6 +39,11 @@ import Updatethought from './pages/thoughtoftheday/updatethought/Updatethought';
 import Policies from './pages/policies/Policies';
 import CreatePolicies from './pages/policies/createpolicies/CreatePolicies';
 import UpdatePolicies from './pages/policies/updatepolicies/UpdatePolicies';
+import Canteenmenu from './pages/canteenmenu/Canteenmenu';
+import Createcanteenmenu from './pages/canteenmenu/createcanteenmenu/Createcanteenmenu';
+import Updatecanteenmenu from './pages/canteenmenu/updatecanteenmenu/Updatecanteenmenu'
+import Salespurchase from './pages/salespurchase/Salespurchase';
+import Createsalespurchase from './pages/salespurchase/createsalespurchase/Createsalespurchase';
 function App() {
   const USER_TYPES = {
     PUBILIC: "Public User",
@@ -104,7 +109,12 @@ function App() {
                 <Route exact path="/admindashboard/announcement/createannouncement"><CreateAnnouncement/></Route>
                 <Route exact path="/admindashboard/announcement/updateannouncement/:id"><Updateannouncement/></Route>
                 <Route exact path="/admindashboard/ceomessage/updateceomessage/:id"><UpdateCeomessage/></Route>
-
+                {/* <Route exact path="/admindashboard/employeemaster"><Employeemaster/></Route> */}
+                <Route exact path="/admindashboard/canteenmenu"><Canteenmenu/></Route>
+                <Route exact path="/admindashboard/canteenmenu/createcanteenmenu"><Createcanteenmenu/></Route>
+                <Route exact path="/admindashboard/canteenmenu/updatecanteenmenu/:id"><Updatecanteenmenu/></Route>
+                <Route exact path="/admindashboard/salespurchase"><Salespurchase/></Route>
+                <Route exact path="/admindashboard/salespurchase/createsalespurchase"><Createsalespurchase/></Route>
               </Switch>
             </LocalizationProvider>
           </div>

@@ -25,6 +25,8 @@ import { useHistory } from "react-router-dom";
 export const Updateopinionpoll = () => {
   const { type } = useParams();
   const idParamVal = useLocation().state.idParam;
+  const [allopinionpoll,setallopinionpoll]=useState([]);
+  const [newopinion, setnewopinion] = useState([]);
   const [opinionData, setopinionData] = useState({
     opinionTitle: "",
     opinionType: "",
@@ -32,17 +34,6 @@ export const Updateopinionpoll = () => {
     opinionEndDate: "",
     opinionDescription: "",
   });
-  // const initialValue = {
-  //     eventTitle: "",
-  //     eventVenue:"",
-  //     eventOrganizerName:"",
-  //     eventDepartment:"",
-  //     eventStartDate:"",
-  //     eventEndDate: "",
-  //     eventDescription:"",
-  //     eventImage:"",
-  //     eventRSVP:""
-  // }
   const updateState = (e) => {
     setopinionData((existingValue) => ({
       ...existingValue,
@@ -52,37 +43,27 @@ export const Updateopinionpoll = () => {
       opinionEndDate: e[0]["opinionEndDate"].slice(0, 10),
       opinionStartDate: e[0]["opinionStartDate"].slice(0, 10),
     }));
-    console.log(opinionData);
-    console.log(JSON.parse(localStorage.getItem("opinionpoll")));
+    // console.log(opinionData);
+    // console.log(JSON.parse(localStorage.getItem("opinionpoll")));
   };
-  const geteventData = (id) => {
+  const getopinionData = (id) => {
     let data = JSON.parse(localStorage.getItem("opinionpoll"));
     if (data) {
-      let edata = data.filter((events) => events.id === id);
+      let edata = data.filter((opinions) => opinions.id === id);
       updateState(edata);
-
-      // console.log(achievementData);
-      // initialValue.achievementType = achievementData[0]["achievementType"];
-      // initialValue.achievementTitle = achievementData[0]["achievementTile"];
-      // initialValue.employeeIdandName = achievementData[0]["employeeIdandName"];
-      // initialValue.achievementArea = achievementData[0]["achievementArea"];
-      // initialValue.achievementStartDate = achievementData[0]["achievementStatDate"];
-      // initialValue.achievementEndDate = achievementData[0]["achievementEndDate"];
-      // initialValue.achievementDescription = achievementData[0]["achievementDescritpion"];
-      // initialValue.achievementImage = achievementData[0]["achievementImage"];
+      setnewopinion(data);
     } else {
       return [];
     }
   };
   useEffect(() => {
     try {
-      geteventData(idParamVal);
+      getopinionData(idParamVal);
     } catch (error) {
       console.log(error);
     }
   }, []);
   const navigate = useHistory();
-  const [newopinon, setnewopinion] = useState([]);
   const ValidationSchema = Yup.object().shape({
     opinionTitle: Yup.string().required("Opinion Title is required."),
     opinionType: Yup.string().required("Opinion Type is required."),
@@ -91,29 +72,33 @@ export const Updateopinionpoll = () => {
     opinionDescription: Yup.string().required("Opinion Description is required"),
     
   });
-//   const onSelectFile = (e, setFieldValue, setFieldError) => {
-//     const files = e.target.files;
-//     if (files?.length) {
-//       const fileSelected = e.target.files[0];
-//       const fileNameArray = fileSelected.name.split(".");
-//       const extension = fileNameArray.pop();
-//       if (["png", "jpg", "jpeg"].includes(extension?.toLowerCase())) {
-//         const reader = new FileReader();
-//         reader.readAsDataURL(fileSelected);
-//         reader.onload = function () {
-//           setFieldValue("eventImage", reader.result);
-//         };
-//         reader.onerror = function (error) {
-//           throw error;
-//         };
-//       } else {
-//         toast.error("only jpg,jpeg and png files are allowed");
-//       }
-//     } else {
-//       setFieldValue("eventImage", "");
-//     }
-//   };
+  //Handles The Event when data is changed
+  const UpdateData = (id, updatedData) => {
 
+    // console.log(id)
+    // console.log("Inside Update Data")
+    const datawithId = newopinion.find(e => e.id === id); //finds the element with id
+    // console.log(datawithId)
+    if (datawithId.id === updatedData.id) {
+        // let temp = JSON.parse(localStorage.getItem("achievement"));
+        let tempdata = newopinion.indexOf(datawithId);
+        console.log(tempdata)
+        let tempAllData = [...newopinion]
+        tempAllData[tempdata] = updatedData
+
+        console.log(tempAllData)
+        setallopinionpoll([...tempAllData])
+        console.log(allopinionpoll);
+        localStorage.setItem("announcement", JSON.stringify(allopinionpoll));
+        navigate.push("/admindashboard/opinionpoll");
+    }
+  }
+    // useEffect(()=>{
+    //   if(allopinionpoll.length > 0){
+    //     localStorage.setItem("opinionpoll", JSON.stringify(allopinionpoll));
+    //     navigate.push("/admindashboard/opinionpoll");
+    //   }
+    // },[allopinionpoll])
   return (
     <div className="page-information-container">
       <header className="page-header">
@@ -133,7 +118,7 @@ export const Updateopinionpoll = () => {
           validationSchema={ValidationSchema}
           enableReinitialize
           onSubmit={(data) => {
-            let event = {
+            let opinionpoll = {
               id: idParamVal,
               opinionType: data.opinionType,
               opinionTitle: data.opinionTitle,
@@ -142,7 +127,8 @@ export const Updateopinionpoll = () => {
               opinionDescription: data.opinionDescription,
               time: Math.floor(Date.now() / 1000),
               isDeleted: false,
-            };
+            }
+            UpdateData(idParamVal,opinionpoll);
             // eventData.push(event);
             // seteventData([...eventData]);
             // localStorage.setItem("event",JSON.stringify(eventData));

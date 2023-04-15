@@ -124,7 +124,7 @@ const Createopinionpoll = () => {
             setNewOpinionpoll([...NewOpinionpoll]);
             localStorage.setItem("opinionpoll", JSON.stringify(NewOpinionpoll));
             toast("Stored Successfully");
-            navigate.push("/opinionpoll");
+            navigate.push("/admindashboard/opinionpoll");
           }}>
           {({
             values,

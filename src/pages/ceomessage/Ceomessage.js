@@ -28,9 +28,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     backgroundColor: theme.palette.action.hover,
   },
   // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
+  // '&:last-child td, &:last-child th': {
+  //   border: 0,
+  // },
 }));
 
 export const Ceomessage = () => {
@@ -134,7 +134,7 @@ export const Ceomessage = () => {
                           {/* <StyledTableCell>{e.employeeIdandName}</StyledTableCell> */}
                           {/* <StyledTableCell>{e.ceomessageArea}</StyledTableCell> */}
                           <StyledTableCell>{e.ceomessageDescription}</StyledTableCell>
-                          <StyledTableCell><img src={e.ceomessageImage} /></StyledTableCell>
+                          <StyledTableCell><img src={e.ceomessageImage} height="50rem" width="50rem"/></StyledTableCell>
                           <StyledTableCell>{convert(e.ceomessageStartDate)}</StyledTableCell>
                           <StyledTableCell>{convert(e.ceomessageEndDate)}</StyledTableCell>
                           <StyledTableCell>
@@ -145,7 +145,7 @@ export const Ceomessage = () => {
                               state: { idParam: e.id }
                             }} ><ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} /></LinkRoute>
                               
-                          <div key={e.id} onClick={handleDelete(e.id)}><Delete sx={{ color: "red" }}/></div>
+                          <Button key={e.id} onClick={handleDelete(e.id)} sx={{verticalAlign: "bottom", minWidth: "auto"}}><Delete sx={{ color: "red" }}/></Button>
                           </StyledTableCell>
                         </StyledTableRow>
                       )

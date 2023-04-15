@@ -14,7 +14,14 @@ import {Close as CloseIcon,
         GridView as Grid,
         EmojiEvents,
         VideoCall,
-        Announcement
+        Announcement,
+        Menu,
+        FoodBank,
+        FoodBankRounded,
+        FoodBankTwoTone,
+        FoodBankOutlined,
+        SellOutlined,
+        Sell
         } from '@mui/icons-material'
 import { Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
@@ -101,6 +108,15 @@ return (
                 </NavLink>
             </div>
             <div className='nav-link'>
+                <NavLink className="nav-text" exact to="/admindashboard/canteenmenu" >
+                    <span><FoodBankOutlined/></span>
+                    <label 
+                        className='nav-font'>
+                        Canteen Menu
+                    </label>
+                </NavLink>
+            </div>
+            <div className='nav-link'>
                 <NavLink className="nav-text" exact to="/admindashboard/upcomingevent" >
                     <span><EventIcon/></span>
                     <label
@@ -143,6 +159,15 @@ return (
                         className='nav-font'>
                         Announcement
                         </label>
+                </NavLink>
+            </div>
+            <div className='nav-link'>
+                <NavLink className="nav-text" exact to="/admindashboard/salespurchase" >
+                    <span><Sell/></span>
+                    <label 
+                        className='nav-font'>
+                        Sales/Purchase
+                    </label>
                 </NavLink>
             </div>
             <div className='nav-link'>
