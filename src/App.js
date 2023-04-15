@@ -44,6 +44,9 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 import Noticeboard from './pages/noticeboard/Noticeboard';
 import Createnotice from './pages/noticeboard/createnotice/Createnotice';
 import Updatenotice from './pages/noticeboard/updatenotice/Updatenotice';
+import Newjoinee from './pages/newjoinee/Newjoinee';
+import Createnewjoinee from './pages/newjoinee/createnewjoinee/Createnewjoinee';
+import Updatenewjoinee  from './pages/newjoinee/updatenewjoinee/Updatenewjoinee';
 function App() {
   const USER_TYPES = {
     PUBILIC: "Public User",
@@ -103,7 +106,7 @@ function App() {
                 <Route index path="/admindashboard/policies/updatepolicies/:id"><UpdatePolicies/></Route>
                 <Route exact path="/admindashboard/managementdesk"><Managementdesk/></Route>
                 <Route index path="/admindashboard/managementdesk/createmanagementdesk"><Createmanagementdesk/></Route>
-                <Route index path="/admindashboard/managementdesk/updatemanagementdesk/:id"><Updatemanagementdesk/></Route>
+                <Route index path="/managementdesk/updatemanagementdesk/:id"><Updatemanagementdesk/></Route>
 
                 <Route exact path="/admindashboard/announcement"><Announcements/></Route>
                 <Route exact path="/admindashboard/announcement/createannouncement"><CreateAnnouncement/></Route>
@@ -111,6 +114,9 @@ function App() {
                 <Route exact path="/admindashboard/noticeboard"><Noticeboard/></Route>
                 <Route index path="/admindashboard/noticeboard/createnotice"><Createnotice/></Route>
                 <Route index path="/admindashboard/noticeboard/updatenotice/:id"><Updatenotice/></Route>
+                <Route exact path="/admindashboard/newjoinee"><Newjoinee /></Route>
+                <Route index path="/newjoinee/createnewjoinee"><Createnewjoinee /></Route>
+                <Route index path="/newjoinee/updatenewjoinee"><Updatenewjoinee /></Route>
                 
 
               </Switch>

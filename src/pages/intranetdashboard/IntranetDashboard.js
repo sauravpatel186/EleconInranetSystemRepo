@@ -7,7 +7,7 @@ import tree from "../../assets/images/icons8-resort-64.png"
 import cricket from "../../assets/images/cricket-image.png"
 import tennis from "../../assets/images/tennis-img.png"
 import { Link, NavLink } from "react-router-dom"
-import { Achievementcard } from "../../components/cards/achievementcard"
+//  import { Achievementcard } from "../../components/cards/achievementcard"
 export const IntranetDashboard = (props) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -152,7 +152,7 @@ export const IntranetDashboard = (props) => {
                     <div className='gallery-container'>
                         <div className='gallery-text'><Typography variant='body1'>Gallery</Typography></div>
                         <div className='gallery-box'>
-                            <Achievementcard />
+                            {/* <Achievementcard /> */}
                             {
                                 /* <img src="/infrastructure-img1.jpg"></img> */}
                         </div>

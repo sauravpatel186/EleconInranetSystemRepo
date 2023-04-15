@@ -98,7 +98,7 @@ const Managementdesk = (props) => {
                   Home
                 </Link>
                 <Link
-                  underline="hover" color="inherit" href="/managementdesk" exact to="/managementdesk">
+                  underline="hover" color="inherit" href="/admindashboard/managementdesk" exact to="/admindashboard/managementdesk">
                   Management Desk
                 </Link>
               </Breadcrumbs>
@@ -106,18 +106,18 @@ const Managementdesk = (props) => {
             </div>
         <div className="md-container">
             <div className="md-container-button">
-                <Route exact path="/managementdesk/createmanagementdesk">
+                <Route exact path="/admindashboard/managementdesk/createmanagementdesk">
                     <Createmanagementdesk />
                 </Route>
-                <NavLink to="/managementdesk/createmanagementdesk">
+                <NavLink to="/admindashboard/managementdesk/createmanagementdesk">
                     <Button variant="contained" color="success" size="small">
                     Create Management Desk
                     </Button>
                 </NavLink>
-                <Route exact path="/managementdesk/createmanagementdesk">
+                <Route exact path="/admindashboard/managementdesk/createmanagementdesk">
                     <Createmanagementdesk />
                 </Route>
-                <NavLink to="/managementdesk/createmanagementdesk">
+                <NavLink to="/admindashboard/managementdesk/createmanagementdesk">
                     <Button variant="contained" color="error" size="small">
                     Disable Selected
                     </Button>
