@@ -60,37 +60,3 @@
 ::-webkit-scrollbar-thumb:hover {
     background: var(--cui-body-color);
 }
-
-/* table thead tr{
-    background-color: #009879;
-    color: white;
-    font-weight: bold;
-}
-table{
- 
-    border-collapse: collapse;
-    font-size: 16px;
-}
-th, td {
-    text-align: center;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-}
-table,tr,td{
-    border: 0.1rem solid black;
-}
-table tbody tr{
-    border-bottom: 1px solid #dddddd;
-}
-table tbody tr:nth-of-type(even){
-    background-color: var(--cui-gray-300);
-}
-@media screen  and (max-width:768px){
-    .table-container{
-        overflow-x: scroll;
-    }
-    table{
-        font-size: 12px;
-    }
-
-} */

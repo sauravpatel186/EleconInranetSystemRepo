@@ -23,6 +23,8 @@ import { Formik } from "formik";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { useHistory } from "react-router-dom";
 export const Updateannouncement = () => {
+  const [newannouncement, setnewannouncement] = useState([]);
+  const [AllAnnouncement, setAllAnnouncement] = useState([]);
   const { type } = useParams();
   const idParamVal = useLocation().state.idParam;
   const [announcementData, setannouncementData] = useState({
@@ -32,17 +34,6 @@ export const Updateannouncement = () => {
     announcementEndDate: "",
     announcementDescription: "",
   });
-  // const initialValue = {
-  //     eventTitle: "",
-  //     eventVenue:"",
-  //     eventOrganizerName:"",
-  //     eventDepartment:"",
-  //     eventStartDate:"",
-  //     eventEndDate: "",
-  //     eventDescription:"",
-  //     eventImage:"",
-  //     eventRSVP:""
-  // }
   const updateState = (e) => {
     setannouncementData((existingValue) => ({
       ...existingValue,
@@ -52,37 +43,27 @@ export const Updateannouncement = () => {
       announcementEndDate: e[0]["announcementEndDate"].slice(0, 10),
       announcementStartDate: e[0]["announcementStartDate"].slice(0, 10),
     }));
-    console.log(announcementData);
-    console.log(JSON.parse(localStorage.getItem("announcement")));
+    //console.log(announcementData);
+    //console.log(JSON.parse(localStorage.getItem("announcement")));
   };
-  const geteventData = (id) => {
+  const getannouncementData = (id) => {
     let data = JSON.parse(localStorage.getItem("announcement"));
     if (data) {
-      let edata = data.filter((events) => events.id === id);
+      let edata = data.filter((announcements) => announcements.id === id);
       updateState(edata);
-
-      // console.log(achievementData);
-      // initialValue.achievementType = achievementData[0]["achievementType"];
-      // initialValue.achievementTitle = achievementData[0]["achievementTile"];
-      // initialValue.employeeIdandName = achievementData[0]["employeeIdandName"];
-      // initialValue.achievementArea = achievementData[0]["achievementArea"];
-      // initialValue.achievementStartDate = achievementData[0]["achievementStatDate"];
-      // initialValue.achievementEndDate = achievementData[0]["achievementEndDate"];
-      // initialValue.achievementDescription = achievementData[0]["achievementDescritpion"];
-      // initialValue.achievementImage = achievementData[0]["achievementImage"];
+      setnewannouncement(data);
     } else {
       return [];
     }
   };
   useEffect(() => {
     try {
-      geteventData(idParamVal);
+      getannouncementData(idParamVal);
     } catch (error) {
       console.log(error);
     }
   }, []);
   const navigate = useHistory();
-  const [newannouncement, setnewannouncement] = useState([]);
   const ValidationSchema = Yup.object().shape({
     announcementTitle: Yup.string().required("Announcement Title is required."),
     announcementDepartment: Yup.string().required(
@@ -94,6 +75,26 @@ export const Updateannouncement = () => {
       "Announcement Description is required"
     ),
   });
+  //Handles The Event when data is changed
+  const UpdateData = (id, updatedData) => {
+    const datawithId = newannouncement.find(e => e.id == id); // finds the element with id 
+    if (datawithId["id"] === updatedData.id) {
+        // let temp = JSON.parse(localStorage.getItem("achievement"));
+        let tempdata = newannouncement.indexOf(newannouncement.find(announcement => announcement.id == id));
+        newannouncement[tempdata] = updatedData
+        setAllAnnouncement([...newannouncement])
+        console.log(AllAnnouncement);
+        // localStorage.setItem("announcement", JSON.stringify(AllAnnouncement));
+        // navigate.push("/admindashboard/announcement");
+    }
+    
+}
+useEffect(()=>{
+  if(AllAnnouncement.length>0){
+    localStorage.setItem("announcement", JSON.stringify(AllAnnouncement));
+    navigate.push("/admindashboard/announcement");
+  }
+},[AllAnnouncement])
   return (
     <div className="page-information-container">
       <header className="page-header">
@@ -115,7 +116,6 @@ export const Updateannouncement = () => {
           onSubmit={(data) => {
             let announcement = {
               id: idParamVal,
-              
               announcementTitle: data.announcementTitle,
               announcementDepartment: data.announcementDepartment,
               announcementStartDate: data.announcementStartDate,
@@ -123,12 +123,8 @@ export const Updateannouncement = () => {
               announcementDescription: data.announcementDescription,
               time: Math.floor(Date.now() / 1000),
               isDeleted: false,
-            };
-            // eventData.push(event);
-            // seteventData([...eventData]);
-            // localStorage.setItem("event",JSON.stringify(eventData));
-            // toast("Stored Successfully");
-            // navigate.push("/upcomingevent");
+            }
+            UpdateData(idParamVal, announcement);
           }}>
           {({
             values,

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { NavLink, useHistory, useRouteMatch, Route } from "react-router-dom";
+import { NavLink, useHistory, useRouteMatch, Route,Redirect } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import {
   Typography,
@@ -74,13 +74,16 @@ const Announcements = () => {
   const navigate = useHistory();
   let { path, url } = useRouteMatch();
   const [announcementdata, setannouncementdata] = useState([]);
+  const [counts, setcounts] = useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const getLocalItem = () => {
-    let data = JSON.parse(localStorage.getItem("announcement"));
+  const getLocalItem = async() => {
+    let data = await JSON.parse(localStorage.getItem("announcement"));
+    
     if (data) {
-      setannouncementdata(JSON.parse(localStorage.getItem("announcement")));
+      let adata=data.filter(announcement=>announcement.isDeleted==false)
+      setannouncementdata( adata);
     } else {
       return [];
     }
@@ -108,7 +111,19 @@ const Announcements = () => {
       day = ("0" + date.getDate()).slice(-2);
     return [day,mnth,date.getFullYear()].join("-");
   }
+  const handleDelete = (e) => {
+    console.log(e);
+    const index = announcementdata.indexOf(announcementdata.find((a => a.id == e )));
+    console.log(index)
+    announcementdata[index].isDeleted = true
+    setannouncementdata(announcementdata);
+    console.log(announcementdata)
+    navigate.push("/admindashboard/announcement")
+    localStorage.setItem("announcement",JSON.stringify(announcementdata))
+  }
   console.log(announcementdata);
+  // const countitems =announcementdata.filter(e => e.isDeleted ==='false').length;
+  // console.log("Not deleted: " + countitems);
   return (
     <div className="page-information-container">
       <div className="page-header">
@@ -117,11 +132,11 @@ const Announcements = () => {
       <div className='page-breadscrumb'>
             <br/>
               <Breadcrumbs aria-label="breadcrumb">
-                <Link underline="hover" color="inherit" href="/" exact to="/">
+                <Link underline="hover" color="inherit" href="/admindashboard" exact to="/admindashboard/">
                   Home
                 </Link>
                 <Link
-                  underline="hover" color="inherit" href="/announcement" exact to="/announcement">
+                  underline="hover" color="inherit" href="/admindashboard/announcement" exact to="/admindashboard/announcement">
                   Announcement
                 </Link>
               </Breadcrumbs>
@@ -129,18 +144,18 @@ const Announcements = () => {
             </div>
       <div className="upcomingevent-container">
         <div className="upcomingevent-container-button">
-          <Route exact path="/announcement/createannouncement">
+          <Route exact path="/admindashboard/announcement/createannouncement">
             <CreateAnnouncement />
           </Route>
-          <NavLink to="/announcement/createannouncement">
+          <NavLink to="/admindashboard/announcement/createannouncement">
             <Button variant="contained" color="success" size="small">
               Create Announcement
             </Button>
           </NavLink>
-          <Route exact path="/announcement/createannouncement">
+          <Route exact path="/admindashboard/announcement/createannouncement">
             <CreateAnnouncement />
           </Route>
-          <NavLink to="/announcement/createannouncement">
+          <NavLink to="/admindashboard/announcement/createannouncement">
             <Button variant="contained" color="error" size="small">
               Disable Selected
             </Button>
@@ -168,10 +183,11 @@ const Announcements = () => {
                   <StyledTableCell>Actions</StyledTableCell>
                 </TableRow>
               </TableHead>
+              { announcementdata.length > 0 &&
               <TableBody>
                 {announcementdata
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((e) => {
+                  .map((e) => {if(e.isDeleted == false)
                     return (
                       <StyledTableRow
                         hover
@@ -190,18 +206,18 @@ const Announcements = () => {
                           <LinkRoute
                             to={{
                               pathname:
-                                "/announcement/updateannouncement/:id",
+                                "/admindashboard/announcement/updateannouncement/:id",
                               state: { idParam: e.id },
                             }}>
                             <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />
                           </LinkRoute>
 
-                          <Delete sx={{ color: "red" }} />
+                          <Button size='small' id={e.id} key={e.id} onClick={(event) => handleDelete(e.id)} sx={{ verticalAlign: "bottom", minWidth: "auto" }}><Delete sx={{ color: "red" }} /></Button>
                         </StyledTableCell>
                       </StyledTableRow>
                     );
                   })}
-              </TableBody>
+              </TableBody>}
             </Table>
           </TableContainer>
         </div>

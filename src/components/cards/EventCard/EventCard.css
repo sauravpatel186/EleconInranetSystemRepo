@@ -1,0 +1,42 @@
+.event-carousel {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    height: 20rem;
+    margin: 0.8rem;
+    gap: 1rem;
+
+}
+.slider-wrapper{
+    height: 19rem !important;
+}
+.evet-date {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.event-date-month {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 68px;
+    height: 24px;
+    padding: 0px;
+    background: #2B50AA;
+    border-radius: 4px;
+}
+
+.event-text-container {
+    display: flex;
+    flex-direction: row;
+    gap: 0.8rem;
+    height: fit-content;
+
+    /* background-color: aqua; */
+}
+
+.event-carousel .event-text-container .event-text-description {
+    text-align: justify;
+}

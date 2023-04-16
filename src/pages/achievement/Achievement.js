@@ -2,7 +2,7 @@ import React from 'react'
 import { styled } from '@mui/material/styles';
 import { Typography, Button, Breadcrumbs, Link, Checkbox, Paper, tableCellClasses, TableContainer, Table, TableHead, TableBody, TableCell, TableRow, TablePagination } from '@mui/material'
 import "../achievement/Achievement.css"
-import { NavLink, useHistory, useRouteMatch } from 'react-router-dom'
+import { NavLink, useHistory, useRouteMatch,Redirect } from 'react-router-dom'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { Delete, ModeEdit } from '@mui/icons-material';
@@ -39,13 +39,15 @@ export const Achievement = () => {
   const [achievementdata, setAchievementdata] = useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  
+  const [counter,setCounter] = useState(0);
   const getLocalItem = async() => {
-    let data =await JSON.parse(localStorage.getItem("achievement"));
+    let data = await JSON.parse(localStorage.getItem("achievement"));
     if (data) {
-
-      setAchievementdata(data);
-      console.log(achievementdata)
+      
+      let adata = data.filter(achievement => achievement.isDeleted == false); 
+      setAchievementdata(adata);
+      setCounter(adata.length);
+      // console.log(achievementdata)
     }
     else {
       return [];
@@ -72,15 +74,17 @@ export const Achievement = () => {
 
   const handleDelete = (e) => {
     console.log(e);
-    const index = achievementdata.indexOf(achievementdata.find(a => a.id == e));
+    let data = JSON.parse(localStorage.getItem("achievement"));
+    setAchievementdata(data);
+    const index = data.indexOf(data.find(a => a.id == e));
     console.log(index)
     achievementdata[index].isDeleted = true
     // achievements.isDeleted = true;
     // let objs = achievementdata
     setAchievementdata(achievementdata);
-    console.log(achievementdata)
-    navigate.push("/admindashboard/achievement")
-    localStorage.setItem("achievement",JSON.stringify(achievementdata))
+    localStorage.setItem("achievement",JSON.stringify(achievementdata));
+    // <Redirect to="/admindashboard/achievement"></Redirect>
+    navigate.push("/admindashboard/achievement");
   }
   function convert(str) {
     var date = new Date(str),
@@ -140,7 +144,7 @@ export const Achievement = () => {
                           <TableBody>
                             {achievementdata.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                               .map((e) => {
-                                console.log(achievementdata.length);
+                                {/* console.log(achievementdata.length); */}
                               if(e.isDeleted == false) return (
                                   <StyledTableRow hover role="checkbox" tabIndex={-1} key={e.id}>
                                     <StyledTableCell><Checkbox size='small' /></StyledTableCell>
@@ -171,51 +175,16 @@ export const Achievement = () => {
               
             </Table>
           </TableContainer>
-          {achievementdata.length > 0 && <TablePagination
+          {<TablePagination
             rowsPerPageOptions={[5]}
             component="div"
-            count={achievementdata.length}
+            count={counter}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
           />}
-          {/* <table>
-            <thead>
-              <tr>
-                <th><Checkbox size="small" /></th>
-                <th>Achievement Title</th>
-                <th>Achievement Type</th>
-                <th>Employee Id and Name</th>
-                <th>Achievement Area</th>
-                <th>Achievement Start Date</th>
-                <th>Achievement End Date</th>
-                <th>Achievement Description</th>
-                <th>Achievement Image</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {achievementdata.map((e) => {
-                return (
-                  <tr key={e.id}>
-                    <td><Checkbox size="small" /></td>
-                    <td>{e.achievementTitle}</td>
-                    <td>{e.achievementType}</td>
-                    <td>{e.employeeIdandName}</td>
-                    <td>{e.achievementArea}</td>
-                    <td>{e.achievementStartDate}</td>
-                    <td>{e.achievementEndDate}</td>
-                    <td>{e.achievementDescription}</td>
-                    <td><img src={e.achievementImage}/></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table> */}
+        
         </div>
       </div>
     </div>

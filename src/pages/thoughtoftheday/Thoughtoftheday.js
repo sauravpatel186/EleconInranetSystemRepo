@@ -88,7 +88,7 @@ export const Thoughtoftheday = () => {
               Home
             </Link>
             <Link
-              underline="hover" area-current="page" style={{ color: "black" }} onClick={() => { navigate.push("/thoughtoftheday") }}>
+              underline="hover" area-current="page" style={{ color: "black" }} onClick={() => { navigate.push("/admindashboard/thoughtoftheday") }}>
               Thought Of The Day
             </Link>
 
@@ -97,7 +97,7 @@ export const Thoughtoftheday = () => {
       </div>
       <div className="thoughtoftheday-container">
         <div className="thoughtoftheday-container-button">
-          <NavLink to="/thoughtoftheday/createthought">
+          <NavLink to="/admindashboard/thoughtoftheday/createthought">
             <Button variant="contained" color="success" size='small' className='btn-create'>
               <Typography variant='caption' className='btn-success-font'>Create New Thought</Typography>
             </Button>
