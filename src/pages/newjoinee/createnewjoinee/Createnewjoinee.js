@@ -30,7 +30,6 @@ const showToastMessage = () => {
 const Createnewjoinee= () => {
     const navigate = useHistory();
       const [newnj,setNewNj]=useState([]);
-      const [newmd,setNewMd]=useState([]);
       const ValidationSchema = Yup.object().shape({
           njFirstName: Yup.string().required("First Name is required."),
           njDepartment: Yup.string().required("Department is required."),
@@ -73,12 +72,6 @@ const Createnewjoinee= () => {
             setNewNj(JSON.parse(data));
           }
         }, []);
-        useEffect(() => {
-            let data = localStorage.getItem("md");
-            if (data) {
-              setNewMd(JSON.parse(data));
-            }
-          }, []);
       return (
           <div className="page-information-container">
               <header className="page-header">
@@ -113,108 +106,6 @@ const Createnewjoinee= () => {
                       <Divider sx={{ borderBottomWidth: 2 }} />
                   </div>
                   <Formik
-                      initialValues={{
-                          
-                          mdTitle: "",
-                          mdStartDate: null,
-                          mdEndDate: null,
-                          mdDescription: "",
-                      }}
-                      validationSchema={ValidationSchema}
-                      onSubmit={data => {
-                          let md = {
-                              id: Math.random(),
-                              mdTitle: data.mdTitle,
-                              mdStartDate: data.mdStartDate,
-                              mdEndDate: data.mdEndDate,
-                              mdDescription: data.mdDescription,
-                              time: Math.floor(Date.now() / 1000),
-                              isDeleted: false,
-                          }
-                          newmd.push(md);
-                          setNewMd([...newmd]);
-                          localStorage.setItem("md",JSON.stringify(newmd));
-                          toast("Stored Successfully");
-                          navigate.push("/managementdesk");
-                      }}
-                  >
-                      {({ values, handleChange, handleBlur, errors, handleSubmit, touched, setFieldValue, setFieldError }) => (
-                          <form onSubmit={handleSubmit}>
-                              <div className="createeventform">
-                                  <div className="formrow">
-                                      <div className="createeventforminput">
-                                          <TextField
-                                              label="Event Title"
-                                              name="mdTitle"
-                                              type="mdTitle"
-                                              onChange={handleChange}
-                                              onBlur={handleBlur}
-                                              variant="outlined"
-                                              sx={{ width: 100 + "%" }}
-                                          />
-                                          <ValidationErrorMessage message={errors.mdTitle} touched={touched.mdTitle} />
-  
-                                      </div>
-                                      <div className="createeventforminput">
-                                          <DemoContainer required components={["DatePicker", "DatePicker"]}>
-                                              <DatePicker
-                                                  label="Start Date"
-                                                  value={dayjs(values.mdStartDate)}
-                                                  required
-                                                  format="DD-MM-YYYY"
-                                                  sx={{ width: 100 + "%" }}
-                                                  onChange={(newValue) => setFieldValue("mdStartDate", newValue)}
-                                                  disablePast
-                                              />
-                                          </DemoContainer>
-                                          <ValidationErrorMessage message={errors.mdStartDate} touched={touched.mdStartDate} />
-  
-                                      </div>
-                                      <div className="createeventforminput">
-                                          <DemoContainer required components={["DatePicker"]}>
-                                              <DatePicker
-                                                  label="End Date"
-                                                  value={dayjs(values.mdEndDate)}
-                                                  required
-                                                  format="DD-MM-YYYY"
-                                                  sx={{ width: 100 + "%" }}
-                                                  onChange={(newValue) => setFieldValue("mdEndDate", newValue)}
-                                                  disablePast
-                                              />
-                                          </DemoContainer>
-                                          <ValidationErrorMessage message={errors.mdEndDate} touched={touched.mdEndDate} />
-  
-                                      </div>
-                                  </div>
-                                  <div className="formrow">
-                                      <div className="createeventforminput">
-                                          <TextField
-                                              id="outlined-multiline-static"
-                                              label="Event Description"
-                                              multiline
-                                              rows={4}
-                                              name="mdDescription"
-                                              type="mdDescription"
-                                              variant="outlined"
-                                              onChange={handleChange}
-                                              onBlur={handleBlur}
-                                              sx={{ width: 100 + "%" }}
-                                          />
-                                          <ValidationErrorMessage message={errors.mdDescription} touched={touched.mdDescription} />
-                                      </div>
-                                  </div>
-                                  <div className="formrow">
-                                      <div className="createeventforminput">
-                                          <Button variant="contained" color="success" type="submit">
-                                              Submit
-                                          </Button>
-                                      </div>
-                                  </div>
-                              </div>
-                          </form>
-                      )}
-                  </Formik>
-                  {/* <Formik
                       initialValues={{
                           njDepartment: "",
                           njFirstName: "",
@@ -479,7 +370,7 @@ const Createnewjoinee= () => {
                               </div>
                           </form>
                       )}
-                  </Formik> */}
+                  </Formik>
               </div>
           </div>
       )
