@@ -33,7 +33,7 @@ export const CreatePolicies = () => {
         policiesStartDate: Yup.string().required("Start Date is required"),
         policiesEndDate: Yup.string().required("End Date is required"),
         policiesDescription: Yup.string().required("Policies Description is required"),
-        policiesImage: Yup.string().required("Image is required"),
+        policiesImage: Yup.string().required("PDF is required"),
     })
     const onSelectFile = (e, setFieldValue, setFieldError) => {
         const files = e.target.files;
@@ -41,7 +41,7 @@ export const CreatePolicies = () => {
             const fileSelected = e.target.files[0];
             const fileNameArray = fileSelected.name.split(".");
             const extension = fileNameArray.pop();
-            if (["png", "jpg", "jpeg"].includes(extension?.toLowerCase())) {
+            if (["pdf"].includes(extension?.toLowerCase())) {
                 const reader = new FileReader();
                 reader.readAsDataURL(fileSelected);
                 reader.onload = function () {

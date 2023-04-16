@@ -13,7 +13,7 @@
     font-family: 'Plus Jakarta Sans';
 }
 
-.achievement-container {
+.employeemaster-container {
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -23,14 +23,14 @@
     margin-top: 1.5rem;
 }
 
-.achievement-container-button {
+.employeemaster-container-button {
     display: flex;
     flex-direction: row;
     gap: 1rem;
     margin: 2rem 2rem 0rem 2rem
 }
 
-.achievementtable-container {
+.employeemastertable-container {
     margin: 2rem;
     display: block;
 }

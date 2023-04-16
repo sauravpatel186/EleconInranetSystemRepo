@@ -1,5 +1,5 @@
 import { Menu, MenuItem, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect} from 'react'
 import { Close, Menu as MenuIcon } from '@mui/icons-material'
 import { useState } from 'react'
 import "./IntranetDashboard.css"
@@ -8,6 +8,7 @@ import cricket from "../../assets/images/cricket-image.png"
 import tennis from "../../assets/images/tennis-img.png"
 import { Link, NavLink } from "react-router-dom"
 import { Achievementcard } from "../../components/cards/achievementcard"
+import {EventCard} from "../../components/cards/EventCard/EventCard"
 export const IntranetDashboard = (props) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -35,6 +36,16 @@ export const IntranetDashboard = (props) => {
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
+
+    
+    const [showTime,setShowTime] = useState("");
+    const [merediem,setMerediem] = useState();
+    useEffect(() => {
+        const date = new Date();
+        setShowTime(date.getHours().toString());
+        setMerediem((date.toLocaleTimeString()).slice(-2));
+    })
+    
     return (
         <div className='main-intranet-dashboard'>
             <div className='topbar-dashboard'>
@@ -145,14 +156,38 @@ export const IntranetDashboard = (props) => {
                 <div className='container-content'>
                     <div className='welcome-text'>
                         <Typography variant='h4' className='welcome-text-1'>Welcome,</Typography>
-                        <Typography variant='h4' className='welcome-text-2'>Good Morning It's 09:35 AM</Typography>
+                        <Typography variant='h4' className='welcome-text-2'>{(()=>{
+                            if(showTime <= "12" && merediem == "am"){
+                                return (
+                                    <span>Good Morning</span>
+                                )
+                                
+                            }
+                            else if(showTime <= "6" && merediem == "pm"){
+                                return (
+                                    <span>Good Afternoon</span>
+                                )
+                            }
+                            else if(showTime>"6" && showTime <= "12" && merediem == "pm"){
+                                return (
+                                    <span>Good Evening</span>
+                                )
+                            }
+                            else{
+                            
+                                return (
+                                    <span>Good Night</span>
+                        
+                                )
+                                }
+                        })()} It's {(new Date().getHours())+":"+new Date().getMinutes()}</Typography>
                     </div>
                 </div>
                 <div className='container-content-row-2'>
                     <div className='gallery-container'>
                         <div className='gallery-text'><Typography variant='body1'>Gallery</Typography></div>
                         <div className='gallery-box'>
-                            <Achievementcard />
+                            {/* <Achievementcard /> */}
                             {
                                 /* <img src="/infrastructure-img1.jpg"></img> */}
                         </div>
@@ -160,6 +195,7 @@ export const IntranetDashboard = (props) => {
                     <div className='event-container'>
                         <div className='event-text'><Typography variant='body1'>Upcoming Event</Typography></div>
                         <div className='event-box'>
+                            <EventCard />
                         </div>
                     </div>
                     <div className='thought-birthday-container'>
@@ -288,7 +324,7 @@ export const IntranetDashboard = (props) => {
                             <Typography variant='body1'>Achievement</Typography>
                         </div>
                         <div className='trophy-box'>
-
+                                <Achievementcard/>
                         </div>
                     </div>
                 </div>

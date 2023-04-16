@@ -63,7 +63,6 @@ export const UpdateAchievement = () => {
         }
     }
     useEffect(() => {
-
         try {
             getAchievementData(idParamVal)
         }
@@ -108,15 +107,21 @@ export const UpdateAchievement = () => {
     const UpdateData = (id, updatedData) => {
         const datawithId = newachievement.find(e => e.id == id); // finds the element with id 
         if (datawithId["id"] === updatedData.id) {
-            // let temp = JSON.parse(localStorage.getItem("achievement"));
+            let temp = JSON.parse(localStorage.getItem("achievement"));
             let tempdata = newachievement.indexOf(newachievement.find(achievements => achievements.id == id));
-            newachievement[tempdata] = updatedData
-            setAllAchievement([...newachievement])
+            temp[tempdata] = updatedData
+            setAllAchievement([...temp])
             console.log(allachievement);
-            localStorage.setItem("achievement", JSON.stringify(allachievement));
+        }
+        
+    }
+    useEffect(() => {
+        console.log(allachievement);
+        if(allachievement.length > 0) {
+            localStorage.setItem('achievement', JSON.stringify(allachievement));
             navigate.push("/admindashboard/achievement");
         }
-    }
+    },[allachievement])
     return (
         <div className="page-information-container">
             <header className="page-header">

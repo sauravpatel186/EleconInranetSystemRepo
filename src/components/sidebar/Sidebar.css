@@ -11,7 +11,7 @@
     flex-direction: column;
 }
 .top-sidebar{
-    background: white;
+   background-color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -30,8 +30,7 @@
     display: none;
 }
 
-.nav-sidebar{
-    background:white;
+.nav-sidebar{ background-color: white;
     display: flex;
     flex-direction: column;
     width: 16rem;

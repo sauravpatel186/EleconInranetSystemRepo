@@ -77,6 +77,7 @@ export const Policies = () => {
       day = ("0" + date.getDate()).slice(-2);
     return [day,mnth,date.getFullYear()].join("-");
   }
+  
   return (
     <div className="page-information-container">
       <div className="page-header"><label>
@@ -97,7 +98,7 @@ export const Policies = () => {
       </div>
       <div className="policies-container">
         <div className="policies-container-button">
-          <NavLink to="/policies/createpolicies">
+          <NavLink to="/admindashboard/policies/createpolicies">
             <Button variant="contained" color="success" size='small' className='btn-create'>
               <Typography variant='caption' className='btn-success-font'>Create New Policies</Typography>
             </Button>
@@ -134,7 +135,7 @@ export const Policies = () => {
                           <StyledTableCell>{e.employeeIdandName}</StyledTableCell> */}
                           <StyledTableCell>{e.policiesArea}</StyledTableCell>
                           <StyledTableCell>{e.policiesDescription}</StyledTableCell>
-                          <StyledTableCell><img src={e.policiesImage} /></StyledTableCell>
+                          <StyledTableCell><object data={e.policiesImage} /></StyledTableCell>
                           <StyledTableCell>{convert(e.policiesStartDate)}</StyledTableCell>
                           <StyledTableCell>{convert(e.policiesEndDate)}</StyledTableCell>
                           <StyledTableCell>
