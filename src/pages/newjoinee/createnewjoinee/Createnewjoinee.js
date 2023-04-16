@@ -27,9 +27,10 @@ const showToastMessage = () => {
     position: toast.POSITION.TOP_RIGHT
   });
 };
-const Createnewjoinee= () => {
+
+const Createnewjoinee = () => {
     const navigate = useHistory();
-      const [newnj,setNewNj]=useState([]);
+      const [newjoinee,setNewjoinee]=useState([]);
       const ValidationSchema = Yup.object().shape({
           njFirstName: Yup.string().required("First Name is required."),
           njDepartment: Yup.string().required("Department is required."),
@@ -37,12 +38,11 @@ const Createnewjoinee= () => {
           njGender: Yup.string().required("Gender is required."),
           njLastName: Yup.string().required("Last Name is required."),
           njDob: Yup.string().required("Date Of Birth is required"),
-          njDoi: Yup.string().required("Date Of Joim is required"),
+          njDoj: Yup.string().required("Date Of Join is required"),
           njCompany: Yup.string().required("Company is required"),
           njImage: Yup.string().required("Image is required"),
-          njEmailId: Yup.string().required("Email is required"),
+          njEmail: Yup.string().required("Email is required"),
           njPassword: Yup.string().required("Password is required"),
-
       })
       const onSelectFile = (e, setFieldValue, setFieldError) => {
           const files = e.target.files;
@@ -69,7 +69,7 @@ const Createnewjoinee= () => {
       useEffect(() => {
           let data = localStorage.getItem("nj");
           if (data) {
-            setNewNj(JSON.parse(data));
+            setNewjoinee(JSON.parse(data));
           }
         }, []);
       return (
@@ -80,7 +80,7 @@ const Createnewjoinee= () => {
               <div className='page-breadscrumb'>
               <br/>
                 <Breadcrumbs aria-label="breadcrumb">
-                  <Link underline="hover" color="inherit" href="/" exact to="/">
+                  <Link underline="hover" color="inherit" href="/" exact to="/admindashboard">
                     Home
                   </Link>
                   <Link
@@ -92,14 +92,14 @@ const Createnewjoinee= () => {
                     color="text.primary"
                     href="/admindashboard/newjoinee/createnewjoinee"
                     aria-current="page">
-                    Create New Joinee
+                    Add New Joinee
                   </Link>
                 </Breadcrumbs>
               </div>
-              <div className="createnewjoinee-container">
-                  <div className="createnewjoinee-header">
+              <div className="createupcomingevent-container">
+                  <div className="createupcomingevent-header">
                       <Typography className="header-font" variant="body" gutterBottom>
-                          Create a New Joinee
+                          Add New Joinee
                       </Typography>
                   </div>
                   <div className="form-line">
@@ -111,43 +111,44 @@ const Createnewjoinee= () => {
                           njFirstName: "",
                           njMiddleName: "",
                           njLastName: "",
-                          njCompany: "",
+                          njCompany:"",
+                          njPassword:"",
+                          njGender:"",
                           njDob: null,
                           njDoj: null,
+                          njEmail: "",
                           njImage: "",
-                          njGender: "",
-                          njEmailId: "",
-                          njPassword: ""
                       }}
                       validationSchema={ValidationSchema}
                       onSubmit={data => {
                           let nj = {
                               id: Math.random(),
-                              njFirstName: data. njFirstName,
+                              njFirstName: data.njFirstName,
                               njMiddleName: data.njMiddleName,
                               njLastName: data.njLastName,
                               njDepartment: data.njDepartment,
                               njDob: data.njDob,
-                              njDoj: data.njDoi,
-                              njCompany:data.njCompany,
+                              njDoj: data.njDoj,
+                              njEmail:data.njEmail,
+                              njCompany: data.njCompany,
                               njGender: data.njGender,
-                              njImage: data.njImage,
-                              njEmailId: data.njEmailId,
-                              njPassword: data.njPassword,
+                              njPassword:data.njPassword,
+                              njImage:data.njImage,
                               time: Math.floor(Date.now() / 1000),
                               isDeleted: false,
                           }
-                          newnj.push(nj);
-                          setNewNj([...newnj]);
-                          localStorage.setItem("nj",JSON.stringify(newnj));
+                          newjoinee.push(nj);
+                          setNewjoinee([...newjoinee]);
+                          console.log(newjoinee);
+                          localStorage.setItem("nj",JSON.stringify(newjoinee));
                           toast("Stored Successfully");
-                          navigate.push("/admindashbiard/newjoinee");
+                          navigate.push("/admindashboard/newjoinee");
                       }}
                   >
                       {({ values, handleChange, handleBlur, errors, handleSubmit, touched, setFieldValue, setFieldError }) => (
                           <form onSubmit={handleSubmit}>
-                              <div className="createeventform">
-                                  <div className="formrow">
+                            <div className="createeventform">
+                            <div className="formrow">
                                       <div className="createeventforminput">
                                           <TextField
                                               label="First Name"
@@ -196,7 +197,7 @@ const Createnewjoinee= () => {
                                                   format="DD-MM-YYYY"
                                                   sx={{ width: 100 + "%" }}
                                                   onChange={(newValue) => setFieldValue("njDob", newValue)}
-                                                  disablePast
+                                                  //disablePast
                                               />
                                           </DemoContainer>
                                           <ValidationErrorMessage message={errors.njDob} touched={touched.njDob} />
@@ -279,14 +280,14 @@ const Createnewjoinee= () => {
                                       <div className="createeventforminput">
                                       <TextField
                                               label="Email ID"
-                                              name="njEmailId"
-                                              type="njEmailid"
+                                              name="njEmail"
+                                              type="njEmail"
                                               onChange={handleChange}
                                               onBlur={handleBlur}
                                               variant="outlined"
                                               sx={{ width: 100 + "%" }}
                                           />
-                                          <ValidationErrorMessage message={errors.njEmailId} touched={touched.njEmailId} />
+                                          <ValidationErrorMessage message={errors.njEmail} touched={touched.njEmail} />
 
                                       </div>
                                       <div className="createeventforminput">
@@ -367,7 +368,7 @@ const Createnewjoinee= () => {
                                           </Button>
                                       </div>
                                   </div>
-                              </div>
+                            </div>
                           </form>
                       )}
                   </Formik>
@@ -378,3 +379,4 @@ const Createnewjoinee= () => {
   }
   
   export default Createnewjoinee;
+  

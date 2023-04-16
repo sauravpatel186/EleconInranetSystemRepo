@@ -86,6 +86,16 @@ const Newjoinee = (props) => {
         day = ("0" + date.getDate()).slice(-2);
       return [day,mnth,date.getFullYear()].join("-");
     }
+    const handleDelete = (e) => {
+      console.log(e);
+      const index = njdata.indexOf(njdata.find((a => a.id == e )));
+      console.log(index)
+      njdata[index].isDeleted = true
+      setnjdata(njdata);
+      console.log(njdata)
+      navigate.push("/admindashboard/newjoinee")
+      localStorage.setItem("nj",JSON.stringify(njdata))
+    }
     console.log(njdata);
     return (
       <div className="page-information-container">
@@ -153,9 +163,9 @@ const Newjoinee = (props) => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {njdata
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((e) => {
+                {njdata
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((e) => {if(e.isDeleted == false)
                       return (
                         <StyledTableRow
                           hover
@@ -178,7 +188,7 @@ const Newjoinee = (props) => {
                           <StyledTableCell>{e.njDepartment}</StyledTableCell>
                           <StyledTableCell>{e.njCompany}</StyledTableCell>
                           <StyledTableCell>{e.njGender}</StyledTableCell>
-                          <StyledTableCell>{e.njEmailId}</StyledTableCell>
+                          <StyledTableCell>{e.njEmail}</StyledTableCell>
                           <StyledTableCell>{e.njPassword}</StyledTableCell>
                           <StyledTableCell>
                             <LinkRoute
@@ -190,7 +200,7 @@ const Newjoinee = (props) => {
                               <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />
                             </LinkRoute>
   
-                            <Delete sx={{ color: "red" }} />
+                            <Button size='small' id={e.id} key={e.id} onClick={(event) => handleDelete(e.id)} sx={{ verticalAlign: "bottom", minWidth: "auto" }}><Delete sx={{ color: "red" }} /></Button>
                           </StyledTableCell>
                         </StyledTableRow>
                       );

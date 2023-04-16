@@ -1,5 +1,5 @@
 import React from "react";
-import "./Updateupcomingevent.css";
+//import "./Updateupcomingevent.css";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
@@ -22,7 +22,7 @@ import { ValidationErrorMessage } from "../../../components/ValidationErrorMessa
 import { Formik } from "formik";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { useHistory } from "react-router-dom";
-export const updatenewjoinee = () => {
+export const Updatenewjoinee = () => {
     const { type } = useParams();
     const idParamVal = useLocation().state.idParam;
     const [njData, setnjData] = useState({
@@ -39,7 +39,7 @@ export const updatenewjoinee = () => {
         njPassword: "",
     });
     const updateState = (e) => {
-        seteventData((existingValue) => ({
+        setnjData((existingValue) => ({
           ...existingValue,
         njDepartment: e[0]["njDepartment"],
         njFirstName: e[0]["njFirstName"] ,

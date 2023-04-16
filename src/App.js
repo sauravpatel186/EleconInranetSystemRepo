@@ -51,7 +51,7 @@ import Createnotice from './pages/noticeboard/createnotice/Createnotice';
 import Updatenotice from './pages/noticeboard/updatenotice/Updatenotice';
 import Newjoinee from './pages/newjoinee/Newjoinee';
 import Createnewjoinee from './pages/newjoinee/createnewjoinee/Createnewjoinee';
-import Updatenewjoinee  from './pages/newjoinee/updatenewjoinee/Updatenewjoinee';
+import updatenewjoinee, { Updatenewjoinee }  from './pages/newjoinee/updatenewjoinee/Updatenewjoinee';
 function App() {
   const USER_TYPES = {
     PUBILIC: "Public User",
