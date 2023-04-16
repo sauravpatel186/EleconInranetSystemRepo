@@ -94,24 +94,22 @@ function App() {
               <Route index path="/admindashboard/upcomingevent/updateupcomingevent/:id"><Updateupcomingevent /></Route>
               <Route index path="/admindashboard/opinionpoll/updateopinionpoll/:id"><Updateopinionpoll /></Route>
               <Route exact path="/admindashboard/thoughtoftheday"><Thoughtoftheday/></Route>
-                <Route index path="/admindashboard/thoughtoftheday/createthought"><Createthought/></Route>
-                <Route index path="/admindashboard/thoughtoftheday/updatethought/:id"><Updatethought/></Route>
-                <Route exact path="/admindashboard/policies"><Policies/></Route>
-                <Route index path="/admindashboard/policies/createpolicies"><CreatePolicies/></Route>
-                <Route index path="/admindashboard/policies/updatepolicies/:id"><UpdatePolicies/></Route>
-                <Route exact path="/admindashboard/managementdesk"><Managementdesk/></Route>
-                <Route index path="/admindashboard/managementdesk/createmanagementdesk"><Createmanagementdesk/></Route>
-                <Route index path="/admindashboard/managementdesk/updatemanagementdesk/:id"><Updatemanagementdesk/></Route>
-
-                <Route exact path="/admindashboard/announcement"><Announcements/></Route>
-                <Route exact path="/admindashboard/announcement/createannouncement"><CreateAnnouncement/></Route>
-                <Route exact path="/admindashboard/announcement/updateannouncement/:id"><Updateannouncement/></Route>
-                <Route exact path="/admindashboard/noticeboard"><Noticeboard/></Route>
-                <Route index path="/admindashboard/noticeboard/createnotice"><Createnotice/></Route>
-                <Route index path="/admindashboard/noticeboard/updatenotice/:id"><Updatenotice/></Route>
+              <Route index path="/admindashboard/thoughtoftheday/createthought"><Createthought/></Route>
+              <Route index path="/admindashboard/thoughtoftheday/updatethought/:id"><Updatethought/></Route>
+              <Route exact path="/admindashboard/policies"><Policies/></Route>
+              <Route index path="/admindashboard/policies/createpolicies"><CreatePolicies/></Route>
+              <Route index path="/admindashboard/policies/updatepolicies/:id"><UpdatePolicies/></Route>
+              <Route exact path="/admindashboard/managementdesk"><Managementdesk/></Route>
+              <Route index path="/admindashboard/managementdesk/createmanagementdesk"><Createmanagementdesk/></Route>
+              <Route index path="/admindashboard/managementdesk/updatemanagementdesk/:id"><Updatemanagementdesk/></Route>
+              <Route exact path="/admindashboard/announcement"><Announcements/></Route>
+              <Route exact path="/admindashboard/announcement/createannouncement"><CreateAnnouncement/></Route>
+              <Route exact path="/admindashboard/announcement/updateannouncement/:id"><Updateannouncement/></Route>
+              <Route exact path="/admindashboard/noticeboard"><Noticeboard/></Route>
+              <Route index path="/admindashboard/noticeboard/createnotice"><Createnotice/></Route>
+              <Route index path="/admindashboard/noticeboard/updatenotice/:id"><Updatenotice/></Route>
                 
-
-              </Switch>
+          </Switch>
             </LocalizationProvider>
           </div>
         </div>
