@@ -30,7 +30,7 @@ import { Updateannouncement } from './pages/announcement/updateannouncement/Upda
 
 import Managementdesk from "./pages/managementdesk/Managementdesk";
 import Createmanagementdesk from './pages/managementdesk/createmanagementdesk/Createmanagementdesk';
-import { Updatemanagementdesk } from './pages/managementdesk/updatemanagementdesk/Updatemanagementdesk';
+import Updatemanagementdesk from './pages/managementdesk/updatemanagementdesk/Updatemanagementdesk';
 import CreateCeomessage from './pages/ceomessage/createceomessage/CreateCeomessage';
 import UpdateCeomessage from './pages/ceomessage/updateceomessage/UpdateCeomessage';
 
@@ -44,6 +44,14 @@ import Createcanteenmenu from './pages/canteenmenu/createcanteenmenu/Createcante
 import Updatecanteenmenu from './pages/canteenmenu/updatecanteenmenu/Updatecanteenmenu'
 import Salespurchase from './pages/salespurchase/Salespurchase';
 import Createsalespurchase from './pages/salespurchase/createsalespurchase/Createsalespurchase';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom';
+
+import Noticeboard from './pages/noticeboard/Noticeboard';
+import Createnotice from './pages/noticeboard/createnotice/Createnotice';
+import Updatenotice from './pages/noticeboard/updatenotice/Updatenotice';
+import Newjoinee from './pages/newjoinee/Newjoinee';
+import Createnewjoinee from './pages/newjoinee/createnewjoinee/Createnewjoinee';
+import Updatenewjoinee  from './pages/newjoinee/updatenewjoinee/Updatenewjoinee';
 function App() {
   const USER_TYPES = {
     PUBILIC: "Public User",
@@ -51,7 +59,7 @@ function App() {
     ADMIN_USER: "Admin User"
   }
   const [isIntranetDashboardOpen,setisIntranetDashboardOpen]=useState(false);
-
+  const history = useHistory();
   useEffect(()=>{
     let adminDashboardChecker = localStorage.getItem("isAdminDashboard")
     if(adminDashboardChecker === "true"){
@@ -69,7 +77,7 @@ function App() {
     setisIntranetDashboardOpen(false)
     localStorage.setItem("isAdminDashboard", "false")
   }
-
+  
   return (
 
     <>
@@ -103,7 +111,7 @@ function App() {
                 <Route index path="/admindashboard/policies/updatepolicies/:id"><UpdatePolicies/></Route>
                 <Route exact path="/admindashboard/managementdesk"><Managementdesk/></Route>
                 <Route index path="/admindashboard/managementdesk/createmanagementdesk"><Createmanagementdesk/></Route>
-                <Route index path="/admindashboard/managementdesk/updatemanagementdesk/:id"><Updatemanagementdesk/></Route>
+                <Route index path="/managementdesk/updatemanagementdesk/:id"><Updatemanagementdesk/></Route>
                 <Route exact path="/admindashboard/ceomessage/createceomessage"><CreateCeomessage/></Route>
                 <Route exact path="/admindashboard/announcement"><Announcements/></Route>
                 <Route exact path="/admindashboard/announcement/createannouncement"><CreateAnnouncement/></Route>
@@ -114,7 +122,14 @@ function App() {
                 <Route exact path="/admindashboard/canteenmenu/createcanteenmenu"><Createcanteenmenu/></Route>
                 <Route exact path="/admindashboard/canteenmenu/updatecanteenmenu/:id"><Updatecanteenmenu/></Route>
                 <Route exact path="/admindashboard/salespurchase"><Salespurchase/></Route>
-                <Route exact path="/admindashboard/salespurchase/createsalespurchase"><Createsalespurchase/></Route>
+                <Route exact path="/admindashboard/salespurchase/createsalespurchase"><Createsalespurchase/></Route>                <Route exact path="/admindashboard/noticeboard"><Noticeboard/></Route>
+                <Route index path="/admindashboard/noticeboard/createnotice"><Createnotice/></Route>
+                <Route index path="/admindashboard/noticeboard/updatenotice/:id"><Updatenotice/></Route>
+                <Route exact path="/admindashboard/newjoinee"><Newjoinee /></Route>
+                <Route index path="/newjoinee/createnewjoinee"><Createnewjoinee /></Route>
+                <Route index path="/newjoinee/updatenewjoinee"><Updatenewjoinee /></Route>
+                
+
               </Switch>
             </LocalizationProvider>
           </div>
