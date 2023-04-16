@@ -249,7 +249,7 @@ export const UpdateCeomessage = () => {
                                         <DemoContainer required components={["DatePicker"]}>
                                             <DatePicker
                                                 label="End Date"
-                                                value={dayjs(parseISO(values.EndDate))}
+                                                value={dayjs((values.EndDate))}
                                                 required
                                                 format="DD-MM-YYYY"
                                                 sx={{ width: 100 + "%" }}

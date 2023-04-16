@@ -46,17 +46,17 @@ const CreateAnnouncement = () => {
               <div className='page-breadscrumb'>
               <br/>
                 <Breadcrumbs aria-label="breadcrumb">
-                  <Link underline="hover" color="inherit" href="/" exact to="/">
+                  <Link underline="hover" color="inherit" href="/admindashboard" exact to="/admindashboard">
                     Home
                   </Link>
                   <Link
-                    underline="hover" color="inherit" href="/announcement" exact to="/announcement">
+                    underline="hover" color="inherit" href="/admindashboard/announcement" exact to="/admindashboard/announcement">
                     Announcement
                   </Link>
                   <Link
                     underline="hover"
                     color="text.primary"
-                    href="/announcement/createannouncement"
+                    href="/admindashboard/announcement/createannouncement"
                     aria-current="page">
                     Create Announcement
                   </Link>
@@ -96,7 +96,7 @@ const CreateAnnouncement = () => {
                           setNewAnnouncement([...newannouncement]);
                           localStorage.setItem("announcement",JSON.stringify(newannouncement));
                           toast("Stored Successfully");
-                          navigate.push("/announcement");
+                          navigate.push("/admindashboard/announcement");
                       }}
                   >
                       {({ values, handleChange, handleBlur, errors, handleSubmit, touched, setFieldValue, setFieldError }) => (

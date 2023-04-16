@@ -25,6 +25,8 @@ import { useHistory } from "react-router-dom";
 export const Updateupcomingevent = () => {
   const { type } = useParams();
   const idParamVal = useLocation().state.idParam;
+  const [newevent, setnewevent] = useState([]);
+  const [AllUpcomingEvent, setAllUpcomingEvent] = useState([]);
   const [eventData, seteventData] = useState({
     eventTitle: "",
     eventVenue: "",
@@ -36,17 +38,7 @@ export const Updateupcomingevent = () => {
     eventImage: "",
     eventRSVP: "",
   });
-  // const initialValue = {
-  //     eventTitle: "",
-  //     eventVenue:"",
-  //     eventOrganizerName:"",
-  //     eventDepartment:"",
-  //     eventStartDate:"",
-  //     eventEndDate: "",
-  //     eventDescription:"",
-  //     eventImage:"",
-  //     eventRSVP:""
-  // }
+  
   const updateState = (e) => {
     seteventData((existingValue) => ({
       ...existingValue,
@@ -60,24 +52,14 @@ export const Updateupcomingevent = () => {
       eventImage: e[0]["eventImage"],
       eventStartDate: e[0]["eventStartDate"],
     }));
-    console.log(eventData);
-    console.log(JSON.parse(localStorage.getItem("event")));
+    // console.log(eventData);
+    // console.log(JSON.parse(localStorage.getItem("event")));
   };
   const geteventData = (id) => {
     let data = JSON.parse(localStorage.getItem("event"));
     if (data) {
       let edata = data.filter((events) => events.id === id);
       updateState(edata);
-
-      // console.log(achievementData);
-      // initialValue.achievementType = achievementData[0]["achievementType"];
-      // initialValue.achievementTitle = achievementData[0]["achievementTile"];
-      // initialValue.employeeIdandName = achievementData[0]["employeeIdandName"];
-      // initialValue.achievementArea = achievementData[0]["achievementArea"];
-      // initialValue.achievementStartDate = achievementData[0]["achievementStatDate"];
-      // initialValue.achievementEndDate = achievementData[0]["achievementEndDate"];
-      // initialValue.achievementDescription = achievementData[0]["achievementDescritpion"];
-      // initialValue.achievementImage = achievementData[0]["achievementImage"];
     } else {
       return [];
     }
@@ -90,7 +72,6 @@ export const Updateupcomingevent = () => {
     }
   }, []);
   const navigate = useHistory();
-  const [newevent, setnewevent] = useState([]);
   const ValidationSchema = Yup.object().shape({
     eventTitle: Yup.string().required("Event Title is required."),
     eventDepartment: Yup.string().required("Event department is required."),
@@ -104,6 +85,27 @@ export const Updateupcomingevent = () => {
     eventDescription: Yup.string().required("Event Description is required"),
     eventImage: Yup.string().required("Image is required"),
   });
+
+  //Handles The Event when data is changed
+  const UpdateData = (id, updatedData) => {
+    const datawithId = newevent.find(e => e.id == id); // finds the element with id 
+    if (datawithId["id"] === updatedData.id) {
+        // let temp = JSON.parse(localStorage.getItem("achievement"));
+        let tempdata = newevent.indexOf(newevent.find(events => events.id == id));
+        newevent[tempdata] = updatedData
+        setAllUpcomingEvent([...newevent])
+        console.log(AllUpcomingEvent);
+        // localStorage.setItem("announcement", JSON.stringify(AllAnnouncement));
+        // navigate.push("/admindashboard/announcement");
+    }
+    
+}
+useEffect(()=>{
+  if(AllUpcomingEvent.length>0){
+    localStorage.setItem("event", JSON.stringify(AllUpcomingEvent));
+    navigate.push("/admindashboard/upcomingevent");
+  }
+},[AllUpcomingEvent])
   const onSelectFile = (e, setFieldValue, setFieldError) => {
     const files = e.target.files;
     if (files?.length) {
@@ -147,7 +149,7 @@ export const Updateupcomingevent = () => {
           enableReinitialize
           onSubmit={(data) => {
             let event = {
-              id: Math.random(),
+              id: idParamVal,
               eventVenue: data.eventVenue,
               eventTitle: data.eventTitle,
               eventOrganizerName: data.eventOrganizerName,
@@ -159,7 +161,8 @@ export const Updateupcomingevent = () => {
               eventImage: data.eventImage,
               time: Math.floor(Date.now() / 1000),
               isDeleted: false,
-            };
+            }
+            UpdateData(idParamVal,event);
             // eventData.push(event);
             // seteventData([...eventData]);
             // localStorage.setItem("event",JSON.stringify(eventData));

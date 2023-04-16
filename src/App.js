@@ -36,9 +36,17 @@ import Updatethought from './pages/thoughtoftheday/updatethought/Updatethought';
 import Policies from './pages/policies/Policies';
 import CreatePolicies from './pages/policies/createpolicies/CreatePolicies';
 import UpdatePolicies from './pages/policies/updatepolicies/UpdatePolicies';
+import Canteenmenu from './pages/canteenmenu/Canteenmenu';
+import Createcanteenmenu from './pages/canteenmenu/createcanteenmenu/Createcanteenmenu';
+import Updatecanteenmenu from './pages/canteenmenu/updatecanteenmenu/Updatecanteenmenu'
+import Salespurchase from './pages/salespurchase/Salespurchase';
+import Createsalespurchase from './pages/salespurchase/createsalespurchase/Createsalespurchase';
 import Noticeboard from './pages/noticeboard/Noticeboard';
 import Createnotice from './pages/noticeboard/createnotice/Createnotice';
 import Updatenotice from './pages/noticeboard/updatenotice/Updatenotice';
+import Newjoinee from './pages/newjoinee/Newjoinee';
+import Createnewjoinee from './pages/newjoinee/createnewjoinee/Createnewjoinee';
+import updatenewjoinee, { Updatenewjoinee } from './pages/newjoinee/updatenewjoinee/Updatenewjoinee';
 import { EmployeeMaster } from './pages/employeemaster/EmployeeMaster';
 import { Login } from './pages/login/Login';
 
@@ -86,19 +94,17 @@ function App() {
           <div className='page-container'>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Switch>
-
-
                 <Route exact path="/admindashboard"><Dashboard /></Route>
                 <Route exact path="/admindashboard/ceomessage"><Ceomessage /></Route>
                 <Route exact path="/admindashboard/opinionpoll"><Opinionpoll /></Route>
                 <Route exact path="/admindashboard/upcomingevent"><Upcomingevent /></Route>
-                <Route exact path="/admindashboard/upcomingevent/createupcomingevent"><Createupcomingevent /></Route>
+                <Route index path="/admindashboard/upcomingevent/createupcomingevent"><Createupcomingevent /></Route>
                 <Route exact path="/admindashboard/opinionpoll/createopinionpoll"><Createopinionpoll /></Route>
                 <Route exact path="/admindashboard/achievement"><Achievement /></Route>
-                <Route exact path="/admindashboard/achievement/createachievement"><CreateAchievement /></Route>
-                <Route exact path="/admindashboard/achievement/updateachievement/:id"><UpdateAchievement /></Route>
-                <Route exact path="/admindashboard/upcomingevent/updateupcomingevent/:id"><Updateupcomingevent /></Route>
-                <Route exact path="/admindashboard/opinionpoll/updateopinionpoll/:id"><Updateopinionpoll /></Route>
+                <Route index path="/admindashboard/achievement/createachievement"><CreateAchievement /></Route>
+                <Route index path="/admindashboard/achievement/updateachievement/:id"><UpdateAchievement /></Route>
+                <Route index path="/admindashboard/upcomingevent/updateupcomingevent/:id"><Updateupcomingevent /></Route>
+                <Route index path="/admindashboard/opinionpoll/updateopinionpoll/:id"><Updateopinionpoll /></Route>
                 <Route exact path="/admindashboard/thoughtoftheday"><Thoughtoftheday /></Route>
                 <Route index path="/admindashboard/thoughtoftheday/createthought"><Createthought /></Route>
                 <Route index path="/admindashboard/thoughtoftheday/updatethought/:id"><Updatethought /></Route>
@@ -115,7 +121,7 @@ function App() {
                 <Route exact path="/admindashboard/noticeboard"><Noticeboard /></Route>
                 <Route index path="/admindashboard/noticeboard/createnotice"><Createnotice /></Route>
                 <Route index path="/admindashboard/noticeboard/updatenotice/:id"><Updatenotice /></Route>
-                <Route exact path="/admindashboard/employeemaster"><EmployeeMaster /></Route>
+
 
               </Switch>
             </LocalizationProvider>

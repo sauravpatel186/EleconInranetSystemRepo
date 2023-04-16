@@ -108,7 +108,7 @@ export const CreateCeomessage = () => {
                         toast("Stored Successfully");
                         // console.log(JSON.stringify(achievement));
                         // submitData(achievement);
-                        navigate.push("/ceomessage");
+                        navigate.push("/admindashboard/ceomessage");
                     }}
                 >
                     {({ values, handleChange, handleBlur, errors, handleSubmit, touched, setFieldValue, setFieldError }) => (

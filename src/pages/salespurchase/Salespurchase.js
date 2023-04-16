@@ -18,8 +18,8 @@ import {
   TableRow,
   TablePagination,
 } from "@mui/material";
-import CreateAnnouncement from "./createannouncement/CreateAnnouncement";
-import "./Announcement.css";
+import Createsalespurchase from "./createsalespurchase/Createsalespurchase";
+import "./Salespurchase.css";
 import { Announcement, Edit } from "@mui/icons-material";
 import { Delete, ModeEdit } from "@mui/icons-material";
 import { Link as LinkRoute } from "react-router-dom";
@@ -47,43 +47,20 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-const Announcements = () => {
-  // const { path, url } = useRouteMatch();
-  // const [eventdata, seteventdata] = useState([]);
-  // const getLocalItem = () => {
-  //   let data = JSON.parse(localStorage.getItem("data"));
-  //   console.log(data[0]["id"]);
-
-  //   console.log(url);
-  //   if (data) {
-  //     seteventdata(JSON.parse(localStorage.getItem("data")));
-  //   }
-  //   else {
-  //     return [];
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   try {
-  //     getLocalItem();
-  //   }
-  //   catch (error) {
-  //     console.error(error);
-  //   }
-  // }, [])
+const Salespurchase = () => {
   const navigate = useHistory();
   let { path, url } = useRouteMatch();
-  const [announcementdata, setannouncementdata] = useState([]);
+  const [salespurchasedata, setsalespurchasedata] = useState([]);
   const [counts, setcounts] = useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const getLocalItem = async() => {
-    let data = await JSON.parse(localStorage.getItem("announcement"));
+    let data = await JSON.parse(localStorage.getItem("salespurchase"));
     
     if (data) {
-      let adata=data.filter(announcement=>announcement.isDeleted==false)
-      setannouncementdata( adata);
+      let adata=data.filter(ad=>ad.isDeleted==false)
+      setsalespurchasedata( adata);
     } else {
       return [];
     }
@@ -113,21 +90,21 @@ const Announcements = () => {
   }
   const handleDelete = (e) => {
     console.log(e);
-    const index = announcementdata.indexOf(announcementdata.find((a => a.id == e )));
+    const index = salespurchasedata.indexOf(salespurchasedata.find((a => a.id == e )));
     console.log(index)
-    announcementdata[index].isDeleted = true
-    setannouncementdata(announcementdata);
-    console.log(announcementdata)
-    navigate.push("/admindashboard/announcement")
-    localStorage.setItem("announcement",JSON.stringify(announcementdata))
+    salespurchasedata[index].isDeleted = true
+    setsalespurchasedata(salespurchasedata);
+    console.log(salespurchasedata)
+    navigate.push("/admindashboard/salespurchase")
+    localStorage.setItem("salespurchase",JSON.stringify(salespurchasedata))
   }
-  console.log(announcementdata);
+  console.log(salespurchasedata);
   // const countitems =announcementdata.filter(e => e.isDeleted ==='false').length;
   // console.log("Not deleted: " + countitems);
   return (
     <div className="page-information-container">
       <div className="page-header">
-        <label>Announcement</label>
+        <label>Sales/Purchase</label>
       </div>
       <div className='page-breadscrumb'>
             <br/>
@@ -136,26 +113,26 @@ const Announcements = () => {
                   Home
                 </Link>
                 <Link
-                  underline="hover" color="inherit" href="/admindashboard/announcement" exact to="/admindashboard/announcement">
-                  Announcement
+                  underline="hover" color="inherit" href="/admindashboard/salespurchase" exact to="/admindashboard/salespurchase">
+                  Sale/Purchase
                 </Link>
               </Breadcrumbs>
               <br/>
             </div>
       <div className="upcomingevent-container">
         <div className="upcomingevent-container-button">
-          <Route exact path="/admindashboard/announcement/createannouncement">
-            <CreateAnnouncement />
+          <Route exact path="/admindashboard/salespurchase/createsalespurchase">
+            <Createsalespurchase />
           </Route>
-          <NavLink to="/admindashboard/announcement/createannouncement">
+          <NavLink to="/admindashboard/salespurchase/createsalespurchase">
             <Button variant="contained" color="success" size="small">
-              Create Announcement
+              Create Ad
             </Button>
           </NavLink>
-          <Route exact path="/admindashboard/announcement/createannouncement">
-            <CreateAnnouncement />
+          <Route exact path="/admindashboard/salespurchase/createsalespurchase">
+            <Createsalespurchase />
           </Route>
-          <NavLink to="/admindashboard/announcement/createannouncement">
+          <NavLink to="/admindashboard/salespurchase/createsalespurchase">
             <Button variant="contained" color="error" size="small">
               Disable Selected
             </Button>
@@ -175,17 +152,17 @@ const Announcements = () => {
                       name="upcomingeventSelect"
                       sx={{ color:"white" }}></Checkbox>
                   </StyledTableCell>
-                  <StyledTableCell>Event Title</StyledTableCell>
-                  <StyledTableCell>Department</StyledTableCell>
-                  <StyledTableCell>Description</StyledTableCell>
-                  <StyledTableCell>Start Date</StyledTableCell>
-                  <StyledTableCell>End Date</StyledTableCell>
+                  <StyledTableCell>Ad Title</StyledTableCell>
+                  <StyledTableCell>Ad Type</StyledTableCell>
+                  <StyledTableCell>Ad Description</StyledTableCell>
+                  <StyledTableCell>Mobile Number</StyledTableCell>
+                  <StyledTableCell>Image</StyledTableCell>
                   <StyledTableCell>Actions</StyledTableCell>
                 </TableRow>
               </TableHead>
-              { announcementdata.length > 0 &&
+              { salespurchasedata.length > 0 &&
               <TableBody>
-                {announcementdata
+                {salespurchasedata
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((e) => {if(e.isDeleted == false)
                     return (
@@ -197,16 +174,16 @@ const Announcements = () => {
                         <StyledTableCell>
                           <Checkbox size="small" />
                         </StyledTableCell>
-                        <StyledTableCell>{e.announcementTitle}</StyledTableCell>
-                        <StyledTableCell>{e.announcementDepartment}</StyledTableCell>
-                        <StyledTableCell>{e.announcementDescription}</StyledTableCell>
-                        <StyledTableCell>{convert(e.announcementStartDate)}</StyledTableCell>
-                        <StyledTableCell>{convert(e.announcementEndDate)}</StyledTableCell>
+                        <StyledTableCell>{e.salespurchaseTitle}</StyledTableCell>
+                        <StyledTableCell>{e.salespurchaseType}</StyledTableCell>
+                        <StyledTableCell>{e.salespurchaseDescription}</StyledTableCell>
+                        <StyledTableCell>{e.salespurchaseMNumber}</StyledTableCell>
+                        <StyledTableCell><img src={e.salespurchaseImage} height="50rem" width="50rem" style={{}} /></StyledTableCell>
                         <StyledTableCell>
                           <LinkRoute
                             to={{
                               pathname:
-                                "/admindashboard/announcement/updateannouncement/:id",
+                                "/admindashboard/salespurchase/updatesalespurchase/:id",
                               state: { idParam: e.id },
                             }}>
                             <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />
@@ -225,7 +202,7 @@ const Announcements = () => {
           <TablePagination
             rowsPerPageOptions={[5]}
             component="div"
-            count={announcementdata.length}
+            count={salespurchasedata.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -237,4 +214,4 @@ const Announcements = () => {
   );
 };
 
-export default Announcements;
+export default Salespurchase;
