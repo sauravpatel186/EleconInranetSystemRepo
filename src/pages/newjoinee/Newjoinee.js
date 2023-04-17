@@ -194,7 +194,7 @@ const Newjoinee = (props) => {
                             <LinkRoute
                               to={{
                                 pathname:
-                                  "/newjoinee/updatenewjoinee/:id",
+                                  "/admindashboard/newjoinee/updatenewjoinee/:id",
                                 state: { idParam: e.id },
                               }}>
                               <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />

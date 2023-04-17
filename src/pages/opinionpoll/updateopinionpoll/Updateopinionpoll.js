@@ -23,11 +23,11 @@ import { Formik } from "formik";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { useHistory } from "react-router-dom";
 export const Updateopinionpoll = () => {
+  const [newannouncement, setnewannouncement] = useState([]);
+  const [AllAnnouncement, setAllAnnouncement] = useState([]);
   const { type } = useParams();
   const idParamVal = useLocation().state.idParam;
-  const [allopinionpoll,setallopinionpoll]=useState([]);
-  const [newopinion, setnewopinion] = useState([]);
-  const [opinionData, setopinionData] = useState({
+  const [announcementData, setannouncementData] = useState({
     opinionTitle: "",
     opinionType: "",
     opinionStartDate: "",
@@ -35,7 +35,7 @@ export const Updateopinionpoll = () => {
     opinionDescription: "",
   });
   const updateState = (e) => {
-    setopinionData((existingValue) => ({
+    setannouncementData((existingValue) => ({
       ...existingValue,
       opinionType: e[0]["opinionType"],
       opinionTitle: e[0]["opinionTitle"],
@@ -43,22 +43,22 @@ export const Updateopinionpoll = () => {
       opinionEndDate: e[0]["opinionEndDate"].slice(0, 10),
       opinionStartDate: e[0]["opinionStartDate"].slice(0, 10),
     }));
-    // console.log(opinionData);
-    // console.log(JSON.parse(localStorage.getItem("opinionpoll")));
+    //console.log(announcementData);
+    //console.log(JSON.parse(localStorage.getItem("announcement")));
   };
-  const getopinionData = (id) => {
+  const getannouncementData = (id) => {
     let data = JSON.parse(localStorage.getItem("opinionpoll"));
     if (data) {
-      let edata = data.filter((opinions) => opinions.id === id);
+      let edata = data.filter((announcements) => announcements.id === id);
       updateState(edata);
-      setnewopinion(data);
+      setnewannouncement(data);
     } else {
       return [];
     }
   };
   useEffect(() => {
     try {
-      getopinionData(idParamVal);
+      getannouncementData(idParamVal);
     } catch (error) {
       console.log(error);
     }
@@ -74,38 +74,31 @@ export const Updateopinionpoll = () => {
   });
   //Handles The Event when data is changed
   const UpdateData = (id, updatedData) => {
-
-    // console.log(id)
-    // console.log("Inside Update Data")
-    const datawithId = newopinion.find(e => e.id === id); //finds the element with id
-    // console.log(datawithId)
-    if (datawithId.id === updatedData.id) {
+    const datawithId = newannouncement.find(e => e.id == id); // finds the element with id 
+    if (datawithId["id"] === updatedData.id) {
         // let temp = JSON.parse(localStorage.getItem("achievement"));
-        let tempdata = newopinion.indexOf(datawithId);
-        console.log(tempdata)
-        let tempAllData = [...newopinion]
-        tempAllData[tempdata] = updatedData
-
-        console.log(tempAllData)
-        setallopinionpoll([...tempAllData])
-        console.log(allopinionpoll);
-        localStorage.setItem("announcement", JSON.stringify(allopinionpoll));
-        navigate.push("/admindashboard/opinionpoll");
+        let tempdata = newannouncement.indexOf(newannouncement.find(announcement => announcement.id == id));
+        newannouncement[tempdata] = updatedData
+        setAllAnnouncement([...newannouncement])
+        console.log(AllAnnouncement);
+        // localStorage.setItem("announcement", JSON.stringify(AllAnnouncement));
+        // navigate.push("/admindashboard/announcement");
     }
+    
+}
+useEffect(()=>{
+  if(AllAnnouncement.length>0){
+    localStorage.setItem("opinionpoll", JSON.stringify(AllAnnouncement));
+    navigate.push("/admindashboard/opinionpoll");
   }
-    // useEffect(()=>{
-    //   if(allopinionpoll.length > 0){
-    //     localStorage.setItem("opinionpoll", JSON.stringify(allopinionpoll));
-    //     navigate.push("/admindashboard/opinionpoll");
-    //   }
-    // },[allopinionpoll])
+},[AllAnnouncement])
   return (
     <div className="page-information-container">
       <header className="page-header">
         <label>Opinion Poll</label>
       </header>
-      <div className="createevent-container">
-        <div className="createevent-header">
+      <div className="createupcomingevent-container">
+        <div className="createupcomingevent-header">
           <Typography className="header-font" variant="body" gutterBottom>
             Update Opinion Poll
           </Typography>
@@ -114,11 +107,11 @@ export const Updateopinionpoll = () => {
           <Divider sx={{ borderBottomWidth: 2 }} />
         </div>
         <Formik
-          initialValues={opinionData}
+          initialValues={announcementData}
           validationSchema={ValidationSchema}
           enableReinitialize
           onSubmit={(data) => {
-            let opinionpoll = {
+            let poll = {
               id: idParamVal,
               opinionType: data.opinionType,
               opinionTitle: data.opinionTitle,
@@ -128,12 +121,7 @@ export const Updateopinionpoll = () => {
               time: Math.floor(Date.now() / 1000),
               isDeleted: false,
             }
-            UpdateData(idParamVal,opinionpoll);
-            // eventData.push(event);
-            // seteventData([...eventData]);
-            // localStorage.setItem("event",JSON.stringify(eventData));
-            // toast("Stored Successfully");
-            // navigate.push("/upcomingevent");
+            UpdateData(idParamVal, poll);
           }}>
           {({
             values,
@@ -147,7 +135,7 @@ export const Updateopinionpoll = () => {
           }) => (
             <form onSubmit={handleSubmit}>
               <div className="createeventform">
-                <div className="formrow">
+              <div className="formrow">
                   <div className="createeventforminput">
                     <TextField
                       label="Opinion Title"
@@ -264,6 +252,7 @@ export const Updateopinionpoll = () => {
             </form>
           )}
         </Formik>
+        {/* {console.log(announcementData.announcementDepartment)} */}
       </div>
     </div>
   );

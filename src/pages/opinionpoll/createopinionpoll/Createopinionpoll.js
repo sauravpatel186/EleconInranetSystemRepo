@@ -35,28 +35,6 @@ const Createopinionpoll = () => {
     ),
     opinionType: Yup.string().required("Opinion Type is required"),
   });
-  // const onSelectFile = (e, setFieldValue, setFieldError) => {
-  //     const files = e.target.files;
-  //     if (files?.length) {
-  //         const fileSelected = e.target.files[0];
-  //         const fileNameArray = fileSelected.name.split(".");
-  //         const extension = fileNameArray.pop();
-  //         if (["png", "jpg", "jpeg"].includes(extension?.toLowerCase())) {
-  //             const reader = new FileReader();
-  //             reader.readAsDataURL(fileSelected);
-  //             reader.onload = function () {
-  //                 setFieldValue("eventImage", reader.result);
-  //             };
-  //             reader.onerror = function (error) {
-  //                 throw error;
-  //             };
-  //         } else {
-  //             toast.error("only jpg,jpeg and png files are allowed");
-  //         }
-  //     } else {
-  //         setFieldValue("eventImage", "");
-  //     }
-  // };
   useEffect(() => {
     let data = localStorage.getItem("opinionpoll");
     if (data) {

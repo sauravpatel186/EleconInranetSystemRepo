@@ -1,84 +1,94 @@
 // import logo from './logo.svg';
-import './App.css';
-import React from 'react';
-import { useEffect } from 'react';
-import { Topbar } from './components/topbar/Topbar';
-import { Sidebar } from './components/sidebar/Sidebar';
-import { Route, BrowserRouter, Switch, Router, useHistory } from 'react-router-dom';
-import { Dashboard } from './pages/dashboard/Dashboard';
-import { Ceomessage } from './pages/ceomessage/Ceomessage';
+import "./App.css";
+import React from "react";
+import { useEffect } from "react";
+import { Topbar } from "./components/topbar/Topbar";
+import { Sidebar } from "./components/sidebar/Sidebar";
+import {
+  Route,
+  BrowserRouter,
+  Switch,
+  Router,
+  useHistory,
+} from "react-router-dom";
+import { Dashboard } from "./pages/dashboard/Dashboard";
+import { Ceomessage } from "./pages/ceomessage/Ceomessage";
 import Upcomingevent from "./pages/upcomingevent/Upcomingevent";
-import Createupcomingevent from './pages/upcomingevent/createupcomingevent/Createupcomingevent';
-import { LocalizationProvider } from '@mui/x-date-pickers';
+import Createupcomingevent from "./pages/upcomingevent/createupcomingevent/Createupcomingevent";
+import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { Achievement } from './pages/achievement/Achievement';
-import { CreateAchievement } from './pages/achievement/createachievement/CreateAchievement';
-import Createopinionpoll from './pages/opinionpoll/createopinionpoll/Createopinionpoll';
-import Opinionpoll from './pages/opinionpoll/Opinionpoll';
-import { UpdateAchievement } from './pages/achievement/updateachievement/UpdateAchievement';
-import { Updateupcomingevent } from './pages/upcomingevent/updateupcomingevent/Updateupcomingevent';
-import { Updateopinionpoll } from './pages/opinionpoll/updateopinionpoll/Updateopinionpoll';
-import { IntranetDashboard } from './pages/intranetdashboard/IntranetDashboard';
-import { Admin } from './pages/Admin/Admin';
-import { useState } from 'react';
-import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
-import Thoughtoftheday from './pages/thoughtoftheday/Thoughtoftheday';
-import CreateAnnouncement from './pages/announcement/createannouncement/CreateAnnouncement'
-import Announcements from './pages/announcement/Announcements'
-import { Updateannouncement } from './pages/announcement/updateannouncement/Updateannouncement';
+import { Achievement } from "./pages/achievement/Achievement";
+import { CreateAchievement } from "./pages/achievement/createachievement/CreateAchievement";
+import Createopinionpoll from "./pages/opinionpoll/createopinionpoll/Createopinionpoll";
+import Opinionpoll from "./pages/opinionpoll/Opinionpoll";
+import { UpdateAchievement } from "./pages/achievement/updateachievement/UpdateAchievement";
+import { Updateupcomingevent } from "./pages/upcomingevent/updateupcomingevent/Updateupcomingevent";
+import { Updateopinionpoll } from "./pages/opinionpoll/updateopinionpoll/Updateopinionpoll";
+import { IntranetDashboard } from "./pages/intranetdashboard/IntranetDashboard";
+import { Admin } from "./pages/Admin/Admin";
+import { useState } from "react";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import Thoughtoftheday from "./pages/thoughtoftheday/Thoughtoftheday";
+import CreateAnnouncement from "./pages/announcement/createannouncement/CreateAnnouncement";
+import Announcements from "./pages/announcement/Announcements";
+import { Updateannouncement } from "./pages/announcement/updateannouncement/Updateannouncement";
 import Managementdesk from "./pages/managementdesk/Managementdesk";
-import Createmanagementdesk from './pages/managementdesk/createmanagementdesk/Createmanagementdesk';
-import Updatemanagementdesk from './pages/managementdesk/updatemanagementdesk/Updatemanagementdesk';
-import CreateCeomessage from './pages/ceomessage/createceomessage/CreateCeomessage';
-import UpdateCeomessage from './pages/ceomessage/updateceomessage/UpdateCeomessage';
-import Createthought from './pages/thoughtoftheday/createthought/Createthought';
-import Updatethought from './pages/thoughtoftheday/updatethought/Updatethought';
-import Policies from './pages/policies/Policies';
-import CreatePolicies from './pages/policies/createpolicies/CreatePolicies';
-import UpdatePolicies from './pages/policies/updatepolicies/UpdatePolicies';
-import Canteenmenu from './pages/canteenmenu/Canteenmenu';
-import Createcanteenmenu from './pages/canteenmenu/createcanteenmenu/Createcanteenmenu';
-import Updatecanteenmenu from './pages/canteenmenu/updatecanteenmenu/Updatecanteenmenu'
-import Salespurchase from './pages/salespurchase/Salespurchase';
-import Createsalespurchase from './pages/salespurchase/createsalespurchase/Createsalespurchase';
-import Noticeboard from './pages/noticeboard/Noticeboard';
-import Createnotice from './pages/noticeboard/createnotice/Createnotice';
-import Updatenotice from './pages/noticeboard/updatenotice/Updatenotice';
-import Newjoinee from './pages/newjoinee/Newjoinee';
-import Createnewjoinee from './pages/newjoinee/createnewjoinee/Createnewjoinee';
-import updatenewjoinee, { Updatenewjoinee } from './pages/newjoinee/updatenewjoinee/Updatenewjoinee';
-import { EmployeeMaster } from './pages/employeemaster/EmployeeMaster';
-import { Login } from './pages/login/Login';
+import Createmanagementdesk from "./pages/managementdesk/createmanagementdesk/Createmanagementdesk";
+import Updatemanagementdesk from "./pages/managementdesk/updatemanagementdesk/Updatemanagementdesk";
+import CreateCeomessage from "./pages/ceomessage/createceomessage/CreateCeomessage";
+import UpdateCeomessage from "./pages/ceomessage/updateceomessage/UpdateCeomessage";
+import Createthought from "./pages/thoughtoftheday/createthought/Createthought";
+import Updatethought from "./pages/thoughtoftheday/updatethought/Updatethought";
+import Policies from "./pages/policies/Policies";
+import CreatePolicies from "./pages/policies/createpolicies/CreatePolicies";
+import UpdatePolicies from "./pages/policies/updatepolicies/UpdatePolicies";
+import Canteenmenu from "./pages/canteenmenu/Canteenmenu";
+import Createcanteenmenu from "./pages/canteenmenu/createcanteenmenu/Createcanteenmenu";
+import Updatecanteenmenu from "./pages/canteenmenu/updatecanteenmenu/Updatecanteenmenu";
+import Salespurchase from "./pages/salespurchase/Salespurchase";
+import Createsalespurchase from "./pages/salespurchase/createsalespurchase/Createsalespurchase";
+import Noticeboard from "./pages/noticeboard/Noticeboard";
+import Createnotice from "./pages/noticeboard/createnotice/Createnotice";
+import Updatenotice from "./pages/noticeboard/updatenotice/Updatenotice";
+import Newjoinee from "./pages/newjoinee/Newjoinee";
+import Createnewjoinee from "./pages/newjoinee/createnewjoinee/Createnewjoinee";
+import updatenewjoinee, {
+  Updatenewjoinee,
+} from "./pages/newjoinee/updatenewjoinee/Updatenewjoinee";
+import { EmployeeMaster } from "./pages/employeemaster/EmployeeMaster";
+import { Login } from "./pages/login/Login";
+import { Employeetopbar } from "./components/employeetopbar/Employeetopbar";
+import { Employeesidebar } from "./components/employeesidebar/Employeesidebar";
+import Employeesalespurchase from "./pages/employeesalespurchase/Employeesalespurchase";
+import { Updatesalespurchase } from "./pages/salespurchase/updatesalespurchase/Updatesalespurchase";
 
 function App() {
   const USER_TYPES = {
     PUBILIC: "Public User",
     NORMAL_USER: "Normal User",
-    ADMIN_USER: "Admin User"
-  }
+    ADMIN_USER: "Admin User",
+  };
   const [isIntranetDashboardOpen, setisIntranetDashboardOpen] = useState(false);
   const history = useHistory();
   console.log(history.goBack(-1));
   useEffect(() => {
-    let adminDashboardChecker = localStorage.getItem("isAdminDashboard")
+    let adminDashboardChecker = localStorage.getItem("isAdminDashboard");
     if (adminDashboardChecker === "true") {
-      setisIntranetDashboardOpen(true)
+      setisIntranetDashboardOpen(true);
     }
-  })
+  });
 
   const AdminHandler = () => {
-    setisIntranetDashboardOpen(true)
-    localStorage.setItem("isAdminDashboard", "true")
-  }
-
+    setisIntranetDashboardOpen(true);
+    localStorage.setItem("isAdminDashboard", "true");
+  };
 
   const AdminCloseHandler = () => {
-    setisIntranetDashboardOpen(false)
-    localStorage.setItem("isAdminDashboard", "false")
-  }
+    setisIntranetDashboardOpen(false);
+    localStorage.setItem("isAdminDashboard", "false");
+  };
 
   return (
-
     <>
       {!isIntranetDashboardOpen &&
         <Switch>
@@ -123,6 +133,12 @@ function App() {
                 <Route index path="/admindashboard/noticeboard/updatenotice/:id"><Updatenotice/></Route>
                 <Route exact path="/admindashboard/newjoinee"><Newjoinee/></Route>
                 <Route exact path="/admindashboard/newjoinee/createnewjoinee"><Createnewjoinee/></Route>
+                <Route exact path="/admindashboard/newjoinee/updatenewjoinee/:id"><Updatenewjoinee/></Route>
+                <Route exact path="/admindashboard/salespurchase/createsalespurchase"><Createsalespurchase/></Route>
+                <Route exact path="/admindashboard/salespurchase"><Salespurchase/></Route>
+                <Route exact path="/admindashboard/salespurchase/updatesalespurchase/:id"><Updatesalespurchase/></Route>
+                <Route exact path="/admindashboard/canteenmenu/createcanteenmenu"><Createcanteenmenu/></Route>
+                <Route exact path="/admindashboard/canteenmenu/updatecanteenmenu/:id"><Updatecanteenmenu/></Route>
               </Switch>
             </LocalizationProvider>
           </div>
@@ -130,6 +146,35 @@ function App() {
       </div>
       }
     </>
+
+    // <>
+    //   {!isIntranetDashboardOpen && (
+    //     <Switch>
+    //       {/* <Route exact path="/"><Login /></Route> */}
+    //       <Route exact path="/">
+    //         <IntranetDashboard open={AdminHandler} />
+    //       </Route>
+    //       <Redirect to="/"></Redirect>
+    //     </Switch>
+    //   )}
+    //   {isIntranetDashboardOpen && (
+    //     <div className="main-container">
+    //       <Employeesidebar />
+    //       <div className="container">
+    //         <Employeetopbar close={AdminCloseHandler} />
+    //         <div className="page-container">
+    //           <LocalizationProvider dateAdapter={AdapterDayjs}>
+    //             <Switch>
+    //               <Route exact path="/employeedashboard/employeesalespurchase"><Employeesalespurchase/></Route>
+    //               <Route exact path="/employeedashboard/createemployeesalespurchase"><Createemployeesalespurchase/></Route>
+    //               <Route exact path="/employeedashboard/employeesalespurchase/updateemployeesalespurchase/:id"><Updateemployeesalespurchase/></Route>
+    //             </Switch>
+    //           </LocalizationProvider>
+    //         </div>
+    //       </div>
+    //     </div>
+    //   )}
+    // </>
   );
 }
 export default App;

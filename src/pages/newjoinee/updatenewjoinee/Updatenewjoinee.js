@@ -153,6 +153,7 @@ return (
                                               label="First Name"
                                               name="njFirstName"
                                               type="njFirstName"
+                                              value={values.njFirstName}
                                               onChange={handleChange}
                                               onBlur={handleBlur}
                                               variant="outlined"

@@ -100,8 +100,8 @@ useEffect(()=>{
       <header className="page-header">
         <label>Announcement</label>
       </header>
-      <div className="createevent-container">
-        <div className="createevent-header">
+      <div className="createupcomingevent-container">
+        <div className="createupcomingevent-header">
           <Typography className="header-font" variant="body" gutterBottom>
             Update Announcement
           </Typography>
@@ -253,7 +253,7 @@ useEffect(()=>{
             </form>
           )}
         </Formik>
-        {console.log(announcementData.announcementDepartment)}
+        {/* {console.log(announcementData.announcementDepartment)} */}
       </div>
     </div>
   );

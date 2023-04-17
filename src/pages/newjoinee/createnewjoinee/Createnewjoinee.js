@@ -142,7 +142,7 @@ const Createnewjoinee = () => {
                           console.log(newjoinee);
                           localStorage.setItem("nj",JSON.stringify(newjoinee));
                           toast("Stored Successfully");
-                          navigate.push("/admindashbiard/newjoinee");
+                          navigate.push("/admindashboard/newjoinee");
                       }}
                   >
                       {({ values, handleChange, handleBlur, errors, handleSubmit, touched, setFieldValue, setFieldError }) => (
