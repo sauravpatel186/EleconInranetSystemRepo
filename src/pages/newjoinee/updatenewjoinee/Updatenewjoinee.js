@@ -22,7 +22,7 @@ import { ValidationErrorMessage } from "../../../components/ValidationErrorMessa
 import { Formik } from "formik";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { useHistory } from "react-router-dom";
-export const updatenewjoinee = () => {
+export const Updatenewjoinee = () => {
     const { type } = useParams();
     const idParamVal = useLocation().state.idParam;
     const [njData, setnjData] = useState({

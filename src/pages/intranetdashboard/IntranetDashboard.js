@@ -7,7 +7,7 @@ import tree from "../../assets/images/icons8-resort-64.png"
 import cricket from "../../assets/images/cricket-image.png"
 import tennis from "../../assets/images/tennis-img.png"
 import { Link, NavLink } from "react-router-dom"
-//  import { Achievementcard } from "../../components/cards/achievementcard"
+import { Achievementcard } from "../../components/cards/achievementcard"
 import {EventCard} from "../../components/cards/EventCard/EventCard"
 export const IntranetDashboard = (props) => {
     const [anchorEl, setAnchorEl] = React.useState(null);

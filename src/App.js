@@ -114,15 +114,15 @@ function App() {
                 <Route exact path="/admindashboard/managementdesk"><Managementdesk /></Route>
                 <Route index path="/admindashboard/managementdesk/createmanagementdesk"><Createmanagementdesk /></Route>
                 <Route index path="/admindashboard/managementdesk/updatemanagementdesk/:id"><Updatemanagementdesk /></Route>
-
+                <Route exact path="/admindashboard/canteenmenu"><Canteenmenu /></Route>
                 <Route exact path="/admindashboard/announcement"><Announcements /></Route>
                 <Route exact path="/admindashboard/announcement/createannouncement"><CreateAnnouncement /></Route>
                 <Route exact path="/admindashboard/announcement/updateannouncement/:id"><Updateannouncement /></Route>
                 <Route exact path="/admindashboard/noticeboard"><Noticeboard /></Route>
                 <Route index path="/admindashboard/noticeboard/createnotice"><Createnotice /></Route>
-                <Route index path="/admindashboard/noticeboard/updatenotice/:id"><Updatenotice /></Route>
-
-
+                <Route index path="/admindashboard/noticeboard/updatenotice/:id"><Updatenotice/></Route>
+                <Route exact path="/admindashboard/newjoinee"><Newjoinee/></Route>
+                <Route exact path="/admindashboard/newjoinee/createnewjoinee"><Createnewjoinee/></Route>
               </Switch>
             </LocalizationProvider>
           </div>

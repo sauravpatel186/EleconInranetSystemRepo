@@ -117,18 +117,18 @@ const Newjoinee = (props) => {
               </div>
         <div className="newjoinee-container">
           <div className="newjoinee-container-button">
-            <Route exact path="/newjoinee/createnewjoinee">
+            {/* <Route exact path="admindashboard/newjoinee/createnewjoinee">
               <Createnewjoinee />
-            </Route>
-            <NavLink to="/newjoinee/createnewjoinee">
+            </Route> */}
+            <NavLink to="/admindashboard/newjoinee/createnewjoinee">
               <Button variant="contained" color="success" size="small">
                 Create New Joinee
               </Button>
             </NavLink>
-            <Route exact path="/newjoinee/createnewjoinee">
+            {/* <Route exact path="admindashboard/newjoinee/createnewjoinee">
               <Createnewjoinee />
-            </Route>
-            <NavLink to="/newjoinee/createnewjoinee">
+            </Route> */}
+            <NavLink to="/admindashboard/newjoinee/createnewjoinee">
               <Button variant="contained" color="error" size="small">
                 Disable Selected
               </Button>
