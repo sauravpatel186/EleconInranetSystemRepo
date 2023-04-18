@@ -23,11 +23,11 @@ import { Formik } from "formik";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { useHistory } from "react-router-dom";
 export const Updateupcomingevent = () => {
+  const [newannouncement, setnewannouncement] = useState([]);
+  const [AllAnnouncement, setAllAnnouncement] = useState([]);
   const { type } = useParams();
   const idParamVal = useLocation().state.idParam;
-  const [newevent, setnewevent] = useState([]);
-  const [AllUpcomingEvent, setAllUpcomingEvent] = useState([]);
-  const [eventData, seteventData] = useState({
+  const [announcementData, setannouncementData] = useState({
     eventTitle: "",
     eventVenue: "",
     eventOrganizerName: "",
@@ -38,9 +38,8 @@ export const Updateupcomingevent = () => {
     eventImage: "",
     eventRSVP: "",
   });
-  
   const updateState = (e) => {
-    seteventData((existingValue) => ({
+    setannouncementData((existingValue) => ({
       ...existingValue,
       eventVenue: e[0]["eventVenue"],
       eventTitle: e[0]["eventTitle"],
@@ -52,21 +51,22 @@ export const Updateupcomingevent = () => {
       eventImage: e[0]["eventImage"],
       eventStartDate: e[0]["eventStartDate"],
     }));
-    // console.log(eventData);
-    // console.log(JSON.parse(localStorage.getItem("event")));
+    //console.log(announcementData);
+    //console.log(JSON.parse(localStorage.getItem("announcement")));
   };
-  const geteventData = (id) => {
+  const getannouncementData = (id) => {
     let data = JSON.parse(localStorage.getItem("event"));
     if (data) {
-      let edata = data.filter((events) => events.id === id);
+      let edata = data.filter((announcements) => announcements.id === id);
       updateState(edata);
+      setnewannouncement(data);
     } else {
       return [];
     }
   };
   useEffect(() => {
     try {
-      geteventData(idParamVal);
+      getannouncementData(idParamVal);
     } catch (error) {
       console.log(error);
     }
@@ -84,72 +84,70 @@ export const Updateupcomingevent = () => {
     eventEndDate: Yup.string().required("End Date is required"),
     eventDescription: Yup.string().required("Event Description is required"),
     eventImage: Yup.string().required("Image is required"),
+    
   });
-
   //Handles The Event when data is changed
   const UpdateData = (id, updatedData) => {
-    const datawithId = newevent.find(e => e.id == id); // finds the element with id 
-    
+    const datawithId = newannouncement.find(e => e.id == id); // finds the element with id 
     if (datawithId["id"] === updatedData.id) {
-        let temp = JSON.parse(localStorage.getItem("event"));
-        let tempdata = newevent.indexOf(newevent.find(events => events.id == id));
-        temp[tempdata] = updatedData
-        setAllUpcomingEvent([...temp])
-        console.log(AllUpcomingEvent);
+        // let temp = JSON.parse(localStorage.getItem("achievement"));
+        let tempdata = newannouncement.indexOf(newannouncement.find(announcement => announcement.id == id));
+        newannouncement[tempdata] = updatedData
+        setAllAnnouncement([...newannouncement])
+        console.log(AllAnnouncement);
         // localStorage.setItem("announcement", JSON.stringify(AllAnnouncement));
         // navigate.push("/admindashboard/announcement");
     }
     
 }
 useEffect(()=>{
-  if(AllUpcomingEvent.length>0){
-    localStorage.setItem("event", JSON.stringify(AllUpcomingEvent));
+  if(AllAnnouncement.length>0){
+    localStorage.setItem("event", JSON.stringify(AllAnnouncement));
     navigate.push("/admindashboard/upcomingevent");
   }
-},[AllUpcomingEvent])
-  const onSelectFile = (e, setFieldValue, setFieldError) => {
-    const files = e.target.files;
-    if (files?.length) {
-      const fileSelected = e.target.files[0];
-      const fileNameArray = fileSelected.name.split(".");
-      const extension = fileNameArray.pop();
-      if (["png", "jpg", "jpeg"].includes(extension?.toLowerCase())) {
-        const reader = new FileReader();
-        reader.readAsDataURL(fileSelected);
-        reader.onload = function () {
-          setFieldValue("eventImage", reader.result);
-        };
-        reader.onerror = function (error) {
-          throw error;
-        };
-      } else {
-        toast.error("only jpg,jpeg and png files are allowed");
-      }
+},[AllAnnouncement])
+const onSelectFile = (e, setFieldValue, setFieldError) => {
+  const files = e.target.files;
+  if (files?.length) {
+    const fileSelected = e.target.files[0];
+    const fileNameArray = fileSelected.name.split(".");
+    const extension = fileNameArray.pop();
+    if (["png", "jpg", "jpeg"].includes(extension?.toLowerCase())) {
+      const reader = new FileReader();
+      reader.readAsDataURL(fileSelected);
+      reader.onload = function () {
+        setFieldValue("eventImage", reader.result);
+      };
+      reader.onerror = function (error) {
+        throw error;
+      };
     } else {
-      setFieldValue("eventImage", "");
+      toast.error("only jpg,jpeg and png files are allowed");
     }
-  };
-
+  } else {
+    setFieldValue("eventImage", "");
+  }
+};
   return (
     <div className="page-information-container">
       <header className="page-header">
         <label>Upcoming Event</label>
       </header>
-      <div className="createevent-container">
-        <div className="createevent-header">
+      <div className="createupcomingevent-container">
+        <div className="createupcomingevent-header">
           <Typography className="header-font" variant="body" gutterBottom>
-            Update Event
+            Update Upcoming Event
           </Typography>
         </div>
         <div className="form-line">
           <Divider sx={{ borderBottomWidth: 2 }} />
         </div>
         <Formik
-          initialValues={eventData}
+          initialValues={announcementData}
           validationSchema={ValidationSchema}
           enableReinitialize
           onSubmit={(data) => {
-            let event = {
+            let upcomingevent = {
               id: idParamVal,
               eventVenue: data.eventVenue,
               eventTitle: data.eventTitle,
@@ -163,13 +161,7 @@ useEffect(()=>{
               time: Math.floor(Date.now() / 1000),
               isDeleted: false,
             }
-
-            UpdateData(idParamVal,event);
-            // eventData.push(event);
-            // seteventData([...eventData]);
-            // localStorage.setItem("event",JSON.stringify(eventData));
-            // toast("Stored Successfully");
-            // navigate.push("/upcomingevent");
+            UpdateData(idParamVal, upcomingevent);
           }}>
           {({
             values,
@@ -183,7 +175,7 @@ useEffect(()=>{
           }) => (
             <form onSubmit={handleSubmit}>
               <div className="createeventform">
-                <div className="formrow">
+              <div className="formrow">
                   <div className="createeventforminput">
                     <TextField
                       label="Event Title"
@@ -265,7 +257,7 @@ useEffect(()=>{
                       components={["DatePicker", "DatePicker"]}>
                       <DatePicker
                         label="Start Date"
-                        value={dayjs(values.eventStartDate)}
+                        value={dayjs(parseISO(values.eventStartDate))}
                         format="DD-MM-YYYY"
                         sx={{ width: 100 + "%" }}
                         onChange={(newValue) =>
@@ -283,7 +275,7 @@ useEffect(()=>{
                     <DemoContainer required components={["DatePicker"]}>
                       <DatePicker
                         label="End Date"
-                        value={dayjs(values.eventEndDate)}
+                        value={dayjs(parseISO(values.eventEndDate))}
                         format="DD-MM-YYYY"
                         sx={{ width: 100 + "%" }}
                         onChange={(newValue) =>
@@ -307,7 +299,7 @@ useEffect(()=>{
                         id="demo-simple-select-autowidth-label"
                         name="eventRSVP"
                         type="eventRSVP"
-                        label="eventRSVP"
+                        label="RSVP"
                         onChange={handleChange}
                         value={values.eventRSVP}>
                         <MenuItem value={"YES"}>YES</MenuItem>
@@ -411,6 +403,7 @@ useEffect(()=>{
             </form>
           )}
         </Formik>
+        {/* {console.log(announcementData.announcementDepartment)} */}
       </div>
     </div>
   );

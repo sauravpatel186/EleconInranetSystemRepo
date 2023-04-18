@@ -117,10 +117,8 @@ const Newjoinee = (props) => {
               </div>
         <div className="newjoinee-page-container">
           <div className="newjoinee-container-button">
-            {/* <Route exact path="admindashboard/newjoinee/createnewjoinee">
-              <Createnewjoinee />
-            </Route> */}
-            <NavLink to="/admindashboard/newjoinee/createnewjoinee">
+            
+            <NavLink to="/admindashboard/admindashboard/newjoinee/createnewjoinee">
               <Button variant="contained" color="success" size="small">
                 Create New Joinee
               </Button>
@@ -200,12 +198,17 @@ const Newjoinee = (props) => {
                           <StyledTableCell>{e.njRole}</StyledTableCell>
                           
                           <StyledTableCell>
-                                      <LinkRoute to={{
-                                        pathname: "/admindashboard/newjoinee/updatenewjoinee/:id",
-                                        state: { idParam: e.id}
-                                      }} ><ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} /></LinkRoute>
-                                      <Button size='small' id={e.id} key={e.id} onClick={(event) => handleDelete(e.id)} sx={{ verticalAlign: "bottom", minWidth: "auto" }}><Delete sx={{ color: "red" }} /></Button>
-                                    </StyledTableCell>
+                            <LinkRoute
+                              to={{
+                                pathname:
+                                  "/newjoinee/updatenewjoinee/:id",
+                                state: { idParam: e.id },
+                              }}>
+                              <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />
+                            </LinkRoute>
+  
+                            <Button size='small' id={e.id} key={e.id} onClick={(event) => handleDelete(e.id)} sx={{ verticalAlign: "bottom", minWidth: "auto" }}><Delete sx={{ color: "red" }} /></Button>
+                          </StyledTableCell>
                         </StyledTableRow>
                       );
                     })}
