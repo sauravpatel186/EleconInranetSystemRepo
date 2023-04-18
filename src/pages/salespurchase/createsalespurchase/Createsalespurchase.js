@@ -120,6 +120,7 @@ const Createsalespurchase = () => {
               salespurchaseImage: data.salespurchaseImage,
               salespurchaseDescription: data.salespurchaseDescription,
               time: Math.floor(Date.now() / 1000),
+              isApproved: true,
               isDeleted: false,
             };
             newsalespurchase.push(ad);

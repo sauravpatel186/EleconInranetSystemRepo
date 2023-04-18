@@ -171,11 +171,11 @@ return (
                 </NavLink>
             </div>
             <div className='nav-link'>
-                <NavLink className="nav-text" exact to="/videostreaming" >
+                <NavLink className="nav-text" exact to="/admindashboard/approvesalespurchase" >
                     <span><VideoCall/></span>
                     <label 
                         className='nav-font'>
-                        Video Streaming
+                        Approve Sales/Purchase
                         </label>
                 </NavLink>
             </div>

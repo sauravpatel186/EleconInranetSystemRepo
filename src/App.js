@@ -63,6 +63,7 @@ import Employeesalespurchase from "./pages/employeesalespurchase/Employeesalespu
 import { Updatesalespurchase } from "./pages/salespurchase/updatesalespurchase/Updatesalespurchase";
 import UserContext from './context/UserContext';
 import { UserProvider } from './context/UserContext';
+import Approvesalespurchase from "./pages/approvesalespurchase/Approvesalespurchase";
 function App() {
   const USER_TYPES = {
     PUBILIC: "Public User",
@@ -145,8 +146,11 @@ function App() {
                 <Route exact path="/admindashboard/noticeboard"><Noticeboard /></Route>
                 <Route index path="/admindashboard/noticeboard/createnotice"><Createnotice /></Route>
                 <Route index path="/admindashboard/noticeboard/updatenotice/:id"><Updatenotice /></Route>
-
-
+                <Route exact path="/admindashboard/newjoinee"><Newjoinee /></Route>
+                <Route exact path="/admindashboard/salespurchase"><Salespurchase /></Route>
+                <Route exact path="/admindashboard/salespurchase/createsalespurchase"><Createsalespurchase/></Route>
+                <Route exact path="/admindashboard/salespurchase/updatesalespurchase/:id"><Updatesalespurchase/></Route>
+                <Route exact path="/admindashboard/approvesalespurchase"><Approvesalespurchase/></Route>
               </Switch>
             </LocalizationProvider>
           </div>

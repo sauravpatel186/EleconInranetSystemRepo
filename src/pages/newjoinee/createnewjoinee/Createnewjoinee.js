@@ -29,7 +29,7 @@ const showToastMessage = () => {
 };
 
 const Createnewjoinee = () => {
-    require('yup-phone');
+
     const navigate = useHistory();
     const [newjoinee, setNewjoinee] = useState([]);
     const ValidationSchema = Yup.object().shape({

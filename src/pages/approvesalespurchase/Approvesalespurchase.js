@@ -18,9 +18,9 @@ import {
   TableRow,
   TablePagination,
 } from "@mui/material";
-import Createsalespurchase from "./createsalespurchase/Createsalespurchase";
-import "./Salespurchase.css";
-import { Announcement, Edit } from "@mui/icons-material";
+//import Createsalespurchase from "./createsalespurchase/Createsalespurchase";
+import "../salespurchase/Salespurchase.css";
+import { Announcement, Approval, Done, Edit } from "@mui/icons-material";
 import { Delete, ModeEdit } from "@mui/icons-material";
 import { Link as LinkRoute } from "react-router-dom";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -47,7 +47,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-const Salespurchase = () => {
+const Approvesalespurchase = () => {
   const navigate = useHistory();
   let { path, url } = useRouteMatch();
   const [salespurchasedata, setsalespurchasedata] = useState([]);
@@ -98,6 +98,16 @@ const Salespurchase = () => {
     navigate.push("/admindashboard/salespurchase")
     localStorage.setItem("salespurchase",JSON.stringify(salespurchasedata))
   }
+  const handleStatus = (e) => {
+    console.log(e);
+    const index = salespurchasedata.indexOf(salespurchasedata.find((a => a.id == e )));
+    console.log(index)
+    salespurchasedata[index].isApproved = true
+    setsalespurchasedata(salespurchasedata);
+    console.log(salespurchasedata)
+    navigate.push("/admindashboard/approvesalespurchase")
+    localStorage.setItem("salespurchase",JSON.stringify(salespurchasedata))
+  }
   console.log(salespurchasedata);
   // const countitems =announcementdata.filter(e => e.isDeleted ==='false').length;
   // console.log("Not deleted: " + countitems);
@@ -121,7 +131,7 @@ const Salespurchase = () => {
             </div>
       <div className="upcomingevent-container">
         <div className="upcomingevent-container-button">
-          <Route exact path="/admindashboard/salespurchase/createsalespurchase">
+          {/* <Route exact path="/admindashboard/salespurchase/createsalespurchase">
             <Createsalespurchase />
           </Route>
           <NavLink to="/admindashboard/salespurchase/createsalespurchase">
@@ -136,7 +146,7 @@ const Salespurchase = () => {
             <Button variant="contained" color="error" size="small">
               Disable Selected
             </Button>
-          </NavLink>
+          </NavLink> */}
         </div>
         <div className="table-container">
           <TableContainer>
@@ -180,17 +190,10 @@ const Salespurchase = () => {
                         <StyledTableCell>{e.salespurchaseDescription}</StyledTableCell>
                         <StyledTableCell>{e.salespurchaseMNumber}</StyledTableCell>
                         <StyledTableCell><img src={e.salespurchaseImage} height="50rem" width="50rem" style={{}} /></StyledTableCell>
-                        <StyledTableCell>{e.isApproved==false?"Not Approved":"Approved"}</StyledTableCell>
-                        <StyledTableCell>
-                          <LinkRoute
-                            to={{
-                              pathname:
-                                "/admindashboard/salespurchase/updatesalespurchase/:id",
-                              state: { idParam: e.id },
-                            }}>
-                            <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />
-                          </LinkRoute>
-
+                        <StyledTableCell>{!e.isApproved?"Not Approved":"Approved"}</StyledTableCell>
+                        <StyledTableCell>{!e.isApproved &&
+                        <Button size='small' id={e.id} key={e.id} onClick={(event) => handleStatus(e.id)} sx={{ verticalAlign: "bottom", minWidth: "auto" }}><Done sx={{ color: "green" }} /></Button>
+                }
                           <Button size='small' id={e.id} key={e.id} onClick={(event) => handleDelete(e.id)} sx={{ verticalAlign: "bottom", minWidth: "auto" }}><Delete sx={{ color: "red" }} /></Button>
                         </StyledTableCell>
                       </StyledTableRow>
@@ -216,4 +219,4 @@ const Salespurchase = () => {
   );
 };
 
-export default Salespurchase;
+export default Approvesalespurchase;
