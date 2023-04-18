@@ -26,6 +26,13 @@ export const Topbar = (props) => {
     sideMenu[0].style.flexDirection = "column";
   
 }
+const handleLogout = () => {
+  localStorage.removeItem("user");
+  localStorage.removeItem("isLogin");
+  
+  props.setisLoggedIn(false)
+  props.close();
+}
   const visible = createContext();
   return (
     <div className='topbar-container'>
@@ -49,7 +56,7 @@ export const Topbar = (props) => {
           handleClose()
           props.close()
           }}>Back To Intranet</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
         </div>
       <button id='menu-btn' name='hambutton' onClick={openSidebar}>

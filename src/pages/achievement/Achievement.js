@@ -159,7 +159,7 @@ export const Achievement = () => {
                                     <StyledTableCell>
                                       <LinkRoute to={{
                                         pathname: "/admindashboard/achievement/updateachievement/:id",
-                                        state: { idParam: e.id }
+                                        state: { idParam: e.id}
                                       }} ><ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} /></LinkRoute>
                                       <Button size='small' id={e.id} key={e.id} onClick={(event) => handleDelete(e.id)} sx={{ verticalAlign: "bottom", minWidth: "auto" }}><Delete sx={{ color: "red" }} /></Button>
                                     </StyledTableCell>

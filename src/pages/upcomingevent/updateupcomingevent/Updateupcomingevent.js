@@ -89,11 +89,12 @@ export const Updateupcomingevent = () => {
   //Handles The Event when data is changed
   const UpdateData = (id, updatedData) => {
     const datawithId = newevent.find(e => e.id == id); // finds the element with id 
+    
     if (datawithId["id"] === updatedData.id) {
-        // let temp = JSON.parse(localStorage.getItem("achievement"));
+        let temp = JSON.parse(localStorage.getItem("event"));
         let tempdata = newevent.indexOf(newevent.find(events => events.id == id));
-        newevent[tempdata] = updatedData
-        setAllUpcomingEvent([...newevent])
+        temp[tempdata] = updatedData
+        setAllUpcomingEvent([...temp])
         console.log(AllUpcomingEvent);
         // localStorage.setItem("announcement", JSON.stringify(AllAnnouncement));
         // navigate.push("/admindashboard/announcement");
@@ -162,6 +163,7 @@ useEffect(()=>{
               time: Math.floor(Date.now() / 1000),
               isDeleted: false,
             }
+
             UpdateData(idParamVal,event);
             // eventData.push(event);
             // seteventData([...eventData]);
@@ -263,7 +265,7 @@ useEffect(()=>{
                       components={["DatePicker", "DatePicker"]}>
                       <DatePicker
                         label="Start Date"
-                        value={dayjs(parseISO(values.eventStartDate))}
+                        value={dayjs(values.eventStartDate)}
                         format="DD-MM-YYYY"
                         sx={{ width: 100 + "%" }}
                         onChange={(newValue) =>
@@ -281,7 +283,7 @@ useEffect(()=>{
                     <DemoContainer required components={["DatePicker"]}>
                       <DatePicker
                         label="End Date"
-                        value={dayjs(parseISO(values.eventEndDate))}
+                        value={dayjs(values.eventEndDate)}
                         format="DD-MM-YYYY"
                         sx={{ width: 100 + "%" }}
                         onChange={(newValue) =>

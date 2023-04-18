@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useEffect } from 'react';
 import { Topbar } from './components/topbar/Topbar';
 import { Sidebar } from './components/sidebar/Sidebar';
@@ -19,7 +19,7 @@ import { UpdateAchievement } from './pages/achievement/updateachievement/UpdateA
 import { Updateupcomingevent } from './pages/upcomingevent/updateupcomingevent/Updateupcomingevent';
 import { Updateopinionpoll } from './pages/opinionpoll/updateopinionpoll/Updateopinionpoll';
 import { IntranetDashboard } from './pages/intranetdashboard/IntranetDashboard';
-import { Admin } from './pages/Admin/Admin';
+
 import { useState } from 'react';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import Thoughtoftheday from './pages/thoughtoftheday/Thoughtoftheday';
@@ -49,21 +49,31 @@ import Createnewjoinee from './pages/newjoinee/createnewjoinee/Createnewjoinee';
 import updatenewjoinee, { Updatenewjoinee } from './pages/newjoinee/updatenewjoinee/Updatenewjoinee';
 import { EmployeeMaster } from './pages/employeemaster/EmployeeMaster';
 import { Login } from './pages/login/Login';
-
+import UserContext from './context/UserContext';
+import { UserProvider } from './context/UserContext';
 function App() {
   const USER_TYPES = {
     PUBILIC: "Public User",
     NORMAL_USER: "Normal User",
     ADMIN_USER: "Admin User"
   }
+  const [isLoggedIn, setisLoggedIn] = useState(false);
   const [isIntranetDashboardOpen, setisIntranetDashboardOpen] = useState(false);
   const history = useHistory();
-  console.log(history.goBack(-1));
+  // console.log(history.goBack(-1));
   useEffect(() => {
+
     let adminDashboardChecker = localStorage.getItem("isAdminDashboard")
     if (adminDashboardChecker === "true") {
       setisIntranetDashboardOpen(true)
     }
+  let isLogin = localStorage.getItem("isLogin")
+  console.log(isLogin)
+  if(isLogin!=null) {
+    setisLoggedIn(JSON.parse(isLogin));
+  } else {
+    setisLoggedIn(false);
+  }
   })
 
   const AdminHandler = () => {
@@ -74,23 +84,28 @@ function App() {
 
   const AdminCloseHandler = () => {
     setisIntranetDashboardOpen(false)
+    history.push("/")
     localStorage.setItem("isAdminDashboard", "false")
   }
 
+  // const [currentUser,setcurrentUser] = useContext(UserContext);
+  // console.log(currentUser);
   return (
 
     <>
+   
+    
       {!isIntranetDashboardOpen &&
         <Switch>
-          {/* <Route exact path="/"><Login /></Route> */}
-          <Route exact path="/"><IntranetDashboard open={AdminHandler} /></Route>
+          {/* { currentUser == null && <Route exact path="/login"><Login /></Route>} */}
+          {!isLoggedIn ? <Route path="/"><Login setisLoggedIn={setisLoggedIn} /></Route> : <Route exact path="/"><IntranetDashboard setisLoggedIn={setisLoggedIn} open={AdminHandler} /></Route>}
           <Redirect to="/"></Redirect>
         </Switch>
       }
       {isIntranetDashboardOpen && <div className="main-container">
         <Sidebar />
         <div className='container'>
-          <Topbar close={AdminCloseHandler} />
+          <Topbar close={AdminCloseHandler}  setisLoggedIn={setisLoggedIn} />
           <div className='page-container'>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Switch>
@@ -114,21 +129,24 @@ function App() {
                 <Route exact path="/admindashboard/managementdesk"><Managementdesk /></Route>
                 <Route index path="/admindashboard/managementdesk/createmanagementdesk"><Createmanagementdesk /></Route>
                 <Route index path="/admindashboard/managementdesk/updatemanagementdesk/:id"><Updatemanagementdesk /></Route>
-
+                <Route exact path="/admindashboard/canteenmenu"><Canteenmenu /></Route>
                 <Route exact path="/admindashboard/announcement"><Announcements /></Route>
                 <Route exact path="/admindashboard/announcement/createannouncement"><CreateAnnouncement /></Route>
                 <Route exact path="/admindashboard/announcement/updateannouncement/:id"><Updateannouncement /></Route>
                 <Route exact path="/admindashboard/noticeboard"><Noticeboard /></Route>
                 <Route index path="/admindashboard/noticeboard/createnotice"><Createnotice /></Route>
-                <Route index path="/admindashboard/noticeboard/updatenotice/:id"><Updatenotice /></Route>
-
-
+                <Route index path="/admindashboard/noticeboard/updatenotice/:id"><Updatenotice/></Route>
+                <Route exact path="/admindashboard/newjoinee"><Newjoinee/></Route>
+                <Route exact path="/admindashboard/newjoinee/createnewjoinee"><Createnewjoinee/></Route>
+                <Route exact path="/admindashboard/newjoinee/updatenewjoinee/:id"><Updatenewjoinee/></Route>
+                <Redirect to="/"></Redirect>
               </Switch>
             </LocalizationProvider>
           </div>
         </div>
       </div>
       }
+      
     </>
   );
 }

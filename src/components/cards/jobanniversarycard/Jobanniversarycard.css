@@ -1,0 +1,34 @@
+.jobcard-container{
+    display: flex;
+    flex-direction: column;
+    height: 9rem;
+    align-items: center;
+}
+.jobcard-container .slider-wrapper{
+    height: 9rem !important;
+}
+.jobcard-container .jobday-card{
+    
+}
+.job-card .job-card-area{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.job-card .job-card-profile{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 0.7rem;
+}
+
+.job-card .job-card-photo{
+    display: block;
+    width: 5rem;
+    height:5rem;
+    border-radius: 50%;
+    overflow: hidden;
+}

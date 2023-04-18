@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { NavLink, useHistory, useRouteMatch, Route } from "react-router-dom";
 import { styled } from "@mui/material/styles";
+import "./upcomingevent.css";
 import {
   Typography,
   Button,

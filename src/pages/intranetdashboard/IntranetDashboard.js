@@ -1,5 +1,5 @@
 import { Menu, MenuItem, Typography } from '@mui/material'
-import React, { useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { Close, Menu as MenuIcon } from '@mui/icons-material'
 import { useState } from 'react'
 import "./IntranetDashboard.css"
@@ -7,9 +7,21 @@ import tree from "../../assets/images/icons8-resort-64.png"
 import cricket from "../../assets/images/cricket-image.png"
 import tennis from "../../assets/images/tennis-img.png"
 import { Link, NavLink } from "react-router-dom"
-//  import { Achievementcard } from "../../components/cards/achievementcard"
-import {EventCard} from "../../components/cards/EventCard/EventCard"
+import { Achievementcard } from "../../components/cards/achievementcard"
+import { EventCard } from "../../components/cards/EventCard/EventCard"
+import { BirthdayCard } from '../../components/cards/birthdaycard/BirthdayCard'
+import { Jobanniversarycard } from '../../components/cards/jobanniversarycard/Jobanniversarycard'
+import { ManagementDeskCard } from '../../components/cards/managmentdeskcard/ManagementDeskCard'
+import { NewJoineeCard } from '../../components/cards/newjoineecard/NewJoineeCard'
+
 export const IntranetDashboard = (props) => {
+    const [time, setTime] = React.useState(new Date());
+
+    React.useEffect(() => {
+        setInterval(() => {
+            setTime(new Date());
+        }, 1000);
+    }, []);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
@@ -37,15 +49,20 @@ export const IntranetDashboard = (props) => {
         setIsOpen(!isOpen);
     };
 
-    
-    const [showTime,setShowTime] = useState("");
-    const [merediem,setMerediem] = useState();
+    const [user,setUser] = useState([]);
+    const [showTime, setShowTime] = useState("");
+    const [merediem, setMerediem] = useState();
     useEffect(() => {
         const date = new Date();
         setShowTime(date.getHours().toString());
         setMerediem((date.toLocaleTimeString()).slice(-2));
-    })
-    
+        setUser(JSON.parse(localStorage.getItem("user"))[0]);
+    }, [])
+    const handleLogout = () => {
+        localStorage.removeItem("user");
+        localStorage.removeItem("isLogin");
+        props.setisLoggedIn(false)
+    }
     return (
         <div className='main-intranet-dashboard'>
             <div className='topbar-dashboard'>
@@ -138,11 +155,12 @@ export const IntranetDashboard = (props) => {
                         MenuListProps={{
                             'aria-labelledby': 'basic-button',
                         }}
-                        style={{zIndex:3000}}
+                        style={{ zIndex: 3000 }}
                     >
                         <MenuItem onClick={handleClose}>Profile</MenuItem>
-                        <MenuItem onClick={handleClose}><Link to="/admindashboard" onClick={() => props.open(true)}>Admin Dashboard</Link></MenuItem>
-                        <MenuItem onClick={handleClose}>Logout</MenuItem>
+                        <MenuItem onClick={handleClose}>
+                        <Link to="/admindashboard" onClick={() => props.open(true)}>Admin Dashboard</Link></MenuItem>
+                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
                     </Menu>
                 </div>
 
@@ -156,31 +174,37 @@ export const IntranetDashboard = (props) => {
                 <div className='container-content'>
                     <div className='welcome-text'>
                         <Typography variant='h4' className='welcome-text-1'>Welcome,</Typography>
-                        <Typography variant='h4' className='welcome-text-2'>{(()=>{
-                            if(showTime <= "12" && merediem == "am"){
+                        <Typography variant='h4' className='welcome-text-2'>{(() => {
+                            if (showTime > "5" && showTime <= "12" && merediem == "am") {
                                 return (
                                     <span>Good Morning</span>
                                 )
-                                
+
                             }
-                            else if(showTime <= "6" && merediem == "pm"){
+                            else if (showTime <= "6" && merediem == "pm") {
                                 return (
                                     <span>Good Afternoon</span>
                                 )
                             }
-                            else if(showTime>"6" && showTime <= "12" && merediem == "pm"){
+                            else if (showTime > "6" && showTime <= "12" && merediem == "pm") {
                                 return (
                                     <span>Good Evening</span>
                                 )
                             }
-                            else{
-                            
+                            else {
+
                                 return (
                                     <span>Good Night</span>
-                        
+
                                 )
-                                }
-                        })()} It's {(new Date().getHours())+":"+new Date().getMinutes()}</Typography>
+                            }
+                        })()} It's {time.toLocaleString("en-US", {
+
+                            dateStyle: "medium",
+                            timeStyle: "short",
+                            hour12: true,
+
+                        })}</Typography>
                     </div>
                 </div>
                 <div className='container-content-row-2'>
@@ -205,7 +229,9 @@ export const IntranetDashboard = (props) => {
                         </div>
                         <div className='birthday-container'>
                             <div className='birthday-text'><Typography variant='body1'>Birthday</Typography></div>
-                            <div className='birthday-box'></div>
+                            <div className='birthday-box'>
+                                <BirthdayCard />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -223,6 +249,7 @@ export const IntranetDashboard = (props) => {
 
                         <div className='anniversary-box'>
                             <div className='anniversary-subtext'><p style={{ color: "#fdbe8c" }}>Congratulations</p></div>
+                            <Jobanniversarycard />
                         </div>
                     </div>
                 </div>
@@ -238,7 +265,7 @@ export const IntranetDashboard = (props) => {
                     <div className='container-content-sub-row-4'>
                         <div className='management-container'>
                             <div className='management-text'><Typography variant='body1'>Managment Speaks</Typography></div>
-                            <div className='management-box'></div>
+                            <div className='management-box'><ManagementDeskCard/></div>
                         </div>
                         <div className='opinion-cmd-container'>
                             <div className='opinion-container'>
@@ -278,7 +305,7 @@ export const IntranetDashboard = (props) => {
                             <Typography variant='body1'>New Joinee</Typography>
                         </div>
                         <div className='newjoinee-box'>
-
+                            <NewJoineeCard/>
                         </div>
                     </div>
 
@@ -324,7 +351,7 @@ export const IntranetDashboard = (props) => {
                             <Typography variant='body1'>Achievement</Typography>
                         </div>
                         <div className='trophy-box'>
-                                <Achievementcard/>
+                            <Achievementcard />
                         </div>
                     </div>
                 </div>
@@ -385,11 +412,11 @@ export const IntranetDashboard = (props) => {
                             </div>
                         </div>
                         <div className='oracle-container'>
-                            
-                                <div className='oracle-text'>
-                                    <Typography variant='h4'>ORACLE</Typography>
-                                    <Typography className='adrenaline' variant='h6'>Business Intelligence</Typography>
-                                
+
+                            <div className='oracle-text'>
+                                <Typography variant='h4'>ORACLE</Typography>
+                                <Typography className='adrenaline' variant='h6'>Business Intelligence</Typography>
+
                             </div>
                         </div>
                     </div>

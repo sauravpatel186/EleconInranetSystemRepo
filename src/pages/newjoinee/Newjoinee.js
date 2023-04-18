@@ -115,31 +115,31 @@ const Newjoinee = (props) => {
                 </Breadcrumbs>
                 <br/>
               </div>
-        <div className="newjoinee-container">
+        <div className="newjoinee-page-container">
           <div className="newjoinee-container-button">
-            <Route exact path="/newjoinee/createnewjoinee">
+            {/* <Route exact path="admindashboard/newjoinee/createnewjoinee">
               <Createnewjoinee />
-            </Route>
-            <NavLink to="/newjoinee/createnewjoinee">
+            </Route> */}
+            <NavLink to="/admindashboard/newjoinee/createnewjoinee">
               <Button variant="contained" color="success" size="small">
                 Create New Joinee
               </Button>
             </NavLink>
-            <Route exact path="/newjoinee/createnewjoinee">
+            {/* <Route exact path="admindashboard/newjoinee/createnewjoinee">
               <Createnewjoinee />
-            </Route>
-            <NavLink to="/newjoinee/createnewjoinee">
+            </Route> */}
+            <NavLink to="/admindashboard/newjoinee/createnewjoinee">
               <Button variant="contained" color="error" size="small">
                 Disable Selected
               </Button>
             </NavLink>
           </div>
           <div className="table-container">
-            <TableContainer>
+            <TableContainer sx={{width:79+"vw"}}>
               <Table
                 stickyHeader
                 aria-label="sticky table"
-                sx={{ maxHeight: 440 }}>
+                sx={{ maxHeight: 440}}>
                 <TableHead>
                   <TableRow>
                     <StyledTableCell>
@@ -151,14 +151,18 @@ const Newjoinee = (props) => {
                     <StyledTableCell>First Name</StyledTableCell>
                     <StyledTableCell>Middle Name</StyledTableCell>
                     <StyledTableCell>Last Name</StyledTableCell>
-                    <StyledTableCell>Date Of Birth</StyledTableCell>
-                    <StyledTableCell>Date Of Join</StyledTableCell>
+                    <StyledTableCell>DOB</StyledTableCell>
+                    <StyledTableCell>DOJ</StyledTableCell>
                     <StyledTableCell>Image</StyledTableCell>
+                    <StyledTableCell>Designation</StyledTableCell>
                     <StyledTableCell>Department</StyledTableCell>
                     <StyledTableCell>Company</StyledTableCell>
                     <StyledTableCell>Gender</StyledTableCell>
                     <StyledTableCell>Email ID</StyledTableCell>
                     <StyledTableCell>Password</StyledTableCell>
+                    <StyledTableCell>Mobile No.</StyledTableCell>
+                    <StyledTableCell>Address</StyledTableCell>
+                    <StyledTableCell>Role</StyledTableCell>
                     <StyledTableCell>Actions</StyledTableCell>
                   </TableRow>
                 </TableHead>
@@ -185,23 +189,23 @@ const Newjoinee = (props) => {
                           <StyledTableCell>
                             <img src={e.njImage} height="50rem" width="50rem" style={{border: '1px solid black'}} />
                           </StyledTableCell>
+                          <StyledTableCell>{e.njDesignation}</StyledTableCell>
                           <StyledTableCell>{e.njDepartment}</StyledTableCell>
                           <StyledTableCell>{e.njCompany}</StyledTableCell>
                           <StyledTableCell>{e.njGender}</StyledTableCell>
                           <StyledTableCell>{e.njEmail}</StyledTableCell>
                           <StyledTableCell>{e.njPassword}</StyledTableCell>
+                          <StyledTableCell>{e.njMobileNo}</StyledTableCell>
+                          <StyledTableCell>{e.njAddress}</StyledTableCell>
+                          <StyledTableCell>{e.njRole}</StyledTableCell>
+                          
                           <StyledTableCell>
-                            <LinkRoute
-                              to={{
-                                pathname:
-                                  "/newjoinee/updatenewjoinee/:id",
-                                state: { idParam: e.id },
-                              }}>
-                              <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />
-                            </LinkRoute>
-  
-                            <Button size='small' id={e.id} key={e.id} onClick={(event) => handleDelete(e.id)} sx={{ verticalAlign: "bottom", minWidth: "auto" }}><Delete sx={{ color: "red" }} /></Button>
-                          </StyledTableCell>
+                                      <LinkRoute to={{
+                                        pathname: "/admindashboard/newjoinee/updatenewjoinee/:id",
+                                        state: { idParam: e.id}
+                                      }} ><ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} /></LinkRoute>
+                                      <Button size='small' id={e.id} key={e.id} onClick={(event) => handleDelete(e.id)} sx={{ verticalAlign: "bottom", minWidth: "auto" }}><Delete sx={{ color: "red" }} /></Button>
+                                    </StyledTableCell>
                         </StyledTableRow>
                       );
                     })}

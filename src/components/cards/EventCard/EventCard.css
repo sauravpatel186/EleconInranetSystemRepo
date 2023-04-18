@@ -7,10 +7,10 @@
     gap: 1rem;
 
 }
-.slider-wrapper{
+.event-carousel .slider-wrapper{
     height: 19rem !important;
 }
-.evet-date {
+.event-date {
     display: flex;
     flex-direction: column;
 
@@ -39,4 +39,7 @@
 
 .event-carousel .event-text-container .event-text-description {
     text-align: justify;
+}
+.event-carousel li:last-child{
+    visibility: hidden;
 }

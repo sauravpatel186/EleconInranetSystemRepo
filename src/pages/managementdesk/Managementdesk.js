@@ -25,11 +25,11 @@ import { Delete, ModeEdit } from "@mui/icons-material";
 import { Link as LinkRoute } from "react-router-dom";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "white",
-    color: "black",
+    backgroundColor: "#527ED4",
+    color: "white",
     fontSize: 14,
     fontWeight: 600,
-    fontFamily: "'Plus Jakarta Sans'",
+    fontFamily: "Plus Jakarta Sans"
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -165,7 +165,7 @@ const Managementdesk = (props) => {
                           <LinkRoute
                             to={{
                               pathname:
-                                "/managementdesk/updatemanagementdesk/:id",
+                                "/admindashboard/managementdesk/updatemanagementdesk/:id",
                               state: { idParam: e.id },
                             }}>
                             <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />
