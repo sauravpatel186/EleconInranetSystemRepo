@@ -151,6 +151,9 @@ function App() {
                 <Route exact path="/admindashboard/salespurchase/createsalespurchase"><Createsalespurchase/></Route>
                 <Route exact path="/admindashboard/salespurchase/updatesalespurchase/:id"><Updatesalespurchase/></Route>
                 <Route exact path="/admindashboard/approvesalespurchase"><Approvesalespurchase/></Route>
+                <Route exact path="/admindashboard/newjoinee"><Newjoinee/></Route>
+                <Route exact path="/admindashboard/newjoinee/createnewjoinee"><Createnewjoinee/></Route>
+                <Route exact path="/admindashboard/newjoinee/updatenewjoinee/:id"><Updatenewjoinee/></Route>
               </Switch>
             </LocalizationProvider>
           </div>

@@ -118,7 +118,7 @@ const Newjoinee = (props) => {
         <div className="newjoinee-page-container">
           <div className="newjoinee-container-button">
             
-            <NavLink to="/admindashboard/admindashboard/newjoinee/createnewjoinee">
+            <NavLink to="/admindashboard/newjoinee/createnewjoinee">
               <Button variant="contained" color="success" size="small">
                 Create New Joinee
               </Button>
@@ -201,7 +201,7 @@ const Newjoinee = (props) => {
                             <LinkRoute
                               to={{
                                 pathname:
-                                  "/newjoinee/updatenewjoinee/:id",
+                                  "/admindashboard/newjoinee/updatenewjoinee/:id",
                                 state: { idParam: e.id },
                               }}>
                               <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />
