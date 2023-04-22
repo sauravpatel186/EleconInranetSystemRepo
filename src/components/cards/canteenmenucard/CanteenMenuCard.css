@@ -1,0 +1,16 @@
+.canteenmenucard-container{
+    height: 20rem;
+    
+}
+.canteenmenucard-text{
+    display: flex;
+    flex-direction: column;
+    gap:0.2rem;
+}
+.canteenmenucard-text,.canteenmenucard-breakfast,.canteenmenucard-lunch{
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+.canteenmenucard-container li{
+    list-style-type: disc;
+}

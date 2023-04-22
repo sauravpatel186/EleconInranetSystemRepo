@@ -1,0 +1,22 @@
+.cmd-card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.cmd-card .cmd-profile {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 0.7rem;
+    margin-left: 0.3rem;
+}
+
+.cmd-card .cmd-photo {
+    display: flex;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    border: 2px solid #1C4CCC;
+    overflow: hidden;
+}

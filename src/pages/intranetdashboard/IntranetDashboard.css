@@ -206,14 +206,14 @@
     flex-direction: column;
 }
 
-.thought-birthday-container .thought-container {
+.thought-birthday-container .cmd-container {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
 }
 
-.thought-birthday-container .thought-box {
+.thought-birthday-container .cmd-box {
     border-radius: var(--border-radius);
     height: 9rem;
     background-color: #FFF5EB;
@@ -351,7 +351,7 @@
 
 .opinion-container {
     height: 9rem;
-    width: 50%;
+    width: 40%;
     border-radius: var(--border-radius);
     background-color: #1c4ccc;
     box-shadow: 0px 20px 70px rgba(222, 222, 222, 0.25);
@@ -370,15 +370,15 @@
     color: white;
 }
 
-.cmd-container {
+.thought-container{
     height: 9rem;
-    width: 50%;
+    width: 60%;
     border-radius: var(--border-radius);
     background-color: #FFF5EB;
     box-shadow: 0px 20px 70px rgba(124, 124, 124, 0.25);
 }
 
-.cmd-text p {
+.thought-text p {
     margin-top: 1rem;
     margin-left: 1rem;
     color: var(--cui-gray-700);
@@ -917,7 +917,16 @@ h6 {
         padding: 0.2rem;
         border: 0.1rem solid var(--cui-gray-300);
     }
-
+    .welcome-text-1 {
+        font-size: calc(1rem + 0.7vw) !important;
+    }
+    
+    .welcome-text-2 {
+        
+        font-size: calc(1rem + 0.7vw) !important;
+        
+    }
+    
     /* .topbar-dashboard #close-btn {
         display: none;
         cursor: pointer;
@@ -1024,7 +1033,9 @@ h6 {
     .container-content-sub-row-8,.videos-container,.container-content-sub-row-9{
         width: 100%;
     }
-
+    .management-box{
+        height: fit-content;
+    }
     .business-gallery-box,.videos-box {
         height: 15rem;
     }

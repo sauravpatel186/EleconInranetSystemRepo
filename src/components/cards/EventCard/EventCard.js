@@ -11,16 +11,14 @@ import dayjs from 'dayjs';
 export const EventCard = () => {
     const [show, setshow] = useState(false);
     const [eventdata,seteventdata] = useState([]);
-    const todayDate = (("0" + new Date().getDate()).slice(-2)+"/" +("0" + (new Date().getMonth() + 1)).slice(-2)+"/"+new Date().getFullYear()).toString();
+    const todayDate = (("0" + new Date().getDate()).slice(-2)+"/" +("0" + (new Date().getMonth() + 1)).slice(-2)+"/"+new Date().getFullYear());
     useEffect(()=>{
         let data = JSON.parse(localStorage.getItem("event"));
         if(data != null) {
             if(data.length > 0)
             {
                 let adata = data.filter(e=>e.isDeleted == false);
-                let finaldata = adata.filter(e=>convertDate(e.eventEndDate).toString() !== todayDate); 
-                console.log(data)
-                console.log(adata)  
+                let finaldata = adata.filter(e=>convertDate(e.eventEndDate) >= todayDate && convertDate(e.eventStartDate) <= todayDate); 
                 seteventdata(finaldata);
                 if(finaldata.length > 0)
                 {
@@ -59,7 +57,7 @@ export const EventCard = () => {
                 
                 show ? (
                     <div className="event-carousel">
-                    <Carousel stopOnHover autoPlay infiniteLoop axis="vertical" showArrows={false} showStatus={false} showThumbs={false} showIndicators={false} interval={1000}>
+                    <Carousel stopOnHover autoPlay infiniteLoop axis="vertical" showArrows={false} showStatus={false} showThumbs={false} showIndicators={false} interval={5000}>
                    {/* <marquee direction='bottom'> */}
                    
                         {eventdata.slice(0,4).map((e) => {

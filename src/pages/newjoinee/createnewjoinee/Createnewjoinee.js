@@ -32,6 +32,7 @@ const Createnewjoinee = () => {
     require('yup-phone');
     const navigate = useHistory();
     const [newjoinee, setNewjoinee] = useState([]);
+    const [newemp, setNewemp] = useState([]);
     const ValidationSchema = Yup.object().shape({
         njFirstName: Yup.string().required("First Name is required."),
         njDepartment: Yup.string().required("Department is required."),
@@ -73,8 +74,10 @@ const Createnewjoinee = () => {
     };
     useEffect(() => {
         let data = localStorage.getItem("nj");
+        let edata = localStorage.getItem("employee");
         if (data) {
             setNewjoinee(JSON.parse(data));
+            setNewemp(JSON.parse(edata));
         }
     }, []);
     return (
@@ -151,9 +154,12 @@ const Createnewjoinee = () => {
                             isDeleted: false,
                         }
                         newjoinee.push(nj);
+                        newemp.push(nj)
+                        setNewemp([...newjoinee]);
                         setNewjoinee([...newjoinee]);
                         console.log(newjoinee);
                         localStorage.setItem("nj", JSON.stringify(newjoinee));
+                        localStorage.setItem("employee", JSON.stringify(newemp));
                         toast("Stored Successfully");
                         navigate.push("/admindashbiard/newjoinee");
                     }}

@@ -1,4 +1,4 @@
-import { Menu, MenuItem, Typography } from '@mui/material'
+import { Menu, MenuItem, Typography,useMediaQuery, useTheme, Dialog, DialogActions, DialogTitle, Button, DialogContent } from '@mui/material'
 import React, { useEffect } from 'react'
 import { Close, Menu as MenuIcon } from '@mui/icons-material'
 import { useState } from 'react'
@@ -13,10 +13,22 @@ import { BirthdayCard } from '../../components/cards/birthdaycard/BirthdayCard'
 import { Jobanniversarycard } from '../../components/cards/jobanniversarycard/Jobanniversarycard'
 import { ManagementDeskCard } from '../../components/cards/managmentdeskcard/ManagementDeskCard'
 import { NewJoineeCard } from '../../components/cards/newjoineecard/NewJoineeCard'
-
+import { Announcementcard } from '../../components/cards/announcementcard/Announcementcard'
+import { CanteenMenuCard } from '../../components/cards/canteenmenucard/CanteenMenuCard'
+import { Profile } from '../../components/profile/Profile'
+import { Thougthcard } from '../../components/cards/thougthcard/Thougthcard'
+import { CMDcard } from '../../components/cards/cmdcard/CMDcard'
 export const IntranetDashboard = (props) => {
     const [time, setTime] = React.useState(new Date());
-
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('xl'));
+    const [dialogopen, setDialogOpen] = React.useState(false);
+    const handleClickOpen = () => {
+      setDialogOpen(true);
+    };
+    const handleDialogClose = () => {
+        setDialogOpen(false);
+      };
     React.useEffect(() => {
         setInterval(() => {
             setTime(new Date());
@@ -49,12 +61,12 @@ export const IntranetDashboard = (props) => {
         setIsOpen(!isOpen);
     };
 
-    const [user,setUser] = useState([]);
+    const [user, setUser] = useState([]);
     const [showTime, setShowTime] = useState("");
     const [merediem, setMerediem] = useState();
     useEffect(() => {
         const date = new Date();
-        setShowTime(date.getHours().toString());
+        setShowTime(date.getHours());
         setMerediem((date.toLocaleTimeString()).slice(-2));
         setUser(JSON.parse(localStorage.getItem("user"))[0]);
     }, [])
@@ -144,9 +156,31 @@ export const IntranetDashboard = (props) => {
                 <div className='profile-area'>
                     <div className='profile'>
                         <div className='profile-photo'>
-                            <img className="profile-image" src="/profile-1.jpg" onClick={handleClick} />
+
+                            {user != null && user != undefined ? <img className="profile-image" src={user.njImage} onClick={handleClick} /> : <img className="profile-image" src="/profile-1.jpg" onClick={handleClick} />}
+
                         </div>
                     </div>
+                    <Dialog
+                        fullScreen={fullScreen}
+                        open={dialogopen}
+                        onClose={handleDialogClose}
+                        aria-labelledby="responsive-dialog-title"
+                        sx={{zIndex:4000}}
+                    >
+                        <DialogTitle id="responsive-dialog-title">
+                            Profile
+                        </DialogTitle>
+                        <DialogContent>
+
+                            <Profile />
+                        </DialogContent>
+                        <DialogActions>
+                            <Button autoFocus onClick={handleDialogClose}>
+                                Close
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
                     <Menu
                         id="basic-menu"
                         anchorEl={anchorEl}
@@ -157,9 +191,16 @@ export const IntranetDashboard = (props) => {
                         }}
                         style={{ zIndex: 3000 }}
                     >
-                        <MenuItem onClick={handleClose}>Profile</MenuItem>
+                        <MenuItem onClick={()=>{
+                            handleClickOpen()
+                            handleClose()
+                        }}>Profile</MenuItem>
                         <MenuItem onClick={handleClose}>
-                        <Link to="/admindashboard" onClick={() => props.open(true)}>Admin Dashboard</Link></MenuItem>
+                            {user.njRole == 'Admin' ? <Link to="/admindashboard" onClick={() => props.open(true)}>Admin Dashboard</Link>
+                                : <Link to="/employeedashboard/employeesalespurchase" onClick={() => props.open(true)}>Employee Dashboard</Link>
+                            }
+                        </MenuItem>
+
                         <MenuItem onClick={handleLogout}>Logout</MenuItem>
                     </Menu>
                 </div>
@@ -175,29 +216,25 @@ export const IntranetDashboard = (props) => {
                     <div className='welcome-text'>
                         <Typography variant='h4' className='welcome-text-1'>Welcome,</Typography>
                         <Typography variant='h4' className='welcome-text-2'>{(() => {
-                            if (showTime > "5" && showTime <= "12" && merediem == "am") {
+
+                            if (showTime > 5 && showTime <= 12) {
                                 return (
                                     <span>Good Morning</span>
                                 )
 
                             }
-                            else if (showTime <= "6" && merediem == "pm") {
+                            else if (showTime <= 18) {
                                 return (
                                     <span>Good Afternoon</span>
                                 )
                             }
-                            else if (showTime > "6" && showTime <= "12" && merediem == "pm") {
+                            else if (showTime > 18) {
+                                
                                 return (
                                     <span>Good Evening</span>
                                 )
                             }
-                            else {
 
-                                return (
-                                    <span>Good Night</span>
-
-                                )
-                            }
                         })()} It's {time.toLocaleString("en-US", {
 
                             dateStyle: "medium",
@@ -223,10 +260,14 @@ export const IntranetDashboard = (props) => {
                         </div>
                     </div>
                     <div className='thought-birthday-container'>
-                        <div className='thought-container'>
-                            <div className='thought-text'><Typography variant='body1'>Thougth of the day</Typography></div>
-                            <div className='thought-box'></div>
-                        </div>
+                    <div className='cmd-container'>
+                    <div className='cmd-text'><Typography variant='body1'>CMD Desk</Typography></div>
+
+                                <div className='cmd-box'>
+                                    <CMDcard/>
+                                </div>
+                            </div>
+                        
                         <div className='birthday-container'>
                             <div className='birthday-text'><Typography variant='body1'>Birthday</Typography></div>
                             <div className='birthday-box'>
@@ -238,7 +279,9 @@ export const IntranetDashboard = (props) => {
                 <div className='container-content-row-3'>
                     <div className='announcement-container'>
                         <div className='announcement-text'><Typography variant='body1'>Announcement</Typography></div>
-                        <div className='announcement-box'></div>
+                        <div className='announcement-box'>
+                            <Announcementcard />
+                        </div>
                     </div>
                     <div className='news-container'>
                         <div className='news-text'><Typography variant='body1'>Latest News</Typography></div>
@@ -256,7 +299,9 @@ export const IntranetDashboard = (props) => {
                 <div className='container-content-row-4'>
                     <div className='canteen-container'>
                         <div className='canteen-text'><Typography variant='body1'>Canteen Menu</Typography></div>
-                        <div className='canteen-box'></div>
+                        <div className='canteen-box'>
+                            <CanteenMenuCard />
+                        </div>
                     </div>
                     <div className='sales-container'>
                         <div className='sales-text'><Typography variant='body1'>Sales/Purchase</Typography></div>
@@ -265,7 +310,7 @@ export const IntranetDashboard = (props) => {
                     <div className='container-content-sub-row-4'>
                         <div className='management-container'>
                             <div className='management-text'><Typography variant='body1'>Managment Speaks</Typography></div>
-                            <div className='management-box'><ManagementDeskCard/></div>
+                            <div className='management-box'><ManagementDeskCard /></div>
                         </div>
                         <div className='opinion-cmd-container'>
                             <div className='opinion-container'>
@@ -274,12 +319,10 @@ export const IntranetDashboard = (props) => {
 
                                 </div>
                             </div>
-                            <div className='cmd-container'>
-                                <div className='cmd-box'>
-                                    <div className='cmd-text'><Typography variant='body1'>CMD Desk</Typography></div>
-
-                                </div>
-                            </div>
+                            <div className='thought-container'>
+                            <div className='thought-text'><Typography variant='body1'>Thougth of the day</Typography></div>
+                            <div className='thought-box'><Thougthcard/></div>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -305,7 +348,7 @@ export const IntranetDashboard = (props) => {
                             <Typography variant='body1'>New Joinee</Typography>
                         </div>
                         <div className='newjoinee-box'>
-                            <NewJoineeCard/>
+                            <NewJoineeCard />
                         </div>
                     </div>
 

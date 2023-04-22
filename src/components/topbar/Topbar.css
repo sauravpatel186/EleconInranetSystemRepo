@@ -1,5 +1,4 @@
 .topbar-container{
-   
     width: 100%;
     background-color: white;
     height:6rem;
@@ -25,7 +24,17 @@
     border-radius: 50%;
     overflow: hidden;
 }
-
+.profile-dialog-container{
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+.profile-dialog-container .profile-row{
+    display: flex;
+    flex-direction: row;
+    gap: 0.8rem;
+    width: 100%;
+}
 #menu-btn{
     display: none;
 

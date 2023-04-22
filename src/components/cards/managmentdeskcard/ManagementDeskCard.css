@@ -17,3 +17,8 @@
 .management-card-description{
     margin-top: 0.5rem;
 }
+@media screen and (max-width:768px) {
+    .management-card-container{
+        height:fit-content;
+    }
+}

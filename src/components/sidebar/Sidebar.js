@@ -21,7 +21,8 @@ import {Close as CloseIcon,
         FoodBankTwoTone,
         FoodBankOutlined,
         SellOutlined,
-        Sell
+        Sell,
+        FolderShared
         } from '@mui/icons-material'
 import { Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
@@ -171,11 +172,11 @@ return (
                 </NavLink>
             </div>
             <div className='nav-link'>
-                <NavLink className="nav-text" exact to="/videostreaming" >
-                    <span><VideoCall/></span>
+                <NavLink className="nav-text" exact to="/admindashboard/employeedirectory" >
+                    <span><FolderShared/></span>
                     <label 
                         className='nav-font'>
-                        Video Streaming
+                        Employee Directory
                         </label>
                 </NavLink>
             </div>

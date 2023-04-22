@@ -37,7 +37,7 @@ export const BirthdayCard = () => {
             {
                 show ?
                     <div className='birthdaycard-container'>
-                        <Carousel stopOnHover autoPlay infiniteLoop dynamicHeight showArrows={false} showStatus={false} showThumbs={false} showIndicators={false} interval={1000}>
+                        <Carousel stopOnHover autoPlay infiniteLoop dynamicHeight showArrows={false} showStatus={false} showThumbs={false} showIndicators={false} interval={5000}>
 
                             {userBirthDay.map((e) => {
                                 return (

@@ -55,6 +55,7 @@ import Createnewjoinee from "./pages/newjoinee/createnewjoinee/Createnewjoinee";
 import updatenewjoinee, {
   Updatenewjoinee,
 } from "./pages/newjoinee/updatenewjoinee/Updatenewjoinee";
+import { Audio } from "react-loader-spinner";
 import { EmployeeMaster } from "./pages/employeemaster/EmployeeMaster";
 import { Login } from "./pages/login/Login";
 import { Employeetopbar } from "./components/employeetopbar/Employeetopbar";
@@ -63,6 +64,8 @@ import Employeesalespurchase from "./pages/employeesalespurchase/Employeesalespu
 import { Updatesalespurchase } from "./pages/salespurchase/updatesalespurchase/Updatesalespurchase";
 import UserContext from './context/UserContext';
 import { UserProvider } from './context/UserContext';
+import EmployeeDirectory from "./pages/employeedirectory/EmployeeDirectory";
+
 function App() {
   const USER_TYPES = {
     PUBILIC: "Public User",
@@ -73,19 +76,39 @@ function App() {
   const [isIntranetDashboardOpen, setisIntranetDashboardOpen] = useState(false);
   const history = useHistory();
   // console.log(history.goBack(-1));
+  const [user, setUser] = useState([]);
+  const [role,setRole] = useState("");
+  const [loading, setLoding] = useState(false);
+  const getUserData = async () => {
+    let roledata = await JSON.parse(localStorage.getItem("role"));
+    console.log(roledata);
+    if (roledata != null || roledata != undefined) {
+      setRole(roledata)
+      console.log(roledata);
+    }
+    else {
+      setRole("");
+    }
+    return true;
+  }
   useEffect(() => {
+    setLoding(true);
     let adminDashboardChecker = localStorage.getItem("isAdminDashboard")
     if (adminDashboardChecker === "true") {
       setisIntranetDashboardOpen(true);
     }
-  let isLogin = localStorage.getItem("isLogin")
-  console.log(isLogin)
-  if(isLogin!=null) {
-    setisLoggedIn(JSON.parse(isLogin));
-  } else {
-    setisLoggedIn(false);
-  }
-  });
+    let isLogin = localStorage.getItem("isLogin")
+    console.log(isLogin)
+    if (isLogin != null) {
+      setisLoggedIn(JSON.parse(isLogin));
+    } else {
+      setisLoggedIn(false);
+    }
+
+    if (getUserData()) {
+      setLoding(false);
+    }
+  }, []);
 
   const AdminHandler = () => {
     setisIntranetDashboardOpen(true);
@@ -102,88 +125,94 @@ function App() {
   // console.log(currentUser);
   return (
     <>
-   
-    
-      {!isIntranetDashboardOpen &&
-        <Switch>
-          {/* { currentUser == null && <Route exact path="/login"><Login /></Route>} */}
-          {!isLoggedIn ? <Route path="/"><Login setisLoggedIn={setisLoggedIn} /></Route> : <Route exact path="/"><IntranetDashboard setisLoggedIn={setisLoggedIn} open={AdminHandler} /></Route>}
-          <Redirect to="/"></Redirect>
-        </Switch>
-      }
-      {isIntranetDashboardOpen && <div className="main-container">
-        <Sidebar />
-        <div className='container'>
-          <Topbar close={AdminCloseHandler}  setisLoggedIn={setisLoggedIn} />
-          <div className='page-container'>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Switch>
-                <Route exact path="/admindashboard"><Dashboard /></Route>
-                <Route exact path="/admindashboard/ceomessage"><Ceomessage /></Route>
-                <Route exact path="/admindashboard/opinionpoll"><Opinionpoll /></Route>
-                <Route exact path="/admindashboard/upcomingevent"><Upcomingevent /></Route>
-                <Route index path="/admindashboard/upcomingevent/createupcomingevent"><Createupcomingevent /></Route>
-                <Route exact path="/admindashboard/opinionpoll/createopinionpoll"><Createopinionpoll /></Route>
-                <Route exact path="/admindashboard/achievement"><Achievement /></Route>
-                <Route index path="/admindashboard/achievement/createachievement"><CreateAchievement /></Route>
-                <Route index path="/admindashboard/achievement/updateachievement/:id"><UpdateAchievement /></Route>
-                <Route index path="/admindashboard/upcomingevent/updateupcomingevent/:id"><Updateupcomingevent /></Route>
-                <Route index path="/admindashboard/opinionpoll/updateopinionpoll/:id"><Updateopinionpoll /></Route>
-                <Route exact path="/admindashboard/thoughtoftheday"><Thoughtoftheday /></Route>
-                <Route index path="/admindashboard/thoughtoftheday/createthought"><Createthought /></Route>
-                <Route index path="/admindashboard/thoughtoftheday/updatethought/:id"><Updatethought /></Route>
-                <Route exact path="/admindashboard/policies"><Policies /></Route>
-                <Route index path="/admindashboard/policies/createpolicies"><CreatePolicies /></Route>
-                <Route index path="/admindashboard/policies/updatepolicies/:id"><UpdatePolicies /></Route>
-                <Route exact path="/admindashboard/managementdesk"><Managementdesk /></Route>
-                <Route index path="/admindashboard/managementdesk/createmanagementdesk"><Createmanagementdesk /></Route>
-                <Route index path="/admindashboard/managementdesk/updatemanagementdesk/:id"><Updatemanagementdesk /></Route>
-                <Route exact path="/admindashboard/canteenmenu"><Canteenmenu /></Route>                <Route exact path="/admindashboard/canteenmenu"><Canteenmenu /></Route>
-                <Route exact path="/admindashboard/announcement"><Announcements /></Route>
-                <Route exact path="/admindashboard/announcement/createannouncement"><CreateAnnouncement /></Route>
-                <Route exact path="/admindashboard/announcement/updateannouncement/:id"><Updateannouncement /></Route>
-                <Route exact path="/admindashboard/noticeboard"><Noticeboard /></Route>
-                <Route index path="/admindashboard/noticeboard/createnotice"><Createnotice /></Route>
-                <Route index path="/admindashboard/noticeboard/updatenotice/:id"><Updatenotice /></Route>
+      {loading && <div>
+        <Audio height="80"
+          width="80"
+          radius="9"
+          color="green"
+          ariaLabel="loading"
+          wrapperStyle
+          wrapperClass></Audio>
+      </div>}
+      {!loading && <div>
+        {!isIntranetDashboardOpen &&
+          <Switch>
+            {/* { currentUser == null && <Route exact path="/login"><Login /></Route>} */}
+            {!isLoggedIn ? <Route path="/"><Login setisLoggedIn={setisLoggedIn} /></Route> : <Route exact path="/"><IntranetDashboard setisLoggedIn={setisLoggedIn} open={AdminHandler} /></Route>}
+            <Redirect to="/"></Redirect>
+          </Switch>
+        }
 
-
-              </Switch>
-            </LocalizationProvider>
+        {isIntranetDashboardOpen && role === 'Admin' &&
+          <div className="main-container">
+            <Sidebar />
+            <div className='container'>
+              <Topbar close={AdminCloseHandler} setisLoggedIn={setisLoggedIn} />
+              <div className='page-container'>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <Switch>
+                    <Route exact path="/admindashboard"><Dashboard /></Route>
+                    <Route exact path="/admindashboard/ceomessage"><Ceomessage /></Route>
+                    <Route exact path="/admindashboard/opinionpoll"><Opinionpoll /></Route>
+                    <Route exact path="/admindashboard/upcomingevent"><Upcomingevent /></Route>
+                    <Route index path="/admindashboard/upcomingevent/createupcomingevent"><Createupcomingevent /></Route>
+                    <Route exact path="/admindashboard/opinionpoll/createopinionpoll"><Createopinionpoll /></Route>
+                    <Route exact path="/admindashboard/achievement"><Achievement /></Route>
+                    <Route index path="/admindashboard/achievement/createachievement"><CreateAchievement /></Route>
+                    <Route index path="/admindashboard/achievement/updateachievement/:id"><UpdateAchievement /></Route>
+                    <Route index path="/admindashboard/upcomingevent/updateupcomingevent/:id"><Updateupcomingevent /></Route>
+                    <Route index path="/admindashboard/opinionpoll/updateopinionpoll/:id"><Updateopinionpoll /></Route>
+                    <Route exact path="/admindashboard/thoughtoftheday"><Thoughtoftheday /></Route>
+                    <Route index path="/admindashboard/thoughtoftheday/createthought"><Createthought /></Route>
+                    <Route index path="/admindashboard/thoughtoftheday/updatethought/:id"><Updatethought /></Route>
+                    <Route exact path="/admindashboard/policies"><Policies /></Route>
+                    <Route index path="/admindashboard/policies/createpolicies"><CreatePolicies /></Route>
+                    <Route index path="/admindashboard/policies/updatepolicies/:id"><UpdatePolicies /></Route>
+                    <Route exact path="/admindashboard/managementdesk"><Managementdesk /></Route>
+                    <Route index path="/admindashboard/managementdesk/createmanagementdesk"><Createmanagementdesk /></Route>
+                    <Route index path="/admindashboard/managementdesk/updatemanagementdesk/:id"><Updatemanagementdesk /></Route>
+                    <Route exact path="/admindashboard/canteenmenu"><Canteenmenu /></Route>                
+                    <Route exact path="/admindashboard/canteenmenu/createcanteenmenu"><Createcanteenmenu /></Route>
+                    <Route exact path="/admindashboard/announcement"><Announcements /></Route>
+                    <Route exact path="/admindashboard/announcement/createannouncement"><CreateAnnouncement /></Route>
+                    <Route exact path="/admindashboard/announcement/updateannouncement/:id"><Updateannouncement /></Route>
+                    <Route exact path="/admindashboard/noticeboard"><Noticeboard /></Route>
+                    <Route index path="/admindashboard/noticeboard/createnotice"><Createnotice /></Route>
+                    <Route index path="/admindashboard/noticeboard/updatenotice/:id"><Updatenotice /></Route>
+                    <Route exact path="/admindashboard/newjoinee"><Newjoinee /></Route>
+                    <Route exact path="/admindashboard/newjoinee/createnewjoinee"><Createnewjoinee /></Route>
+                    <Route exact path="/admindashboard/newjoinee/updatenewjoinee/:id"><Updatenewjoinee /></Route>
+                    <Route exact path="/admindashboard/employeedirectory"><EmployeeDirectory /></Route>
+                  </Switch>
+                </LocalizationProvider>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      }
-      
+        }
+        {isIntranetDashboardOpen && role === 'Normal' &&
+          <div className="main-container">
+            <Employeesidebar />
+            {console.log("Employee Sales")}
+            <div className="container">
+              <Employeetopbar close={AdminCloseHandler} setisLoggedIn={setisLoggedIn} />
+              <div className="page-container">
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <Switch>
+                    <Route exact path="/employeedashboard/employeesalespurchase"><Employeesalespurchase /></Route>
+                    {/* <Route exact path="/employeedashboard/createemployeesalespurchase"></></Route> */}
+                  {/* <Route exact path="/employeedashboard/employeesalespurchase/updateemployeesalespurchase/:id"><Updatesalespurchase /></Route> */}
+                  <Route exact path="/employeedashboard/employeedirectory"><EmployeeDirectory/></Route>
+                  </Switch>
+                </LocalizationProvider>
+              </div>
+            </div>
+          </div>
+        }
+
+
+      </div>}
     </>
 
-    // <>
-    //   {!isIntranetDashboardOpen && (
-    //     <Switch>
-    //       {/* <Route exact path="/"><Login /></Route> */}
-    //       <Route exact path="/">
-    //         <IntranetDashboard open={AdminHandler} />
-    //       </Route>
-    //       <Redirect to="/"></Redirect>
-    //     </Switch>
-    //   )}
-    //   {isIntranetDashboardOpen && (
-    //     <div className="main-container">
-    //       <Employeesidebar />
-    //       <div className="container">
-    //         <Employeetopbar close={AdminCloseHandler} />
-    //         <div className="page-container">
-    //           <LocalizationProvider dateAdapter={AdapterDayjs}>
-    //             <Switch>
-    //               <Route exact path="/employeedashboard/employeesalespurchase"><Employeesalespurchase/></Route>
-    //               <Route exact path="/employeedashboard/createemployeesalespurchase"><Createemployeesalespurchase/></Route>
-    //               <Route exact path="/employeedashboard/employeesalespurchase/updateemployeesalespurchase/:id"><Updateemployeesalespurchase/></Route>
-    //             </Switch>
-    //           </LocalizationProvider>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   )}
-    // </>
   );
 }
 export default App;

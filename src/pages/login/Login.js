@@ -36,7 +36,7 @@ export const Login = (props) => {
                 props.setisLoggedIn(true)
             }
             else {
-                console.log("Login Failure");
+                toast.error("Invalid email or password or role"); 
             }
         }
         catch (e) {

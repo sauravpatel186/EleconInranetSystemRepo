@@ -56,8 +56,15 @@ return (
                     </label>
                 </NavLink>
             </div>
-            
-          
+            <div className='nav-link'>
+                <NavLink className="nav-text" exact to="/employeedashboard/employeedirectory" >
+                    <span><BadgeIcon/></span>
+                    <label 
+                        className='nav-font'>
+                        EmployeeDirectory
+                    </label>
+                </NavLink>
+            </div>
         </div>
     </div>
 )

@@ -66,8 +66,8 @@ export const Updatenewjoinee = () => {
             njImage: e[0]["njImage"],
 
         }));
-        console.log(njData);
-        console.log(JSON.parse(localStorage.getItem("nj")));
+        //console.log(njData);
+        //console.log(JSON.parse(localStorage.getItem("nj")));
     };
     const geteventData = (id) => {
         let data = JSON.parse(localStorage.getItem("nj"));
@@ -93,7 +93,6 @@ export const Updatenewjoinee = () => {
         njDepartment: Yup.string().required("Department is required."),
         njMiddleName: Yup.string().required("Middle Name is required."),
         njGender: Yup.string().required("Gender is required."),
-        //njDepartment: Yup.string().required("Department is required."),
         njLastName: Yup.string().required("Last Name is required."),
         njDob: Yup.string().required("Date Of Birth is required"),
         njDoj: Yup.string().required("Date Of Joim is required"),
@@ -104,7 +103,7 @@ export const Updatenewjoinee = () => {
         njDesignation: Yup.string().required("Designation is required"),
         njAddress: Yup.string().required("Address is required"),
         njMobileNo: Yup.string().required("Mobile No is required"),
-
+        njRole: Yup.string().required("Role is required"),
     })
     const onSelectFile = (e, setFieldValue, setFieldError) => {
         const files = e.target.files;
@@ -129,13 +128,14 @@ export const Updatenewjoinee = () => {
         }
     };
     const UpdateData = (id, updatedData) => {
+        
         const datawithId = newjoinee.find(e => e.id == id); // finds the element with id 
         if (datawithId["id"] === updatedData.id) {
             let temp = JSON.parse(localStorage.getItem("nj"));
             let tempdata = newjoinee.indexOf(newjoinee.find(achievements => achievements.id == id));
             temp[tempdata] = updatedData
             setAllnj([...temp])
-            
+            console.log(allnj);
         }
         
     }
@@ -165,7 +165,7 @@ export const Updatenewjoinee = () => {
                     validationSchema={ValidationSchema}
                     enableReinitialize
                     onSubmit={data => {
-                        let nj = {
+                        let newData = {
                             id: idParamVal,
                             njFirstName: data.njFirstName,
                             njMiddleName: data.njMiddleName,
@@ -181,10 +181,13 @@ export const Updatenewjoinee = () => {
                             njDesignation: data.njDesignation,
                             njAddress: data.njAddress,
                             njMobileNo: data.njMobileNo,
+                            njRole: data.njRole,
                             time: Math.floor(Date.now() / 1000),
                             isDeleted: false,
                         }
-                        updateState(idParamVal,nj);
+            
+
+                        UpdateData(idParamVal,newData);
                     }}>
                     {({ values, handleChange, handleBlur, errors, handleSubmit, touched, setFieldValue, setFieldError }) => (
                         <form onSubmit={handleSubmit}>
@@ -360,7 +363,7 @@ export const Updatenewjoinee = () => {
                                                 id="demo-simple-select-autowidth-label"
                                                 name="njRole"
                                                 type="njRole"
-                                                label="Rolw"
+                                                label="Role"
                                                 onChange={handleChange}
                                                 value={values.njRole}>
                                                 <MenuItem value={"Normal"}>Normal</MenuItem>

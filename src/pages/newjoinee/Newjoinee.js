@@ -48,7 +48,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 const Newjoinee = (props) => {
-   
+   const [counter,setCounter] = useState(0);
     const navigate = useHistory();
     let { path, url } = useRouteMatch();
     const [njdata, setnjdata] = useState([]);
@@ -58,7 +58,9 @@ const Newjoinee = (props) => {
     const getLocalItem = () => {
       let data = JSON.parse(localStorage.getItem("nj"));
       if (data) {
-        setnjdata(JSON.parse(localStorage.getItem("nj")));
+        let finaldata = data.filter(e=>e.isDeleted == false);
+        setnjdata(finaldata);
+        setCounter(finaldata.length);
       } else {
         return [];
       }
@@ -201,7 +203,7 @@ const Newjoinee = (props) => {
                             <LinkRoute
                               to={{
                                 pathname:
-                                  "/newjoinee/updatenewjoinee/:id",
+                                  "/admindashboard/newjoinee/updatenewjoinee/:id",
                                 state: { idParam: e.id },
                               }}>
                               <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />
@@ -220,7 +222,7 @@ const Newjoinee = (props) => {
             <TablePagination
               rowsPerPageOptions={[5]}
               component="div"
-              count={njdata.length}
+              count={counter}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}

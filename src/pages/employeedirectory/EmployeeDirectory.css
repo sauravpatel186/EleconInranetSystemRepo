@@ -1,0 +1,32 @@
+.page-information-container{
+    display: flex;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    flex-direction: column;
+}
+.page-header{
+    font-size: calc(1.325rem + 0.9vw)!important;
+    font-weight: 600!important;
+    color: var(--cui-body-color);
+    font-family:'Plus Jakarta Sans';
+}
+.employeedirectory-container{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 0.5rem;
+    box-shadow : #32325d05 0 2px 5px -1px, rgba(0,0,0,.05) 0 1px 3px -1px;
+    margin-top: 1.5rem;
+}
+.employeedirectory-container-button{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin:2rem 2rem 0rem 2rem
+}
+.searchbox{
+    width:  30%;
+    margin-bottom: 2rem!important;
+}

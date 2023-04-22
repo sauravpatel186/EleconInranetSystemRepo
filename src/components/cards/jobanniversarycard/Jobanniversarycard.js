@@ -50,7 +50,7 @@ export const Jobanniversarycard = () => {
             {
                 show ?
                     <div className='jobcard-container'>
-                        <Carousel stopOnHover autoPlay infiniteLoop dynamicHeight showArrows={false} showStatus={false} showThumbs={false} showIndicators={false} interval={1000}>
+                        <Carousel stopOnHover autoPlay infiniteLoop dynamicHeight showArrows={false} showStatus={false} showThumbs={false} showIndicators={false} interval={5000}>
 
                             {userdata.map((e) => {
                                 return (

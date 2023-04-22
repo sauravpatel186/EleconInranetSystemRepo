@@ -1,0 +1,11 @@
+.thought-card-container{
+    margin:0.2rem 1rem 0rem 1rem;
+}
+.thought-card-text{
+    text-align: justify;
+}
+.thought-card-author{
+    text-align: justify;
+    margin-left: 20rem;
+    margin-right: 2rem;
+}

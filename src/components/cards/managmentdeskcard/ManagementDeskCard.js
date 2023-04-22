@@ -15,7 +15,7 @@ export const ManagementDeskCard = () => {
             const date = todayDate();
             console.log(date);
 
-            let adata = data.filter(management => management.isDeleted == false && convertDate(management.mdEndDate) != todayDate() && convertDate(management.mdStartDate) >= todayDate());
+            let adata = data.filter(management => management.isDeleted == false && convertDate(management.mdEndDate) >= todayDate() && convertDate(management.mdStartDate) <= todayDate());
             setmanagementdata(adata);
             
             if (adata.length > 0) {
@@ -50,10 +50,10 @@ export const ManagementDeskCard = () => {
                                 return (
                                     <div key={e.id} className='management-card'>
                                         <div className="management-card-title">
-                                            <Typography variant='subtitle1' sx={{textAlign:"justify !important",color:"#8B8B8B !important"}}>{e. mdTitle}</Typography>
+                                            <Typography variant='body1' sx={{textAlign:"justify !important",color:"#8B8B8B !important"}}>{e. mdTitle}</Typography>
                                         </div>
                                         <div className="management-card-description">
-                                            <Typography variant='subtitle2' sx={{textAlign:"justify !important",color:"#8B8B8B !important"}}>{e.mdDescription}</Typography>
+                                            <Typography variant='body2' sx={{textAlign:"justify !important",color:"#8B8B8B !important"}}>{e.mdDescription}</Typography>
                                         </div>
                                     </div>
                                 )

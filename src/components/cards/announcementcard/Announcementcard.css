@@ -1,0 +1,39 @@
+.announcementcard-container{
+    height: 100%;
+}
+.announcementcard-container .carousel-slider,.slider-wrapper{
+    height: 12rem !important;
+    
+}
+.announcementcard-container .announcementcard-text{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    height: 10rem;   
+}
+.announcementcard-container .announcementcard-text {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin : 0.8rem 0 0 0.8rem;
+}
+.announcementcard-text .announcementcard-description{
+    text-align: justify;
+    width: 35rem;
+}
+
+@media screen  and (max-width:768px){
+    .announcementcard-container .announcementcard-text {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        margin:0;
+        height: 100% !important;
+    }
+    .announcementcard-container .announcementcard-text .announcementcard-description{
+        text-align: justify;
+        width:fit-content;
+        height: 100% !important;
+    }
+}
