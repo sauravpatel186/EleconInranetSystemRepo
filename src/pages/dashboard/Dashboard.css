@@ -1,21 +1,144 @@
-.dashboard-container{
+.dashboard-container {
     display: flex;
     width: 100%;
     flex-direction: column;
     background: #fff;
     border-radius: 0.5rem;
-    box-shadow : rgba(50,50,93,.02) 0 2px 5px -1px, rgba(0,0,0,.05) 0 1px 3px -1px;
+    box-shadow: rgba(50, 50, 93, .02) 0 2px 5px -1px, rgba(0, 0, 0, .05) 0 1px 3px -1px;
     margin-top: 1.5rem;
 }
 
-.dashboard-container-card{
+.dashboard-container-card {
     display: flex;
     flex-direction: row;
     gap: 1rem;
-    margin: 3rem 3rem 3rem 3rem;
+    margin: 3rem 1rem 0rem 1rem;
 
 }
-.dashboard-card{
-    width: 100%;
-    
+
+.dashboard-container-table {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin: 2rem 1rem 3rem 1rem;
+}
+
+.dashboard-card-content h2 {
+    font-family: "Plus Jakarta Sans";
+    font-weight: 600;
+    color: var(--cui-body-color);
+    margin-left: 0.5rem;
+}
+
+.dashboard-card-1 {
+    width: 25%;
+    background-color: #ffe2e6;
+    height: 10rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.dashboard-card-content {
+    display: flex;
+    flex-direction: column;
+    margin: 1.5rem 0 0 1.5rem;
+}
+
+.dashboard-card-icon-1 {
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    background-color: #fb6e8e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.dashboard-card-text {
+    margin-top: 0.5rem;
+}
+
+.dashboard-container-birthday-table {
+    width: 25%;
+}
+
+.dashboard-card-1 svg {
+    color: white !important;
+}
+
+.dashboard-card-2 {
+    width: 25%;
+    background-color: #fff4de;
+    height: 10rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.dashboard-card-icon-2 {
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    background-color: #ff947a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.dashboard-container-job-table {
+    width: 25%;
+}
+
+.dashboard-card-3 {
+    width: 25%;
+    background-color: #dcfce7;
+    height: 10rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.dashboard-card-icon-3 {
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    background-color: #3cd755;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.dashboard-container-event-table {
+    width: 25%;
+}
+
+.dashboard-card-4 {
+    width: 25%;
+    background-color: #f4e8ff;
+    height: 10rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.dashboard-card-icon-4 {
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    background-color: #bf83ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard-container-joinee-table {
+    width: 25%;
 }

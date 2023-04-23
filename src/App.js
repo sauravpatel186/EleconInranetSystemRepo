@@ -66,6 +66,7 @@ import UserContext from './context/UserContext';
 import { UserProvider } from './context/UserContext';
 import EmployeeDirectory from "./pages/employeedirectory/EmployeeDirectory";
 
+import Approvesalespurchase from "./pages/approvesalespurchase/Approvesalespurchase";
 function App() {
   const USER_TYPES = {
     PUBILIC: "Public User",
@@ -182,7 +183,13 @@ function App() {
                     <Route exact path="/admindashboard/newjoinee"><Newjoinee /></Route>
                     <Route exact path="/admindashboard/newjoinee/createnewjoinee"><Createnewjoinee /></Route>
                     <Route exact path="/admindashboard/newjoinee/updatenewjoinee/:id"><Updatenewjoinee /></Route>
+                    <Route exact path="/admindashboard/employeemaster"><EmployeeMaster /></Route>
+                    <Route exact path="/admindashboard/salespurchase"><Salespurchase/></Route>
+                    <Route exact path="/admindashboard/salespurchase/createsalespurchase"><Createsalespurchase/></Route>
+                    <Route exact path="/admindashboard/salespurchase/updatesalespurchase/:id"><Updatesalespurchase/></Route>
+                    <Route exact path="/admindashboard/approvesalespurchase"><Approvesalespurchase /></Route>
                     <Route exact path="/admindashboard/employeedirectory"><EmployeeDirectory /></Route>
+                    
                   </Switch>
                 </LocalizationProvider>
               </div>
