@@ -18,8 +18,8 @@ import {
   TableRow,
   TablePagination,
 } from "@mui/material";
-import Createsalespurchase from "./createemployeesalespurchase/Createemployeesalespurchase";
-import "./Employeesalespurchase.css";
+import Createemployeearticle from "./createarticle/Createemployeearticle";
+import "./Article.css";
 import { Announcement, Edit } from "@mui/icons-material";
 import { Delete, ModeEdit } from "@mui/icons-material";
 import { Link as LinkRoute } from "react-router-dom";
@@ -47,28 +47,28 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-const Employeesalespurchase = () => {
+const Employeearticle = () => {
   const navigate = useHistory();
   const [userdata,setuserdata] = useState([]);
   let { path, url } = useRouteMatch();
-  const [salespurchasedata, setsalespurchasedata] = useState([]);
+  const [articledata, setarticledata] = useState([]);
   const [counts, setcounts] = useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const getLocalItem = async() => {
     let udata=localStorage.getItem("user");
-    // if (udata) {
-    //   setuserdata(JSON.parse(udata));
-    // }
-    let data = await JSON.parse(localStorage.getItem("salespurchase"));
+    if (udata) {
+      setuserdata(JSON.parse(udata));
+    }
+    let data = await JSON.parse(localStorage.getItem("article"));
     if (data) {
       let adata=data.filter(ad=>ad.isDeleted==false && ad.empid==userdata[0].id)
-      setsalespurchasedata( adata);
+      setarticledata( adata);
     } else {
       return [];
     }
-    
+    console.log(articledata)
   };
 
   useEffect(() => {
@@ -95,15 +95,15 @@ const Employeesalespurchase = () => {
   }
   const handleDelete = (e) => {
     console.log(e);
-    const index = salespurchasedata.indexOf(salespurchasedata.find((a => a.id == e )));
+    const index = articledata.indexOf(articledata.find((a => a.id == e )));
     console.log(index)
-    salespurchasedata[index].isDeleted = true
-    setsalespurchasedata(salespurchasedata);
-    console.log(salespurchasedata)
-    navigate.push("/employeedashboard/employeesalespurchase")
-    localStorage.setItem("salespurchase",JSON.stringify(salespurchasedata))
+    articledata[index].isDeleted = true
+    setarticledata(articledata);
+    console.log(articledata)
+    navigate.push("/employeedashboard/employeearticle")
+    localStorage.setItem("article",JSON.stringify(articledata))
   }
-  console.log(salespurchasedata);
+  console.log(articledata);
   // const countitems =announcementdata.filter(e => e.isDeleted ==='false').length;
   // console.log("Not deleted: " + countitems);
   return (
@@ -118,7 +118,7 @@ const Employeesalespurchase = () => {
                   Home
                 </Link>
                 <Link
-                  underline="hover" color="inherit" href="/employeedashboard/employeesalespurchase" exact to="/employeedashboard/employeesalespurchase">
+                  underline="hover" color="inherit" href="/employeedashboard/employeearticle" exact to="/employeedashboard/employeearticle">
                   Sale/Purchase
                 </Link>
               </Breadcrumbs>
@@ -129,9 +129,9 @@ const Employeesalespurchase = () => {
           {/* <Route exact path="/employeedashboard/employeesalespurchase/createemployeesalespurchase">
             <Createsalespurchase />
           </Route> */}
-          <NavLink to="/employeedashboard/employeesalespurchase/createemployeesalespurchase">
+          <NavLink to="/employeedashboard/employeearticle/createemployeearticle">
             <Button variant="contained" color="success" size="small">
-              Create Ad
+              Create Article
             </Button>
           </NavLink>
           {/* <Route exact path="/employeedashboard/employeesalespurchase/createemployeesalespurchase">
@@ -157,18 +157,18 @@ const Employeesalespurchase = () => {
                       name="upcomingeventSelect"
                       sx={{ color:"white" }}></Checkbox>
                   </StyledTableCell>
-                  <StyledTableCell>Ad Title</StyledTableCell>
-                  <StyledTableCell>Ad Type</StyledTableCell>
-                  <StyledTableCell>Ad Description</StyledTableCell>
-                  <StyledTableCell>Mobile Number</StyledTableCell>
-                  <StyledTableCell>Image</StyledTableCell>
+                  <StyledTableCell>Article Title</StyledTableCell>
+                  <StyledTableCell>Article Link</StyledTableCell>
+                  <StyledTableCell>Article Description</StyledTableCell>
+                  <StyledTableCell>Start Date</StyledTableCell>
+                  <StyledTableCell>End Date</StyledTableCell>
                   <StyledTableCell>Status</StyledTableCell>
                   <StyledTableCell>Actions</StyledTableCell>
                 </TableRow>
               </TableHead>
-              { salespurchasedata.length > 0 &&
+              { articledata.length > 0 &&
               <TableBody>
-                {salespurchasedata
+                {articledata
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((e) => {if(e.isDeleted == false)
                     return (
@@ -180,17 +180,17 @@ const Employeesalespurchase = () => {
                         <StyledTableCell>
                           <Checkbox size="small" />
                         </StyledTableCell>
-                        <StyledTableCell>{e.salespurchaseTitle}</StyledTableCell>
-                        <StyledTableCell>{e.salespurchaseType}</StyledTableCell>
-                        <StyledTableCell>{e.salespurchaseDescription}</StyledTableCell>
-                        <StyledTableCell>{e.salespurchaseMNumber}</StyledTableCell>
-                        <StyledTableCell><img src={e.salespurchaseImage} height="50rem" width="50rem" style={{}} /></StyledTableCell>
+                        <StyledTableCell>{e.articleTitle}</StyledTableCell>
+                        <StyledTableCell>{e.articleLink}</StyledTableCell>
+                        <StyledTableCell>{e.articleDescription}</StyledTableCell>
+                        <StyledTableCell>{e.articleStartDate}</StyledTableCell>
+                        <StyledTableCell><img src={e.articleEndDate} height="50rem" width="50rem" style={{}} /></StyledTableCell>
                         <StyledTableCell>{e.isApproved==false?"Not Approved":"Approved"}</StyledTableCell>
                         <StyledTableCell>
                           <LinkRoute
                             to={{
                               pathname:
-                                "/employeedashboard/employeesalespurchase/updateemployeesalespurchase/:id",
+                                "/employeedashboard/employeearticle/updateemployeearticle/:id",
                               state: { idParam: e.id },
                             }}>
                             <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />
@@ -209,7 +209,7 @@ const Employeesalespurchase = () => {
           <TablePagination
             rowsPerPageOptions={[5]}
             component="div"
-            count={salespurchasedata.length}
+            count={articledata.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -221,4 +221,4 @@ const Employeesalespurchase = () => {
   );
 };
 
-export default Employeesalespurchase;
+export default Employeearticle;

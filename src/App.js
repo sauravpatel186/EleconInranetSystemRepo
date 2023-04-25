@@ -67,6 +67,9 @@ import { UserProvider } from './context/UserContext';
 import EmployeeDirectory from "./pages/employeedirectory/EmployeeDirectory";
 
 import Approvesalespurchase from "./pages/approvesalespurchase/Approvesalespurchase";
+import Createemployeesalespurchase from "./pages/employeesalespurchase/createemployeesalespurchase/Createemployeesalespurchase";
+import Employeearticle from "./pages/article/Employeearticle";
+import Createemployeearticle from "./pages/article/createarticle/Createemployeearticle";
 function App() {
   const USER_TYPES = {
     PUBILIC: "Public User",
@@ -172,7 +175,8 @@ function App() {
                     <Route exact path="/admindashboard/managementdesk"><Managementdesk /></Route>
                     <Route index path="/admindashboard/managementdesk/createmanagementdesk"><Createmanagementdesk /></Route>
                     <Route index path="/admindashboard/managementdesk/updatemanagementdesk/:id"><Updatemanagementdesk /></Route>
-                    <Route exact path="/admindashboard/canteenmenu"><Canteenmenu /></Route>                
+                    <Route exact path="/admindashboard/canteenmenu"><Canteenmenu /></Route>  
+                    <Route exact path="/admindashboard/canteenmenu/updatecanteenmenu/:id"><Updatecanteenmenu/></Route>             
                     <Route exact path="/admindashboard/canteenmenu/createcanteenmenu"><Createcanteenmenu /></Route>
                     <Route exact path="/admindashboard/announcement"><Announcements /></Route>
                     <Route exact path="/admindashboard/announcement/createannouncement"><CreateAnnouncement /></Route>
@@ -206,9 +210,11 @@ function App() {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Switch>
                     <Route exact path="/employeedashboard/employeesalespurchase"><Employeesalespurchase /></Route>
-                    {/* <Route exact path="/employeedashboard/createemployeesalespurchase"></></Route> */}
-                  {/* <Route exact path="/employeedashboard/employeesalespurchase/updateemployeesalespurchase/:id"><Updatesalespurchase /></Route> */}
+                    <Route exact path="/employeedashboard/employeesalespurchase/createemployeesalespurchase"><Createemployeesalespurchase/></Route>
+                  <Route exact path="/employeedashboard/employeesalespurchase/updateemployeesalespurchase/:id"><Updatesalespurchase /></Route>
                   <Route exact path="/employeedashboard/employeedirectory"><EmployeeDirectory/></Route>
+                  <Route exact path="/employeedashboard/employeearticle"><Employeearticle/></Route>
+                  <Route exact path="/employeedashboard/employeearticle/createemployeearticle"><Createemployeearticle/></Route>
                   </Switch>
                 </LocalizationProvider>
               </div>
