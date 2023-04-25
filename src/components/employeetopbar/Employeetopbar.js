@@ -9,10 +9,24 @@ import {
 import { Menu, MenuItem } from '@mui/material'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom'
 
+import { useMediaQuery, useTheme, Dialog, DialogActions, DialogTitle, Button, DialogContent, DialogContentText, TextField } from '@mui/material'
+
+import { Profile } from '../profile/Profile'
 
 
 export const Employeetopbar = (props) => {
+  const [user,setUser]= useState([]);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('xl'));
+  const [dialogopen, setDialogOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    setDialogOpen(true);
+  };
+  const handleDialogClose = () => {
+    setDialogOpen(false);
+  };
+
   const open = Boolean(anchorEl);
   let history = useHistory();
   const handleClick = (event) => {
@@ -37,13 +51,24 @@ export const Employeetopbar = (props) => {
     props.close();
     history.push("/");
   }
+  useEffect(() => {
+    let data = JSON.parse(localStorage.getItem("user"));
+    if (data !== undefined && data !== null) {
+      setUser(data);
+
+    }
+    else {
+      setUser([]);
+    }
+  }, [])
   const visible = createContext();
   return (
     <div className='topbar-container'>
       <div className='profile-area'>
         <div className='profile'>
           <div className='profile-photo'>
-            <img className="profile-image" src="/profile-1.jpg" onClick={handleClick} />
+          {user.length > 0 ? <img src={user[0].njImage} className="profile-image" onClick={handleClick} /> : <img className="profile-image" src="/profile-1.jpg" onClick={handleClick} />}
+
           </div>
         </div>
         <Menu
@@ -55,7 +80,7 @@ export const Employeetopbar = (props) => {
             'aria-labelledby': 'basic-button',
           }}
         >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
+          <MenuItem onClick={handleClickOpen}>Profile</MenuItem>
           <MenuItem onClick={() => {
             handleClose()
             props.close()
@@ -66,6 +91,25 @@ export const Employeetopbar = (props) => {
       <button id='menu-btn' name='hambutton' onClick={openSidebar}>
         <span><MenuIcon /></span>
       </button>
+      <Dialog
+        fullScreen={fullScreen}
+        open={dialogopen}
+        onClose={handleDialogClose}
+        aria-labelledby="responsive-dialog-title"
+      >
+        <DialogTitle id="responsive-dialog-title">
+          Profile
+        </DialogTitle>
+        <DialogContent>
+
+          <Profile/>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleDialogClose}>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
 
   )

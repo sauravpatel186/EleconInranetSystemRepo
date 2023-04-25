@@ -1,0 +1,31 @@
+.opinion-card-container{
+    display: flex;
+    flex-direction: column;
+    margin:0.5rem 1rem 0rem 1rem;
+    height: 9rem ;
+    overflow: hidden;
+    color: white !important;
+}
+.opinion-card-container:hover{
+    overflow: auto;
+}
+.thought-card-content{
+    
+}
+.opinion-card-title{
+    text-align: justify;
+    font-size: 14px !important;
+}
+.opinion-card-description{
+    text-align: justify;
+    font-size: 14px !important;
+    margin-top: 0.5rem;
+}
+.opinion-card-buttons{
+    display: flex;
+    flex-direction: row;
+}
+.opinion-card-buttons .radiobtn{
+    display: flex;
+    flex-direction: row !important;
+}

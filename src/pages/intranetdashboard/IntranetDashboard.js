@@ -1,4 +1,4 @@
-import { Menu, MenuItem, Typography,useMediaQuery, useTheme, Dialog, DialogActions, DialogTitle, Button, DialogContent } from '@mui/material'
+import { Menu, MenuItem, Typography, useMediaQuery, useTheme, Dialog, DialogActions, DialogTitle, Button, DialogContent } from '@mui/material'
 import React, { useEffect } from 'react'
 import { Close, Menu as MenuIcon } from '@mui/icons-material'
 import { useState } from 'react'
@@ -18,17 +18,18 @@ import { CanteenMenuCard } from '../../components/cards/canteenmenucard/CanteenM
 import { Profile } from '../../components/profile/Profile'
 import { Thougthcard } from '../../components/cards/thougthcard/Thougthcard'
 import { CMDcard } from '../../components/cards/cmdcard/CMDcard'
+import { OpinionPollCard } from '../../components/cards/opinionpollcard/OpinionPollCard'
 export const IntranetDashboard = (props) => {
     const [time, setTime] = React.useState(new Date());
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('xl'));
     const [dialogopen, setDialogOpen] = React.useState(false);
     const handleClickOpen = () => {
-      setDialogOpen(true);
+        setDialogOpen(true);
     };
     const handleDialogClose = () => {
         setDialogOpen(false);
-      };
+    };
     React.useEffect(() => {
         setInterval(() => {
             setTime(new Date());
@@ -166,7 +167,7 @@ export const IntranetDashboard = (props) => {
                         open={dialogopen}
                         onClose={handleDialogClose}
                         aria-labelledby="responsive-dialog-title"
-                        sx={{zIndex:4000}}
+                        sx={{ zIndex: 4000 }}
                     >
                         <DialogTitle id="responsive-dialog-title">
                             Profile
@@ -191,7 +192,7 @@ export const IntranetDashboard = (props) => {
                         }}
                         style={{ zIndex: 3000 }}
                     >
-                        <MenuItem onClick={()=>{
+                        <MenuItem onClick={() => {
                             handleClickOpen()
                             handleClose()
                         }}>Profile</MenuItem>
@@ -229,7 +230,7 @@ export const IntranetDashboard = (props) => {
                                 )
                             }
                             else if (showTime > 18) {
-                                
+
                                 return (
                                     <span>Good Evening</span>
                                 )
@@ -260,14 +261,14 @@ export const IntranetDashboard = (props) => {
                         </div>
                     </div>
                     <div className='thought-birthday-container'>
-                    <div className='cmd-container'>
-                    <div className='cmd-text'><Typography variant='body1'>CMD Desk</Typography></div>
+                        <div className='cmd-container'>
+                            <div className='cmd-text'><Typography variant='body1'>CMD Desk</Typography></div>
 
-                                <div className='cmd-box'>
-                                    <CMDcard/>
-                                </div>
+                            <div className='cmd-box'>
+                                <CMDcard />
                             </div>
-                        
+                        </div>
+
                         <div className='birthday-container'>
                             <div className='birthday-text'><Typography variant='body1'>Birthday</Typography></div>
                             <div className='birthday-box'>
@@ -316,13 +317,13 @@ export const IntranetDashboard = (props) => {
                             <div className='opinion-container'>
                                 <div className='opinion-box'>
                                     <div className='opinion-text'><Typography variant='body1'>Opinion Poll</Typography></div>
-
+                                    <OpinionPollCard/>
                                 </div>
                             </div>
                             <div className='thought-container'>
-                            <div className='thought-text'><Typography variant='body1'>Thougth of the day</Typography></div>
-                            <div className='thought-box'><Thougthcard/></div>
-                        </div>
+                                <div className='thought-text'><Typography variant='body1'>Thougth of the day</Typography></div>
+                                <div className='thought-box'><Thougthcard /></div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,7 @@
 .thought-card-container{
     margin:0.2rem 1rem 0rem 1rem;
+    height: 6rem ;
+    overflow: auto;
 }
 .thought-card-text{
     text-align: justify;

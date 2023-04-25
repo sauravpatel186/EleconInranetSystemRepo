@@ -80,8 +80,8 @@ function App() {
   const [user, setUser] = useState([]);
   const [role,setRole] = useState("");
   const [loading, setLoding] = useState(false);
-  const getUserData = async () => {
-    let roledata = await JSON.parse(localStorage.getItem("role"));
+  const getUserData = () => {
+    let roledata = JSON.parse(localStorage.getItem("role"));
     console.log(roledata);
     if (roledata != null || roledata != undefined) {
       setRole(roledata)

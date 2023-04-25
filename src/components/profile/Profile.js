@@ -213,7 +213,7 @@ export const Profile = () => {
                                             <input
                                                 id="contained-button-file"
                                                 type="file"
-                                                name="profileImage"
+                                                name="njImage"
                                                 inputProps={{ className: "small" }}
                                                 onBlur={handleBlur}
 
@@ -246,7 +246,7 @@ export const Profile = () => {
                                             component="span"
                                             color="error"
                                             onClick={() => {
-                                                setFieldValue("profileImage", "");
+                                                setFieldValue("njImage", "");
                                             }}
                                         >
                                             Remove

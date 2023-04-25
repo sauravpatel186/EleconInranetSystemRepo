@@ -17,13 +17,16 @@ export const Thougthcard = () => {
         return day;
     }
     const getData = async () => {
-        let data = await JSON.parse(localStorage.getItem("thought"));
-        let finaldata = data.filter(e => e.isDeleted == false);
-        setThougth(finaldata[index()].Thoughttitle);
+        let data = await (JSON.parse(localStorage.getItem("thought"))).filter(e=>e.isDeleted == false);
+        // let finaldata = data[index()];
+        
+        setThougth(data[index()].Thoughttitle);
+        
+        
         if (thougth.length > 0) {
-            let newStr = (thougth) => (thougth.endsWith(".,") ? thougth.substring(0, thougth.length - 1) : thougth).split(".,");
+            let newStr =  (thougth) => (thougth.endsWith(".,") ? thougth.substring(0, thougth.length - 1) : thougth).split(".,");
             setTitle(newStr(thougth)[0]);
-            let str = (thougth) => (thougth.endsWith(",") ? thougth.substring(0, thougth.length - 1) : thougth).split(",");
+            let str =  (thougth) =>  (thougth.endsWith(",") ? thougth.substring(0, thougth.length - 1) : thougth).split(",");
             setAuthor(str(newStr(thougth)[1])[0]);
             setShow(true);
         }
