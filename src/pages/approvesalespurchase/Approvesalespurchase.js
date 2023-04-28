@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 //import Createsalespurchase from "./createsalespurchase/Createsalespurchase";
 import "../salespurchase/Salespurchase.css";
-import { Announcement, Approval, Done, Edit } from "@mui/icons-material";
+import { Announcement, Approval, Close, Done, Edit } from "@mui/icons-material";
 import { Delete, ModeEdit } from "@mui/icons-material";
 import { Link as LinkRoute } from "react-router-dom";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -103,6 +103,16 @@ const Approvesalespurchase = () => {
     const index = salespurchasedata.indexOf(salespurchasedata.find((a => a.id == e )));
     console.log(index)
     salespurchasedata[index].isApproved = true
+    setsalespurchasedata(salespurchasedata);
+    console.log(salespurchasedata)
+    navigate.push("/admindashboard/approvesalespurchase")
+    localStorage.setItem("salespurchase",JSON.stringify(salespurchasedata))
+  }
+  const handleDisapprove = (e) => {
+    console.log(e);
+    const index = salespurchasedata.indexOf(salespurchasedata.find((a => a.id == e )));
+    console.log(index)
+    salespurchasedata[index].isApproved = false
     setsalespurchasedata(salespurchasedata);
     console.log(salespurchasedata)
     navigate.push("/admindashboard/approvesalespurchase")
@@ -191,9 +201,10 @@ const Approvesalespurchase = () => {
                         <StyledTableCell>{e.salespurchaseMNumber}</StyledTableCell>
                         <StyledTableCell><img src={e.salespurchaseImage} height="50rem" width="50rem" style={{}} /></StyledTableCell>
                         <StyledTableCell>{!e.isApproved?"Not Approved":"Approved"}</StyledTableCell>
-                        <StyledTableCell>{!e.isApproved &&
+                        <StyledTableCell>{!e.isApproved ?
                         <Button size='small' id={e.id} key={e.id} onClick={(event) => handleStatus(e.id)} sx={{ verticalAlign: "bottom", minWidth: "auto" }}><Done sx={{ color: "green" }} /></Button>
-                }
+                         : <Button size='small' id={e.id} key={e.id} onClick={(event) => handleDisapprove(e.id)} sx={{ verticalAlign: "bottom", minWidth: "auto" }}><Close sx={{ color: "red" }} /></Button>
+                         } 
                           <Button size='small' id={e.id} key={e.id} onClick={(event) => handleDelete(e.id)} sx={{ verticalAlign: "bottom", minWidth: "auto" }}><Delete sx={{ color: "red" }} /></Button>
                         </StyledTableCell>
                       </StyledTableRow>

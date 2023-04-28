@@ -1,0 +1,80 @@
+.employee-recognition-carousel {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    height: 19rem;
+    margin: 0 0 0.8rem 0;
+    gap: 1rem;
+}
+.employee-recognition-carousel .slider{
+    height: 0px !important;
+}
+.employee-recognition-carousel .slider-wrapper {
+    height: 19rem !important;
+}
+
+.employee-recognition-carousel .slider-wrapper li:last-child{
+    visibility: hidden;
+}
+
+.employee-recognition-carousel .slider-wrapper li:nth-last-child(2){
+    visibility: hidden;
+} 
+/* .newjoinee-profile {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 68px;
+    border-radius:50%;    
+    padding: 0px;
+    background: #2B50AA;
+    
+} */
+/* .newjoinee-profile{
+    width: 50px;
+} */
+.employee-recognition-text-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-bottom: 8px;
+    height: 9rem;
+    border-radius:1rem;
+    /* background-color: aqua; */
+}
+
+.employee-recognition-carousel .employee-recognition-text-container .employee-recognition-text-description {
+    text-align: justify;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+}
+
+.employee-recognition-carousel .employee-recognition-profile {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 0.7rem;
+    margin-left: 0.3rem;
+}
+
+.employee-recognition-carousel .employee-recognition-photo {
+    display: block;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.employee-recognition-carousel .slider li:nth-child(even){
+    background-color: #F99F01 !important;
+    border-radius: 0.5rem;
+}
+.employee-recognition-carousel .slider li:nth-child(odd){
+    background-color: #1C4CCC !important;
+    border-radius: 0.5rem;
+}
+.employee-recognition-carousel  p
+{
+    color: white !important;
+}

@@ -257,7 +257,7 @@ const onSelectFile = (e, setFieldValue, setFieldError) => {
                       components={["DatePicker", "DatePicker"]}>
                       <DatePicker
                         label="Start Date"
-                        value={dayjs(parseISO(values.eventStartDate))}
+                        value={dayjs(values.eventStartDate)}
                         format="DD-MM-YYYY"
                         sx={{ width: 100 + "%" }}
                         onChange={(newValue) =>
@@ -275,7 +275,7 @@ const onSelectFile = (e, setFieldValue, setFieldError) => {
                     <DemoContainer required components={["DatePicker"]}>
                       <DatePicker
                         label="End Date"
-                        value={dayjs(parseISO(values.eventEndDate))}
+                        value={dayjs(values.eventEndDate)}
                         format="DD-MM-YYYY"
                         sx={{ width: 100 + "%" }}
                         onChange={(newValue) =>

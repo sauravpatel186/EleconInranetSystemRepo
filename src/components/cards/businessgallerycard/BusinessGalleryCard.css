@@ -1,0 +1,22 @@
+.achievement-card-container .slider-wrapper{
+    height: 20rem !important;
+}
+.achievement-card-container .carousel .slider-wrapper.axis-horizontal .slider {
+    height: 20rem !important;
+}
+.achievement-card-container .carousel .slide .legend 
+{
+    border-radius: 0rem !important;
+    bottom: 0px !important;
+    width: 100% !important;
+    padding: 1rem !important;
+    margin-left: -50% !important;
+    height: fit-content;
+    text-align: center;
+    vertical-align: middle;
+    opacity: 0.5 !important;
+    transition: opacity .35s ease-in-out !important;
+}
+.achievement-card-container .carousel .slide .legend:hover{
+    opacity: 1 !important;
+}

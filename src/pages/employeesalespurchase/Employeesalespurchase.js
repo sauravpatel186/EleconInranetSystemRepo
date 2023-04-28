@@ -58,9 +58,11 @@ const Employeesalespurchase = () => {
 
   const getLocalItem = async() => {
     let udata=localStorage.getItem("user");
-    // if (udata) {
-    //   setuserdata(JSON.parse(udata));
-    // }
+    if (udata) {
+      setuserdata(JSON.parse(udata));
+    }
+  };
+  const getSalespurchasedata = async() =>{
     let data = await JSON.parse(localStorage.getItem("salespurchase"));
     if (data) {
       let adata=data.filter(ad=>ad.isDeleted==false && ad.empid==userdata[0].id)
@@ -68,9 +70,7 @@ const Employeesalespurchase = () => {
     } else {
       return [];
     }
-    
-  };
-
+  }
   useEffect(() => {
     try {
       getLocalItem();
@@ -78,7 +78,9 @@ const Employeesalespurchase = () => {
       console.error(error);
     }
   }, []);
-
+  useEffect(()=>{
+    getSalespurchasedata();
+  },[userdata])
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };

@@ -8,7 +8,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import "./Createnewjoinee.css";
 import { ValidationErrorMessage } from "../../../../src/components/ValidationErrorMessage/ValidationErrorMessage"
-import { Breadcrumbs, Divider, Input } from "@mui/material";
+import { Breadcrumbs, Divider, Input, Menu } from "@mui/material";
 import dayjs from "dayjs";
 import * as Yup from "yup";
 import { Formik } from "formik";
@@ -21,7 +21,7 @@ import Button from "@mui/material/Button";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link, useRouteMatch, useHistory } from "react-router-dom";
-
+import companyList from "../../../assets/data/companyanddepartment";
 const showToastMessage = () => {
     toast.success('Success Notification !', {
         position: toast.POSITION.TOP_RIGHT
@@ -29,7 +29,7 @@ const showToastMessage = () => {
 };
 
 const Createnewjoinee = () => {
-
+    const [department, setDepartment] = useState([]);
     const navigate = useHistory();
     const [newjoinee, setNewjoinee] = useState([]);
     const [newemp, setNewemp] = useState([]);
@@ -46,7 +46,7 @@ const Createnewjoinee = () => {
         njEmail: Yup.string().required("Email is required"),
         njPassword: Yup.string().required("Password is required"),
         njRole: Yup.string().required("Roles is required"),
-        njDesignation : Yup.string().required("Designation is required"),
+        njDesignation: Yup.string().required("Designation is required"),
         njAddress: Yup.string().required("Address is required"),
         njMobileNo: Yup.string().required("Mobile No is required"),
     })
@@ -72,6 +72,11 @@ const Createnewjoinee = () => {
             setFieldValue("njImage", "");
         }
     };
+    const onSelectCompany = (e, setFieldValue, setFieldError) => {
+        const company = e.target.value;
+        setFieldValue("njCompany", company);
+        setDepartment(companyList.filter(c => c.CompanyName == company)[0].DepartmentName);
+    }
     useEffect(() => {
         let data = localStorage.getItem("nj");
         let edata = localStorage.getItem("employee");
@@ -79,6 +84,7 @@ const Createnewjoinee = () => {
             setNewjoinee(JSON.parse(data));
             setNewemp(JSON.parse(edata));
         }
+        console.log(companyList);
     }, []);
     return (
         <div className="page-information-container">
@@ -125,8 +131,8 @@ const Createnewjoinee = () => {
                         njDob: null,
                         njDoj: null,
                         njEmail: "",
-                        njRole:"",
-                        njDesignation:"",
+                        njRole: "",
+                        njDesignation: "",
                         njAddress: "",
                         njMobileNo: "",
                         njImage: "",
@@ -147,15 +153,13 @@ const Createnewjoinee = () => {
                             njPassword: data.njPassword,
                             njImage: data.njImage,
                             njRole: data.njRole,
-                            njDesignation : data.njDesignation,
+                            njDesignation: data.njDesignation,
                             njAddress: data.njAddress,
                             njMobileNo: data.njMobileNo,
                             time: Math.floor(Date.now() / 1000),
                             isDeleted: false,
                         }
                         newjoinee.push(nj);
-                        newemp.push(nj)
-                        setNewemp([...newjoinee]);
                         setNewjoinee([...newjoinee]);
                         console.log(newjoinee);
                         localStorage.setItem("nj", JSON.stringify(newjoinee));
@@ -285,7 +289,7 @@ const Createnewjoinee = () => {
 
                                     </div>
                                     <div className="createeventforminput">
-                                        <FormControl sx={{ width: 100 + "%"}}>
+                                        <FormControl sx={{ width: 100 + "%" }}>
                                             <InputLabel id="demo-simple-select-autowidth-label">Role</InputLabel>
                                             <Select
                                                 labelId="demo-simple-select-autowidth-label"
@@ -297,13 +301,39 @@ const Createnewjoinee = () => {
                                                 value={values.njRole}>
                                                 <MenuItem value={"Normal"}>Normal</MenuItem>
                                                 <MenuItem value={"Admin"}>Admin</MenuItem>
-                                                
+
                                             </Select>
                                         </FormControl>
                                         <ValidationErrorMessage message={errors.njCompany} touched={touched.njCompany} />
                                     </div>
                                 </div>
                                 <div className="formrow">
+
+                                    <div className="createeventforminput">
+                                        <FormControl sx={{ width: 100 + "%", marginTop: "1vh" }}>
+                                            <InputLabel id="demo-simple-select-autowidth-label">Company</InputLabel>
+                                            <Select
+                                                labelId="demo-simple-select-autowidth-label"
+                                                id="demo-simple-select-autowidth-label"
+                                                name="njCompany"
+                                                type="njCompany"
+                                                label="Company"
+                                                onChange={(e) =>
+                                                    onSelectCompany(e, setFieldValue, setFieldError)
+                                                }
+                                                value={values.njCompany}>
+                                                {
+                                                    companyList.map((company) => {
+                                                        return (
+                                                            <MenuItem key={company} value={company.CompanyName}>{company.CompanyName}</MenuItem>
+                                                        )
+                                                    })
+                                                }
+
+                                            </Select>
+                                        </FormControl>
+                                        <ValidationErrorMessage message={errors.njCompany} touched={touched.njCompany} />
+                                    </div>
                                     <div className="createeventforminput">
                                         <FormControl sx={{ width: 100 + "%", marginTop: "1vh" }}>
                                             <InputLabel id="demo-simple-select-autowidth-label">Department</InputLabel>
@@ -315,37 +345,29 @@ const Createnewjoinee = () => {
                                                 label="Department"
                                                 onChange={handleChange}
                                                 value={values.njDepartment}>
-                                                <MenuItem value={"Department 1"}>Department 1</MenuItem>
-                                                <MenuItem value={"Department 2"}>Department 2</MenuItem>
-                                                <MenuItem value={"Department 3"}>Department 3</MenuItem>
+                                                {
+                                                    department && 
+                                                        
+                                                            
+                                                                department.map((dep)=>{
+                                                                    return (
+                                                                        <MenuItem value={dep} key={dep}>{dep}</MenuItem>
+                                                                    )
+                                                                })
+                                                            
+                                                        
+                                                    
+                                                }
                                             </Select>
                                         </FormControl>
                                         <ValidationErrorMessage message={errors.njDepartment} touched={touched.njDepartment} />
                                     </div>
-                                    <div className="createeventforminput">
-                                        <FormControl sx={{ width: 100 + "%", marginTop: "1vh" }}>
-                                            <InputLabel id="demo-simple-select-autowidth-label">Company</InputLabel>
-                                            <Select
-                                                labelId="demo-simple-select-autowidth-label"
-                                                id="demo-simple-select-autowidth-label"
-                                                name="njCompany"
-                                                type="njCompany"
-                                                label="Company"
-                                                onChange={handleChange}
-                                                value={values.njCompany}>
-                                                <MenuItem value={"Company 1"}>Company 1</MenuItem>
-                                                <MenuItem value={"Company 2"}>Company 2</MenuItem>
-                                                <MenuItem value={"Company 3"}>Company 3</MenuItem>
-                                            </Select>
-                                        </FormControl>
-                                        <ValidationErrorMessage message={errors.njCompany} touched={touched.njCompany} />
-                                    </div>
                                 </div>
-                                
+
                                 <div className="formrow">
-                                    
+
                                     <div className="createeventforminput">
-                                    <TextField
+                                        <TextField
                                             label="Designation"
                                             name="njDesignation"
                                             type="njDesignation"
@@ -358,7 +380,7 @@ const Createnewjoinee = () => {
 
                                     </div>
                                     <div className="createeventforminput">
-                                    <TextField
+                                        <TextField
                                             label="Mobile No"
                                             name="njMobileNo"
                                             type="njMobileNo"
@@ -371,7 +393,7 @@ const Createnewjoinee = () => {
 
                                     </div>
                                 </div>
-                                
+
                                 <div className="formrow">
                                     <div className="createachievementforminput">
                                         <TextField

@@ -25,22 +25,31 @@ export const CanteenMenuCard = () => {
                         return (
                             <div className="canteenmenucard-text" key={e.id}>
 
-                                <Typography variant="body1" sx={{ fontWeight: "bold !important",fontSize:16+"px !important",color:"#8B8B8B !important"}}>
+                                <Typography variant="h6">
                                     Breakfast
                                 </Typography>
                                 <div className="canteenmenucard-breakfast">
                                     <ul className='' >{(e.newmenuBreakfastFood).split(",").map((x) => {
-                                        return <li key={x}> <Typography variant="body2" sx={{color:"#8B8B8B !important"}}>{x} </Typography></li>
+                                        return <li key={x}> <Typography variant="body2" sx={{ color: "#8B8B8B !important" }}>{x} </Typography></li>
+                                    })}
+                                    </ul>
+                                    <ul className='' >{(e.newmenuBreakfastBeverage).split(",").map((x) => {
+                                        return <li key={x}> <Typography variant="body2" sx={{ color: "#8B8B8B !important" }}>{x} </Typography></li>
                                     })}
                                     </ul>
                                 </div>
-                                <Divider orientation='horizontal'/>
-                                <Typography variant="body1" sx={{ fontWeight: "bold !important",fontSize:16+"px !important",color:"#8B8B8B !important"}}>
+                                <Divider orientation='horizontal' />
+                                <Typography variant="h6">
                                     Lunch
                                 </Typography>
                                 <div className="canteenmenucard-lunch">
+                                    <ul>{(e.newmenuLunchBeverage
+                                    ).split(",").map((x) => {
+                                        return <li key={x}><Typography variant="body2" sx={{ color: "#8B8B8B !important" }}>{x}</Typography></li>
+                                    })}
+                                    </ul>
                                     <ul>{(e.newmenuLunchFood).split(",").map((x) => {
-                                        return <li key={x}><Typography variant="body2" sx={{color:"#8B8B8B !important"}}>{x}</Typography></li>
+                                        return <li key={x}><Typography variant="body2" sx={{ color: "#8B8B8B !important" }}>{x}</Typography></li>
                                     })}
                                     </ul>
 

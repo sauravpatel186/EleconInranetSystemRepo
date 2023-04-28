@@ -25,13 +25,7 @@ export const Createthought = () => {
     const navigate = useHistory();
     const [newthought,setNewThought]=useState([]);
     const ValidationSchema = Yup.object().shape({
-        thoughtTitle: Yup.string().required("Title is required"),
-        authorName: Yup.string().required("Author name is required"),
-        thoughtType: Yup.string().required("Please select an option"),
-        thoughtStartDate: Yup.string().required("Start Date is required"),
-        thoughtEndDate: Yup.string().required("End Date is required"),
-        addThought: Yup.string().required("Thought is required"),
-        thoughtDescription: Yup.string().required("Thought Description is required"),
+        Thoughttitle: Yup.string().required("Title is required"),
     })
 
     useEffect(() => {
@@ -56,26 +50,13 @@ export const Createthought = () => {
                 </div>
                 <Formik
                     initialValues={{
-                        thoughtTitle: "",
-                        authorName: "",
-                        thoughtType: "",
-                        thoughtStartDate: null,
-                        thoughtEndDate: null,
-                        addThought: "",
-                        thoughtDescription: "",
+                        Thoughttitle: "",
                     }}
                     validationSchema={ValidationSchema}
                     onSubmit={data => {
                         let thought = {
                             id: Math.random(),
-                            thoughtTitle: data.thoughtTitle,
-                            authorName: data.authorName,
-                            thoughtType: data.thoughtType,
-                            thoughtStartDate: data.thoughtStartDate,
-                            thoughtEndDate: data.thoughtEndDate,
-                            addThought: data.addThought,
-                            thoughtDescription: data.thoughtDescription,
-                            time: Math.floor(Date.now() / 1000),
+                            Thoughttitle: data.Thoughttitle,
                             isDeleted: false,
                         }
                         newthought.push(thought);
@@ -84,7 +65,7 @@ export const Createthought = () => {
                         toast("Stored Successfully");
                         // console.log(JSON.stringify(thought));
                         // submitData(achievement);
-                        navigate.push("/thoughtoftheday");
+                        navigate.push("/admindashboard/thoughtoftheday");
                     }}
                 >
                     {({ values, handleChange, handleBlur, errors, handleSubmit, touched, setFieldValue, setFieldError }) => (
@@ -94,116 +75,20 @@ export const Createthought = () => {
                                     <div className="createthoughtforminput">
                                         <TextField
                                             label="Thought Title"
-                                            name="thoughtTitle"
-                                            type="thoughtTitle"
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            variant="outlined"
-                                            sx={{ width: 100 + "%" }}
-                                        />
-                                        <ValidationErrorMessage message={errors.thoughtTitle} touched={touched.thoughtTitle} />
-
-                                    </div>
-                                    <div className="createthoughtforminput">
-                                        <TextField
-                                            label="Author Name"
-                                            name="authorName"
-                                            type="authorName"
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            variant="outlined"
-                                            sx={{ width: 100 + "%" }}
-                                        />
-                                        <ValidationErrorMessage message={errors.authorName} touched={touched.authorName} />
-
-                                    </div>
-                                </div>
-                            
-                                <div className="formrow">
-                                    <div className="createthoughtforminput">
-                                        <FormControl sx={{ width: 100 + "%", marginTop: 1 + "vh" }}>
-                                            <InputLabel id="demo-simple-select-autowidth-label">Thought Type</InputLabel>
-                                            <Select
-                                                labelId="demo-simple-select-autowidth-label"
-                                                id="demo-simple-select-autowidth-label"
-                                                name="thoughtType"
-                                                type="thoughtType"
-                                                label="Thought Type"
-                                                onChange={handleChange}
-                                                value={values.thoughtType}>
-                                                <MenuItem value={"Success"}>Success</MenuItem>
-                                                <MenuItem value={"Motivation"}>Motivation</MenuItem>
-                                                <MenuItem value={"Daily"}>Daily</MenuItem>
-                                            </Select>
-                                        </FormControl>
-
-                                        <ValidationErrorMessage message={errors.thoughtType} touched={touched.thoughtType} />
-                                    </div>
-                                    <div className="createthoughtforminput">
-                                        <DemoContainer required components={["DatePicker", "DatePicker"]}>
-                                            <DatePicker
-                                                label="Start Date"
-                                                value={values.thoughtStartDate}
-                                                required
-                                                format="DD-MM-YYYY"
-                                                sx={{ width: 100 + "%" }}
-                                                onChange={(newValue) => setFieldValue("thoughtStartDate", newValue)}
-                                                disablePast
-                                            />
-                                        </DemoContainer>
-                                        <ValidationErrorMessage message={errors.thoughtStartDate} touched={touched.thoughtStartDate} />
-
-                                    </div>
-                                    <div className="createthoughtforminput">
-                                        <DemoContainer required components={["DatePicker"]}>
-                                            <DatePicker
-                                                label="End Date"
-                                                value={values.thoughtEndDate}
-                                                required
-                                                format="DD-MM-YYYY"
-                                                sx={{ width: 100 + "%" }}
-                                                onChange={(newValue) => setFieldValue("thoughtEndDate", newValue)}
-                                                disablePast
-                                            />
-                                        </DemoContainer>
-                                        <ValidationErrorMessage message={errors.thoughtEndDate} touched={touched.thoughtEndDate} />
-
-                                    </div>
-                                </div>
-
-                                <div className="formrow">
-                                    <div className="createthoughtforminput">
-                                        <TextField
-                                            label="Add Thought"
-                                            name="addThought"
-                                            type="addThought"
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            variant="outlined"
-                                            sx={{ width: 100 + "%" }}
-                                        />
-                                        <ValidationErrorMessage message={errors.addThought} touched={touched.addThought} />
-
-                                    </div>
-                                </div>
-                                <div className="formrow">
-                                    <div className="createthoughtforminput">
-                                        <TextField
-                                            id="outlined-multiline-static"
-                                            label="Thought Description"
+                                            name="Thoughttitle"
+                                            type="Thoughttitle"
                                             multiline
-                                            rows={4}
-                                            name="thoughtDescription"
-                                            type="thoughtDescription"
-                                            variant="outlined"
+                                            rows={7}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
+                                            variant="outlined"
                                             sx={{ width: 100 + "%" }}
                                         />
-                                        <ValidationErrorMessage message={errors.thoughtDescription} touched={touched.thoughtDescription} />
+                                        <ValidationErrorMessage message={errors.Thoughttitle} touched={touched.Thoughttitle} />
+
                                     </div>
-                                </div>
-                        
+                                    </div>
+                                    
                                 <div className="formrow">
                                     <div className="createthoughtforminput">
                                         <Button variant="contained" color="success" type="submit">

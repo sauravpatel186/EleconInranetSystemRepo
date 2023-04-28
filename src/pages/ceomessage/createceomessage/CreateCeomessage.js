@@ -65,12 +65,12 @@ export const CreateCeomessage = () => {
     return (
         <div className="page-information-container">
             <header className="page-header">
-                <label>Ceomessage</label>
+                <label>CMD Desk</label>
             </header>
             <div className="createceomessage-container">
                 <div className="createceomessage-header">
                     <Typography className="header-font" variant="body" gutterBottom>
-                        Create a new ceomessage
+                        Create a new CMD Desk 
                     </Typography>
                 </div>
                 <div className="form-line">
@@ -135,7 +135,7 @@ export const CreateCeomessage = () => {
                                     </div>     */}
                                     <div className="createceomessageforminput">
                                         <TextField
-                                            label="Ceomessage Title"
+                                            label="Title"
                                             name="ceomessageTitle"
                                             type="ceomessageTitle"
                                             onChange={handleChange}
@@ -223,7 +223,7 @@ export const CreateCeomessage = () => {
                                     <div className="createceomessageforminput">
                                         <TextField
                                             id="outlined-multiline-static"
-                                            label="Ceomessage Description"
+                                            label="Description"
                                             multiline
                                             rows={4}
                                             name="ceomessageDescription"

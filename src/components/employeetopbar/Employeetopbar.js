@@ -88,6 +88,9 @@ export const Employeetopbar = (props) => {
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
       </div>
+      <div className='topbar-text'>
+        <label>Employee Dashboard</label>
+      </div>
       <button id='menu-btn' name='hambutton' onClick={openSidebar}>
         <span><MenuIcon /></span>
       </button>

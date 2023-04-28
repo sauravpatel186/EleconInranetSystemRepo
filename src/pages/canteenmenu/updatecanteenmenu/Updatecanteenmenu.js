@@ -93,12 +93,12 @@ const Updatecanteenmenu = () => {
   return (
     <div className="page-information-container">
       <header className="page-header">
-        <label>Announcement</label>
+        <label>Canteen Menu</label>
       </header>
       <div className="createevent-container">
         <div className="createevent-header">
           <Typography className="header-font" variant="body" gutterBottom>
-            Update Announcement
+            Update Canteen Menu
           </Typography>
         </div>
         <div className="form-line">

@@ -22,14 +22,16 @@ import { ValidationErrorMessage } from "../../../components/ValidationErrorMessa
 import { Formik } from "formik";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { useHistory } from "react-router-dom";
+import companyList from "../../../assets/data/companyanddepartment";
 export const Updatenewjoinee = () => {
+    const [department, setDepartment] = useState([]);
     const { type } = useParams();
     const idParamVal = useLocation().state.idParam;
     console.log(idParamVal);
     const [newjoinee, setNewJoinee] = useState([]);
     const [allnj, setAllnj] = useState([]);
     const [njData, setnjData] = useState({
-       
+
         njFirstName: "",
         njMiddleName: "",
         njLastName: "",
@@ -37,7 +39,7 @@ export const Updatenewjoinee = () => {
         njPassword: "",
         njGender: "",
         njDob: "",
-        njDoj:"",
+        njDoj: "",
         njEmail: "",
         njRole: "",
         njDesignation: "",
@@ -56,7 +58,7 @@ export const Updatenewjoinee = () => {
             njCompany: e[0]["njCompany"],
             njDob: e[0]["njDob"],
             njDoj: e[0]["njDoj"],
-            njGender:e[0]["njGender"],
+            njGender: e[0]["njGender"],
             njEmail: e[0]["njEmail"],
             njPassword: e[0]["njPassword"],
             njAddress: e[0]["njAddress"],
@@ -128,7 +130,7 @@ export const Updatenewjoinee = () => {
         }
     };
     const UpdateData = (id, updatedData) => {
-        
+
         const datawithId = newjoinee.find(e => e.id == id); // finds the element with id 
         if (datawithId["id"] === updatedData.id) {
             let temp = JSON.parse(localStorage.getItem("nj"));
@@ -137,15 +139,20 @@ export const Updatenewjoinee = () => {
             setAllnj([...temp])
             console.log(allnj);
         }
-        
+
     }
     useEffect(() => {
-        
-        if(allnj.length > 0) {
+
+        if (allnj.length > 0) {
             localStorage.setItem('nj', JSON.stringify(allnj));
             navigate.push("/admindashboard/newjoinee");
         }
-    },[allnj])
+    }, [allnj])
+    const onSelectCompany = (e, setFieldValue, setFieldError) => {
+        const company = e.target.value;
+        setFieldValue("njCompany", company);
+        setDepartment(companyList.filter(c => c.CompanyName == company)[0].DepartmentName);
+    }
     return (
         <div className="page-information-container">
             <header className="page-header">
@@ -185,9 +192,9 @@ export const Updatenewjoinee = () => {
                             time: Math.floor(Date.now() / 1000),
                             isDeleted: false,
                         }
-            
 
-                        UpdateData(idParamVal,newData);
+
+                        UpdateData(idParamVal, newData);
                     }}>
                     {({ values, handleChange, handleBlur, errors, handleSubmit, touched, setFieldValue, setFieldError }) => (
                         <form onSubmit={handleSubmit}>
@@ -202,7 +209,7 @@ export const Updatenewjoinee = () => {
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             variant="outlined"
-                                            
+
                                             sx={{ width: 100 + "%" }}
                                         />
                                         <ValidationErrorMessage message={errors.njFirstName} touched={touched.njFirstName} />
@@ -245,7 +252,7 @@ export const Updatenewjoinee = () => {
                                                 format="DD-MM-YYYY"
                                                 sx={{ width: 100 + "%" }}
                                                 onChange={(newValue) => setFieldValue("njDob", newValue)}
-                                                
+
                                             />
                                         </DemoContainer>
                                         <ValidationErrorMessage message={errors.njDob} touched={touched.njDob} />
@@ -260,7 +267,7 @@ export const Updatenewjoinee = () => {
                                                 format="DD-MM-YYYY"
                                                 sx={{ width: 100 + "%" }}
                                                 onChange={(newValue) => setFieldValue("njDoj", newValue)}
-                                                
+
                                             />
                                         </DemoContainer>
                                         <ValidationErrorMessage message={errors.njDoj} touched={touched.njDoj} />
@@ -287,8 +294,33 @@ export const Updatenewjoinee = () => {
 
                                 </div>
                                 <div className="formrow">
+
                                     <div className="createeventforminput">
-                                    <FormControl sx={{ width: 100 + "%" }}>
+                                        <FormControl sx={{ width: 100 + "%" }}>
+                                            <InputLabel id="demo-simple-select-autowidth-label">Company</InputLabel>
+                                            <Select
+                                                labelId="demo-simple-select-autowidth-label"
+                                                id="demo-simple-select-autowidth-label"
+                                                name="njCompany"
+                                                type="njCompany"
+                                                label="Company"
+                                                onChange={(e) =>
+                                                    onSelectCompany(e, setFieldValue, setFieldError)
+                                                }
+                                                value={values.njCompany}>
+                                                {
+                                                    companyList.map((company) => {
+                                                        return (
+                                                            <MenuItem value={company.CompanyName}>{company.CompanyName}</MenuItem>
+                                                        )
+                                                    })
+                                                }
+                                            </Select>
+                                        </FormControl>
+                                        <ValidationErrorMessage message={errors.njCompany} touched={touched.njCompany} />
+                                    </div>
+                                    <div className="createeventforminput">
+                                        <FormControl sx={{ width: 100 + "%"}}>
                                             <InputLabel id="demo-simple-select-autowidth-label">Department</InputLabel>
                                             <Select
                                                 labelId="demo-simple-select-autowidth-label"
@@ -299,30 +331,22 @@ export const Updatenewjoinee = () => {
 
                                                 onChange={handleChange}
                                                 value={values.njDepartment}>
-                                                <MenuItem value={"Department 1"}>Department 1</MenuItem>
-                                                <MenuItem value={"Department 2"}>Department 2</MenuItem>
-                                                <MenuItem value={"Department 3"}>Department 3</MenuItem>
+                                                {
+                                                    department &&
+
+
+                                                    department.map((dep) => {
+                                                        return (
+                                                            <MenuItem value={dep}>{dep}</MenuItem>
+                                                        )
+                                                    })
+
+
+
+                                                }
                                             </Select>
                                         </FormControl>
                                         <ValidationErrorMessage message={errors.njDepartment} touched={touched.njDepartment} />
-                                    </div>
-                                    <div className="createeventforminput">
-                                        <FormControl sx={{ width: 100 + "%", marginTop: "1vh" }}>
-                                            <InputLabel id="demo-simple-select-autowidth-label">Company</InputLabel>
-                                            <Select
-                                                labelId="demo-simple-select-autowidth-label"
-                                                id="demo-simple-select-autowidth-label"
-                                                name="njCompany"
-                                                type="njCompany"
-                                                label="Company"
-                                                onChange={handleChange}
-                                                value={values.njCompany}>
-                                                <MenuItem value={"Company 1"}>Company 1</MenuItem>
-                                                <MenuItem value={"Company 2"}>Company 2</MenuItem>
-                                                <MenuItem value={"Company 3"}>Company 3</MenuItem>
-                                            </Select>
-                                        </FormControl>
-                                        <ValidationErrorMessage message={errors.njCompany} touched={touched.njCompany} />
                                     </div>
                                 </div>
                                 <div className="formrow">
@@ -343,7 +367,7 @@ export const Updatenewjoinee = () => {
 
                                     <div className="createeventforminput">
                                         <TextField
-                                             label="Password"
+                                            label="Password"
                                             name="njPassword"
                                             type="njPassword"
                                             onChange={handleChange}
@@ -356,7 +380,7 @@ export const Updatenewjoinee = () => {
 
                                     </div>
                                     <div className="createeventforminput">
-                                        <FormControl sx={{ width: 100 + "%"}}>
+                                        <FormControl sx={{ width: 100 + "%" }}>
                                             <InputLabel id="demo-simple-select-autowidth-label">Role</InputLabel>
                                             <Select
                                                 labelId="demo-simple-select-autowidth-label"
@@ -368,17 +392,17 @@ export const Updatenewjoinee = () => {
                                                 value={values.njRole}>
                                                 <MenuItem value={"Normal"}>Normal</MenuItem>
                                                 <MenuItem value={"Admin"}>Admin</MenuItem>
-                                                
+
                                             </Select>
                                         </FormControl>
                                         <ValidationErrorMessage message={errors.njCompany} touched={touched.njCompany} />
                                     </div>
                                 </div>
-                                
+
                                 <div className="formrow">
-                                    
+
                                     <div className="createeventforminput">
-                                    <TextField
+                                        <TextField
                                             label="Designation"
                                             name="njDesignation"
                                             type="njDesignation"
@@ -392,7 +416,7 @@ export const Updatenewjoinee = () => {
 
                                     </div>
                                     <div className="createeventforminput">
-                                    <TextField
+                                        <TextField
                                             label="Mobile No"
                                             name="njMobileNo"
                                             type="njMobileNo"
@@ -406,7 +430,7 @@ export const Updatenewjoinee = () => {
 
                                     </div>
                                 </div>
-                                
+
                                 <div className="formrow">
                                     <div className="createachievementforminput">
                                         <TextField

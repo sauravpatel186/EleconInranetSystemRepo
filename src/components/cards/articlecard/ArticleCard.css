@@ -1,0 +1,11 @@
+.article-card-container{
+    margin: 0.4rem;
+}
+.article-card-container .article-card-content{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+    text-align: justify;
+
+}

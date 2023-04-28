@@ -10,8 +10,8 @@ import { Link as LinkRoute } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#ffffff",
-    // color: "white",
+    backgroundColor: "#527ED4",
+    color: "white",
     fontSize: 14,
     fontWeight: 600,
     fontFamily: "Plus Jakarta Sans"
@@ -80,7 +80,7 @@ export const Ceomessage = () => {
   return (
     <div className="page-information-container">
       <div className="page-header"><label>
-        Ceomessage
+        CMD Desk
       </label>
         <div className='page-breadscrumb'>
           <Breadcrumbs aria-label="breadcrumb">
@@ -89,7 +89,7 @@ export const Ceomessage = () => {
             </Link>
             <Link
               underline="hover" area-current="page" style={{ color: "black" }} onClick={() => { navigate.push("/admindashboard/ceomessage") }}>
-              Ceomessage
+              CMD Desk
             </Link>
 
           </Breadcrumbs>

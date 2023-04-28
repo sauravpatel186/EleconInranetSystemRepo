@@ -27,27 +27,25 @@ export const Updatenotice = () => {
     const { type } = useParams();
     const idParamVal = useLocation().state.idParam;
     const [noticeData, setNoticeData] = useState({
-        noticeTitle: "",
-        noticeStartDate: "",
-        noticeEndDate: "",
-        noticeDescription: "",
-        noticeImage: ""
+        newsTitle : "",
+        newsDescription:"",
+        newsStartDate:"",
+        newsEndDate:"",
     });
     const updateState = (e) => {
         setNoticeData(existingValue => ({
             ...existingValue,
-            noticeTitle: e[0]["noticeTitle"],
-            noticeDescription: e[0]["noticeDescription"],
-            noticeEndDate: e[0]["noticeEndDate"],
-            noticeImage: e[0]["noticeImage"],
-            noticeStartDate: e[0]["noticeStartDate"]
+            newsTitle: e[0]["newsTitle"],
+            newsDescription: e[0]["newsDescription"],
+            newsEndDate: e[0]["newsEndDate"],
+            newsStartDate: e[0]["newsImage"],
+            newsStartDate: e[0]["newsDate"]
         })
         )
-        console.log(noticeData);
-        console.log(parseISO("2023-04-06T18:30:00.000Z"));
+        
     }
     const getNoticeData = (id) => {
-        let data = JSON.parse(localStorage.getItem("notice"));
+        let data = JSON.parse(localStorage.getItem("news"));
         if (data) {
             let adata = data.filter(notices => notices.id === id);
             updateState(adata);
@@ -67,34 +65,13 @@ export const Updatenotice = () => {
     }, [])
     const navigate = useHistory();
     const ValidationSchema = Yup.object().shape({
-        noticeTitle: Yup.string().required("Notice Title is required"),
-        noticeStartDate: Yup.string().required("Start Date is required"),
-        noticeEndDate: Yup.string().required("End Date is required"),
-        noticeDescription: Yup.string().required("Notice Description is required"),
-        noticeImage: Yup.string().required("Image is required"),
+        newsTitle: Yup.string().required("News Title is required"),
+        newsStartDate: Yup.string().required("Start Date is required"),
+        newsEndDate: Yup.string().required("End Date is required"),
+        newsDescription: Yup.string().required("News Description is required"),
+        
     })
-    const onSelectFile = (e, setFieldValue, setFieldError) => {
-        const files = e.target.files;
-        if (files?.length) {
-            const fileSelected = e.target.files[0];
-            const fileNameArray = fileSelected.name.split(".");
-            const extension = fileNameArray.pop();
-            if (["png", "jpg", "jpeg"].includes(extension?.toLowerCase())) {
-                const reader = new FileReader();
-                reader.readAsDataURL(fileSelected);
-                reader.onload = function () {
-                    setFieldValue("noticeImage", reader.result);
-                };
-                reader.onerror = function (error) {
-                    throw error;
-                };
-            } else {
-                toast.error("only jpg,jpeg and png files are allowed");
-            }
-        } else {
-            setFieldValue("noticeImage", "");
-        }
-    };
+    
     //Handles The Event when data is changed
     const UpdateData = (id, updatedData) => {
         const datawithId = newnotice.find(e => e.id === id); // finds the element with id 
@@ -109,12 +86,12 @@ export const Updatenotice = () => {
     return (
         <div className="page-information-container">
             <header className="page-header">
-                <label>Notice Board</label>
+                <label>News</label>
             </header>
             <div className="createnotice-container">
                 <div className="createnotice-header">
                     <Typography className="header-font" variant="body" gutterBottom>
-                        Update Notice
+                        Update News
                     </Typography>
                 </div>
                 <div className="form-line">
@@ -127,11 +104,10 @@ export const Updatenotice = () => {
                     onSubmit={data => {
                         let notice = {
                             id: idParamVal,
-                            noticeTitle: data.noticeTitle,
-                            noticeStartDate: JSON.stringify(data.noticeStartDate),
-                            noticeEndDate: JSON.stringify(data.noticeEndDate),
-                            noticeDescription: data.noticeDescription,
-                            noticeImage: data.noticeImage,
+                            newsTitle: data.newsTitle,
+                            newsStartDate: JSON.stringify(data.newsStartDate),
+                            newsEndDate: JSON.stringify(data.newsEndDate),
+                            newsDescription: data.newsDescription,
                             time: Math.floor(Date.now() / 1000),
                             isDeleted: false,
                         }
@@ -142,30 +118,30 @@ export const Updatenotice = () => {
                         <form onSubmit={handleSubmit}>
                             <div className="createnoticeform">
                                 <div className="formrow">
-                                <div className="createnoticeforminput">
+                                <div className="createnoticeforminput" style={{marginTop:0.5+"rem"}}>
                                         <TextField
                                             label="Notice Title"
-                                            name="noticeTitle"
-                                            type="noticeTitle"
+                                            name="newsTitle"
+                                            type="newsTitle"
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            value={values.achievementTitle}
+                                            value={values.newsTitle}
                                             variant="outlined"
                                             sx={{ width: 100 + "%" }}
                                         />
-                                        <ValidationErrorMessage message={errors.noticeTitle} touched={touched.noticeTitle} />
+                                        <ValidationErrorMessage message={errors.newsTitle} touched={touched.newsTitle} />
 
                                     </div>
                                     <div className="createnoticeforminput">
                                         <DemoContainer required components={["DatePicker", "DatePicker"]}>
                                             <DatePicker
                                                 label="View From"
-                                                value={dayjs(parseISO(values.noticeStartDate))}
+                                                value={dayjs(values.newsStartDate)}
                                                 required
                                                 format="DD-MM-YYYY"
-                                                defaultValue={dayjs(parseISO(values.noticeStartDate))}
+                                                
                                                 sx={{ width: 100 + "%" }}
-                                                onChange={(newValue) => setFieldValue("noticeStartDate", newValue)}
+                                                onChange={(newValue) => setFieldValue("newsStartDate", newValue)}
                                                 
                                             />
                                         </DemoContainer>
@@ -176,16 +152,16 @@ export const Updatenotice = () => {
                                         <DemoContainer required components={["DatePicker"]}>
                                             <DatePicker
                                                 label="View Upto"
-                                                value={dayjs(parseISO(values.noticeEndDate))}
+                                                value={dayjs(values.newsEndDate)}
                                                 required
                                                 format="DD-MM-YYYY"
                                                 sx={{ width: 100 + "%" }}
-                                                defaultValue={dayjs(values.noticeEndDate)}
-                                                onChange={(newValue) => setFieldValue("noticeEndDate", newValue)}
+                                                defaultValue={dayjs(values.newsEndDate)}
+                                                onChange={(newValue) => setFieldValue("newsEndDate", newValue)}
                                         
                                             />
                                         </DemoContainer>
-                                        <ValidationErrorMessage message={errors.noticeEndDate} touched={touched.noticeEndDate} />
+                                        <ValidationErrorMessage message={errors.newsEndDate} touched={touched.newsEndDate} />
 
                                     </div>
                                 </div>
@@ -196,72 +172,18 @@ export const Updatenotice = () => {
                                             label="Notice Description"
                                             multiline
                                             rows={4}
-                                            value={values.noticeDescription}
-                                            name="noticeDescription"
-                                            type="noticeDescription"
+                                            value={values.newsDescription}
+                                            name="newsDescription"
+                                            type="newsDescription"
                                             variant="outlined"
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             sx={{ width: 100 + "%" }}
                                         />
-                                        <ValidationErrorMessage message={errors.noticeDescription} touched={touched.noticeDescription} />
+                                        <ValidationErrorMessage message={errors.newsDescription} touched={touched.newsDescription} />
                                     </div>
                                 </div>
-                                <div className="formrow">
-                                    <div className="createnoticeforminput">
-                                        <div className="form-col">
-                                            {!values.noticeImage && (
-                                                <>
-                                                    {" "}
-                                                    <label
-                                                        htmlFor="contained-button-file"
-                                                        className="file-upload-btn"
-                                                    >
-                                                        <Input
-                                                            id="contained-button-file"
-                                                            type="file"
-                                                            name="noticeImage"
-                                                            inputProps={{ className: "small" }}
-                                                            onBlur={handleBlur}
-                                                            onChange={(e) => {
-                                                                onSelectFile(e, setFieldValue, setFieldError);
-                                                            }}
-                                                        />
-                                                        <Button
-                                                            variant="contained"
-                                                            component="span"
-                                                            className="btn pink-btn"
-                                                        >
-                                                            Upload
-                                                        </Button>
-                                                    </label>
-                                                    <ValidationErrorMessage
-                                                        message={errors.noticeImage}
-                                                        touched={touched.noticeImage}
-                                                    />
-                                                </>
-                                            )}
-                                            {values.noticeImage && (
-                                                <div className="uploaded-file-name">
-                                                    <em>
-                                                        <img src={values.noticeImage} className="img-upload" width="10rem" height="10rem" alt="" />
-                                                    </em>
-                                                    <Button
-                                                        style={{ marginLeft: 2 + "rem" }}
-                                                        variant="contained"
-                                                        component="span"
-                                                        color="error"
-                                                        onClick={() => {
-                                                            setFieldValue("noticeImage", "");
-                                                        }}
-                                                    >
-                                                        Remove
-                                                    </Button>
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
+                                
                                 <div className="formrow">
                                     <div className="createnoticeforminput">
                                         <Button variant="contained" color="success" type="submit">

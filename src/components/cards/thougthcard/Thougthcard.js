@@ -19,8 +19,8 @@ export const Thougthcard = () => {
     const getData = async () => {
         let data = await (JSON.parse(localStorage.getItem("thought"))).filter(e=>e.isDeleted == false);
         // let finaldata = data[index()];
-        
-        setThougth(data[index()].Thoughttitle);
+        let i = index();
+        setThougth(data[110].Thoughttitle);
         
         
         if (thougth.length > 0) {
@@ -38,7 +38,7 @@ export const Thougthcard = () => {
         <>{
             show ?
                 <div className='thought-card-container'>
-                    <div className='thought-card-text'>
+                    <div className='thought-card-text' style={{marginTop:1.6+"rem"}}>
                         <Typography variant='body1' sx={{ color: "#8B8B8B !important" }}>"{title}."</Typography>
                     </div>
                     <div className='thought-card-author'>

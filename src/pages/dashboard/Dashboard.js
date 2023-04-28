@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#f9f9f9",
+    backgroundColor: theme.palette.action.hover,
     // color: "black",
     fontSize: 14,
     fontWeight: 600,
@@ -22,7 +22,8 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(even)': {
-    backgroundColor: theme.palette.action.hover,
+    // backgroundColor: theme.palette.action.hover,
+    backgroundColor: "rgba(240, 244, 247,0.5)",
   },
   // hide last border
   '&:last-child td, &:last-child th': {
@@ -149,7 +150,7 @@ export const Dashboard = () => {
         <div className='dashboard-container-table'>
           <div className="dashboard-container-birthday-table">
             <TableContainer>
-              <Table aria-label="simple table" sx={{ height: 16.5 + "rem" }} >
+              <Table aria-label="simple table">
                 <TableHead>
                   <StyledTableRow>
                     <StyledTableCell>#</StyledTableCell>
@@ -174,7 +175,7 @@ export const Dashboard = () => {
           </div>
           <div className="dashboard-container-job-table">
             <TableContainer>
-              <Table aria-label="simple table" sx={{ height: 16.5 + "rem" }}>
+              <Table aria-label="simple table">
                 <TableHead>
                   <StyledTableRow>
                     <StyledTableCell>#</StyledTableCell>

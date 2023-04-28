@@ -65,7 +65,7 @@ const Salespurchase = () => {
       return [];
     }
   };
-
+  
   useEffect(() => {
     try {
       getLocalItem();

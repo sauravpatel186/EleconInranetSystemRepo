@@ -33,7 +33,15 @@
 .profile-image{
     width: 100%;
 }
-
+.topbar-text{
+    margin-left: 34%;
+    margin-right: 40%;
+    font-size: calc(1.325rem + 0.7vw) !important;
+    font-weight: 600 !important;
+    color: var(--cui-body-color);
+    font-family: 'Plus Jakarta Sans';
+    position: absolute;
+}
 @media screen and (max-width: 768px) {
     #menu-btn{
         display: inline-block;
@@ -48,5 +56,10 @@
     }
     #menu-btn:hover{
         background-color: var(--cui-gray-100);
+    }
+    .topbar-text{
+        font-size: calc(1.325rem + 0.2vw) !important;
+        margin-left: 36%;
+        margin-right: 40%;
     }
 }

@@ -19,6 +19,13 @@ import { Profile } from '../../components/profile/Profile'
 import { Thougthcard } from '../../components/cards/thougthcard/Thougthcard'
 import { CMDcard } from '../../components/cards/cmdcard/CMDcard'
 import { OpinionPollCard } from '../../components/cards/opinionpollcard/OpinionPollCard'
+import { SalesPurchaseCard } from '../../components/cards/salespurchasecard/SalesPurchaseCard'
+import { EmployeeGalleyCard } from '../../components/cards/employeegalleycard/EmployeeGalleyCard'
+import { BusinessCard } from '../../components/cards/businessgallerycard/BusinessCard'
+import { EmployeeRecognition } from '../../components/cards/employeerecognition/EmployeeRecognition'
+import { GalleryCard } from '../../components/cards/gallerycard/GalleryCard'
+import { NewsCard } from '../../components/cards/newscard/NewsCard'
+import { ArticleCard } from '../../components/cards/articlecard/ArticleCard'
 export const IntranetDashboard = (props) => {
     const [time, setTime] = React.useState(new Date());
     const theme = useTheme();
@@ -249,6 +256,7 @@ export const IntranetDashboard = (props) => {
                     <div className='gallery-container'>
                         <div className='gallery-text'><Typography variant='body1'>Gallery</Typography></div>
                         <div className='gallery-box'>
+                            <GalleryCard />
                             {/* <Achievementcard /> */}
                             {
                                 /* <img src="/infrastructure-img1.jpg"></img> */}
@@ -286,13 +294,13 @@ export const IntranetDashboard = (props) => {
                     </div>
                     <div className='news-container'>
                         <div className='news-text'><Typography variant='body1'>Latest News</Typography></div>
-                        <div className='news-box'></div>
+                        <div className='news-box'><NewsCard /></div>
                     </div>
                     <div className='anniversary-container'>
                         <div className='anniversary-text'><Typography variant='body1'>Job Anniversary</Typography></div>
-
+                        {/* color: "#fdbe8c" */}
                         <div className='anniversary-box'>
-                            <div className='anniversary-subtext'><p style={{ color: "#fdbe8c" }}>Congratulations</p></div>
+                            <div className='anniversary-subtext'><p style={{ color: "var(--cui-body-color)" }}>Congratulations</p></div>
                             <Jobanniversarycard />
                         </div>
                     </div>
@@ -306,7 +314,7 @@ export const IntranetDashboard = (props) => {
                     </div>
                     <div className='sales-container'>
                         <div className='sales-text'><Typography variant='body1'>Sales/Purchase</Typography></div>
-                        <div className='sales-box'></div>
+                        <div className='sales-box'><SalesPurchaseCard /></div>
                     </div>
                     <div className='container-content-sub-row-4'>
                         <div className='management-container'>
@@ -317,7 +325,7 @@ export const IntranetDashboard = (props) => {
                             <div className='opinion-container'>
                                 <div className='opinion-box'>
                                     <div className='opinion-text'><Typography variant='body1'>Opinion Poll</Typography></div>
-                                    <OpinionPollCard/>
+                                    <OpinionPollCard />
                                 </div>
                             </div>
                             <div className='thought-container'>
@@ -333,7 +341,7 @@ export const IntranetDashboard = (props) => {
                             <Typography variant='body1'>Employee Recognition</Typography>
                         </div>
                         <div className='employee-recognition-box'>
-
+                            <EmployeeRecognition />
                         </div>
                     </div>
                     <div className='employee-gallery-container'>
@@ -341,7 +349,7 @@ export const IntranetDashboard = (props) => {
                             <Typography variant='body1'>Employee Gallery</Typography>
                         </div>
                         <div className='employee-gallery-box'>
-
+                            <EmployeeGalleyCard />
                         </div>
                     </div>
                     <div className='newjoinee-container'>
@@ -388,7 +396,7 @@ export const IntranetDashboard = (props) => {
                         <div className='article-text'>
                             <Typography variant='body1'>Article</Typography>
                         </div>
-                        <div className='article-box'></div>
+                        <div className='article-box'><ArticleCard/></div>
                     </div>
                     <div className='trophy-container'>
                         <div className='trophy-text'>
@@ -405,7 +413,7 @@ export const IntranetDashboard = (props) => {
                             <Typography variant='body1'>Business Gallery</Typography>
                         </div>
                         <div className='business-gallery-box'>
-                            <img src="/infrastructure-img1.jpg"></img>
+                            <BusinessCard />
                         </div>
                     </div>
                     <div className='container-content-sub-row-8'>
@@ -469,7 +477,7 @@ export const IntranetDashboard = (props) => {
                             <Typography variant='body1'>Videos</Typography>
                         </div>
                         <div className='videos-box'>
-                            <img src="/infrastructure-img1.jpg"></img>
+                            <iframe src="https://www.youtube.com/embed/P0_wq1b6Xj4?autoplay=1&mute=1" allowFullScreen title='video' />
                         </div>
                     </div>
                 </div>

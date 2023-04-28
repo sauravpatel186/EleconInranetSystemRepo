@@ -9,7 +9,6 @@ export const OpinionPollCard = () => {
         let data = (JSON.parse(localStorage.getItem("opinionpoll"))).filter(e => e.isDeleted == false);
         if (data.length > 0) {
             setPollData(data);
-            console.log(pollData);
             setShow(true);
         }
 
@@ -31,7 +30,7 @@ export const OpinionPollCard = () => {
                                                 <RadioGroup className='radiobtn'>
                                                     {e.opinionType.split("/").map((e) => {
                                                         return (
-                                                            <FormControlLabel value={e} control={<Radio sx={{
+                                                            <FormControlLabel key={e} value={e} control={<Radio sx={{
                                                                 color: "white", '& .MuiSvgIcon-root': {
                                                                     color:"white",
                                                                 }

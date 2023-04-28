@@ -10,7 +10,12 @@
 .canteenmenucard-text,.canteenmenucard-breakfast,.canteenmenucard-lunch{
     margin-left: 1rem;
     margin-right: 1rem;
+   
+}
+.canteenmenucard-container hr{
+    margin-top: 1.5rem;
 }
 .canteenmenucard-container li{
     list-style-type: disc;
+
 }

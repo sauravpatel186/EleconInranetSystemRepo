@@ -10,8 +10,8 @@ import { Link as LinkRoute } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#ffffff",
-    // color: "white",
+    backgroundColor: "#527ED4",
+    color: "white",
     fontSize: 14,
     fontWeight: 600,
     fontFamily: "Plus Jakarta Sans"

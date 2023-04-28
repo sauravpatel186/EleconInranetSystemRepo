@@ -6,7 +6,7 @@ import {
   ExpandMore,
   Menu as MenuIcon
 } from "@mui/icons-material"
-import { Menu, MenuItem, useMediaQuery, useTheme, Dialog, DialogActions, DialogTitle, Button, DialogContent, DialogContentText, TextField } from '@mui/material'
+import { Menu, MenuItem, useMediaQuery, useTheme, Dialog, DialogActions, DialogTitle, Button, DialogContent, DialogContentText, TextField, Typography } from '@mui/material'
 
 import { Profile } from '../profile/Profile'
 export const Topbar = (props) => {
@@ -56,10 +56,11 @@ export const Topbar = (props) => {
       setUser([]);
     }
   }, [])
-  
+
   const visible = createContext();
   return (
     <div className='topbar-container'>
+      
       <div className='profile-area'>
         <div className='profile'>
           <div className='profile-photo'>
@@ -84,6 +85,9 @@ export const Topbar = (props) => {
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
       </div>
+      <div className='topbar-text'>
+        <label>Admin Dashboard</label>
+      </div>
       <button id='menu-btn' name='hambutton' onClick={openSidebar}>
         <span><MenuIcon /></span>
       </button>
@@ -98,7 +102,7 @@ export const Topbar = (props) => {
         </DialogTitle>
         <DialogContent>
 
-          <Profile/>
+          <Profile />
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleDialogClose}>

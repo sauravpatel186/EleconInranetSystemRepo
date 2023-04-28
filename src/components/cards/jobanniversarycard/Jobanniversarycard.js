@@ -58,7 +58,7 @@ export const Jobanniversarycard = () => {
                                     <div className='job-card' key={e.id}>
                                         
                                         <div className='job-card-area'>
-                                            <Typography variant='body1' sx={{color: "rgb(253, 190, 140) !important",textAlign:"center",height:2+"rem"}} >{e.njFirstName}{" "}{e.njLastName} on completion of {subYear(e.njDoj)} years </Typography>
+                                            <Typography variant='body1' sx={{color:"var(--cui-body-color)",textAlign:"center",height:2+"rem"}} >{e.njFirstName}{" "}{e.njLastName} on completion of {subYear(e.njDoj)} years </Typography>
                                             <div className='job-card-profile'>
                                                 <div className='job-card-photo'>
                                                     <img src={e.njImage} height="100%" width="100%" />
@@ -80,3 +80,4 @@ export const Jobanniversarycard = () => {
 
     )
 }
+// color: "rgb(253, 190, 140) !important"

@@ -49,15 +49,15 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const Managementdesk = (props) => {
-    
-    const [mddata, setmddata] = useState([]);
+
+  const [mddata, setmddata] = useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
+  const navigate = useHistory();
   const getLocalItem = () => {
     let data = JSON.parse(localStorage.getItem("md"));
     if (data) {
-      setmddata(JSON.parse(localStorage.getItem("md")));
+      setmddata(JSON.parse(localStorage.getItem("md")).filter(md => md.isDeleted == false));
     } else {
       return [];
     }
@@ -82,47 +82,57 @@ const Managementdesk = (props) => {
   function convert(str) {
     var date = new Date(str),
       mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-       day = ("0" + date.getDate()).slice(-2);
-    return [day,mnth,date.getFullYear()].join("-");
+      day = ("0" + date.getDate()).slice(-2);
+    return [day, mnth, date.getFullYear()].join("-");
+  }
+  const handleDelete = (e) => {
+    console.log(e);
+    const index = mddata.indexOf(mddata.find((a => a.id == e)));
+    console.log(index)
+    mddata[index].isDeleted = true
+    setmddata(mddata);
+    console.log(mddata)
+    navigate.push("/admindashboard/managementdesk")
+    localStorage.setItem("md", JSON.stringify(mddata))
   }
   console.log(mddata);
   return (
     <div className="page-information-container">
-        <div className="page-header">
-            <label>Management Desk</label>
-        </div>
+      <div className="page-header">
+        <label>Management Speaks</label>
+      </div>
       <div className='page-breadscrumb'>
-            <br/>
-              <Breadcrumbs aria-label="breadcrumb">
-                <Link underline="hover" color="inherit" href="/" exact to="/">
-                  Home
-                </Link>
-                <Link
-                  underline="hover" color="inherit" href="/admindashboard/managementdesk" exact to="/admindashboard/managementdesk">
-                  Management Desk
-                </Link>
-              </Breadcrumbs>
-            <br/>
-            </div>
-        <div className="md-container">
-            <div className="md-container-button">
-                <Route exact path="/admindashboard/managementdesk/createmanagementdesk">
-                    <Createmanagementdesk />
-                </Route>
-                <NavLink to="/admindashboard/managementdesk/createmanagementdesk">
-                    <Button variant="contained" color="success" size="small">
-                    Create Management Desk
-                    </Button>
-                </NavLink>
-                <Route exact path="/admindashboard/managementdesk/createmanagementdesk">
-                    <Createmanagementdesk />
-                </Route>
-                <NavLink to="/admindashboard/managementdesk/createmanagementdesk">
-                    <Button variant="contained" color="error" size="small">
-                    Disable Selected
-                    </Button>
-                </NavLink>
-                </div>
+        <br />
+        <Breadcrumbs aria-label="breadcrumb">
+          <Link underline="hover" color="inherit" href="/" exact to="/">
+            Home
+          </Link>
+          <Link
+            underline="hover" color="inherit" href="/admindashboard/managementdesk" exact to="/admindashboard/managementdesk">
+            Management Speaks
+          </Link>
+        </Breadcrumbs>
+        <br />
+      </div>
+      <div className="md-container">
+        <div className="md-container-button">
+          <Route exact path="/admindashboard/managementdesk/createmanagementdesk">
+            <Createmanagementdesk />
+          </Route>
+          <NavLink to="/admindashboard/managementdesk/createmanagementdesk">
+            <Button variant="contained" color="success" size="small">
+              Create Management Desk
+            </Button>
+          </NavLink>
+          <Route exact path="/admindashboard/managementdesk/createmanagementdesk">
+            <Createmanagementdesk />
+          </Route>
+          <NavLink to="/admindashboard/managementdesk/createmanagementdesk">
+            <Button variant="contained" color="error" size="small">
+              Disable Selected
+            </Button>
+          </NavLink>
+        </div>
         <div className="table-container">
           <TableContainer>
             <Table
@@ -171,8 +181,8 @@ const Managementdesk = (props) => {
                             <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />
                           </LinkRoute>
 
-                          <Delete sx={{ color: "red" }} />
-                        </StyledTableCell>
+                          <Button size='small' id={e.id} key={e.id} onClick={(event) => handleDelete(e.id)} sx={{ verticalAlign: "bottom", minWidth: "auto" }}><Delete sx={{ color: "red" }} /></Button>
+                          </StyledTableCell>
                       </StyledTableRow>
                     );
                   })}
@@ -189,9 +199,9 @@ const Managementdesk = (props) => {
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </div>
-     
+
+      </div>
     </div>
-</div>
   );
 
 };

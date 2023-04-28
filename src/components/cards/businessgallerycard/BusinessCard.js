@@ -1,0 +1,50 @@
+import React from 'react'
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { Carousel } from 'react-responsive-carousel'
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import "./BusinessGalleryCard.css"
+
+export const BusinessCard = () => {
+    const [show, setshow] = useState(false);
+    const [achievementdata, setachievementdata] = useState([]);
+    useEffect(() => {
+        let data = JSON.parse(localStorage.getItem("businessgallery"));
+        if (data != null) {
+            let adata = data.filter(achievement => achievement.isDeleted == false);
+            console.log(data)
+            console.log(adata)
+            setachievementdata(adata);
+            if (adata.length > 0) {
+                setshow(true);
+            }
+        }
+
+    }, [])
+
+    return (
+        <>
+
+            {
+                show ? (
+                    <div className="achievement-card-container">            
+                    <Carousel stopOnHover autoPlay infiniteLoop dynamicHeight showArrows={false} showStatus={false} showThumbs={false} showIndicators={false} interval={2000}>
+                        
+                        {achievementdata.map((e) => {
+
+                            return (<div key={e.id}>
+                                <img src={e.galleryImage} width="100%" height="100%"></img>
+                                <p className='legend'>{e.galleryDescription}</p>
+                            </div>)
+
+                        })}
+                    </Carousel>
+                    </div>
+
+                ) : (
+                    <></>
+                )
+            }
+        </>
+    )
+}

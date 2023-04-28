@@ -21,7 +21,8 @@ import {Close as CloseIcon,
         FoodBankTwoTone,
         FoodBankOutlined,
         SellOutlined,
-        Sell
+        Sell,
+        Collections
         } from '@mui/icons-material'
 import { Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
@@ -71,6 +72,15 @@ return (
                     <label 
                         className='nav-font'>
                         Article
+                    </label>
+                </NavLink>
+            </div>
+            <div className='nav-link'>
+                <NavLink className="nav-text" exact to="/employeedashboard/employeegallery" >
+                    <span><Collections/></span>
+                    <label 
+                        className='nav-font'>
+                        Employee Gallery
                     </label>
                 </NavLink>
             </div>

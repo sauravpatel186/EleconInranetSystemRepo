@@ -24,7 +24,10 @@ import {
     SellOutlined,
     Sell,
     FolderShared,
-    CheckCircle
+    CheckCircle,
+    Collections,
+    BurstMode,
+    Description,
 } from '@mui/icons-material'
 import { Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
@@ -62,16 +65,8 @@ export const Sidebar = () => {
                     <NavLink className="nav-text" to="/admindashboard/ceomessage" exact>
                         <span><Person /></span>
                         <label className='nav-font'>
-                            CEO Message
+                            CMD Desk
                         </label></NavLink>
-                </div>
-                <div className='nav-link'>
-                    <NavLink className="nav-text" to="/admindashboard/policies">
-                        <span><ArticleIcon /></span>
-                        <label className='nav-font'>
-                            Policies
-                        </label>
-                    </NavLink>
                 </div>
                 <div className='nav-link'>
                     <NavLink className="nav-text" exact to="/admindashboard/thoughtoftheday">
@@ -84,11 +79,11 @@ export const Sidebar = () => {
                     </NavLink>
                 </div>
                 <div className='nav-link'>
-                    <NavLink className="nav-text" exact to="/admindashboard/noticeboard" >
+                    <NavLink className="nav-text" exact to="/admindashboard/news" >
                         <span><NoteIcon /></span>
                         <label
                             className='nav-font' >
-                            Noticeboard
+                            News
                         </label>
                     </NavLink>
                 </div>
@@ -97,7 +92,7 @@ export const Sidebar = () => {
                         <span><Diversity3Icon /></span>
                         <label
                             className='nav-font'>
-                            Management Desk
+                            Management Speaks
                         </label>
                     </NavLink>
                 </div>
@@ -190,9 +185,38 @@ export const Sidebar = () => {
                         </label>
                     </NavLink>
                 </div>
-                
-
-
+                <div className='nav-link'>
+                    <NavLink className="nav-text" exact to="/admindashboard/employeegallery" >
+                        <span><BurstMode /></span>
+                        <label className="nav-font">
+                            Employee Gallery
+                        </label>
+                    </NavLink>
+                </div>
+                <div className='nav-link'>
+                    <NavLink className="nav-text" exact to="/admindashboard/approveemployeegallery" >
+                        <span><CheckCircle /></span>
+                        <label className="nav-font">
+                            Approve Employee Gallery
+                        </label>
+                    </NavLink>
+                </div>
+                <div className='nav-link'>
+                    <NavLink className="nav-text" exact to="/admindashboard/businessgallery" >
+                        <span><Collections /></span>
+                        <label className="nav-font">
+                            Business Gallery
+                        </label>
+                    </NavLink>
+                </div>
+                <div className='nav-link'>
+                    <NavLink className="nav-text" exact to="/admindashboard/article" >
+                        <span><Description /></span>
+                        <label className="nav-font">
+                            Article
+                        </label>
+                    </NavLink>
+                </div>
             </div>
         </div>
     )

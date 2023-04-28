@@ -70,6 +70,14 @@ import Approvesalespurchase from "./pages/approvesalespurchase/Approvesalespurch
 import Createemployeesalespurchase from "./pages/employeesalespurchase/createemployeesalespurchase/Createemployeesalespurchase";
 import Employeearticle from "./pages/article/Employeearticle";
 import Createemployeearticle from "./pages/article/createarticle/Createemployeearticle";
+import { CreateEmployeeGallery } from "./pages/employeegallery/createemployeegallery/CreateEmployeeGallery";
+import { EmployeeGallery } from "./pages/employeegallery/EmployeeGallery";
+import { UpdateEmployeeGallery } from "./pages/employeegallery/updateemployeegallery/UpdateEmployeeGallery";
+import { BusinessGallery } from "./pages/businessgallery/BusinessGallery";
+import { CreateBusinessGallery } from "./pages/businessgallery/createbusinessgallery/CreateBusinessGallery";
+import { EmpCreateEmployeeGallery } from "./pages/empemployeegallery/createemployeegallery/EmpCreateEmployeeGallery";
+import { EmpEmployeeGallery } from "./pages/empemployeegallery/EmpEmployeeGallery";
+import { UpdateBusinessGallery } from "./pages/businessgallery/updatebusinessgallery/UpdateBusinessGallery";
 function App() {
   const USER_TYPES = {
     PUBILIC: "Public User",
@@ -161,7 +169,9 @@ function App() {
                     <Route exact path="/admindashboard/upcomingevent"><Upcomingevent /></Route>
                     <Route index path="/admindashboard/upcomingevent/createupcomingevent"><Createupcomingevent /></Route>
                     <Route exact path="/admindashboard/opinionpoll/createopinionpoll"><Createopinionpoll /></Route>
+                    <Route exact path="/admindashboard/ceomessage/createceomessage"><CreateCeomessage/></Route>
                     <Route exact path="/admindashboard/achievement"><Achievement /></Route>
+                    <Route exact path="admindashboard/ceomessage/updateceomessage/:id"><UpdateCeomessage/></Route>
                     <Route index path="/admindashboard/achievement/createachievement"><CreateAchievement /></Route>
                     <Route index path="/admindashboard/achievement/updateachievement/:id"><UpdateAchievement /></Route>
                     <Route index path="/admindashboard/upcomingevent/updateupcomingevent/:id"><Updateupcomingevent /></Route>
@@ -193,7 +203,17 @@ function App() {
                     <Route exact path="/admindashboard/salespurchase/updatesalespurchase/:id"><Updatesalespurchase/></Route>
                     <Route exact path="/admindashboard/approvesalespurchase"><Approvesalespurchase /></Route>
                     <Route exact path="/admindashboard/employeedirectory"><EmployeeDirectory /></Route>
+                    <Route exact path="/admindashboard/employeegallery"><EmployeeGallery/></Route>
+                    <Route exact path="/admindashboard/employeegallery/createemployeegallery"><CreateEmployeeGallery/></Route>
+                    <Route exact path="/admindashboard/employeegallery/updateemployeegallery/:id"><UpdateEmployeeGallery/></Route>
+                    <Route exact path="/admindashboard/businessgallery"><BusinessGallery/></Route>
+                    <Route exact path="/admindashboard/businessgallery/createbusinessgallery"><CreateBusinessGallery/></Route>
+                    <Route exact path="/admindashboard/businessgallery/updatebusinessgallery/:id"><UpdateBusinessGallery/></Route>
                     
+                    <Route exact path="/admindashboard/news"><Noticeboard/></Route>
+                    <Route exact path="/admindashboard/article"><Employeearticle/></Route>
+                  <Route exact path="/admindashboard/article/createarticle"><Createemployeearticle/></Route>
+                  
                   </Switch>
                 </LocalizationProvider>
               </div>
@@ -215,6 +235,8 @@ function App() {
                   <Route exact path="/employeedashboard/employeedirectory"><EmployeeDirectory/></Route>
                   <Route exact path="/employeedashboard/employeearticle"><Employeearticle/></Route>
                   <Route exact path="/employeedashboard/employeearticle/createemployeearticle"><Createemployeearticle/></Route>
+                  <Route exact path="/employeedashboard/employeegallery"><EmpEmployeeGallery/></Route>
+                  <Route exact path="/employeedashboard/employeegallery/createemployeegallery"><EmpCreateEmployeeGallery/></Route>
                   </Switch>
                 </LocalizationProvider>
               </div>

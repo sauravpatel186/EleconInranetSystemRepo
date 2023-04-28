@@ -25,6 +25,7 @@ import { Link, useRouteMatch, useHistory } from "react-router-dom";
 const Createsalespurchase = () => {
   const navigate = useHistory();
   const [newsalespurchase, setnewsalespurchase] = useState([]);
+  const [userData, setuserdata] = useState([]);
   const ValidationSchema = Yup.object().shape({
     salespurchaseTitle: Yup.string().required("Ad Title is required"),
     salespurchaseMNumber:Yup.string().required("Phone number is required"),
@@ -56,6 +57,10 @@ const Createsalespurchase = () => {
   };
   useEffect(() => {
     let data = localStorage.getItem("salespurchase");
+    let user = localStorage.getItem("user");
+    if(user){
+        setuserdata(JSON.parse(user));
+    }
     if (data) {
       setnewsalespurchase(JSON.parse(data));
     }
@@ -63,7 +68,7 @@ const Createsalespurchase = () => {
   return (
     <div className="page-information-container">
       <header className="page-header">
-        <label>Announcement</label>
+        <label>Sales Purchase</label>
       </header>
       <div className="page-breadscrumb">
         <br />
@@ -119,6 +124,7 @@ const Createsalespurchase = () => {
               salespurchaseMNumber: data.salespurchaseMNumber,
               salespurchaseImage: data.salespurchaseImage,
               salespurchaseDescription: data.salespurchaseDescription,
+              empid:userData[0].id,
               time: Math.floor(Date.now() / 1000),
               isApproved: true,
               isDeleted: false,

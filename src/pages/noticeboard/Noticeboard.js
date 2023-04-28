@@ -7,12 +7,13 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { Delete, ModeEdit } from '@mui/icons-material';
 import { Link as LinkRoute } from "react-router-dom";
-
+import newsData from '../../assets/data/newsData';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#FFFFFF",
-    color: "black",
+    backgroundColor: "#527ED4",
+    color: "white",
     fontSize: 14,
+
     fontWeight: 600,
     fontFamily: "Plus Jakarta Sans"
   },
@@ -36,16 +37,15 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export const Noticeboard = () => {
   const navigate = useHistory();
   let { path, url } = useRouteMatch();
-  const [noticedata, setNoticedata] = useState([]);
+  const [newsdata, setNewsdata] = useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const getLocalItem = () => {
-    let data = JSON.parse(localStorage.getItem("notice"));
+    let data = JSON.parse(localStorage.getItem("news"));
     if (data) {
 
-      setNoticedata(data);
-      console.log(noticedata)
+    setNewsdata(data);
     }
     else {
       return [];
@@ -72,14 +72,14 @@ export const Noticeboard = () => {
 
   const handleDelete = (e) => {
     console.log(e);
-    const notices = noticedata.find(a => a.id !== e.id);
+    const notices = newsdata.find(a => a.id !== e.id);
     notices.isDeleted = true;
-    setNoticedata(result => ({
+    setNewsdata(result => ({
       ...result,
       isDeleted: true
     }));
-    console.log(noticedata)
-    localStorage.setItem("notice",JSON.stringify(noticedata))
+ 
+    localStorage.setItem("news", JSON.stringify(newsData))
   }
   function convert(str) {
     var date = new Date(str),
@@ -90,7 +90,7 @@ export const Noticeboard = () => {
   return (
     <div className="page-information-container">
       <div className="page-header"><label>
-        Notice Board
+        News
       </label>
         <div className='page-breadscrumb'>
           <Breadcrumbs aria-label="breadcrumb">
@@ -98,8 +98,8 @@ export const Noticeboard = () => {
               Home
             </Link>
             <Link
-              underline="hover" area-current="page" style={{ color: "black" }} onClick={() => { navigate.push("/noticeboard") }}>
-              Notice Board
+              underline="hover" area-current="page" style={{ color: "black" }} onClick={() => { navigate.push("/news") }}>
+              News
             </Link>
 
           </Breadcrumbs>
@@ -122,52 +122,51 @@ export const Noticeboard = () => {
               <TableHead>
                 <TableRow>
                   <StyledTableCell><Checkbox size='small' name='noticeSelect' sx={{ color: "black" }}></Checkbox></StyledTableCell>
-                  <StyledTableCell>#</StyledTableCell>
-                  <StyledTableCell>Notice Title</StyledTableCell>
+
+                  <StyledTableCell>News Title</StyledTableCell>
                   <StyledTableCell>View From</StyledTableCell>
                   <StyledTableCell>View Upto</StyledTableCell>
-                  <StyledTableCell>Notice Description</StyledTableCell>
+                  <StyledTableCell>News Description</StyledTableCell>
                   <StyledTableCell>Actions</StyledTableCell>
                 </TableRow>
               </TableHead>
-              
-              { noticedata.length > 0 &&
-                        (
-                          <TableBody>
-                            {noticedata.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                              .map((e) => {
-                                console.log(noticedata.length);
-                                e.isDeleted === false && 
-                                (
-                                  <StyledTableRow hover role="checkbox" tabIndex={-1} key={e.id}>
-                                    <StyledTableCell><Checkbox size='small' /></StyledTableCell>
-                                    <StyledTableCell>{e.noticeTitle}</StyledTableCell>
-                                    <StyledTableCell>{e.noticeDescription}</StyledTableCell>
-                                    <StyledTableCell>{convert(e.noticeStartDate)}</StyledTableCell>
-                                    <StyledTableCell>{convert(e.noticeEndDate)}</StyledTableCell>
-                                    <StyledTableCell>
-                                      <LinkRoute to={{
-                                        pathname: "/admindashboard/noticeboard/updatenotice/:id",
-                                        state: { idParam: e.id }
-                                      }} ><ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} /></LinkRoute>
-                                      <Button size='small' id={e.id} key={e.id} onClick={(event) => handleDelete(e.id)} sx={{ verticalAlign: "bottom", minWidth: "auto" }}><Delete sx={{ color: "red" }} /></Button>
-                                    </StyledTableCell>
-                                  </StyledTableRow>
 
-                                )
+              {newsdata.length > 0 &&
+                (
+                  <TableBody>
+                    {newsdata.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                      .map((e) => {
+                          return (
+                            <StyledTableRow hover role="checkbox" tabIndex={-1} key={e.id}>
+                              <StyledTableCell><Checkbox size='small' /></StyledTableCell>
+                              <StyledTableCell>{e.newsTitle}</StyledTableCell>
                               
-                              }
-                              )}
-                          </TableBody>)
-      
-          }
-              
+                              <StyledTableCell>{convert(e.newsStartDate)}</StyledTableCell>
+                              <StyledTableCell>{convert(e.newsEndDate)}</StyledTableCell>
+                              <StyledTableCell>{e.newsDescription}</StyledTableCell>
+                              <StyledTableCell>
+                                <LinkRoute to={{
+                                  pathname: "/admindashboard/noticeboard/updatenotice/:id",
+                                  state: { idParam: e.id }
+                                }} ><ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} /></LinkRoute>
+                                <Button size='small' id={e.id} key={e.id} onClick={(event) => handleDelete(e.id)} sx={{ verticalAlign: "bottom", minWidth: "auto" }}><Delete sx={{ color: "red" }} /></Button>
+                              </StyledTableCell>
+                            </StyledTableRow>
+
+                          )
+
+                      }
+                      )}
+                  </TableBody>)
+
+              }
+
             </Table>
           </TableContainer>
           <TablePagination
             rowsPerPageOptions={[5]}
             component="div"
-            count={noticedata.length}
+            count={newsdata.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

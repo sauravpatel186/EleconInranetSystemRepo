@@ -1,0 +1,23 @@
+
+.salespurchase-card-container .carousel-slider, .slider-wrapper{
+    height: 22rem !important;
+}
+.salespurchase-card-image{
+    width: 75%;
+    height: 75%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.salespurchase-card-content{
+    margin:0.5rem 0.5rem 0.5rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: justify;
+    gap:0.5rem
+}
+
+.salespurchase-card-container .carousel .slider-wrapper:hover{
+    overflow-y: auto;
+}
