@@ -142,3 +142,35 @@
 .dashboard-container-joinee-table {
     width: 25%;
 }
+.dashboard-container-text-table
+{
+    display: none;
+}
+@media screen and (max-width: 768px) {
+    .dashboard-container-card {
+        flex-direction: column;
+    }
+
+    .dashboard-card-1,
+    .dashboard-card-2,
+    .dashboard-card-3,
+    .dashboard-card-4 {
+        width: 100%;
+    }
+
+    .dashboard-container-table {
+        flex-direction: column;
+    }
+
+    .dashboard-container-birthday-table,
+    .dashboard-container-event-table,
+    .dashboard-container-job-table,
+    .dashboard-container-joinee-table {
+        width: 100%;
+        margin-top: 1rem;
+    }
+    .dashboard-container-text-table
+    {
+        display: block;
+    }
+}

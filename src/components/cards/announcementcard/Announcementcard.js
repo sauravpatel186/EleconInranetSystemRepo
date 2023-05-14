@@ -10,12 +10,30 @@ export const Announcementcard = () => {
         let data = JSON.parse(localStorage.getItem("announcement"));
         let date = todayDate();
         
-        let finaldata = data.filter(e => e.isDeleted == false && convertDate(e.announcementEndDate) >= todayDate() && convertDate(e.announcementStartDate) <= todayDate());
+        let finaldata = data.filter(e => e.isDeleted == false && compareEndDate(e.announcementEndDate) && compareStartDate(e.announcementStartDate));
         if (finaldata != null) {
             setAnnouncement(finaldata);
             setShow(true);
         }
     }, [])
+    const compareEndDate = (date1) =>{
+        var x = new Date(date1);
+        var y = new Date();
+        if(x >= y)
+        {
+            return true;
+        }
+        return false;
+    }
+    const compareStartDate = (date1) =>{
+        var x = new Date(date1);
+        var y = new Date();
+        if(x <= y)
+        {
+            return true;
+        }
+        return false;
+    }
     function convertDate(str) {
         var date = new Date(str),
             mnth = ("0" + (date.getMonth() + 1)).slice(-2),

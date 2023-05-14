@@ -24,11 +24,11 @@ export const EventCard = () => {
         if (data != null) {
             if (data.length > 0) {
                 let adata = data.filter(e => e.isDeleted == false);
-                let finaldata = adata.filter(e=> compareEndDate(e.eventEndDate) && convertDate(e.eventStartDate) <= todayDate); 
-                seteventdata(finaldata);
+                let finaldata = adata.filter(e=> compareEndDate(e.eventEndDate) && compareStartDate(e.eventStartDate)); 
+                console.log(finaldata)
                 if (finaldata.length > 0) {
                     setshow(true);
-
+                    seteventdata(finaldata);
                 }
                 // adata.forEach(element => {
                 //     console.log(convertDate(element.eventEndDate));
@@ -45,6 +45,15 @@ export const EventCard = () => {
         var x = new Date(date1);
         var y = new Date();
         if(x >= y)
+        {
+            return true;
+        }
+        return false;
+    }
+    const compareStartDate = (date1) =>{
+        var x = new Date(date1);
+        var y = new Date();
+        if(x <= y)
         {
             return true;
         }

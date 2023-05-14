@@ -149,6 +149,9 @@ export const Dashboard = () => {
         </div>
         <div className='dashboard-container-table'>
           <div className="dashboard-container-birthday-table">
+          <div className="dashboard-container-text-table">
+          <Typography variant='h6'>Birthday</Typography>
+          </div>
             <TableContainer>
               <Table aria-label="simple table">
                 <TableHead>
@@ -174,6 +177,9 @@ export const Dashboard = () => {
             </TableContainer>
           </div>
           <div className="dashboard-container-job-table">
+          <div className="dashboard-container-text-table">
+          <Typography variant='h6'>Job Anniversary</Typography>
+          </div>
             <TableContainer>
               <Table aria-label="simple table">
                 <TableHead>
@@ -198,6 +204,9 @@ export const Dashboard = () => {
             </TableContainer>
           </div>
           <div className="dashboard-container-event-table">
+          <div className="dashboard-container-text-table">
+          <Typography variant='h6'>Upcoming Event</Typography>
+          </div>
             <TableContainer>
               <Table aria-label="simple table">
                 <TableHead>
@@ -223,6 +232,9 @@ export const Dashboard = () => {
             </TableContainer>
           </div>
           <div className="dashboard-container-joinee-table">
+          <div className="dashboard-container-text-table">
+          <Typography variant='h6'>New Joinee</Typography>
+          </div>
             <TableContainer>
               <Table aria-label="simple table">
                 <TableHead>

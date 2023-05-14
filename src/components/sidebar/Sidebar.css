@@ -41,8 +41,8 @@
     align-self: flex-start;
     padding-bottom: 2rem;
 }
-.nav-sidebar:hover{
-    overflow-y: scroll!important;
+.nav-sidebar{
+    overflow-y: auto
 }
 .nav-sidebar .nav-text{
     display: flex;

@@ -20,7 +20,8 @@ export const Thougthcard = () => {
         let data = await (JSON.parse(localStorage.getItem("thought"))).filter(e=>e.isDeleted == false);
         // let finaldata = data[index()];
         let i = index();
-        setThougth(data[110].Thoughttitle);
+        console.log(index());
+        setThougth(data[index()].Thoughttitle);
         
         
         if (thougth.length > 0) {
@@ -39,11 +40,11 @@ export const Thougthcard = () => {
             show ?
                 <div className='thought-card-container'>
                     <div className='thought-card-text' style={{marginTop:1.6+"rem"}}>
-                        <Typography variant='body1' sx={{ color: "#8B8B8B !important" }}>"{title}."</Typography>
+                        <Typography variant='body1' sx={{ color: "#8B8B8B !important" }}>If you're so afraid of failure, you will never succeed. You have to take chances</Typography>
                     </div>
-                    <div className='thought-card-author'>
+                    {/* <div className='thought-card-author'>
                         <Typography variant='body1' sx={{ color: "#8B8B8B!important" }}>-{author}</Typography>
-                    </div>
+                    </div> */}
                 </div>
                 :
                 <></>
