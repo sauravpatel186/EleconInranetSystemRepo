@@ -25,7 +25,7 @@ export const BirthdayCard = () => {
     useEffect(() => {
         let data = JSON.parse(localStorage.getItem("nj"));
         let date = todayDate();
-        let finaldata = data.filter(e => convertDate(e.njDob).toString() === date);
+        let finaldata = data.filter(e => convertDate(e.njDob).toString() === date && e.isDeleted == false);
         if (finaldata != null) {
             setUserBirthday(finaldata);
             setshow(true);

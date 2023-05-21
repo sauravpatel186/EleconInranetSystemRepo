@@ -21,7 +21,7 @@ import { Formik } from "formik";
 import { useHistory } from "react-router-dom";
 import { EmployeeGallery } from "../EmployeeGallery";
 export const CreateEmployeeGallery = () => {
-
+    const [userData, setuserdata] = useState([]);
     const navigate = useHistory();
     const [newemployeegallery, setNewEmployeeGallery] = useState([]);
     const ValidationSchema = Yup.object().shape({
@@ -56,8 +56,12 @@ export const CreateEmployeeGallery = () => {
     };
     useEffect(() => {
         let data = localStorage.getItem("employeegallery");
+        let userdata = localStorage.getItem("user");
         if (data) {
             setNewEmployeeGallery(JSON.parse(data));
+            if(userdata){
+                setuserdata(JSON.parse(userdata));
+            }
         }
     }, []);
     return (
@@ -91,6 +95,7 @@ export const CreateEmployeeGallery = () => {
                             empGalleryEndDate: data.empGalleryEndDate,
                             empGalleryDescription: data.empGalleryDescription,
                             empGalleryImage: data.empGalleryImage,
+                            empId:userData[0].id,
                             time: Math.floor(Date.now() / 1000),
                             isDeleted: false,
                             isApproved: true,

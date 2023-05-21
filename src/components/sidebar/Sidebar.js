@@ -193,14 +193,7 @@ export const Sidebar = () => {
                         </label>
                     </NavLink>
                 </div>
-                <div className='nav-link'>
-                    <NavLink className="nav-text" exact to="/admindashboard/approveemployeegallery" >
-                        <span><CheckCircle /></span>
-                        <label className="nav-font">
-                            Approve Employee Gallery
-                        </label>
-                    </NavLink>
-                </div>
+                
                 <div className='nav-link'>
                     <NavLink className="nav-text" exact to="/admindashboard/businessgallery" >
                         <span><Collections /></span>

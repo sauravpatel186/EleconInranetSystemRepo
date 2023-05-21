@@ -81,6 +81,7 @@ export const IntranetDashboard = (props) => {
     const handleLogout = () => {
         localStorage.removeItem("user");
         localStorage.removeItem("isLogin");
+        localStorage.removeItem("role");
         props.setisLoggedIn(false)
     }
     return (

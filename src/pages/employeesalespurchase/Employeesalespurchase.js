@@ -136,14 +136,7 @@ const Employeesalespurchase = () => {
               Create Ad
             </Button>
           </NavLink>
-          {/* <Route exact path="/employeedashboard/employeesalespurchase/createemployeesalespurchase">
-            <Createsalespurchase />
-          </Route> */}
-          <NavLink to="/employeedashboard/employeesalespurchase/createemployeesalespurchase">
-            <Button variant="contained" color="error" size="small">
-              Disable Selected
-            </Button>
-          </NavLink>
+         
         </div>
         <div className="table-container">
           <TableContainer>

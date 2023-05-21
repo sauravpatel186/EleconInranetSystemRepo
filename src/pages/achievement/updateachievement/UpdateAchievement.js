@@ -30,7 +30,7 @@ export const UpdateAchievement = () => {
     const [achievementData, setAchievementData] = useState({
         achievementType: "",
         achievementTitle: "",
-        employeeIdandName: "",
+        // employeeIdandName: "",
         achievementArea: "",
         achievementStartDate: "",
         achievementEndDate: "",
@@ -42,7 +42,7 @@ export const UpdateAchievement = () => {
             ...existingValue,
             achievementType: e[0]["achievementType"],
             achievementTitle: e[0]["achievementTitle"],
-            employeeIdandName: e[0]["employeeIdandName"],
+            // employeeIdandName: e[0]["employeeIdandName"],
             achievementArea: e[0]["achievementArea"],
             achievementDescription: e[0]["achievementDescription"],
             achievementEndDate: e[0]["achievementEndDate"],
@@ -74,7 +74,7 @@ export const UpdateAchievement = () => {
     const ValidationSchema = Yup.object().shape({
         achievementType: Yup.string().required("Please select an option"),
         achievementTitle: Yup.string().required("Achievement Title is required"),
-        employeeIdandName: Yup.string().required("Please select an option"),
+        // employeeIdandName: Yup.string().required("Please select an option"),
         achievementArea: Yup.string().required("Please select an option"),
         achievementStartDate: Yup.string().required("Start Date is required"),
         achievementEndDate: Yup.string().required("End Date is required"),
@@ -145,7 +145,7 @@ export const UpdateAchievement = () => {
                             id: idParamVal,
                             achievementType: data.achievementType,
                             achievementTitle: data.achievementTitle,
-                            employeeIdandName: data.employeeIdandName,
+                            // employeeIdandName: data.employeeIdandName,
                             achievementArea: data.achievementArea,
                             achievementStartDate: data.achievementStartDate,
                             achievementEndDate: data.achievementEndDate,
@@ -195,7 +195,7 @@ export const UpdateAchievement = () => {
 
                                     </div>
                                 </div>
-                                <div className="formrow">
+                                {/* <div className="formrow">
                                     <div className="createachievementforminput">
                                         <FormControl sx={{ width: 100 + "%" }}>
                                             <InputLabel id="demo-simple-select-autowidth-label">Employee Id and Name</InputLabel>
@@ -215,7 +215,7 @@ export const UpdateAchievement = () => {
                                         <ValidationErrorMessage message={errors.employeeIdandName} touched={touched.employeeIdandName} />
 
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="formrow">
                                     <div className="createachievementforminput">
                                         <FormControl sx={{ width: 100 + "%", marginTop: 1 + "vh" }}>

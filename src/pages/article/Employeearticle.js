@@ -56,24 +56,25 @@ const Employeearticle = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const getLocalItem = async () => {
-    let udata = await JSON.parse(localStorage.getItem("user"));
+  const getLocalItem =  () => {
+    let udata = JSON.parse(localStorage.getItem("user"));
     if (udata) {
       setuserdata(udata);
     }
   };
   const getArticleData = async () => {
-    let data =JSON.parse(localStorage.getItem("article"));
+    let data = JSON.parse(localStorage.getItem("article"));
     if (data) {
-      let adata =data.filter(ad => ad.isDeleted == false)
+      let id= userdata[0].id;
+      let adata = data.filter(ad => ad.isDeleted == false && ad.empid == id);
       setarticledata(adata);
     } else {
       return [];
     }
   }
-  useEffect(()=>{
+  useEffect(() => {
     getArticleData();
-  },[userdata])
+  }, [userdata])
   useEffect(() => {
     try {
       getLocalItem();
@@ -103,8 +104,14 @@ const Employeearticle = () => {
     articledata[index].isDeleted = true
     setarticledata(articledata);
     console.log(articledata)
-    navigate.push("/employeedashboard/employeearticle")
     localStorage.setItem("article", JSON.stringify(articledata))
+    navigate.push("/employeedashboard/employeearticle")
+  }
+  function convert(str) {
+    var date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [day, mnth, date.getFullYear()].join("-");
   }
   // const countitems =announcementdata.filter(e => e.isDeleted ==='false').length;
   // console.log("Not deleted: " + countitems);
@@ -120,7 +127,7 @@ const Employeearticle = () => {
             Home
           </Link>
           <Link
-            underline="hover" color="inherit" href="/admindashboard/employeearticle" exact to="/admindashboard/employeearticle">
+            underline="hover" color="inherit" href="/employeedashboard/employeearticle" exact to="/employeedashboard/employeearticle">
             Article
           </Link>
         </Breadcrumbs>
@@ -131,7 +138,7 @@ const Employeearticle = () => {
           {/* <Route exact path="/employeedashboard/employeesalespurchase/createemployeesalespurchase">
             <Createsalespurchase />
           </Route> */}
-          <NavLink to="/admindashboard/article/createarticle">
+          <NavLink to="/employeedashboard/employeearticle/createemployeearticle">
             <Button variant="contained" color="success" size="small">
               Create Article
             </Button>
@@ -139,11 +146,7 @@ const Employeearticle = () => {
           {/* <Route exact path="/employeedashboard/employeesalespurchase/createemployeesalespurchase">
             <Createsalespurchase />
           </Route> */}
-          <NavLink to="/employeedashboard/employeesalespurchase/createemployeesalespurchase">
-            <Button variant="contained" color="error" size="small">
-              Disable Selected
-            </Button>
-          </NavLink>
+          
         </div>
         <div className="table-container">
           <TableContainer>
@@ -186,8 +189,8 @@ const Employeearticle = () => {
                             <StyledTableCell>{e.articleTitle}</StyledTableCell>
                             <StyledTableCell><a href={e.articleLink} target="_blank">{e.articleLink}</a></StyledTableCell>
                             <StyledTableCell>{e.articleDescription}</StyledTableCell>
-                            <StyledTableCell>{e.articleStartDate}</StyledTableCell>
-                            <StyledTableCell>{e.articleEndDate}</StyledTableCell>
+                            <StyledTableCell>{convert(e.articleStartDate)}</StyledTableCell>
+                            <StyledTableCell>{convert(e.articleEndDate)}</StyledTableCell>
                             <StyledTableCell>{e.isApproved == false ? "Not Approved" : "Approved"}</StyledTableCell>
                             <StyledTableCell>
                               <LinkRoute

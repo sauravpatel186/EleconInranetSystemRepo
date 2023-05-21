@@ -26,6 +26,7 @@ export const UpdateEmployeeGallery = () => {
     const [newemployeegallery, setNewEmployeeGallery] = useState([]);
     const { type } = useParams();
     const idParamVal = useLocation().state.idParam;
+    const [allEmployeeGallery,setAllEmployeeGallery] = useState([]);
     const [employeeData, setEmployeeData] = useState({
         empGalleryTitle: "",
         empGalleryStartDate: "",
@@ -99,13 +100,19 @@ export const UpdateEmployeeGallery = () => {
     const UpdateData = (id, updatedData) => {
         const datawithId = newemployeegallery.find(e => e.id == id); // finds the element with id 
         if (datawithId["id"] === updatedData.id) {
-            // /console.log(newachievement);
-            setNewEmployeeGallery(result => [...result, updatedData]);
-            console.log(newemployeegallery);
+            let temp = JSON.parse(localStorage.getItem("employeegallery"));
+            let tempdata = newemployeegallery.indexOf(newemployeegallery.find(achievements => achievements.id == id));
+            temp[tempdata] = updatedData
+            setAllEmployeeGallery([...temp]);
         }
-        // setToDos([...toDos]) //updating the current state
-        // localStorage.setItem("data", JSON.stringify(toDos)) //updating local storage with state
     }
+    useEffect(()=>{
+        if(allEmployeeGallery.length > 0)
+        {
+            localStorage.setItem("employeegallery",JSON.stringify(allEmployeeGallery));
+            navigate.push("/admindashboard/employeegallery");
+        }
+    },[allEmployeeGallery])
     return (
         <div className="page-information-container">
             <header className="page-header">
@@ -126,12 +133,15 @@ export const UpdateEmployeeGallery = () => {
                     enableReinitialize
                     onSubmit={data => {
                         let employee ={
-                            id: Math.random(),
+                            id: idParamVal,
                             empGalleryTitle: data.empGalleryTitle,
                             empGalleryStartDate: data.empGalleryStartDate,
                             empGalleryEndDate: data.empGalleryEndDate,
                             empGalleryDescription: data.empGalleryDescription,
                             empGalleryImage: data.empGalleryImage,
+                            time: Math.floor(Date.now() / 1000),
+                            isApproved : true,
+                            isDeleted : false
                         }
                         UpdateData(idParamVal, employee);
                     }}
@@ -159,19 +169,19 @@ export const UpdateEmployeeGallery = () => {
 
                                 <div className="formrow">
                                     <div className="createemployeegalleryforminput">
-                                    <DemoContainer required components={["DatePicker", "DatePicker"]}>
+                                    <DemoContainer  components={["DatePicker", "DatePicker"]}>
                                             <DatePicker
-                                                label="Start Date"
+                                                label="End Date"
                                                 value={dayjs(values.empGalleryStartDate)}
-                                                
+                                                required
                                                 format="DD-MM-YYYY"
                                                 sx={{ width: 100 + "%" }}
-                                                onChange={(newValue) => setFieldValue("employeeGallery", newValue)}
+                                                onChange={(newValue) => setFieldValue("empGalleryStartDate", newValue)}
                                                 
                                             />
                                         </DemoContainer>
-                                        <ValidationErrorMessage message={errors.empGalleryStartDate} touched={touched.empGalleryStartDate} />
-
+                                        <ValidationErrorMessage message={errors.galleryEndDate} touched={touched.galleryEndDate} />
+                                
                                     </div>
                                     <div className="createemployeegalleryforminput">
                                     <DemoContainer  components={["DatePicker", "DatePicker"]}>
@@ -181,11 +191,11 @@ export const UpdateEmployeeGallery = () => {
                                                 required
                                                 format="DD-MM-YYYY"
                                                 sx={{ width: 100 + "%" }}
-                                                onChange={(newValue) => setFieldValue("empGalleryStartDate", newValue)}
-                                                
+                                                onChange={(newValue) => setFieldValue("empGalleryEndDate", newValue)}
+    
                                             />
                                         </DemoContainer>
-                                        <ValidationErrorMessage message={errors.empGalleryEndDate} touched={touched.empGalleryStartDate} />
+                                        <ValidationErrorMessage message={errors.empGalleryEndDate} touched={touched.empGalleryEndDate} />
                                     </div>
                                 </div>
                                 <div className="formrow">

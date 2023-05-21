@@ -38,7 +38,8 @@ export const EmployeeGallery = () => {
   const [employeedata, setEmployeedata] = useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [counter,setCounter]=useState(0);
+  const [counter, setCounter] = useState(0);
+  const [userData, setUserData] = useState([]);
   const getLocalItem = () => {
     let data = (JSON.parse(localStorage.getItem("employeegallery"))).filter(a => a.isDeleted == false);
     if (data) {
@@ -50,7 +51,19 @@ export const EmployeeGallery = () => {
       return [];
     }
   }
-
+  const getUserData = () => {
+    let data = localStorage.getItem("nj");
+    if (data) {
+      setUserData(JSON.parse(data));
+    }
+  }
+  useEffect(() => {
+    try{
+      getUserData();
+    }
+    catch(e){
+    }
+  }, [])
   useEffect(() => {
     try {
       getLocalItem();
@@ -58,7 +71,7 @@ export const EmployeeGallery = () => {
     catch (error) {
       console.error(error);
     }
-  }, [])
+  }, [userData])
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -70,13 +83,13 @@ export const EmployeeGallery = () => {
   }
 
   const handleDelete = (e) => {
-    
-    const index = employeedata.indexOf(employeedata.find((a => a.id == e )));
+
+    const index = employeedata.indexOf(employeedata.find((a => a.id == e)));
     employeedata[index].isDeleted = true
     setEmployeedata(employeedata);
-    localStorage.setItem("employeegallery",JSON.stringify(employeedata))
+    localStorage.setItem("employeegallery", JSON.stringify(employeedata))
     navigate.push("/admindashboard/employeegallery")
-    
+
   }
   function convert(str) {
     var date = new Date(str),
@@ -125,9 +138,7 @@ export const EmployeeGallery = () => {
               <Typography variant='caption' className='btn-success-font'>Create New employee gallery</Typography>
             </Button>
           </NavLink>
-          <Button variant="contained" color="error" size='small' className='btn-delete'>
-            <Typography variant='caption' className='btn-delete-font'>Disable Selected</Typography>
-          </Button>
+          
         </div>
         <div className="employeegallery-table-container">
           <TableContainer sx={{ boxShadow: "box-shadow:  3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)" }}>
@@ -138,7 +149,10 @@ export const EmployeeGallery = () => {
                   <StyledTableCell>Title</StyledTableCell>
                   <StyledTableCell>Description</StyledTableCell>
                   <StyledTableCell>Image</StyledTableCell>
-                  
+                  <StyledTableCell>Employee Name</StyledTableCell>
+                  <StyledTableCell>Employee Organization</StyledTableCell>
+                  <StyledTableCell>Employee Department</StyledTableCell>
+                  <StyledTableCell>Employee Mobile No.</StyledTableCell>
                   <StyledTableCell>Start Date</StyledTableCell>
                   <StyledTableCell>End Date</StyledTableCell>
                   <StyledTableCell>Status</StyledTableCell>
@@ -159,6 +173,10 @@ export const EmployeeGallery = () => {
                           <StyledTableCell>{e.empGalleryTitle}</StyledTableCell>
                           <StyledTableCell>{e.empGalleryDescription}</StyledTableCell>
                           <StyledTableCell><img src={e.empGalleryImage} width="100px" height="100px" /></StyledTableCell>
+                          <StyledTableCell>{userData.filter(m=>m.id == e.empId)[0].njFirstName}{" "}{userData.filter(m=>m.id == e.empId)[0].njMiddleName}{" "}{userData.filter(m=>m.id == e.empId)[0].njLastName}</StyledTableCell>
+                          <StyledTableCell>{userData.filter(m=>m.id == e.empId)[0].njCompany}</StyledTableCell>
+                          <StyledTableCell>{userData.filter(m=>m.id == e.empId)[0].njDepartment}</StyledTableCell>
+                          <StyledTableCell>{userData.filter(m=>m.id == e.empId)[0].njMobileNo}</StyledTableCell>
                           <StyledTableCell>{convert(e.empGalleryStartDate)}</StyledTableCell>
                           <StyledTableCell>{convert(e.empGalleryEndDate)}</StyledTableCell>
                           <StyledTableCell>{e.isApproved ? "Approved" : "Not Approved"}</StyledTableCell>

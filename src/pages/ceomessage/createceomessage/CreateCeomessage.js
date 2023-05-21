@@ -26,12 +26,12 @@ export const CreateCeomessage = () => {
     const [newceomessage,setNewCeomessage]=useState([]);
     const ValidationSchema = Yup.object().shape({
         // ceomessageType: Yup.string().required("Please select an option"),
-        ceomessageTitle: Yup.string().required("Achievement Title is required"),
+        ceomessageTitle: Yup.string().required("CMD Title is required"),
         // employeeIdandName: Yup.string().required("Please select an option"),
         // ceomessageArea: Yup.string().required("Please select an option"),
         ceomessageStartDate: Yup.string().required("Start Date is required"),
         ceomessageEndDate: Yup.string().required("End Date is required"),
-        ceomessageDescription: Yup.string().required("Achievement Description is required"),
+        ceomessageDescription: Yup.string().required("CMD Description is required"),
         ceomessageImage: Yup.string().required("Image is required"),
     })
     const onSelectFile = (e, setFieldValue, setFieldError) => {

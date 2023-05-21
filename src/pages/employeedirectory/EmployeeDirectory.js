@@ -93,7 +93,8 @@ const EmployeeDirectory = () => {
         return [day, mnth, date.getFullYear()].join("-");
     }
     const search = () => {
-        return njdata.filter((user) => user.njFirstName.toLowerCase().startsWith(query) || user.njLastName.toLowerCase().startsWith(query) || user.njCompany.toLowerCase().includes(query) || user.njDepartment.toLowerCase().includes(query) || user.njDesignation.toLowerCase().includes(query));
+        console.log();
+        return njdata.filter((user) => user.njFirstName.toLowerCase().includes(query.toLowerCase()) || user.njLastName.toLowerCase().includes(query.toLowerCase()) || user.njCompany.toLowerCase().includes(query.toLowerCase()) || user.njDepartment.toLowerCase().includes(query.toLowerCase()) || user.njDesignation.toLowerCase().includes(query.toLowerCase()));
     }
     return (
         <div className="page-information-container">
@@ -152,7 +153,8 @@ const EmployeeDirectory = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {search()
+                                { 
+                                    search()
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((e) => {
                                         if (e.isDeleted == false)

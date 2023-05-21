@@ -3,12 +3,11 @@
     flex-direction: column;
     height: 9rem;
     align-items: center;
+    margin: 0 0.5rem 0rem 0.5rem;
 }
 .jobcard-container .slider-wrapper{
     height: 9rem !important;
-}
-.jobcard-container .jobday-card{
-    
+    width: 20rem !important;
 }
 .job-card .job-card-area{
     display: flex;
@@ -16,7 +15,9 @@
     justify-content: center;
     align-items: center;
     margin-top: 0.5rem;
+    text-align: justify;
 }
+
 
 .job-card .job-card-profile{
     display: flex;

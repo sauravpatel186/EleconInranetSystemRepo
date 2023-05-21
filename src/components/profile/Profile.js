@@ -114,9 +114,9 @@ export const Profile = () => {
     const getAchievementData = () => {
         let data = JSON.parse(localStorage.getItem("user"));
         if (data) {
-            updateState(data);
-
-            setNewProfile(data);
+            let userData = (JSON.parse(localStorage.getItem("nj")).filter(user => user.id == data[0].id))
+            updateState(userData);
+            setNewProfile(userData);
         } else {
             return [];
         }
@@ -186,13 +186,13 @@ export const Profile = () => {
 
                             </div>
                         </div>
-                        <div className="profile-row">
-                            <div className="createprofileforminput">
-                                <TextField variant='outlined' onBlur={handleBlur} onChange={handleChange} name='njPassword' value={values.njPassword} type='password' label="Password" required sx={{ marginTop: 1 + "rem" }} />
+                        <div className="profile-row" >
+                            <div className="createprofileforminput"  style={{width:100+"%"}}>
+                                <TextField variant='outlined' onBlur={handleBlur} onChange={handleChange} name='njPassword' value={values.njPassword} type='password' label="Password" required sx={{ marginTop: 1 + "rem",width:100+"%"}} />
                                 <ValidationErrorMessage message={errors.njPassword} touched={touched.njPassword} />
                             </div>
-                            <div className="createprofileforminput">
-                                <TextField variant='outlined' onBlur={handleBlur} onChange={handleChange} name='confirmPassword' type='password' label="ConfirmPassword" required sx={{ marginTop: 1 + "rem" }} />
+                            <div className="createprofileforminput"  style={{width:100+"%"}}>
+                                <TextField variant='outlined' onBlur={handleBlur} onChange={handleChange} name='confirmPassword' type='password' label="ConfirmPassword" required sx={{ marginTop: 1 + "rem",width:100+"%"}} />
                             </div>
                         </div>
                         <div className="profile-row">

@@ -33,6 +33,7 @@
 .employeemastertable-container {
     margin: 2rem;
     display: block;
+    width: 79vw;
 }
 
 /* .achievement-image:hover{

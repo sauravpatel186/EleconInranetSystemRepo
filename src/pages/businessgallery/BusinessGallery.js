@@ -38,14 +38,18 @@ export const BusinessGallery = () => {
   const [gallerydata, setGallerydata] = useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
+  const [counter,setCounter] = useState(0);
+  
   const getLocalItem = () => {
-    let data = JSON.parse(localStorage.getItem("businessgallery"));
+    let data = (JSON.parse(localStorage.getItem("businessgallery"))).filter(d=> d.isDeleted == false);
+   
     if (data) {
 
       setGallerydata(data);
+      setCounter(data.length);
       console.log(gallerydata)
     }
+    
     else {
       return [];
     }
@@ -111,9 +115,7 @@ export const BusinessGallery = () => {
               <Typography variant='caption' className='btn-success-font'>Create New business gallery</Typography>
             </Button>
           </NavLink>
-          <Button variant="contained" color="error" size='small' className='btn-delete'>
-            <Typography variant='caption' className='btn-delete-font'>Disable Selected</Typography>
-          </Button>
+         
         </div>
         <div className="businessgallery-table-container">
           <TableContainer sx={{ boxShadow: "box-shadow:  3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)" }}>
@@ -144,6 +146,7 @@ export const BusinessGallery = () => {
                           <StyledTableCell>{e.galleryTitle}</StyledTableCell>
                           <StyledTableCell>{e.galleryDescription}</StyledTableCell>
                           <StyledTableCell><img src={e.galleryImage} width="100px" height="100px" /></StyledTableCell>
+                          
                           <StyledTableCell>{convert(e.galleryStartDate)}</StyledTableCell>
                           <StyledTableCell>{convert(e.galleryEndDate)}</StyledTableCell>
                           <StyledTableCell>{e.isApproved ? "Approved" : "Not Approved"}</StyledTableCell>
@@ -168,7 +171,7 @@ export const BusinessGallery = () => {
           <TablePagination
             rowsPerPageOptions={[5]}
             component="div"
-            count={gallerydata.length}
+            count={counter}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

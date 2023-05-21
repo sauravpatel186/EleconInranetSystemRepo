@@ -22,6 +22,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link, useRouteMatch, useHistory } from "react-router-dom";
 import companyList from "../../../assets/data/companyanddepartment";
+import "yup-phone";
 const showToastMessage = () => {
     toast.success('Success Notification !', {
         position: toast.POSITION.TOP_RIGHT
@@ -43,12 +44,12 @@ const Createnewjoinee = () => {
         njDoj: Yup.string().required("Date Of Join is required"),
         njCompany: Yup.string().required("Company is required"),
         njImage: Yup.string().required("Image is required"),
-        njEmail: Yup.string().required("Email is required"),
+        njEmail: Yup.string().email("Email format not valid").required("Email is required"),
         njPassword: Yup.string().required("Password is required"),
         njRole: Yup.string().required("Roles is required"),
         njDesignation: Yup.string().required("Designation is required"),
         njAddress: Yup.string().required("Address is required"),
-        njMobileNo: Yup.string().required("Mobile No is required"),
+        njMobileNo: Yup.string().max(10).required("Mobile No is required"),
     })
     const onSelectFile = (e, setFieldValue, setFieldError) => {
         const files = e.target.files;
@@ -82,6 +83,9 @@ const Createnewjoinee = () => {
         let edata = localStorage.getItem("employee");
         if (data) {
             setNewjoinee(JSON.parse(data));
+
+        }
+        if (edata) {
             setNewemp(JSON.parse(edata));
         }
         console.log(companyList);
@@ -161,11 +165,12 @@ const Createnewjoinee = () => {
                         }
                         newjoinee.push(nj);
                         setNewjoinee([...newjoinee]);
-                        console.log(newjoinee);
-                        localStorage.setItem("nj", JSON.stringify(newjoinee));
-                        localStorage.setItem("employee", JSON.stringify(newemp));
-                        toast("Stored Successfully");
-                        navigate.push("/admindashbiard/newjoinee");
+                            // setNewemp([...newjoinee]);
+                            localStorage.setItem("nj", JSON.stringify(newjoinee));
+                            // localStorage.setItem("employee", JSON.stringify(newemp));
+                            toast("Stored Successfully");
+                            navigate.push("admindashboard/newjoinee");
+                    
                     }}
                 >
                     {({ values, handleChange, handleBlur, errors, handleSubmit, touched, setFieldValue, setFieldError }) => (
@@ -235,7 +240,7 @@ const Createnewjoinee = () => {
                                                 format="DD-MM-YYYY"
                                                 sx={{ width: 100 + "%" }}
                                                 onChange={(newValue) => setFieldValue("njDoj", newValue)}
-                                                disablePast
+
                                             />
                                         </DemoContainer>
                                         <ValidationErrorMessage message={errors.njDoj} touched={touched.njDoj} />
@@ -296,7 +301,7 @@ const Createnewjoinee = () => {
                                                 id="demo-simple-select-autowidth-label"
                                                 name="njRole"
                                                 type="njRole"
-                                                label="Rolw"
+                                                label="Role"
                                                 onChange={handleChange}
                                                 value={values.njRole}>
                                                 <MenuItem value={"Normal"}>Normal</MenuItem>
@@ -346,17 +351,17 @@ const Createnewjoinee = () => {
                                                 onChange={handleChange}
                                                 value={values.njDepartment}>
                                                 {
-                                                    department && 
-                                                        
-                                                            
-                                                                department.map((dep)=>{
-                                                                    return (
-                                                                        <MenuItem value={dep} key={dep}>{dep}</MenuItem>
-                                                                    )
-                                                                })
-                                                            
-                                                        
-                                                    
+                                                    department &&
+
+
+                                                    department.map((dep) => {
+                                                        return (
+                                                            <MenuItem value={dep} key={dep}>{dep}</MenuItem>
+                                                        )
+                                                    })
+
+
+
                                                 }
                                             </Select>
                                         </FormControl>

@@ -61,10 +61,11 @@ export const Dashboard = () => {
       setJob(data);
     }
   }
+  
   const getUpcomingEvent = () => {
     const today = todayDate();
     console.log(today);
-    let data = (JSON.parse(localStorage.getItem("event"))).filter(e => e.isDeleted == false && convertDate(e.eventStartDate) <= today && convertDate(e.eventEndDate) >= today);
+    let data = (JSON.parse(localStorage.getItem("event"))).filter(e => e.isDeleted == false && compareStartDate(e.eventStartDate) && compareEndDate(e.eventEndDate));
     console.log(data)
     if (data.length > 0) {
       setEventData(data);
@@ -77,6 +78,22 @@ export const Dashboard = () => {
       setJoinee(data);
     }
   }
+  const compareEndDate = (date1) => {
+    var x = new Date(date1);
+    var y = new Date();
+    if (x >= y) {
+        return true;
+    }
+    return false;
+}
+const compareStartDate = (date1) => {
+    var x = new Date(date1);
+    var y = new Date();
+    if (x <= y) {
+        return true;
+    }
+    return false;
+}
   useEffect(() => {
     getBirthDay();
     getJob();
@@ -220,7 +237,7 @@ export const Dashboard = () => {
                     eventData.map((e) => {
                       return (
                         <StyledTableRow key={e.id} >
-                          <StyledTableCell>{eventData.indexOf(eventData.find(achievements => achievements.id == e.id)) + 1}</StyledTableCell>
+                          <StyledTableCell>{eventData.indexOf(eventData.find(achievements => achievements.id == e.id && compareStartDate(achievements.eventStartDate) && compareEndDate(achievements.eventEndDate))) + 1}</StyledTableCell>
                           <StyledTableCell>{e.eventTitle}</StyledTableCell>
                         </StyledTableRow>
                       )

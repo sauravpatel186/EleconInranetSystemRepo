@@ -25,12 +25,13 @@ import { useHistory } from "react-router-dom";
 export const Updatenotice = () => {
     const [newnotice, setNewNotice] = useState([]);
     const { type } = useParams();
+    const [allnotice, setallnotice] = useState([]);
     const idParamVal = useLocation().state.idParam;
     const [noticeData, setNoticeData] = useState({
-        newsTitle : "",
-        newsDescription:"",
-        newsStartDate:"",
-        newsEndDate:"",
+        newsTitle: "",
+        newsDescription: "",
+        newsStartDate: "",
+        newsEndDate: "",
     });
     const updateState = (e) => {
         setNoticeData(existingValue => ({
@@ -38,11 +39,12 @@ export const Updatenotice = () => {
             newsTitle: e[0]["newsTitle"],
             newsDescription: e[0]["newsDescription"],
             newsEndDate: e[0]["newsEndDate"],
-            newsStartDate: e[0]["newsImage"],
-            newsStartDate: e[0]["newsDate"]
+            newsStartDate: e[0]["newsStartDate"],
+            time: e[0]["time"],
+            isDeleted: e[0]["isDeleted"],
         })
         )
-        
+
     }
     const getNoticeData = (id) => {
         let data = JSON.parse(localStorage.getItem("news"));
@@ -50,6 +52,7 @@ export const Updatenotice = () => {
             let adata = data.filter(notices => notices.id === id);
             updateState(adata);
             setNewNotice(data);
+
         } else {
             return [];
         }
@@ -69,20 +72,26 @@ export const Updatenotice = () => {
         newsStartDate: Yup.string().required("Start Date is required"),
         newsEndDate: Yup.string().required("End Date is required"),
         newsDescription: Yup.string().required("News Description is required"),
-        
+
     })
-    
+
     //Handles The Event when data is changed
     const UpdateData = (id, updatedData) => {
-        const datawithId = newnotice.find(e => e.id === id); // finds the element with id 
+        const datawithId = newnotice.find(e => e.id == id); // finds the element with id 
         if (datawithId["id"] === updatedData.id) {
-            // /console.log(newachievement);
-            setNewNotice(result => [...result,updatedData]);
-            console.log(newnotice);
+            console.log(datawithId);
+            let tempdata = newnotice.indexOf(newnotice.find(announcement => announcement.id == id));
+            newnotice[tempdata] = updatedData
+            setallnotice([...newnotice])
+            console.log(allnotice)
         }
-        // setToDos([...toDos]) //updating the current state
-        // localStorage.setItem("data", JSON.stringify(toDos)) //updating local storage with state
     }
+    useEffect(() => {
+        if (allnotice.length > 0) {
+            localStorage.setItem("news", JSON.stringify(allnotice));
+            navigate.push("/admindashboard/news");
+        }
+    }, [allnotice])
     return (
         <div className="page-information-container">
             <header className="page-header">
@@ -105,12 +114,13 @@ export const Updatenotice = () => {
                         let notice = {
                             id: idParamVal,
                             newsTitle: data.newsTitle,
-                            newsStartDate: JSON.stringify(data.newsStartDate),
-                            newsEndDate: JSON.stringify(data.newsEndDate),
+                            newsStartDate: data.newsStartDate,
+                            newsEndDate: data.newsEndDate,
                             newsDescription: data.newsDescription,
-                            time: Math.floor(Date.now() / 1000),
-                            isDeleted: false,
+                            time:data.time,
+                            isDeleted: data.isDeleted,
                         }
+                        console.log(notice);
                         UpdateData(idParamVal, notice);
                     }}
                 >
@@ -118,7 +128,7 @@ export const Updatenotice = () => {
                         <form onSubmit={handleSubmit}>
                             <div className="createnoticeform">
                                 <div className="formrow">
-                                <div className="createnoticeforminput" style={{marginTop:0.5+"rem"}}>
+                                    <div className="createnoticeforminput" style={{ marginTop: 0.5 + "rem" }}>
                                         <TextField
                                             label="Notice Title"
                                             name="newsTitle"
@@ -139,13 +149,13 @@ export const Updatenotice = () => {
                                                 value={dayjs(values.newsStartDate)}
                                                 required
                                                 format="DD-MM-YYYY"
-                                                
+
                                                 sx={{ width: 100 + "%" }}
                                                 onChange={(newValue) => setFieldValue("newsStartDate", newValue)}
-                                                
+
                                             />
                                         </DemoContainer>
-                                        <ValidationErrorMessage message={errors.noticeStartDate} touched={touched.noticeStartDate} />
+                                        <ValidationErrorMessage message={errors.newsStartDate} touched={touched.newsStartDate} />
 
                                     </div>
                                     <div className="createnoticeforminput">
@@ -156,9 +166,9 @@ export const Updatenotice = () => {
                                                 required
                                                 format="DD-MM-YYYY"
                                                 sx={{ width: 100 + "%" }}
-                                                defaultValue={dayjs(values.newsEndDate)}
+
                                                 onChange={(newValue) => setFieldValue("newsEndDate", newValue)}
-                                        
+
                                             />
                                         </DemoContainer>
                                         <ValidationErrorMessage message={errors.newsEndDate} touched={touched.newsEndDate} />
@@ -183,7 +193,7 @@ export const Updatenotice = () => {
                                         <ValidationErrorMessage message={errors.newsDescription} touched={touched.newsDescription} />
                                     </div>
                                 </div>
-                                
+
                                 <div className="formrow">
                                     <div className="createnoticeforminput">
                                         <Button variant="contained" color="success" type="submit">

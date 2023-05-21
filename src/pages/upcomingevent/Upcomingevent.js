@@ -153,11 +153,7 @@ const Upcomingevent = (props) => {
           <Route exact path="/admindashboard/upcomingevent/createupcomingevent">
             <Createupcomingevent />
           </Route>
-          <NavLink to="/admindashboard/upcomingevent/createupcomingevent">
-            <Button variant="contained" color="error" size="small">
-              Disable Selected
-            </Button>
-          </NavLink>
+         
         </div>
         <div className="table-container">
           <TableContainer>

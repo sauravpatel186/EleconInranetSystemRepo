@@ -27,7 +27,7 @@ export const Updatenewjoinee = () => {
     const [department, setDepartment] = useState([]);
     const { type } = useParams();
     const idParamVal = useLocation().state.idParam;
-    console.log(idParamVal);
+    
     const [newjoinee, setNewJoinee] = useState([]);
     const [allnj, setAllnj] = useState([]);
     const [njData, setnjData] = useState({
@@ -104,7 +104,7 @@ export const Updatenewjoinee = () => {
         njPassword: Yup.string().required("Password is required"),
         njDesignation: Yup.string().required("Designation is required"),
         njAddress: Yup.string().required("Address is required"),
-        njMobileNo: Yup.string().required("Mobile No is required"),
+        njMobileNo: Yup.string().max(10).required("Mobile No is required"),
         njRole: Yup.string().required("Role is required"),
     })
     const onSelectFile = (e, setFieldValue, setFieldError) => {

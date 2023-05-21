@@ -132,11 +132,7 @@ const Canteenmenu = () => {
           <Route exact path="/admindashboard/canteenmenu/createcanteenmenu">
             <Createcanteenmenu />
           </Route>
-          <NavLink to="/admindashboard/canteenmenu/createcanteenmenu">
-            <Button variant="contained" color="error" size="small">
-              Disable Selected
-            </Button>
-          </NavLink>
+          
         </div>
         <div className="table-container">
           <TableContainer>

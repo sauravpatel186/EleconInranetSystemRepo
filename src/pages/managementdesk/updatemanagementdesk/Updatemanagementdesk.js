@@ -27,6 +27,7 @@ export const Updatemanagementdesk = () => {
   const [newmd, setNewMd] = useState([]);
   const [allmd, setAllMd] = useState([]);
   const idParamVal = useLocation().state.idParam;
+  console.log(idParamVal);
   const [mdData, setmdData] = useState({
     mdTitle: "",
     mdStartDate: "",
@@ -76,7 +77,7 @@ export const Updatemanagementdesk = () => {
       let tempdata = newmd.indexOf(newmd.find(achievements => achievements.id == id));
       temp[tempdata] = updatedData
       setAllMd([...temp])
-      console.log(temp[tempdata]);
+      console.log(allmd);
     }
 
   }

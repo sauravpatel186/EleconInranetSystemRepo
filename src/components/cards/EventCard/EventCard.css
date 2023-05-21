@@ -15,7 +15,12 @@
     flex-direction: column;
 
 }
+.event-description{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 
+}
 .event-date-month {
     display: flex;
     flex-direction: row;
@@ -41,5 +46,8 @@
     text-align: justify;
 }
 .event-carousel li:last-child{
+    visibility: hidden;
+}
+.event-carousel li:first-child{
     visibility: hidden;
 }

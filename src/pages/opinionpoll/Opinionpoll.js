@@ -132,11 +132,7 @@ const Opinionpoll = () => {
             <Route exact path="/admindashboard/opinionpoll/createopinionpoll">
               <Createopinionpoll />
             </Route>
-            <NavLink to="/admindashboard/opinionpoll/createopinionpoll">
-              <Button variant="contained" color="error">
-                Disable Selected
-              </Button>
-            </NavLink>
+            
           </div>
           <div className="table-container">
             {/* <table>

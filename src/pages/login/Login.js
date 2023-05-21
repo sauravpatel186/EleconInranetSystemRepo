@@ -77,8 +77,11 @@ export const Login = (props) => {
                                         <TextField name="email" type='email' required label='Email' sx={{ width: 100 + "%" }} onChange={handleChange} onBlur={handleBlur} />
                                         <ValidationErrorMessage message={errors.email} touched={errors.email} />
                                     </div>
+                                    <div className="password-input">
                                     <TextField name="password" type='password' required label='Password' sx={{ width: 100 + "%" }} onChange={handleChange} onBlur={handleBlur} />
                                     <ValidationErrorMessage message={errors.password} touched={errors.password} />
+                                    </div>
+                                    <div className='role-input'>
                                     <FormControl sx={{ width: 100 + "%" }}>
                                         <InputLabel id="demo-simple-select-label">Role</InputLabel>
                                         <Select
@@ -97,6 +100,7 @@ export const Login = (props) => {
                                         </Select>
                                     </FormControl>
                                     <ValidationErrorMessage message={errors.role} touched={errors.role} />
+                                    </div>
                                 </div>
                                 <div className="login-form-button">
                                     <Button variant='contained' fullWidth type="submit">Login</Button>

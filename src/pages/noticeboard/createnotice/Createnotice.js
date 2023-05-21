@@ -20,10 +20,10 @@ export const Createnotice = () => {
     const navigate = useHistory();
     const [newnotice,setNewNotice]=useState([]);
     const ValidationSchema = Yup.object().shape({
-        newsTitle: Yup.string().required("Notice Title is required"),
+        newsTitle: Yup.string().required("News Title is required"),
         newsStartDate: Yup.string().required("Start Date is required"),
         newsEndDate: Yup.string().required("End Date is required"),
-        newsDescription: Yup.string().required("Notice Description is required"),
+        newsDescription: Yup.string().required("News Description is required"),
     })
     
     useEffect(() => {
@@ -70,7 +70,7 @@ export const Createnotice = () => {
                         toast("Stored Successfully");
                         // console.log(JSON.stringify(achievement));
                         // submitData(achievement);
-                        navigate.push("/noticeboard");
+                        navigate.push("/admindashboard/news");
                     }}
                 >
                     {({ values, handleChange, handleBlur, errors, handleSubmit, touched, setFieldValue, setFieldError }) => (
@@ -94,7 +94,7 @@ export const Createnotice = () => {
                                         <DemoContainer required components={["DatePicker", "DatePicker"]}>
                                             <DatePicker
                                                 label="View From"
-                                                value={dayjs(values.newsStartDate)}
+                                                value={values.newsStartDate}
                                                 
                                                 format="DD-MM-YYYY"
                                                 sx={{ width: 100 + "%" }}
@@ -102,14 +102,14 @@ export const Createnotice = () => {
                                                 disablePast
                                             />
                                         </DemoContainer>
-                                        <ValidationErrorMessage message={errors.newsStartDate} touched={touched.noticeStartDate} />
+                                        <ValidationErrorMessage message={errors.newsStartDate} touched={touched.newsStartDate} />
 
                                     </div>
                                     <div className="createnoticeforminput">
                                         <DemoContainer required components={["DatePicker"]}>
                                             <DatePicker
                                                 label="View Upto"
-                                                value={dayjs(values.newsEndDate)}
+                                                value={values.newsEndDate}
                                                 
                                                 format="DD-MM-YYYY"
                                                 sx={{ width: 100 + "%" }}

@@ -184,9 +184,7 @@ export const Thoughtoftheday = () => {
               <Typography variant='caption' className='btn-success-font'>Create New Thought</Typography>
             </Button>
           </NavLink>
-          <Button variant="contained" color="error" size='small' className='btn-delete'>
-            <Typography variant='caption' className='btn-delete-font'>Disable Selected</Typography>
-          </Button>
+          
 
         </div>
         <div className="thoughtofthedaytable-container">

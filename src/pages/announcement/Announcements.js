@@ -155,11 +155,7 @@ const Announcements = () => {
           <Route exact path="/admindashboard/announcement/createannouncement">
             <CreateAnnouncement />
           </Route>
-          <NavLink to="/admindashboard/announcement/createannouncement">
-            <Button variant="contained" color="error" size="small">
-              Disable Selected
-            </Button>
-          </NavLink>
+          
         </div>
         <div className="table-container">
           <TableContainer>

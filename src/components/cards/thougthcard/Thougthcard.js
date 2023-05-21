@@ -16,21 +16,19 @@ export const Thougthcard = () => {
         var day = Math.floor(diff / oneDay);
         return day;
     }
-    const getData = async () => {
-        let data = await (JSON.parse(localStorage.getItem("thought"))).filter(e=>e.isDeleted == false);
-        // let finaldata = data[index()];
-        let i = index();
-        console.log(index());
-        setThougth(data[index()].Thoughttitle);
-        
-        
-        if (thougth.length > 0) {
-            let newStr =  (thougth) => (thougth.endsWith(".,") ? thougth.substring(0, thougth.length - 1) : thougth).split(".,");
-            setTitle(newStr(thougth)[0]);
-            let str =  (thougth) =>  (thougth.endsWith(",") ? thougth.substring(0, thougth.length - 1) : thougth).split(",");
-            setAuthor(str(newStr(thougth)[1])[0]);
-            setShow(true);
-        }
+    const getData = () => {
+        setShow(true);
+        // let data = (JSON.parse(localStorage.getItem("thought"))).filter(e=>e.isDeleted == false);
+        // let i = index();
+        // console.log(index());
+        // setThougth(data[140].Thoughttitle);
+        // if (thougth != null) {   
+        //     let newStr =  (thougth) => (thougth.endsWith(".,") ? thougth.substring(0, thougth.length - 1) : thougth).split(".,");
+        //     setTitle(newStr(thougth)[0]);
+        //     let str =  (thougth) =>  (thougth.endsWith(",") ? thougth.substring(0, thougth.length - 1) : thougth).split(",");
+        //     setAuthor(str(newStr(thougth)[1])[0]);
+        //     setShow(true);
+        // }
     }
     useEffect(() => {
         getData();
@@ -39,13 +37,17 @@ export const Thougthcard = () => {
         <>{
             show ?
                 <div className='thought-card-container'>
+                
+
                     <div className='thought-card-text' style={{marginTop:1.6+"rem"}}>
-                        <Typography variant='body1' sx={{ color: "#8B8B8B !important" }}>If you're so afraid of failure, you will never succeed. You have to take chances</Typography>
+                        <Typography variant='body1' sx={{ color: "#8B8B8B !important" }}>If you have the opportunity to play this game of life you need to appreciate every moment. a lot of people don't appreciate the moment until it's passed</Typography>
                     </div>
-                    {/* <div className='thought-card-author'>
-                        <Typography variant='body1' sx={{ color: "#8B8B8B!important" }}>-{author}</Typography>
-                    </div> */}
+                    <div className='thought-card-author'>
+                        <Typography variant='body1' sx={{ color: "#8B8B8B!important" }}>-Kanye West</Typography>
+                    </div>
+                
                 </div>
+                
                 :
                 <></>
         }

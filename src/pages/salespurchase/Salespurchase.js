@@ -132,11 +132,7 @@ const Salespurchase = () => {
           <Route exact path="/admindashboard/salespurchase/createsalespurchase">
             <Createsalespurchase />
           </Route>
-          <NavLink to="/admindashboard/salespurchase/createsalespurchase">
-            <Button variant="contained" color="error" size="small">
-              Disable Selected
-            </Button>
-          </NavLink>
+          
         </div>
         <div className="table-container">
           <TableContainer>

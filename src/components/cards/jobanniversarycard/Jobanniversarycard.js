@@ -37,11 +37,11 @@ export const Jobanniversarycard = () => {
     useEffect(() => {
         let data = JSON.parse(localStorage.getItem("nj"));
         let date = todayDate();
-        let finaldata = data.filter(e => convertDate(e.njDoj).toString() === date);
+        let finaldata = data.filter(e => convertDate(e.njDoj).toString() == date && e.isDeleted == false);
         if (finaldata != null) {
             setUserData(finaldata);
             setshow(true);
-            
+            console.log(finaldata);
         }
 
     }, [])
@@ -50,7 +50,7 @@ export const Jobanniversarycard = () => {
             {
                 show ?
                     <div className='jobcard-container'>
-                        <Carousel stopOnHover autoPlay infiniteLoop dynamicHeight showArrows={false} showStatus={false} showThumbs={false} showIndicators={false} interval={5000}>
+                        <Carousel stopOnHover autoPlay infiniteLoop dynamicHeight showArrows={false} showStatus={false} showThumbs={false} showIndicators={false} interval={3000}>
 
                             {userdata.map((e) => {
                                 return (

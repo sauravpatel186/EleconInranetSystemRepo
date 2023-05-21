@@ -56,7 +56,8 @@ export const Announcementcard = () => {
                                 return (
                                     <div className="announcementcard-text" key={e.id}>
                                         <div className="announcementcard-date"><Typography variant='subtitle2'>{convertDate(e.announcementStartDate)}</Typography></div>
-                                        <div className="announcementcard-title"><Typography variant='body1' sx={{color:"#8B8B8B !important",marginTop:0.5+"rem"}}>{e.announcementTitle}</Typography></div>
+                                        <div className="announcementcard-department"><Typography variant='body1' sx={{color:"#8B8B8B !important",marginTop:0.5+"rem"}}>From : {e.announcementDepartment} Department</Typography></div>
+                                        <div className="announcementcard-title"><Typography variant='body1' sx={{color:"#8B8B8B !important"}}>{e.announcementTitle}</Typography></div>
                                         <div className="announcementcard-description"><Typography variant='body1' sx={{color:"#8B8B8B !important"}}>{e.announcementDescription}</Typography></div>
 
                                     </div>

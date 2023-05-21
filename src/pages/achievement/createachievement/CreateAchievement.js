@@ -21,13 +21,17 @@ import { Formik } from "formik";
 import { useHistory } from "react-router-dom";
 import { Achievement } from "../Achievement";
 export const CreateAchievement = () => {
-    
+    const [empData, setEmpData] = useState([]);
+    useEffect(() => {
+        let emp = JSON.parse(localStorage.getItem("nj"));
+        setEmpData(emp);
+    }, [])
     const navigate = useHistory();
-    const [newachievement,setNewAchievement]=useState([]);
+    const [newachievement, setNewAchievement] = useState([]);
     const ValidationSchema = Yup.object().shape({
         achievementType: Yup.string().required("Please select an option"),
         achievementTitle: Yup.string().required("Achievement Title is required"),
-        employeeIdandName: Yup.string().required("Please select an option"),
+        // employeeIdandName: Yup.string().required("Please select an option"),
         achievementArea: Yup.string().required("Please select an option"),
         achievementStartDate: Yup.string().required("Start Date is required"),
         achievementEndDate: Yup.string().required("End Date is required"),
@@ -59,9 +63,9 @@ export const CreateAchievement = () => {
     useEffect(() => {
         let data = localStorage.getItem("achievement");
         if (data) {
-          setNewAchievement(JSON.parse(data));
+            setNewAchievement(JSON.parse(data));
         }
-      }, []);
+    }, []);
     return (
         <div className="page-information-container">
             <header className="page-header">
@@ -80,7 +84,7 @@ export const CreateAchievement = () => {
                     initialValues={{
                         achievementType: "",
                         achievementTitle: "",
-                        employeeIdandName: "",
+                        // employeeIdandName: "",
                         achievementArea: "",
                         achievementStartDate: null,
                         achievementEndDate: null,
@@ -93,7 +97,7 @@ export const CreateAchievement = () => {
                             id: Math.random(),
                             achievementType: data.achievementType,
                             achievementTitle: data.achievementTitle,
-                            employeeIdandName: data.employeeIdandName,
+                            // employeeIdandName: data.employeeIdandName,
                             achievementArea: data.achievementArea,
                             achievementStartDate: data.achievementStartDate,
                             achievementEndDate: data.achievementEndDate,
@@ -104,7 +108,7 @@ export const CreateAchievement = () => {
                         }
                         newachievement.push(achievement);
                         setNewAchievement([...newachievement]);
-                        localStorage.setItem("achievement",JSON.stringify(newachievement));
+                        localStorage.setItem("achievement", JSON.stringify(newachievement));
                         toast("Stored Successfully");
                         // console.log(JSON.stringify(achievement));
                         // submitData(achievement);
@@ -147,8 +151,8 @@ export const CreateAchievement = () => {
 
                                     </div>
                                 </div>
-                                <div className="formrow">
-                                    <div className="createachievementforminput">
+                                {/* <div className="formrow"> */}
+                                    {/* <div className="createachievementforminput">
                                         <FormControl sx={{ width: 100 + "%" }}>
                                             <InputLabel id="demo-simple-select-autowidth-label">Employee Id and Name</InputLabel>
                                             <Select
@@ -166,8 +170,8 @@ export const CreateAchievement = () => {
                                         </FormControl>
                                         <ValidationErrorMessage message={errors.employeeIdandName} touched={touched.employeeIdandName} />
 
-                                    </div>
-                                </div>
+                                    </div> */}
+                                {/* </div> */}
                                 <div className="formrow">
                                     <div className="createachievementforminput">
                                         <FormControl sx={{ width: 100 + "%", marginTop: 1 + "vh" }}>

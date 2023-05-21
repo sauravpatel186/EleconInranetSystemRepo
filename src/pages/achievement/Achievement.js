@@ -37,6 +37,7 @@ export const Achievement = () => {
   const navigate = useHistory();
   let { path, url } = useRouteMatch();
   const [achievementdata, setAchievementdata] = useState([]);
+  const [empdata, setempdata] = useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [counter,setCounter] = useState(0);
@@ -45,6 +46,8 @@ export const Achievement = () => {
     if (data) {
       
       let adata = data.filter(achievement => achievement.isDeleted == false); 
+      let empData = JSON.parse(localStorage.getItem("nj"));
+      setempdata(empData);
       setAchievementdata(adata);
       setCounter(adata.length);
       // console.log(achievementdata)
@@ -117,9 +120,7 @@ export const Achievement = () => {
               <Typography variant='caption' className='btn-success-font'>Create New Achievement</Typography>
             </Button>
           </NavLink>
-          <Button variant="contained" color="error" size='small' className='btn-delete'>
-            <Typography variant='caption' className='btn-delete-font'>Disable Selected</Typography>
-          </Button>
+        
         </div>
         <div className="achievementtable-container">
           <TableContainer sx={{ boxShadow: "box-shadow:  3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)" }}>
@@ -129,7 +130,7 @@ export const Achievement = () => {
                   <StyledTableCell><Checkbox size='small' name='achievementSelect' sx={{ color: "black" }}></Checkbox></StyledTableCell>
                   <StyledTableCell>Achievement Title</StyledTableCell>
                   <StyledTableCell>Achievement Type</StyledTableCell>
-                  <StyledTableCell>Employee Id and Name</StyledTableCell>
+                  {/* <StyledTableCell>Employee Id and Name</StyledTableCell> */}
                   <StyledTableCell>Achievement Area</StyledTableCell>
                   <StyledTableCell>Achievement Description</StyledTableCell>
                   <StyledTableCell>Image</StyledTableCell>
@@ -150,7 +151,7 @@ export const Achievement = () => {
                                     <StyledTableCell><Checkbox size='small' /></StyledTableCell>
                                     <StyledTableCell>{e.achievementTitle}</StyledTableCell>
                                     <StyledTableCell>{e.achievementType}</StyledTableCell>
-                                    <StyledTableCell>{e.employeeIdandName}</StyledTableCell>
+                                    {/* <StyledTableCell>{e.employeeIdandName}</StyledTableCell> */}
                                     <StyledTableCell>{e.achievementArea}</StyledTableCell>
                                     <StyledTableCell>{e.achievementDescription}</StyledTableCell>
                                     <StyledTableCell><img className="achievement-image" src={e.achievementImage} width="40rem" height="40rem" /></StyledTableCell>

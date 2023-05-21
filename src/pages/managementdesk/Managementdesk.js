@@ -127,11 +127,7 @@ const Managementdesk = (props) => {
           <Route exact path="/admindashboard/managementdesk/createmanagementdesk">
             <Createmanagementdesk />
           </Route>
-          <NavLink to="/admindashboard/managementdesk/createmanagementdesk">
-            <Button variant="contained" color="error" size="small">
-              Disable Selected
-            </Button>
-          </NavLink>
+               
         </div>
         <div className="table-container">
           <TableContainer>
@@ -172,15 +168,14 @@ const Managementdesk = (props) => {
                         <StyledTableCell>{convert(e.mdStartDate)}</StyledTableCell>
                         <StyledTableCell>{convert(e.mdEndDate)}</StyledTableCell>
                         <StyledTableCell>
-                          <LinkRoute
-                            to={{
-                              pathname:
+                        <LinkRoute
+                              to={{
+                                pathname:
                                 "/admindashboard/managementdesk/updatemanagementdesk/:id",
-                              state: { idParam: e.id },
-                            }}>
-                            <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />
-                          </LinkRoute>
-
+                                state: { idParam: e.id },
+                              }}>
+                                <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />
+                              </LinkRoute>
                           <Button size='small' id={e.id} key={e.id} onClick={(event) => handleDelete(e.id)} sx={{ verticalAlign: "bottom", minWidth: "auto" }}><Delete sx={{ color: "red" }} /></Button>
                           </StyledTableCell>
                       </StyledTableRow>

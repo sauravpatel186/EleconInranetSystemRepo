@@ -24,6 +24,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { useHistory } from "react-router-dom";
 export const UpdateCeomessage = () => {
     const [newceomessage, setNewCeomessage] = useState([]);
+    const [allceomessage, setAllCeomessage] = useState([]);
     const { type } = useParams();
     const idParamVal = useLocation().state.idParam;
     const [ceomessageData, setCeomessageData] = useState({
@@ -108,13 +109,20 @@ export const UpdateCeomessage = () => {
     const UpdateData = (id, updatedData) => {
         const datawithId = newceomessage.find(e => e.id == id); // finds the element with id 
         if (datawithId["id"] === updatedData.id) {
-            // /console.log(newachievement);
-            setNewCeomessage(result => [...result,updatedData]);
-             console.log(newceomessage);
+            let tempdata = newceomessage.indexOf(newceomessage.find(announcement => announcement.id == id));
+            newceomessage[tempdata]= updatedData;
+            setAllCeomessage([...newceomessage])
+            
         }
         // setToDos([...toDos]) //updating the current state
         // localStorage.setItem("data", JSON.stringify(toDos)) //updating local storage with state
     }
+    useEffect(() => {
+        if (allceomessage.length > 0) {
+            localStorage.setItem("ceomessage", JSON.stringify(allceomessage));
+            navigate.push("/admindashboard/ceomessage");
+        }
+    }, [allceomessage])
     return (
         <div className="page-information-container">
             <header className="page-header">
@@ -140,8 +148,8 @@ export const UpdateCeomessage = () => {
                             ceomessageTitle: data.ceomessageTitle,
                             // employeeIdandName: data.employeeIdandName,
                             // achievementArea: data.achievementArea,
-                            ceomessageStartDate: JSON.stringify(data.ceomessageStartDate),
-                            ceomessageEndDate: JSON.stringify(data.ceomessageEndDate),
+                            ceomessageStartDate: data.ceomessageStartDate,
+                            ceomessageEndDate: data.ceomessageEndDate,
                             ceomessageDescription: data.ceomessageDescription,
                             ceomessageImage: data.ceomessageImage,
                             time: Math.floor(Date.now() / 1000),
@@ -233,10 +241,10 @@ export const UpdateCeomessage = () => {
                                         <DemoContainer required components={["DatePicker", "DatePicker"]}>
                                             <DatePicker
                                                 label="Start Date"
-                                                value={dayjs(parseISO(values.ceomessageStartDate))}
+                                                value={dayjs(values.ceomessageStartDate)}
                                                 required
                                                 format="DD-MM-YYYY"
-                                                defaultValue={dayjs(parseISO(values.ceomessageStartDate))}
+                                                
                                                 sx={{ width: 100 + "%" }}
                                                 onChange={(newValue) => setFieldValue("ceomessageStartDate", newValue)}
                                                 
@@ -249,11 +257,11 @@ export const UpdateCeomessage = () => {
                                         <DemoContainer required components={["DatePicker"]}>
                                             <DatePicker
                                                 label="End Date"
-                                                value={dayjs((values.EndDate))}
+                                                value={dayjs(values.ceomessageEndDate)}
                                                 required
                                                 format="DD-MM-YYYY"
                                                 sx={{ width: 100 + "%" }}
-                                                defaultValue={dayjs(values.ceomessageEndDate)}
+                                                
                                                 onChange={(newValue) => setFieldValue("ceomessageEndDate", newValue)}
                                         
                                             />

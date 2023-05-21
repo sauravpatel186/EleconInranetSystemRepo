@@ -109,12 +109,10 @@ export const Noticeboard = () => {
         <div className="noticeboard-container-button">
           <NavLink to="/admindashboard/noticeboard/createnotice">
             <Button variant="contained" color="success" size='small' className='btn-create'>
-              <Typography variant='caption' className='btn-success-font'>Create New Notice</Typography>
+              <Typography variant='caption' className='btn-success-font'>Create News</Typography>
             </Button>
           </NavLink>
-          <Button variant="contained" color="error" size='small' className='btn-delete'>
-            <Typography variant='caption' className='btn-delete-font'>Disable Selected</Typography>
-          </Button>
+        
         </div>
         <div className="noticeboardtable-container">
           <TableContainer sx={{ boxShadow: "box-shadow:  3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)" }}>

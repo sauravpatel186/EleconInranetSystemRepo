@@ -22,7 +22,9 @@ import { ValidationErrorMessage } from "../../../components/ValidationErrorMessa
 import { Formik } from "formik";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { useHistory } from "react-router-dom";
+import companyList from "../../../assets/data/companyanddepartment";
 export const Updateannouncement = () => {
+  const [department, setDepartment] = useState([]);
   const [newannouncement, setnewannouncement] = useState([]);
   const [AllAnnouncement, setAllAnnouncement] = useState([]);
   const { type } = useParams();
@@ -95,6 +97,11 @@ useEffect(()=>{
     navigate.push("/admindashboard/announcement");
   }
 },[AllAnnouncement])
+const onSelectCompany = (e, setFieldValue, setFieldError) => {
+  const company = e.target.value;
+  setFieldValue("company", company);
+  setDepartment(companyList.filter(c => c.CompanyName == company)[0].DepartmentName);
+}
   return (
     <div className="page-information-container">
       <header className="page-header">
@@ -158,28 +165,58 @@ useEffect(()=>{
                 </div>
                 <div className="formrow">
                 <div className="createeventforminput">
-                    <FormControl sx={{ width: 100 + "%" }}>
-                      <InputLabel id="demo-simple-select-autowidth-label">
-                        Department
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-autowidth-label"
-                        id="demo-simple-select-autowidth-label"
-                        name="announcementDepartment"
-                        type="announcementDepartment"
-                        label="Department"
-                        onChange={handleChange}
-                        value={values.announcementDepartment}>
-                        <MenuItem value={"Department 1"}>Department 1</MenuItem>
-                        <MenuItem value={"Department 2"}>Department 2</MenuItem>
-                        <MenuItem value={"Department 3"}>Department 3</MenuItem>
-                      </Select>
-                    </FormControl>
-                    <ValidationErrorMessage
-                      message={errors.announcementDepartment}
-                      touched={touched.announcementDepartment}
-                    />
-                  </div>
+                                        <FormControl sx={{ width: 100 + "%"}}>
+                                            <InputLabel id="demo-simple-select-autowidth-label">Company</InputLabel>
+                                            <Select
+                                                labelId="demo-simple-select-autowidth-label"
+                                                id="demo-simple-select-autowidth-label"
+                                                name="company"
+                                                type="company"
+                                                label="Company"
+                                                onChange={(e) =>
+                                                    onSelectCompany(e, setFieldValue, setFieldError)
+                                                }
+                                                value={values.njCompany}>
+                                                {
+                                                    companyList.map((company) => {
+                                                        return (
+                                                            <MenuItem key={company} value={company.CompanyName}>{company.CompanyName}</MenuItem>
+                                                        )
+                                                    })
+                                                }
+
+                                            </Select>
+                                        </FormControl>
+                                        <ValidationErrorMessage message={errors.njCompany} touched={touched.njCompany} />
+                                    </div>
+                                    <div className="createeventforminput">
+                                        <FormControl sx={{ width: 100 + "%"}}>
+                                            <InputLabel id="demo-simple-select-autowidth-label">Department</InputLabel>
+                                            <Select
+                                                labelId="demo-simple-select-autowidth-label"
+                                                id="demo-simple-select-autowidth-label"
+                                                name="announcementDepartment"
+                                                type="announcementDepartment"
+                                                label="Department"
+                                                onChange={handleChange}
+                                                value={values.announcementDepartment}>
+                                                {
+                                                    department &&
+
+
+                                                    department.map((dep) => {
+                                                        return (
+                                                            <MenuItem value={dep} key={dep}>{dep}</MenuItem>
+                                                        )
+                                                    })
+
+
+
+                                                }
+                                            </Select>
+                                        </FormControl>
+                                        <ValidationErrorMessage message={errors.njDepartment} touched={touched.njDepartment} />
+                                    </div>
                 </div>
                 <div className="formrow">
                   <div className="createeventforminput">

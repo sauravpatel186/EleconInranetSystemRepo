@@ -78,6 +78,10 @@ import { CreateBusinessGallery } from "./pages/businessgallery/createbusinessgal
 import { EmpCreateEmployeeGallery } from "./pages/empemployeegallery/createemployeegallery/EmpCreateEmployeeGallery";
 import { EmpEmployeeGallery } from "./pages/empemployeegallery/EmpEmployeeGallery";
 import { UpdateBusinessGallery } from "./pages/businessgallery/updatebusinessgallery/UpdateBusinessGallery";
+import ArticleAdmin from "./pages/articleadmin/ArticleAdmin";
+import Createadminarticle from "./pages/articleadmin/Createadminarticle/Createadminarticle";
+import { UpdateAdminArticle } from "./pages/articleadmin/updatearticleadmin/UpdateAdminArticle";
+import UpdateEmployeeData from "./pages/employeemaster/updateemployeedata/UpdateEmployeeData";
 function App() {
   const USER_TYPES = {
     PUBILIC: "Public User",
@@ -91,12 +95,10 @@ function App() {
   const [user, setUser] = useState([]);
   const [role,setRole] = useState("");
   const [loading, setLoding] = useState(false);
-  const getUserData = () => {
-    let roledata = JSON.parse(localStorage.getItem("role"));
-    console.log(roledata);
+  const getUserData = async () => {
+    let roledata = await JSON.parse(localStorage.getItem("role"));
     if (roledata != null || roledata != undefined) {
       setRole(roledata)
-      console.log(roledata);
     }
     else {
       setRole("");
@@ -120,7 +122,7 @@ function App() {
     if (getUserData()) {
       setLoding(false);
     }
-  }, []);
+  }, [role]);
 
   const AdminHandler = () => {
     setisIntranetDashboardOpen(true);
@@ -170,6 +172,7 @@ function App() {
                     <Route index path="/admindashboard/upcomingevent/createupcomingevent"><Createupcomingevent /></Route>
                     <Route exact path="/admindashboard/opinionpoll/createopinionpoll"><Createopinionpoll /></Route>
                     <Route exact path="/admindashboard/ceomessage/createceomessage"><CreateCeomessage/></Route>
+                    <Route exact path="/admindashboard/ceomessage/updateceomessage/:id"><UpdateCeomessage/></Route>
                     <Route exact path="/admindashboard/achievement"><Achievement /></Route>
                     <Route exact path="admindashboard/ceomessage/updateceomessage/:id"><UpdateCeomessage/></Route>
                     <Route index path="/admindashboard/achievement/createachievement"><CreateAchievement /></Route>
@@ -209,11 +212,11 @@ function App() {
                     <Route exact path="/admindashboard/businessgallery"><BusinessGallery/></Route>
                     <Route exact path="/admindashboard/businessgallery/createbusinessgallery"><CreateBusinessGallery/></Route>
                     <Route exact path="/admindashboard/businessgallery/updatebusinessgallery/:id"><UpdateBusinessGallery/></Route>
-                    
+                    <Route exact path="/admindashboard/employeemaster/updateemployeemaster/:id"><UpdateEmployeeData/></Route>
                     <Route exact path="/admindashboard/news"><Noticeboard/></Route>
-                    <Route exact path="/admindashboard/article"><Employeearticle/></Route>
-                  <Route exact path="/admindashboard/article/createarticle"><Createemployeearticle/></Route>
-                  
+                    <Route exact path="/admindashboard/article"><ArticleAdmin/></Route>
+                  <Route exact path="/admindashboard/article/createarticle"><Createadminarticle/></Route>
+                  <Route exact path="/admindashboard/article/updateemployeearticle/:id"><UpdateAdminArticle/></Route>
                   </Switch>
                 </LocalizationProvider>
               </div>

@@ -1,11 +1,15 @@
+import React from 'react'
 import { styled } from '@mui/material/styles';
-import { Typography, Button, Breadcrumbs, Link, Checkbox, Paper, tableCellClasses, TableContainer, Table, TableHead, TableBody, TableCell, TableRow, TablePagination } from '@mui/material'
+import { Typography, Button, Breadcrumbs, Link, Checkbox, Paper, tableCellClasses, TableContainer, Table, TableHead, TableBody, TableCell, TableRow, TablePagination, Dialog, DialogTitle } from '@mui/material'
 import { NavLink, useHistory, useRouteMatch, Redirect } from 'react-router-dom'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { Delete, ModeEdit } from '@mui/icons-material';
 import { Link as LinkRoute } from "react-router-dom";
 import "./EmployeeMaster.css"
+import Papa from "papaparse";
+import employeeData from '../../assets/data/employeerecognition';
+import { parse } from 'date-fns';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -32,37 +36,117 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-
+const allowedExtensions = ["csv"];
 export const EmployeeMaster = () => {
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const navigate = useHistory();
-    const [csvFile, setcsvFile] = useState(null);
-    const [fileError, setfileError] = useState(null);
+    const [employee, setEmployee] = useState([]);
+    const [open, setOpen] = React.useState(false);
+    const [error, setError] = useState("");
+    const [file, setFile] = useState("");
+    const [col, setCol] = useState([]);
+    const [counter, setCounter] = useState(0);
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
 
-    console.log(csvFile);
-const readData = (e) => {
-    const fileType = ["text/csv"];
-    let selectedFile = e.target.files[0];
-    if (selectedFile) {
-        console.log(selectedFile);
-        if (selectedFile && fileType.includes(selectedFile.type)) {
-            let reader = new FileReader();
-            reader.readAsArrayBuffer(selectedFile);
-            reader.onload = (e) => {
-                setcsvFile(e.target.result);
-                console.log(e.target.result);
-                setfileError(null);
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const handleFileChange = (e) => {
+        setError("");
+
+        // Check if user has entered the file
+        if (e.target.files.length) {
+            const inputFile = e.target.files[0];
+
+            // Check the file extensions, if it not
+            // included in the allowed extensions
+            // we show the error
+            const fileExtension = inputFile?.type.split("/")[1];
+            if (!allowedExtensions.includes(fileExtension)) {
+                setError("Please input a csv file");
+                return;
             }
-        }
-        else {
-            setfileError("PLease select only csv file type");
-            setcsvFile(null);
-        }
-    }
-    else {
-        console.log("No File Selected");
-    }
 
-}
+            // If input type is correct set the state
+            setFile(inputFile);
+        }
+    };
+    const handleParse = () => {
+
+        // If user clicks the parse button without
+        // a file we show a error
+        if (!file) return setError("Enter a valid file");
+
+        // Initialize a reader which allows user
+        // to read any file or blob.
+        const reader = new FileReader();
+
+        // Event listener on reader when the file
+        // loads, we parse it and set the data.
+        reader.onload = async ({ target }) => {
+            const csv = Papa.parse(target.result, { header: true });
+            const parsedData = csv?.data;
+            parsedData.forEach(element => {
+                if (element.isDeleted == "" || element.id == "") {
+                    element.isDeleted = false;
+                    element.id = Math.random().toString();
+                }
+            });
+            let data = JSON.parse(localStorage.getItem("employee"));
+            console.log(data);
+            setEmployee(data);
+            if(employee.length == 0) {
+                setEmployee([...parsedData]);
+                console.log(employee.length);
+                localStorage.setItem("employee", JSON.stringify(employee));
+                handleClose();
+                navigate.push("/admindashboard/employeemaster");
+            }
+            if(employee.length > 0){
+                parsedData.forEach(element => {
+                    employee.push(element);
+                })
+                setEmployee([...employee]);
+                localStorage.setItem("employee", JSON.stringify(employee));
+                handleClose();
+                navigate.push("/admindashboard/employeemaster");
+            }
+            
+        };
+        reader.readAsText(file);
+    };
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
+    useEffect(() => {
+        try {
+            let data = (JSON.parse(localStorage.getItem("employee"))).filter(e=> e.isDeleted == "false");
+            if (data.length > 0) {
+                setEmployee(data);
+                setCounter(data.length);
+            }
+
+        }
+        catch (e) {
+
+        }
+
+    }, [])
+
+    function convert(str) {
+        var date = new Date(str),
+            mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+            day = ("0" + date.getDate()).slice(-2);
+        return [day, mnth, date.getFullYear()].join("-");
+    }
 
     return (
         <>
@@ -85,55 +169,82 @@ const readData = (e) => {
                 </div>
                 <div className="employeemaster-container">
                     <div className="employeemaster-container-button">
-                        <Button variant="contained" color="success" size='small' className='btn-create' onChange={readData}>
-                            <input type="file" name="employeeData" placeholder='Bulk Upload' ></input>
+                        <Button variant='contained' color="info" size='small' className='btn-upload' onClick={handleClickOpen}>
+                            Bulk Upload
                         </Button>
-                        <Button variant="contained" color="error" size='small' className='btn-delete'>
-                            <Typography variant='caption' className='btn-delete-font'>Disable Selected</Typography>
-                        </Button>
+                        <Dialog open={open} onClose={handleClose}>
+                            <DialogTitle>Upload CSV File</DialogTitle>
+                            <input type="file" name="csvfile" onChange={handleFileChange} />
+                            <Button onClick={handleParse}>Upload</Button>
+                            <Button onClick={handleClose}>Close</Button>
+                        </Dialog>
+
                     </div>
                     <div className="employeemastertable-container">
                         <TableContainer sx={{ boxShadow: "box-shadow:  3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)" }}>
                             <Table stickyHeader aria-label='sticky table' sx={{ maxHeight: 440 }} size='small'>
                                 <TableHead>
                                     <TableRow>
-                                        <StyledTableCell><Checkbox size='small' name='employeemasterSelect' sx={{ color: "black" }}></Checkbox></StyledTableCell>
-                                        <StyledTableCell>Name</StyledTableCell>
-                                        <StyledTableCell>Company</StyledTableCell>
-                                        <StyledTableCell>Department</StyledTableCell>
-                                        <StyledTableCell>D.O.B</StyledTableCell>
-                                        <StyledTableCell>Mobile No.</StyledTableCell>
+                                        <StyledTableCell>Sr.no </StyledTableCell>
+                                        <StyledTableCell>First Name</StyledTableCell>
+                                        <StyledTableCell>Middle Name</StyledTableCell>
+                                        <StyledTableCell>Last Name</StyledTableCell>
+                                        <StyledTableCell>DOB</StyledTableCell>
+                                        <StyledTableCell>DOJ</StyledTableCell>
                                         <StyledTableCell>Image</StyledTableCell>
-                                        <StyledTableCell>D.O.J</StyledTableCell>
-                                        <StyledTableCell>Email</StyledTableCell>
-
+                                        <StyledTableCell>Designation</StyledTableCell>
+                                        <StyledTableCell>Department</StyledTableCell>
+                                        <StyledTableCell>Company</StyledTableCell>
+                                        <StyledTableCell>Gender</StyledTableCell>
+                                        <StyledTableCell>Email ID</StyledTableCell>
+                                        <StyledTableCell>Password</StyledTableCell>
+                                        <StyledTableCell>Mobile No.</StyledTableCell>
+                                        <StyledTableCell>Address</StyledTableCell>
+                                        <StyledTableCell>Role</StyledTableCell>
                                         <StyledTableCell>Actions</StyledTableCell>
                                     </TableRow>
                                 </TableHead>
 
-                                {/* {achievementdata.length > 0 &&
+                                {employee.length > 0 &&
 
                                     <TableBody>
-                                        {achievementdata.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                            .map((e) => {
-                                                
-                                                if (e.isDeleted == false) return (
-                                                    <StyledTableRow hover role="checkbox" tabIndex={-1} key={e.id}>
-                                                        <StyledTableCell><Checkbox size='small' /></StyledTableCell>
-                                                        <StyledTableCell>{e.achievementTitle}</StyledTableCell>
-                                                        <StyledTableCell>{e.achievementType}</StyledTableCell>
-                                                        <StyledTableCell>{e.employeeIdandName}</StyledTableCell>
-                                                        <StyledTableCell>{e.achievementArea}</StyledTableCell>
-                                                        <StyledTableCell>{e.achievementDescription}</StyledTableCell>
-                                                        <StyledTableCell><img className="achievement-image" src={e.achievementImage} width="40rem" height="40rem" /></StyledTableCell>
-                                                        <StyledTableCell>{convert(e.achievementStartDate)}</StyledTableCell>
-                                                        <StyledTableCell>{convert(e.achievementEndDate)}</StyledTableCell>
+                                        {employee.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                            .map((e,key) => {
+
+                                                return (
+                                                    <StyledTableRow hover  tabIndex={-1} key={e.id}>
+                                                        <StyledTableCell>{key + 1}</StyledTableCell>
+                                                        <StyledTableCell>{e.njFirstName}</StyledTableCell>
                                                         <StyledTableCell>
-                                                            <LinkRoute to={{
-                                                                pathname: "/admindashboard/achievement/updateachievement/:id",
-                                                                state: { idParam: e.id }
-                                                            }} ><ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} /></LinkRoute>
-                                                            <Button size='small' id={e.id} key={e.id} onClick={(event) => handleDelete(e.id)} sx={{ verticalAlign: "bottom", minWidth: "auto" }}><Delete sx={{ color: "red" }} /></Button>
+                                                            {e.njMiddleName}
+                                                        </StyledTableCell>
+                                                        <StyledTableCell>{e.njLastName}</StyledTableCell>
+                                                        <StyledTableCell>{convert(e.njDob)}</StyledTableCell>
+                                                        <StyledTableCell>{convert(e.njDoj)}</StyledTableCell>
+                                                        <StyledTableCell>
+                                                            <img src={e.njImage} height="50rem" width="50rem" style={{ border: '1px solid black' }} />
+                                                        </StyledTableCell>
+                                                        <StyledTableCell>{e.njDesignation}</StyledTableCell>
+                                                        <StyledTableCell>{e.njDepartment}</StyledTableCell>
+                                                        <StyledTableCell>{e.njCompany}</StyledTableCell>
+                                                        <StyledTableCell>{e.njGender}</StyledTableCell>
+                                                        <StyledTableCell>{e.njEmail}</StyledTableCell>
+                                                        <StyledTableCell>{e.njPassword}</StyledTableCell>
+                                                        <StyledTableCell>{e.njMobileNo}</StyledTableCell>
+                                                        <StyledTableCell>{e.njAddress}</StyledTableCell>
+                                                        <StyledTableCell>{e.njRole}</StyledTableCell>
+
+                                                        <StyledTableCell>
+                                                            <LinkRoute
+                                                                to={{
+                                                                    pathname:
+                                                                        "/admindashboard/updateemployeemaster/:id",
+                                                                    state: { idParam: e.id },
+                                                                }}>
+                                                                <ModeEdit sx={{ color: "rgba(0, 127, 255, 1)" }} />
+                                                            </LinkRoute>
+
+                                                            {/* <Button size='small' id={e.id} key={e.id} onClick={handleDelete} sx={{ verticalAlign: "bottom", minWidth: "auto" }}><Delete sx={{ color: "red" }} /></Button> */}
                                                         </StyledTableCell>
                                                     </StyledTableRow>
 
@@ -143,11 +254,11 @@ const readData = (e) => {
                                             )}
                                     </TableBody>
 
-                                } */}
+                                }
 
                             </Table>
                         </TableContainer>
-                        {/* {<TablePagination
+                        {<TablePagination
                             rowsPerPageOptions={[5]}
                             component="div"
                             count={counter}
@@ -155,7 +266,7 @@ const readData = (e) => {
                             page={page}
                             onPageChange={handleChangePage}
                             onRowsPerPageChange={handleChangeRowsPerPage}
-                        />} */}
+                        />}
 
                     </div>
                 </div>

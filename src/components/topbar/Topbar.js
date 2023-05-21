@@ -41,7 +41,7 @@ export const Topbar = (props) => {
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("isLogin");
-
+    localStorage.removeItem("role");
     props.setisLoggedIn(false)
     props.close();
   }

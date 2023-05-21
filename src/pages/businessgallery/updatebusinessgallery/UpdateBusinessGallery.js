@@ -22,9 +22,11 @@ import { ValidationErrorMessage } from "../../../components/ValidationErrorMessa
 import { Formik } from "formik";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { useHistory } from "react-router-dom";
+import { id } from 'date-fns/locale';
 export const UpdateBusinessGallery = () => {
     const [newbusinessgallery, setNewBusinessGallery] = useState([]);
     const { type } = useParams();
+    const [allbusinessgallery, setAllBusinessGallery] = useState([]);
     const idParamVal = useLocation().state.idParam;
     const [galleryData, setGalleryData] = useState({
         galleryTitle: "",
@@ -43,8 +45,7 @@ export const UpdateBusinessGallery = () => {
             galleryDescription:e[0]["galleryDescription"]
         })
         )
-        console.log(galleryData);
-        console.log(parseISO("2023-04-06T18:30:00.000Z"));
+
     }
     const getGalleryData = (id) => {
         let data = JSON.parse(localStorage.getItem("businessgallery"));
@@ -99,13 +100,19 @@ export const UpdateBusinessGallery = () => {
     const UpdateData = (id, updatedData) => {
         const datawithId = newbusinessgallery.find(e => e.id == id); // finds the element with id 
         if (datawithId["id"] === updatedData.id) {
-            // /console.log(newachievement);
-            setNewBusinessGallery(result => [...result, updatedData]);
-            console.log(newbusinessgallery);
+            let temp = JSON.parse(localStorage.getItem("businessgallery"));
+            let tempdata = newbusinessgallery.indexOf(newbusinessgallery.find(achievements => achievements.id == id));
+            temp[tempdata] = updatedData
+            setAllBusinessGallery([...temp]);
         }
-        // setToDos([...toDos]) //updating the current state
         // localStorage.setItem("data", JSON.stringify(toDos)) //updating local storage with state
     }
+    useEffect(()=>{
+        if(allbusinessgallery.length > 0){
+            localStorage.setItem('businessgallery', JSON.stringify(allbusinessgallery));
+            navigate.push("/admindashboard/businessgallery");
+        }
+    },[allbusinessgallery])
     return (
         <div className="page-information-container">
             <header className="page-header">
@@ -126,13 +133,15 @@ export const UpdateBusinessGallery = () => {
                     enableReinitialize
                     onSubmit={data => {
                         let achievement = {
-                            id: Math.random(),
+                            id: idParamVal,
                             galleryTitle: data.galleryTitle,
                             galleryStartDate: data.galleryStartDate,
                             galleryEndDate: data.galleryEndDate,
                             galleryDescription: data.galleryDescription,
                             galleryImage: data.galleryImage,
-                            
+                            time: Math.floor(Date.now() / 1000),
+                            isDeleted: false,
+                            isApproved : true
                         }
                         UpdateData(idParamVal, achievement);
                     }}

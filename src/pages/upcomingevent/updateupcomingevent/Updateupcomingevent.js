@@ -22,6 +22,7 @@ import { ValidationErrorMessage } from "../../../components/ValidationErrorMessa
 import { Formik } from "formik";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { useHistory } from "react-router-dom";
+import companyList from "../../../assets/data/companyanddepartment";
 export const Updateupcomingevent = () => {
   const [newannouncement, setnewannouncement] = useState([]);
   const [AllAnnouncement, setAllAnnouncement] = useState([]);
@@ -37,6 +38,7 @@ export const Updateupcomingevent = () => {
     eventDescription: "",
     eventImage: "",
     eventRSVP: "",
+    eventCompany:"",
   });
   const updateState = (e) => {
     setannouncementData((existingValue) => ({
@@ -50,6 +52,7 @@ export const Updateupcomingevent = () => {
       eventEndDate: e[0]["eventEndDate"],
       eventImage: e[0]["eventImage"],
       eventStartDate: e[0]["eventStartDate"],
+      eventCompany:e[0]["eventCompany"],
     }));
     //console.log(announcementData);
     //console.log(JSON.parse(localStorage.getItem("announcement")));
@@ -83,7 +86,8 @@ export const Updateupcomingevent = () => {
     eventStartDate: Yup.string().required("Start Date is required"),
     eventEndDate: Yup.string().required("End Date is required"),
     eventDescription: Yup.string().required("Event Description is required"),
-    eventImage: Yup.string().required("Image is required"),
+    eventImage: Yup.string().nullable(),
+    eventCompany : Yup.string().required("Company required"),
     
   });
   //Handles The Event when data is changed
@@ -128,6 +132,12 @@ const onSelectFile = (e, setFieldValue, setFieldError) => {
     setFieldValue("eventImage", "");
   }
 };
+const [department, setDepartment] = useState([]);
+const onSelectCompany = (e, setFieldValue, setFieldError) => {
+  const company = e.target.value;
+  setFieldValue("eventCompany", company);
+  setDepartment(companyList.filter(c => c.CompanyName == company)[0].DepartmentName);
+}
   return (
     <div className="page-information-container">
       <header className="page-header">
@@ -158,6 +168,7 @@ const onSelectFile = (e, setFieldValue, setFieldError) => {
               eventRSVP: data.eventRSVP,
               eventDescription: data.eventDescription,
               eventImage: data.eventImage,
+              eventCompany:data.eventCompany,
               time: Math.floor(Date.now() / 1000),
               isDeleted: false,
             }
@@ -210,29 +221,59 @@ const onSelectFile = (e, setFieldValue, setFieldError) => {
                   </div>
                 </div>
                 <div className="formrow">
-                  <div className="createeventforminput">
-                    <FormControl sx={{ width: 100 + "%" }}>
-                      <InputLabel id="demo-simple-select-autowidth-label">
-                        Department
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-autowidth-label"
-                        id="demo-simple-select-autowidth-label"
-                        name="eventDepartment"
-                        type="eventDepartment"
-                        label="Department"
-                        onChange={handleChange}
-                        value={values.eventDepartment}>
-                        <MenuItem value={"Department 1"}>Department 1</MenuItem>
-                        <MenuItem value={"Department 2"}>Department 2</MenuItem>
-                        <MenuItem value={"Department 3"}>Department 3</MenuItem>
-                      </Select>
-                    </FormControl>
-                    <ValidationErrorMessage
-                      message={errors.eventDepartment}
-                      touched={touched.eventDepartment}
-                    />
-                  </div>
+                <div className="createeventforminput">
+                                        <FormControl sx={{ width: 100 + "%", marginTop: "1vh" }}>
+                                            <InputLabel id="demo-simple-select-autowidth-label">Company</InputLabel>
+                                            <Select
+                                                labelId="demo-simple-select-autowidth-label"
+                                                id="demo-simple-select-autowidth-label"
+                                                name="eventCompany"
+                                                type="eventCompany"
+                                                label="Company"
+                                                onChange={(e) =>
+                                                    onSelectCompany(e, setFieldValue, setFieldError)
+                                                }
+                                                value={values.eventCompany}>
+                                                {
+                                                    companyList.map((company) => {
+                                                        return (
+                                                            <MenuItem key={company} value={company.CompanyName}>{company.CompanyName}</MenuItem>
+                                                        )
+                                                    })
+                                                }
+
+                                            </Select>
+                                        </FormControl>
+                                        <ValidationErrorMessage message={errors.eventCompany} touched={touched.eventCompany} />
+                                    </div>
+                                    <div className="createeventforminput">
+                                        <FormControl sx={{ width: 100 + "%", marginTop: "1vh" }}>
+                                            <InputLabel id="demo-simple-select-autowidth-label">Department</InputLabel>
+                                            <Select
+                                                labelId="demo-simple-select-autowidth-label"
+                                                id="demo-simple-select-autowidth-label"
+                                                name="eventDepartment"
+                                                type="eventDepartment"
+                                                label="Department"
+                                                onChange={handleChange}
+                                                value={values.eventDepartment}>
+                                                {
+                                                    department &&
+
+
+                                                    department.map((dep) => {
+                                                        return (
+                                                            <MenuItem value={dep} key={dep}>{dep}</MenuItem>
+                                                        )
+                                                    })
+
+
+
+                                                }
+                                            </Select>
+                                        </FormControl>
+                                        <ValidationErrorMessage message={errors.eventDepartment} touched={touched.eventDepartment} />
+                                    </div>
                   <div className="createeventforminput">
                     <TextField
                       label="Event Venue"

@@ -26,10 +26,10 @@ const Createmanagementdesk = () => {
     const navigate = useHistory();
     const [newmd, setNewMd] = useState([]);
     const ValidationSchema = Yup.object().shape({
-        mdTitle: Yup.string().required("md Title is required."),
+        mdTitle: Yup.string().required("Title is required."),
         mdStartDate: Yup.string().required("Start Date is required"),
         mdEndDate: Yup.string().required("End Date is required"),
-        mdDescription: Yup.string().required("md Description is required"),
+        mdDescription: Yup.string().required("Description is required"),
 
     })
     useEffect(() => {
@@ -56,7 +56,7 @@ const Createmanagementdesk = () => {
                     <Link
                         underline="hover"
                         color="text.primary"
-                        href="/admindashboard/managementdesk/createmanagementdeskt"
+                        href="/admindashboard/managementdesk/createmanagementdesk"
                         aria-current="page">
                         Create Management Desk
                     </Link>

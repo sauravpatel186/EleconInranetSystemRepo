@@ -19,7 +19,7 @@
     font-family: "Plus Jakarta Sans" !important;
     background-color: white;
     padding: 0rem 0rem 2rem 0rem;
-
+    
 }
 
 .login-form-header {
@@ -34,13 +34,24 @@
 .login-form-input {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
     padding: 0rem 2rem 0rem 2rem;
     /* background-color: rgba(255, 255, 255, 0.2); */
 }
+.email-input {
+    margin-bottom: 2rem;
+    height: 4rem;
+}
+.password-input {
+    margin-bottom: 2rem;
+    height: 4rem;
+}
+.role-input {
+    margin-bottom: 2rem;
+    height: 4rem;
+}
 
 .login-form-button {
-    margin-top: 2rem;
+    
     align-self: center;
     width: 100%;
     padding: 0rem 2rem 0rem 2rem;

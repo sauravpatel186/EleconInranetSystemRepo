@@ -15,7 +15,7 @@ export const ManagementDeskCard = () => {
             const date = todayDate();
             console.log(date);
 
-            let adata = data.filter(management => management.isDeleted == false && convertDate(management.mdEndDate) >= todayDate() && convertDate(management.mdStartDate) <= todayDate());
+            let adata = data.filter(management => management.isDeleted == false && compareEndDate(management.mdEndDate) && compareStartDate(management.mdStartDate));
             setmanagementdata(adata);
             
             if (adata.length > 0) {
@@ -25,6 +25,24 @@ export const ManagementDeskCard = () => {
         }
 
     }, [])
+    const compareEndDate = (date1) =>{
+        var x = new Date(date1);
+        var y = new Date();
+        if(x >= y)
+        {
+            return true;
+        }
+        return false;
+    }
+    const compareStartDate = (date1) =>{
+        var x = new Date(date1);
+        var y = new Date();
+        if(x <= y)
+        {
+            return true;
+        }
+        return false;
+    }
     function convertDate(str){
         var date = new Date(str),
         mnth = ("0" + (date.getMonth() + 1)).slice(-2),
